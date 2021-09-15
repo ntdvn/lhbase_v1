@@ -10,6 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  dio: ^4.0.0
+  get: 4.3.8
 
 dev_dependencies:
   flutter_test:
@@ -30,6 +32,7 @@ flutter:
       android:
         package: com.lhbase.lhbase_v1
         pluginClass: LhbaseV1Plugin
+
       ios:
         pluginClass: LhbaseV1Plugin
 
