@@ -11,7 +11,8 @@ class Initializer {
   // static final Initializer instance = Initializer._internal();
   // factory Initializer() => instance;
   // Initializer._internal();
-  Initializer({InitServices? initServices});
+  final InitServices initServices;
+  Initializer({required this.initServices});
 
   void init(VoidCallback runApp) {
     ErrorWidget.builder = (errorDetails) {
@@ -28,8 +29,7 @@ class Initializer {
         FlutterError.dumpErrorToConsole(details);
         // printInfo(info: details.stack.toString());
       };
-
-      await _initServices();
+      await initServices();
       runApp();
     }, (error, stack) {
       // printInfo(info: 'runZonedGuarded: ${stack.toString()}');
