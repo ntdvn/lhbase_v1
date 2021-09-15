@@ -10,13 +10,22 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations: # Add this line
+    sdk: flutter
   dio: ^4.0.0
   get: 4.3.8
+  intl: ^0.17.0
+
+  connectivity: ^3.0.6
+
+  shared_preferences: ^2.0.7
+#  UI
+  keyboard_dismisser: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
+#  flutter_lints: ^1.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
