@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:lhbase_v1/common/models/models.dart';
+import 'package:lhbase_v1/lhbase.dart';
 
 class LhStrings extends Translations implements LhStringsConfig {
   LhStrings();

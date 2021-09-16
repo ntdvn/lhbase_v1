@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:lhbase_v1/lhbase.dart';
 
 typedef InitServices = Future<void> Function();
 
@@ -30,17 +31,18 @@ class Initializer {
         // printInfo(info: details.stack.toString());
       };
       await initServices();
+      await _initLhBaseServices();
       runApp();
     }, (error, stack) {
       // printInfo(info: 'runZonedGuarded: ${stack.toString()}');
     });
   }
 
-  Future<void> _initServices() async {
+  Future<void> _initLhBaseServices() async {
     try {
       await _initStorage();
       // FirebaseApp firebase = await Firebase.initializeApp();
-      _initApis();
+      _initRepos();
       _initLocalNotification();
       _initCloudMessaging();
     } catch (err) {
@@ -48,9 +50,9 @@ class Initializer {
     }
   }
 
-  void _initApis() {
+  void _initRepos() {
     // Get.put<CommonRepository>(CommonRepository(DioProvider.instance()));
-    // Get.put<SessionRepository>(SessionRepository(pref: LocalPref()));
+    Get.put<LhSessionRepository>(LhSessionRepository(pref: LhbasePref()));
     // // Get.put<CommonRepository>(CommonRepository(Dio()));
     //
     // Get.put<CloudMessagingUtil>(CloudMessagingUtil());

@@ -1,8 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:lhbase_v1/common/controllers/controllers.dart';
+import 'package:lhbase_v1/lhbase.dart';
 
 class LhBaseController extends GetxController implements WebServiceAPICallback {
+  LhSessionRepository lhSessionRepository = Get.find<LhSessionRepository>();
   WebServiceStateController webServiceStateController =
       Get.find<WebServiceStateController>();
 
