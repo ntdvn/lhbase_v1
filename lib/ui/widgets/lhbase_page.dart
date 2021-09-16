@@ -19,7 +19,7 @@ class _LhBasePageState extends State<LhBasePage> {
       child: WillPopScope(
         onWillPop: widget.onWillPop,
         child: Container(
-          // padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+          padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: Scaffold(
             body: widget.child,
           ),
