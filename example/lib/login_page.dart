@@ -10,6 +10,12 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   @override
+  void initState() {
+    print('_LoginPageState');
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LhBasePage(
         child: Center(

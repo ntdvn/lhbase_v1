@@ -10,6 +10,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   @override
+  void initState() {
+    print('_HomePageState');
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return LhBasePage(
         child: Center(

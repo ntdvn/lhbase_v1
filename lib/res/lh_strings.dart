@@ -17,11 +17,19 @@ class LhStrings extends Translations implements LhStringsConfig {
         'api.notification': 'Notification',
         'api.success': 'Success',
         'api.failed': 'Failure',
+        'connectivity.oops': 'Oops!',
+        'connectivity.no_internet': 'There is no Internet connection',
+        'connectivity.check': 'Please check your Internet connection',
+        'connectivity.try_again': 'Try again',
       },
       'vi_VN': {
         'api.notification': 'Thông báo',
         'api.success': 'Thành công',
         'api.failed': 'Thất bại',
+        'connectivity.oops': 'Oops!',
+        'connectivity.no_internet': 'Hiện không có kết nối Internet',
+        'connectivity.check': 'Vui lòng kiểm tra lại kết nối Internet của bạn',
+        'connectivity.try_again': 'Thử lại',
       },
     };
 
