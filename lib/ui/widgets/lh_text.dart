@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class LhText extends StatelessWidget {
   final String data;
@@ -19,7 +20,9 @@ class LhText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       data,
-      style: style,
+      style: GoogleFonts.inter(
+        textStyle: style,
+      ),
       textAlign: textAlign,
       overflow: overflow,
       textScaleFactor: textScaleFactor,
