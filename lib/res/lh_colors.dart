@@ -5,7 +5,7 @@ class LhColors {
   static final greyTransparent = Colors.grey.shade100.withOpacity(0.98);
   static final bubbleDefault = Colors.grey.shade300.withOpacity(0.9);
 
-  static const PRIMARY = const Color(0xff118843);
+  static const PRIMARY = const Color(0xff2eb02e);
   static const DARK_GREEN = const Color(0xff118843);
   static const LIGHT_GREEN = const Color(0xffA5C24A);
   static const GREEN_2 = const Color(0xffA5C24A);
