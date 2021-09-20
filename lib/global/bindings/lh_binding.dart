@@ -4,6 +4,7 @@ import 'package:lhbase_v1/lhbase.dart';
 class LhBinding extends Bindings {
   @override
   void dependencies() {
+    Get.put(GlobalConfigController());
     Get.put(ConnectivityController());
     Get.put(WebServiceStateController());
     Get.put(AuthenticationController());

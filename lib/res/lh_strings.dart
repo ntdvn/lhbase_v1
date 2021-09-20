@@ -21,6 +21,8 @@ class LhStrings extends Translations implements LhStringsConfig {
         'connectivity.no_internet': 'There is no Internet connection',
         'connectivity.check': 'Please check your Internet connection',
         'connectivity.try_again': 'Try again',
+        'cupertino_picker.select': 'Select',
+        'cupertino_picker.delete': 'Delete',
       },
       'vi_VN': {
         'api.notification': 'Thông báo',
@@ -30,6 +32,8 @@ class LhStrings extends Translations implements LhStringsConfig {
         'connectivity.no_internet': 'Hiện không có kết nối Internet',
         'connectivity.check': 'Vui lòng kiểm tra lại kết nối Internet của bạn',
         'connectivity.try_again': 'Thử lại',
+        'cupertino_picker.select': 'Chọn',
+        'cupertino_picker.delete': 'Xóa',
       },
     };
 

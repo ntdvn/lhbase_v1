@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:lhbase_v1/lhbase.dart';
+import 'package:get/get.dart';
 
 class ComponentUtils {
   static void showCupertinoDatePicker(BuildContext context,
       {String? title,
-      TextStyle? titleStyle,
-      required ValueChanged<DateTime> onSubmitted}) {
+      required ValueChanged<DateTime> onSubmitted,
+      VoidCallback? onDelete}) {
     DateTime datetime = DateTime.now();
     FocusScope.of(context).unfocus();
     showCupertinoModalPopup(
@@ -13,35 +16,63 @@ class ComponentUtils {
         builder: (_) => Wrap(
               children: [
                 Container(
-                  color: const Color.fromARGB(255, 255, 255, 255),
+                  color: Color.fromARGB(255, 255, 255, 255),
                   child: Column(
                     children: [
-                      SizedBox(
+                      Container(
                         height: 300,
                         child: Column(
                           children: [
                             Material(
                               child: Container(
                                 color: Colors.grey.shade100,
-                                padding: const EdgeInsets.symmetric(
+                                padding: EdgeInsets.symmetric(
                                     vertical: 10, horizontal: 20),
                                 child: Row(
                                   children: [
                                     Expanded(
                                       child: Text(
-                                        title ?? '',
-                                        style: titleStyle,
+                                        '${title ?? ''}',
+                                        style: LhStyle.DEFAULT_18
+                                            .copyWith(color: Colors.lightBlue),
                                       ),
                                     ),
-                                    GestureDetector(
-                                        onTap: () {
-                                          onSubmitted(datetime);
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text(
-                                          'Chọn',
-                                          style: titleStyle,
-                                        ))
+                                    RichText(
+                                      text: new TextSpan(
+                                        children: [
+                                          new TextSpan(
+                                            text: 'cupertino_picker.delete'.tr,
+                                            style: LhStyle.DEFAULT_18
+                                                .copyWith(color: Colors.red),
+                                            recognizer:
+                                                new TapGestureRecognizer()
+                                                  ..onTap = () {
+                                                    if (onDelete != null)
+                                                      onDelete();
+                                                    Navigator.of(context).pop();
+                                                  },
+                                          ),
+                                          new TextSpan(
+                                            text: ' | ',
+                                            style: LhStyle.DEFAULT_18.copyWith(
+                                                color: Colors.lightBlue),
+                                          ),
+                                          new TextSpan(
+                                              text:
+                                                  'cupertino_picker.select'.tr,
+                                              style: LhStyle.DEFAULT_18
+                                                  .copyWith(
+                                                      color: Colors.lightBlue),
+                                              recognizer:
+                                                  new TapGestureRecognizer()
+                                                    ..onTap = () {
+                                                      onSubmitted(datetime);
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    }),
+                                        ],
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
 class LoginPage extends StatefulWidget {
@@ -19,11 +20,21 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return LhBasePage(
         child: Center(
-            child: TextButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed('/home');
-      },
-      child: Text('Home Page'),
+            child: Column(
+      children: [
+        TextButton(
+          onPressed: () {
+            Get.find<GlobalConfigController>().fontFamily = 'Anton';
+          },
+          child: LhText('Almost before we knew it, we had left the ground.'),
+        ),
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed('/home');
+          },
+          child: LhText('Login Page'),
+        ),
+      ],
     )));
   }
 }

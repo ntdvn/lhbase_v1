@@ -19,11 +19,15 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return LhBasePage(
         child: Center(
-            child: TextButton(
-      onPressed: () {
-        Navigator.of(context).pushNamed('/login');
-      },
-      child: Text('Login Page'),
+            child: Column(
+      children: [
+        TextButton(
+          onPressed: () {
+            Navigator.of(context).pushNamed('/login');
+          },
+          child: LhText('Login Page'),
+        ),
+      ],
     )));
   }
 }

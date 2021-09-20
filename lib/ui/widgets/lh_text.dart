@@ -1,16 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:lhbase_v1/global/controllers/controllers.dart';
+import 'package:lhbase_v1/lhbase.dart';
 
 class LhText extends StatelessWidget {
   final String data;
-  final TextStyle? style;
+  final TextStyle style;
   final TextAlign? textAlign;
   final TextOverflow? overflow;
   final double? textScaleFactor;
   const LhText(
     this.data, {
     Key? key,
-    this.style,
+    this.style = LhStyle.DEFAULT_12,
     this.textAlign,
     this.overflow,
     this.textScaleFactor,
@@ -18,14 +21,20 @@ class LhText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      data,
-      style: GoogleFonts.inter(
-        textStyle: style,
+    return GetX<GlobalConfigController>(
+      builder: (controller) => Text(
+        data,
+        style: GoogleFonts.getFont(controller.fontFamily).copyWith(
+            color: style.color,
+            fontWeight: style.fontWeight,
+            fontSize: style.fontSize,
+            fontStyle: style.fontStyle,
+            overflow: style.overflow,
+            wordSpacing: style.wordSpacing),
+        textAlign: textAlign,
+        overflow: overflow,
+        textScaleFactor: textScaleFactor,
       ),
-      textAlign: textAlign,
-      overflow: overflow,
-      textScaleFactor: textScaleFactor,
     );
   }
 }
