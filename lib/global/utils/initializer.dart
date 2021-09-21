@@ -51,8 +51,12 @@ class Initializer {
   }
 
   void _initRepos() {
-    // Get.put<CommonRepository>(CommonRepository(DioProvider.instance()));
     Get.put<LhSessionRepository>(LhSessionRepository(pref: LhbasePref()));
+    Get.put(WebServiceStateController());
+    Get.put(GlobalConfigController());
+    // Get.put(GlobalConfigController());
+    // Get.put<CommonRepository>(CommonRepository(DioProvider.instance()));
+
     // // Get.put<CommonRepository>(CommonRepository(Dio()));
     //
     // Get.put<CloudMessagingUtil>(CloudMessagingUtil());

@@ -21,20 +21,12 @@ class LhText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<GlobalConfigController>(
-      builder: (controller) => Text(
-        data,
-        style: GoogleFonts.getFont(controller.fontFamily).copyWith(
-            color: style.color,
-            fontWeight: style.fontWeight,
-            fontSize: style.fontSize,
-            fontStyle: style.fontStyle,
-            overflow: style.overflow,
-            wordSpacing: style.wordSpacing),
-        textAlign: textAlign,
-        overflow: overflow,
-        textScaleFactor: textScaleFactor,
-      ),
+    return Text(
+      data,
+      style: style,
+      textAlign: textAlign,
+      overflow: overflow,
+      textScaleFactor: textScaleFactor,
     );
   }
 }

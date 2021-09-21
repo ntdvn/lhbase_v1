@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,18 +23,24 @@ class _LoginPageState extends State<LoginPage> {
         child: Center(
             child: Column(
       children: [
-        TextButton(
-          onPressed: () {
-            Get.find<GlobalConfigController>().fontFamily = 'Anton';
-          },
-          child: LhText('Almost before we knew it, we had left the ground.'),
-        ),
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/home');
-          },
-          child: LhText('Login Page'),
-        ),
+        ...List.generate(
+            LhStyle.supportedThemes.keys.length,
+            (index) => TextButton(
+                onPressed: () {
+                  Get.find<GlobalConfigController>().changeTheme(
+                      context, LhStyle.supportedThemes.keys.elementAt(index));
+                },
+                child: Text(LhStyle.supportedThemes.keys.elementAt(index)))),
+        GestureDetector(
+            onTap: () {
+              Get.find<GlobalConfigController>().changeLanguage();
+            },
+            child: LhText('connectivity.no_internet'.tr)),
+        TextField(
+          decoration: InputDecoration(
+            hintText: 'connectivity.no_internet'.tr,
+          ),
+        )
       ],
     )));
   }

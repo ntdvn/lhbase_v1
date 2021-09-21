@@ -1,11 +1,28 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:lhbase_v1/lhbase.dart';
 
-class GlobalConfigController extends GetxController {
-  RxString _fontFamily = RxString('Inter');
+class GlobalConfigController extends LhBaseController {
+  @override
+  void onReady() async {
+    super.onReady();
+    _initConfig();
+  }
 
-  String get fontFamily => _fontFamily.value;
-  set fontFamily(String fontFamily) {
-    _fontFamily.value = fontFamily;
+  changeTheme(BuildContext context, String themeName) {
+    Get.changeTheme(LhStyle.getTheme(themeName: themeName));
+
+    lhSessionRepository.saveAppTheme(themeName);
+  }
+
+  _initConfig() async {
+    var _themeName = await lhSessionRepository.getAppTheme();
+    if (_themeName != null) {
+      Get.changeTheme(LhStyle.getTheme(themeName: _themeName));
+    }
+  }
+
+  changeLanguage() {
+    Get.updateLocale(Locale('vi', 'VN'));
   }
 }

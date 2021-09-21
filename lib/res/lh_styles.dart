@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:lhbase_v1/lhbase.dart';
 
 import 'res.dart';
 
@@ -97,6 +100,35 @@ class LhStyle {
   // ignore: non_constant_identifier_names
   static final DEFAULT_24_BOLD =
       DEFAULT_24.copyWith(fontWeight: FontWeight.bold);
+
+  static Map<String, ThemeData> supportedThemes = {
+    'Light': ThemeData.light(),
+    'Dark': ThemeData.dark(),
+    'Anton': DataUtils.getGoogleThemeData('Anton'),
+    'Inter': DataUtils.getGoogleThemeData('Inter'),
+    'custom1': ThemeData(
+      // Define the default brightness and colors.
+      brightness: Brightness.dark,
+      primaryColor: Colors.lightBlue[800],
+
+      // Define the default font family.
+      fontFamily: 'Georgia',
+
+      // Define the default `TextTheme`. Use this to specify the default
+      // text styling for headlines, titles, bodies of text, and more.
+      textTheme: const TextTheme(
+        headline1: TextStyle(fontSize: 72.0, fontWeight: FontWeight.bold),
+        headline6: TextStyle(fontSize: 36.0, fontStyle: FontStyle.italic),
+        bodyText2: TextStyle(fontSize: 14.0, fontFamily: 'Hind'),
+      ),
+    ),
+  };
   // ignore: non_constant_identifier_names
 
+  static ThemeData getTheme({String? themeName}) {
+    var defaultTheme = ThemeData.light();
+    // var theme = themes as Map<String, ThemeData>;
+    // print('ThemeData ${theme[themeName]}');
+    return supportedThemes[themeName] ?? defaultTheme;
+  }
 }
