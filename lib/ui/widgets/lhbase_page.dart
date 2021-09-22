@@ -3,9 +3,16 @@ import 'package:lhbase_v1/lhbase.dart';
 
 class LhBasePage extends StatefulWidget {
   final Widget child;
+  final Widget? floatingActionButton;
   final WillPopCallback? onWillPop;
+  final PreferredSizeWidget? appBar;
 
-  const LhBasePage({Key? key, required this.child, this.onWillPop})
+  const LhBasePage(
+      {Key? key,
+      required this.child,
+      this.onWillPop,
+      this.floatingActionButton,
+      this.appBar})
       : super(key: key);
 
   @override
@@ -22,6 +29,8 @@ class _LhBasePageState extends State<LhBasePage> {
           padding: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: Scaffold(
             body: widget.child,
+            floatingActionButton: widget.floatingActionButton,
+            appBar: widget.appBar,
           ),
         ),
       ),
