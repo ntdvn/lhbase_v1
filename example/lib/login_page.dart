@@ -28,7 +28,7 @@ class _LoginPageState extends State<LoginPage> {
             (index) => TextButton(
                 onPressed: () {
                   Get.find<GlobalConfigController>().changeTheme(
-                      context, LhStyle.supportedThemes.keys.elementAt(index));
+                      LhStyle.supportedThemes.keys.elementAt(index));
                 },
                 child: Text(LhStyle.supportedThemes.keys.elementAt(index)))),
         GestureDetector(

@@ -9,9 +9,8 @@ class GlobalConfigController extends LhBaseController {
     _initConfig();
   }
 
-  changeTheme(BuildContext context, String themeName) {
+  changeTheme(String themeName) {
     Get.changeTheme(LhStyle.getTheme(themeName: themeName));
-
     lhSessionRepository.saveAppTheme(themeName);
   }
 
