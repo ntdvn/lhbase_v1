@@ -72,37 +72,37 @@ class LhBorderLessInput extends StatelessWidget {
   }
 
   factory LhBorderLessInput.search(
-      {required TextEditingController? controller,
+      {required TextEditingController controller,
       String? hint,
-      TextStyle? hintStyle,
-      Widget? prefixIcon,
-      Widget? suffixIcon}) {
+      TextStyle? hintStyle}) {
     return LhBorderLessInput(
         controller: controller,
         padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
         hint: hint,
         formHintStyle: hintStyle,
-        prefixIcon: prefixIcon ??
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Icon(
-                Icons.search,
-                size: 20,
-                color: Colors.grey,
-              ),
-            ),
-        suffix: suffixIcon ??
-            Material(
+        prefixIcon: Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Icon(
+            Icons.search,
+            size: 20,
+            color: Colors.grey,
+          ),
+        ),
+        suffix: controller.text.isNotEmpty
+            ? Material(
                 color: Colors.transparent,
                 child: InkWell(
                     borderRadius: BorderRadius.circular(500.0),
-                    onTap: () {},
+                    onTap: () {
+                      controller.text = '';
+                    },
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.close,
                         size: 12,
                       ),
-                    ))));
+                    )))
+            : null);
   }
 }
