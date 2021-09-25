@@ -62,6 +62,8 @@ abstract class LhStyle {
   }
 
   static Map<String, ThemeData> supportedThemes = {
+    'Light': ThemeData.light(),
+    'Dark': ThemeData.dark(),
     'Anton': DataUtils.getGoogleThemeData('Anton'),
     'Inter': DataUtils.getGoogleThemeData('Inter'),
     'custom1': ThemeData(
