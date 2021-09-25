@@ -80,7 +80,7 @@ class LhAppBar extends StatelessWidget {
         children: leading as List<Widget>,
       );
     } else {
-      if (ModalRoute.of(context) != null) {
+      if (ModalRoute.of(context) != null && type == LhAppBarType.TOP) {
         if (ModalRoute.of(context)!.canPop) {
           leadingWidget = LhAppBarAction.icon(
             icon: Icon(
