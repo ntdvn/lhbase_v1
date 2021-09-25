@@ -67,9 +67,10 @@ class LhAppBarTop extends StatelessWidget {
     );
   }
 
-  _renderLeading(BuildContext context) {
-    var leadingWidget = null;
+  Widget _renderLeading(BuildContext context) {
+    Widget? leadingWidget = null;
     if (leading != null) {
+      leadingWidget = leading;
     } else {
       if (ModalRoute.of(context) != null) {
         if (ModalRoute.of(context)!.canPop) {
