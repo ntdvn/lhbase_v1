@@ -38,8 +38,7 @@ class LhAppBarAction extends StatelessWidget {
                 ),
                 child: LhText(
                   badge! > 99 ? '99+' : '$badge',
-                  style: LhStyle.DEFAULT_12.copyWith(
-                      color: Theme.of(context).textTheme.subtitle1!.color),
+                  style: LhStyle.DEFAULT_12.copyWith(color: Colors.white),
                 )),
           )
       ],
