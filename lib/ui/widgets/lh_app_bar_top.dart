@@ -4,6 +4,7 @@ import 'package:lhbase_v1/ui/widgets/lh_app_bar_action.dart';
 
 class LhAppBarTop extends StatelessWidget {
   // final double? height;
+  final double? elevation;
   final Color? backgroundColor;
   final LhAppBarAction? leading;
   final List<LhAppBarAction>? actions;
@@ -13,7 +14,9 @@ class LhAppBarTop extends StatelessWidget {
 
   const LhAppBarTop(
       {Key? key,
+
       // this.height,
+      this.elevation,
       this.backgroundColor,
       this.leading,
       this.actions,
@@ -25,7 +28,7 @@ class LhAppBarTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 5,
+      elevation: elevation,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0.0),
