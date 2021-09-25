@@ -10,7 +10,7 @@ class AppPages extends LhPages {
   static const login = '/login';
 
   @override
-  List<GetPage> onConfig(List<GetPage> getPages) {
+  List<GetPage> onConfig() {
     return [
       GetPage(name: '/login', page: () => const LoginPage()),
       GetPage(name: '/home', page: () => const HomePage()),

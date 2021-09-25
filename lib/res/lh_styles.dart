@@ -1,58 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
 import 'res.dart';
 
-class LhStyle {
-  LhStyle._();
-  //DEFAULT STYLE
-  // static const DEFAULT_10 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_10,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
-  //
-  // static const DEFAULT_12 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_12,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
-  //
-  // static const DEFAULT_14 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_14,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
-  //
-  // static const DEFAULT_16 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_16,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
-  //
-  // static const DEFAULT_18 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_18,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
-  //
-  // static const DEFAULT_20 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_20,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
-  // static const DEFAULT_22 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_22,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
-  // static const DEFAULT_24 = TextStyle(
-  //     fontFamily: 'OpenSans',
-  //     fontSize: LhValue.FONT_SIZE_24,
-  //     color: LhColors.BLACK,
-  //     height: 1.2);
+abstract class LhStyle {
+  LhStyle();
 
   static const DEFAULT_10 = TextStyle(
       fontSize: LhValue.FONT_SIZE_10, color: LhColors.BLACK, height: 1.2);
@@ -101,9 +53,15 @@ class LhStyle {
   static final DEFAULT_24_BOLD =
       DEFAULT_24.copyWith(fontWeight: FontWeight.bold);
 
+  Map<String, ThemeData> onConfigSupportedThemes();
+
+  Map<String, ThemeData> getSupportedThemes() {
+    var themes = supportedThemes;
+    themes.addAll(onConfigSupportedThemes());
+    return themes;
+  }
+
   static Map<String, ThemeData> supportedThemes = {
-    'Light': ThemeData.light(),
-    'Dark': ThemeData.dark(),
     'Anton': DataUtils.getGoogleThemeData('Anton'),
     'Inter': DataUtils.getGoogleThemeData('Inter'),
     'custom1': ThemeData(

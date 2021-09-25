@@ -7,6 +7,7 @@ class LhBasePage extends StatelessWidget {
   final WillPopCallback? onWillPop;
   final PreferredSizeWidget? appBar;
   final bool isPaddingTop;
+  final LhAppBarTop? appBarTop;
 
   const LhBasePage(
       {Key? key,
@@ -14,7 +15,8 @@ class LhBasePage extends StatelessWidget {
       this.onWillPop,
       this.floatingActionButton,
       this.appBar,
-      this.isPaddingTop = false})
+      this.isPaddingTop = false,
+      this.appBarTop})
       : super(key: key);
 
   @override
@@ -27,7 +29,12 @@ class LhBasePage extends StatelessWidget {
               ? EdgeInsets.only(top: MediaQuery.of(context).padding.top)
               : null,
           child: Scaffold(
-            body: child,
+            body: Column(
+              children: [
+                if (appBarTop != null) appBarTop as Widget,
+                Expanded(child: child),
+              ],
+            ),
             floatingActionButton: floatingActionButton,
             appBar: appBar,
           ),

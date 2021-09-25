@@ -4,8 +4,7 @@ class TestString extends LhStrings {
   TestString();
 
   @override
-  Map<String, Map<String, String>> onConfig(
-      Map<String, Map<String, String>> strings) {
+  Map<String, Map<String, String>> onConfig() {
     return {
       'en_US': {
         'namloz': 'tieng anh ne',

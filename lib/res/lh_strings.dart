@@ -1,10 +1,9 @@
 import 'package:get/get.dart';
-import 'package:lhbase_v1/lhbase.dart';
 
-class LhStrings extends Translations implements LhStringsConfig {
+abstract class LhStrings extends Translations {
   LhStrings();
 
-  Map<String, Map<String, String>> _config = {};
+  Map<String, Map<String, String>> onConfig();
 
   static const content_type = 'Content-Type';
   static const multipart_form_data = 'multipart/form-data';
@@ -36,8 +35,9 @@ class LhStrings extends Translations implements LhStringsConfig {
         'cupertino_picker.delete': 'Xóa',
       },
     };
+    Map<String, Map<String, String>> _config = {};
 
-    _config = onConfig({});
+    _config = onConfig();
 
     translate.keys.forEach((tk) {
       _config.keys.forEach((ck) {
@@ -46,13 +46,6 @@ class LhStrings extends Translations implements LhStringsConfig {
         }
       });
     });
-
     return translate;
-  }
-
-  @override
-  Map<String, Map<String, String>> onConfig(
-      Map<String, Map<String, String>> strings) {
-    return strings;
   }
 }

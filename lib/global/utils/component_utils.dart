@@ -8,7 +8,11 @@ class ComponentUtils {
   static void showCupertinoDatePicker(BuildContext context,
       {String? title,
       required ValueChanged<DateTime> onSubmitted,
-      VoidCallback? onDelete}) {
+      VoidCallback? onDelete,
+      bool use24hFormat = true,
+      DateTime? minimumDate,
+      DateTime? initialDateTime,
+      DateTime? maximumDate}) {
     DateTime datetime = DateTime.now();
     FocusScope.of(context).unfocus();
     showCupertinoModalPopup(
@@ -40,23 +44,27 @@ class ComponentUtils {
                                     RichText(
                                       text: new TextSpan(
                                         children: [
-                                          new TextSpan(
-                                            text: 'cupertino_picker.delete'.tr,
-                                            style: LhStyle.DEFAULT_18
-                                                .copyWith(color: Colors.red),
-                                            recognizer:
-                                                new TapGestureRecognizer()
-                                                  ..onTap = () {
-                                                    if (onDelete != null)
+                                          if (onDelete != null)
+                                            new TextSpan(
+                                              text:
+                                                  'cupertino_picker.delete'.tr,
+                                              style: LhStyle.DEFAULT_18
+                                                  .copyWith(color: Colors.red),
+                                              recognizer:
+                                                  new TapGestureRecognizer()
+                                                    ..onTap = () {
                                                       onDelete();
-                                                    Navigator.of(context).pop();
-                                                  },
-                                          ),
-                                          new TextSpan(
-                                            text: ' | ',
-                                            style: LhStyle.DEFAULT_18.copyWith(
-                                                color: Colors.lightBlue),
-                                          ),
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                            ),
+                                          if (onDelete != null)
+                                            new TextSpan(
+                                              text: ' | ',
+                                              style: LhStyle.DEFAULT_18
+                                                  .copyWith(
+                                                      color: Colors.lightBlue),
+                                            ),
                                           new TextSpan(
                                               text:
                                                   'cupertino_picker.select'.tr,
@@ -79,12 +87,14 @@ class ComponentUtils {
                             ),
                             Expanded(
                               child: CupertinoDatePicker(
-                                initialDateTime: DateTime.now(),
-                                use24hFormat: true,
+                                initialDateTime: initialDateTime ?? minimumDate,
+                                use24hFormat: use24hFormat,
                                 mode: CupertinoDatePickerMode.date,
                                 onDateTimeChanged: (value) {
                                   datetime = value;
                                 },
+                                minimumDate: minimumDate,
+                                maximumDate: maximumDate,
                               ),
                             ),
                           ],
