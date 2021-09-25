@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1/ui/widgets/lh_app_bar_action.dart';
 
-class LhAppBarTop extends StatelessWidget {
+enum LhAppBarType { TOP, BOTTOM }
+
+class LhAppBar extends StatelessWidget {
   // final double? height;
+  final LhAppBarType type;
   final double? elevation;
   final Color? backgroundColor;
-  final LhAppBarAction? leading;
+  final List<LhAppBarAction>? leading;
   final Color? leadingColor;
   final List<LhAppBarAction>? actions;
   final String? title;
   final Widget? titles;
   final Widget? backgroundImage;
 
-  const LhAppBarTop(
+  const LhAppBar(
       {Key? key,
-
+      required this.type,
       // this.height,
-      this.elevation,
+      this.elevation = 0,
       this.backgroundColor,
       this.leading,
       this.leadingColor,
@@ -30,7 +33,7 @@ class LhAppBarTop extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: elevation,
+      elevation: elevation ?? 0,
       margin: EdgeInsets.zero,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(0.0),
@@ -46,10 +49,13 @@ class LhAppBarTop extends StatelessWidget {
             Column(
               children: [
                 Container(
-                  height: MediaQuery.of(context).padding.top,
-                ),
-                Container(
-                  // height: height ?? kToolbarHeight,
+                  margin: EdgeInsets.only(
+                      top: type == LhAppBarType.TOP
+                          ? MediaQuery.of(context).padding.top
+                          : 0,
+                      bottom: type == LhAppBarType.BOTTOM
+                          ? MediaQuery.of(context).padding.bottom
+                          : 0),
                   height: kToolbarHeight,
                   child: Row(
                     children: [
@@ -70,7 +76,9 @@ class LhAppBarTop extends StatelessWidget {
   Widget _renderLeading(BuildContext context) {
     Widget? leadingWidget = null;
     if (leading != null) {
-      leadingWidget = leading;
+      leadingWidget = Row(
+        children: leading as List<Widget>,
+      );
     } else {
       if (ModalRoute.of(context) != null) {
         if (ModalRoute.of(context)!.canPop) {
@@ -102,5 +110,47 @@ class LhAppBarTop extends StatelessWidget {
         width: double.infinity,
         height: double.infinity,
         child: renderWidget ?? SizedBox.shrink());
+  }
+
+  factory LhAppBar.top(
+      {double? elevation,
+      Color? backgroundColor,
+      List<LhAppBarAction>? leading,
+      Color? leadingColor,
+      List<LhAppBarAction>? actions,
+      String? title,
+      Widget? titles,
+      Widget? backgroundImage}) {
+    return LhAppBar(
+        type: LhAppBarType.TOP,
+        elevation: elevation,
+        backgroundColor: backgroundColor,
+        leading: leading,
+        leadingColor: leadingColor,
+        actions: actions,
+        title: title,
+        titles: titles,
+        backgroundImage: backgroundImage);
+  }
+
+  factory LhAppBar.bottom(
+      {double? elevation,
+      Color? backgroundColor,
+      List<LhAppBarAction>? leading,
+      Color? leadingColor,
+      List<LhAppBarAction>? actions,
+      String? title,
+      Widget? titles,
+      Widget? backgroundImage}) {
+    return LhAppBar(
+        type: LhAppBarType.BOTTOM,
+        elevation: elevation,
+        backgroundColor: backgroundColor,
+        leading: leading,
+        leadingColor: leadingColor,
+        actions: actions,
+        title: title,
+        titles: titles,
+        backgroundImage: backgroundImage);
   }
 }

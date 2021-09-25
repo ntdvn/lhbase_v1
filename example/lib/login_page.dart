@@ -22,7 +22,32 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
-        appBarTop: LhAppBarTop(
+        appBarTop: LhAppBar.top(
+          backgroundImage: LhCachedImageWidget(
+            imageUrl:
+                'https://mondaycareer.com/wp-content/uploads/2020/11/background-%C4%91%E1%BA%B9p-3-1024x682.jpg',
+          ),
+          actions: [
+            LhAppBarAction.custom(
+              child: Text('Thêm người dùng'),
+              badge: 2,
+              onTap: () {
+                print('hahah');
+              },
+            ),
+            LhAppBarAction.icon(
+              icon: Icon(Icons.no_accounts),
+              badge: 1,
+              onTap: () {
+                Get.toNamed('/home');
+              },
+            )
+          ],
+          titles: Column(
+            children: [Text('123')],
+          ),
+        ),
+        appBarBottom: LhAppBar.bottom(
           backgroundImage: LhCachedImageWidget(
             imageUrl:
                 'https://mondaycareer.com/wp-content/uploads/2020/11/background-%C4%91%E1%BA%B9p-3-1024x682.jpg',

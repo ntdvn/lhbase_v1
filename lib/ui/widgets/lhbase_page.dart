@@ -8,7 +8,7 @@ class LhBasePage extends StatelessWidget {
   final PreferredSizeWidget? appBar;
   final bool isPaddingTop;
   final bool isPaddingBottom;
-  final LhAppBarTop? appBarTop;
+  final LhAppBar? appBarTop;
   final Widget? appBarBottom;
 
   const LhBasePage(

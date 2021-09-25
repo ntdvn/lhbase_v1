@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
-        appBarTop: LhAppBarTop(
+        appBarTop: LhAppBar.top(
           titles: Text('123'),
         ),
         child: Center(
