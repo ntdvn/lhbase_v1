@@ -30,6 +30,7 @@ class Initializer {
         FlutterError.dumpErrorToConsole(details);
         // printInfo(info: details.stack.toString());
       };
+      _initScreenPreference();
       await initServices();
       await _initLhBaseServices();
       runApp();

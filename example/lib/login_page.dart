@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/ui/widgets/lh_cached_image.dart';
 import 'package:lhbase_v1_example/app_style.dart';
 
 class LoginPage extends StatefulWidget {
@@ -22,10 +23,28 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return LhBasePage(
         appBarTop: LhAppBarTop(
-          leading: LhAppBarAction(
-            child: Text(
-              'abc',
+          backgroundImage: LhCachedImageWidget(
+            imageUrl:
+                'https://mondaycareer.com/wp-content/uploads/2020/11/background-%C4%91%E1%BA%B9p-3-1024x682.jpg',
+          ),
+          actions: [
+            LhAppBarAction.custom(
+              child: Text('Thêm người dùng'),
+              badge: 2,
+              onTap: () {
+                print('hahah');
+              },
             ),
+            LhAppBarAction.icon(
+              icon: Icon(Icons.no_accounts),
+              badge: 1,
+              onTap: () {
+                Get.toNamed('/home');
+              },
+            )
+          ],
+          titles: Column(
+            children: [Text('123')],
           ),
         ),
         child: Center(
@@ -35,28 +54,8 @@ class _LoginPageState extends State<LoginPage> {
                 AppStyle().getSupportedThemes().length,
                 (index) => TextButton(
                     onPressed: () {
-                      // Get.find<GlobalConfigController>().changeTheme(
-                      //     LhStyle.supportedThemes.keys.elementAt(index));
-                      ComponentUtils.showCupertinoDatePicker(context,
-                          onSubmitted: (value) {
-                        print(value);
-                      },
-                          onDelete: () {},
-                          initialDateTime: DateTime(
-                            1998,
-                            03,
-                            13,
-                          ),
-                          minimumDate: DateTime(
-                            1997,
-                            03,
-                            13,
-                          ),
-                          maximumDate: DateTime(
-                            2000,
-                            03,
-                            13,
-                          ));
+                      Get.find<GlobalConfigController>().changeTheme(
+                          LhStyle.supportedThemes.keys.elementAt(index));
                     },
                     child:
                         Text(LhStyle.supportedThemes.keys.elementAt(index)))),

@@ -18,16 +18,19 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
+        appBarTop: LhAppBarTop(
+          titles: Text('123'),
+        ),
         child: Center(
             child: Column(
-      children: [
-        TextButton(
-          onPressed: () {
-            Navigator.of(context).pushNamed('/login');
-          },
-          child: LhText('Login Page'),
-        ),
-      ],
-    )));
+          children: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pushNamed('/login');
+              },
+              child: LhText('Login Page'),
+            ),
+          ],
+        )));
   }
 }

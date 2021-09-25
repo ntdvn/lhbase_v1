@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
@@ -10,7 +11,14 @@ class GlobalConfigController extends LhBaseController {
   }
 
   changeTheme(String themeName) {
-    Get.changeTheme(LhStyle.getTheme(themeName: themeName));
+    var theme = LhStyle.getTheme(themeName: themeName);
+    Get.changeTheme(theme);
+
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        systemNavigationBarColor: Colors.blue, // navigation bar color
+        statusBarColor: Colors.pink, // status bar co
+        statusBarBrightness: theme.brightness // lor
+        ));
     lhSessionRepository.saveAppTheme(themeName);
   }
 
