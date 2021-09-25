@@ -7,6 +7,7 @@ class LhAppBarTop extends StatelessWidget {
   final double? elevation;
   final Color? backgroundColor;
   final LhAppBarAction? leading;
+  final Color? leadingColor;
   final List<LhAppBarAction>? actions;
   final String? title;
   final Widget? titles;
@@ -19,6 +20,7 @@ class LhAppBarTop extends StatelessWidget {
       this.elevation,
       this.backgroundColor,
       this.leading,
+      this.leadingColor,
       this.actions,
       this.title,
       this.titles,
@@ -67,20 +69,19 @@ class LhAppBarTop extends StatelessWidget {
 
   _renderLeading(BuildContext context) {
     var leadingWidget = null;
-    if (ModalRoute.of(context) != null) {
-      if (ModalRoute.of(context)!.canPop) {
-        leadingWidget = LhAppBarAction.icon(
-          icon: Icon(Icons.chevron_left),
-          onTap: () => Navigator.of(context).pop(),
-        );
+    if (leading != null) {
+    } else {
+      if (ModalRoute.of(context) != null) {
+        if (ModalRoute.of(context)!.canPop) {
+          leadingWidget = LhAppBarAction.icon(
+            icon: Icon(
+              Icons.chevron_left,
+              color: leadingColor ?? Theme.of(context).primaryIconTheme.color,
+            ),
+            onTap: () => Navigator.of(context).pop(),
+          );
+        }
       }
-    } else if (title != null) {
-      leadingWidget = LhText(
-        title!,
-        style: LhStyle.DEFAULT_14,
-      );
-    } else if (title != null) {
-      leadingWidget = titles;
     }
     // if (.canPop!=null)
     return leadingWidget ?? SizedBox.shrink();
@@ -89,7 +90,10 @@ class LhAppBarTop extends StatelessWidget {
   _renderTitle() {
     var renderWidget = null;
     if (title != null) {
-      renderWidget = Text(title!);
+      renderWidget = Text(
+        title!,
+        style: LhStyle.DEFAULT_14,
+      );
     } else if (titles != null) {
       renderWidget = titles;
     }
