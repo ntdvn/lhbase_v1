@@ -13,9 +13,7 @@ class LhAppBarAction extends StatelessWidget {
   Widget build(BuildContext context) {
     return Stack(
       children: [
-        Container(
-            alignment: Alignment.center,
-            child: FractionallySizedBox(widthFactor: 0.6, child: child)),
+        Container(alignment: Alignment.center, child: child),
         // Positioned.fill(
         //     child: Material(
         //   color: Colors.transparent,
@@ -74,7 +72,10 @@ class LhAppBarAction extends StatelessWidget {
     return LhAppBarAction(
       child: Stack(
         children: [
-          AspectRatio(aspectRatio: 1, child: icon),
+          AspectRatio(
+              aspectRatio: 1,
+              child: FractionallySizedBox(
+                  widthFactor: 0.6, heightFactor: 0.6, child: icon)),
           Positioned.fill(
               child: Material(
             color: Colors.transparent,
