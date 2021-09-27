@@ -6,8 +6,12 @@ class LhAppBarAction extends StatelessWidget {
   final int? badge;
   final VoidCallback? onTap;
 
-  const LhAppBarAction({Key? key, this.badge, this.child, this.onTap})
-      : super(key: key);
+  const LhAppBarAction({
+    Key? key,
+    this.badge,
+    this.child,
+    this.onTap,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -68,14 +72,19 @@ class LhAppBarAction extends StatelessWidget {
   }
 
   factory LhAppBarAction.icon(
-      {required Widget icon, int? badge, VoidCallback? onTap}) {
+      {required Widget icon,
+      int? badge,
+      VoidCallback? onTap,
+      double? iconFactor}) {
     return LhAppBarAction(
       child: Stack(
         children: [
           AspectRatio(
               aspectRatio: 1,
               child: FractionallySizedBox(
-                  widthFactor: 0.6, heightFactor: 0.6, child: icon)),
+                  widthFactor: iconFactor ?? 0.6,
+                  heightFactor: iconFactor ?? 0.6,
+                  child: icon)),
           Positioned.fill(
               child: Material(
             color: Colors.transparent,
