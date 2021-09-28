@@ -19,7 +19,8 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return LhBasePage(
         appBarTop: LhAppBar.top(
-          titles: Text('123'),
+          title: 'abc',
+          titleStyle: TextStyle(color: Colors.white),
         ),
         child: Center(
             child: Column(

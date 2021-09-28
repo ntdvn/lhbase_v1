@@ -6,6 +6,7 @@ class AppBinding extends LhBinding {
   @override
   void dependencies() {
     super.dependencies();
+    Get.put(MediaManagerController());
     Get.put(LoginController());
   }
 }

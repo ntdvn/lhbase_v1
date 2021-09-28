@@ -6,3 +6,4 @@ export 'keyboard_dimisser.dart';
 export 'lh_text.dart';
 export 'lh_spacer.dart';
 export 'lh_borderless_input.dart';
+export 'lh_bottom_sheet.dart';

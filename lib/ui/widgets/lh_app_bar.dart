@@ -13,6 +13,7 @@ class LhAppBar extends StatelessWidget {
   final Color? leadingColor;
   final List<LhAppBarAction>? actions;
   final String? title;
+  final TextStyle? titleStyle;
   final Widget? titles;
   final Widget? backgroundImage;
 
@@ -26,6 +27,7 @@ class LhAppBar extends StatelessWidget {
       this.leadingColor,
       this.actions,
       this.title,
+      this.titleStyle,
       this.titles,
       this.backgroundImage})
       : super(key: key);
@@ -99,9 +101,13 @@ class LhAppBar extends StatelessWidget {
   _renderTitle() {
     var renderWidget = null;
     if (title != null) {
-      renderWidget = Text(
-        title!,
-        style: LhStyle.DEFAULT_14,
+      renderWidget = Container(
+        alignment: Alignment.centerLeft,
+        padding: EdgeInsets.only(left: 10),
+        child: Text(
+          title!,
+          style: titleStyle ?? LhStyle.DEFAULT_14,
+        ),
       );
     } else if (titles != null) {
       renderWidget = titles;
@@ -119,6 +125,7 @@ class LhAppBar extends StatelessWidget {
       Color? leadingColor,
       List<LhAppBarAction>? actions,
       String? title,
+      TextStyle? titleStyle,
       Widget? titles,
       Widget? backgroundImage}) {
     return LhAppBar(
@@ -129,6 +136,7 @@ class LhAppBar extends StatelessWidget {
         leadingColor: leadingColor,
         actions: actions,
         title: title,
+        titleStyle: titleStyle,
         titles: titles,
         backgroundImage: backgroundImage);
   }
@@ -140,6 +148,7 @@ class LhAppBar extends StatelessWidget {
       Color? leadingColor,
       List<LhAppBarAction>? actions,
       String? title,
+      TextStyle? titleStyle,
       Widget? titles,
       Widget? backgroundImage}) {
     return LhAppBar(
@@ -150,6 +159,7 @@ class LhAppBar extends StatelessWidget {
         leadingColor: leadingColor,
         actions: actions,
         title: title,
+        titleStyle: titleStyle,
         titles: titles,
         backgroundImage: backgroundImage);
   }

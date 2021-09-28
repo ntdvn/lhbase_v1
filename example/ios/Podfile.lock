@@ -10,6 +10,9 @@ PODS:
     - Flutter
   - path_provider (0.0.1):
     - Flutter
+  - photo_manager (1.0.0):
+    - Flutter
+    - FlutterMacOS
   - Reachability (3.2)
   - shared_preferences (0.0.1):
     - Flutter
@@ -22,6 +25,7 @@ DEPENDENCIES:
   - Flutter (from `Flutter`)
   - lhbase_v1 (from `.symlinks/plugins/lhbase_v1/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
+  - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
   - shared_preferences (from `.symlinks/plugins/shared_preferences/ios`)
   - sqflite (from `.symlinks/plugins/sqflite/ios`)
 
@@ -39,6 +43,8 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/lhbase_v1/ios"
   path_provider:
     :path: ".symlinks/plugins/path_provider/ios"
+  photo_manager:
+    :path: ".symlinks/plugins/photo_manager/ios"
   shared_preferences:
     :path: ".symlinks/plugins/shared_preferences/ios"
   sqflite:
@@ -50,6 +56,7 @@ SPEC CHECKSUMS:
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   lhbase_v1: afb6fee0f27693b48a590059867360004430d8f7
   path_provider: d1e9807085df1f9cc9318206cd649dc0b76be3de
+  photo_manager: 84fa94fbeb82e607333ea9a13c43b58e0903a463
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   shared_preferences: af6bfa751691cdc24be3045c43ec037377ada40d
   sqflite: 6d358c025f5b867b29ed92fc697fd34924e11904

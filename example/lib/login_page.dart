@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1/ui/widgets/lh_cached_image.dart';
 import 'package:lhbase_v1_example/app_style.dart';
@@ -23,6 +22,8 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return LhBasePage(
         appBarTop: LhAppBar.top(
+          title: 'abc',
+          titleStyle: TextStyle(color: Colors.white),
           backgroundImage: LhCachedImageWidget(
             imageUrl:
                 'https://mondaycareer.com/wp-content/uploads/2020/11/background-%C4%91%E1%BA%B9p-3-1024x682.jpg',
@@ -32,7 +33,39 @@ class _LoginPageState extends State<LoginPage> {
               child: Text('Thêm người dùng'),
               badge: 2,
               onTap: () {
-                print('hahah');
+                // Get.bottomSheet(MediaSelectPage(
+                //   type: MediaSelectType.MULTIPLE,
+                //   number: 10,
+                // ));
+                Get.bottomSheet(
+                    GestureDetector(
+                      behavior: HitTestBehavior.opaque,
+                      onTap: () {
+                        Get.back();
+                      },
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: DraggableScrollableSheet(
+                          initialChildSize: 0.5, // half screen on load
+                          maxChildSize: 1, // full screen on scroll
+                          minChildSize: 0.5,
+                          expand: true,
+                          builder: (context, scrollController) {
+                            // scrollController.
+
+                            return LhBottomSheet(
+                              title: "Title",
+                              child: ListView(
+                                // controller: scrollController,
+                                children: [],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    isScrollControlled: true,
+                    ignoreSafeArea: false);
               },
             ),
             LhAppBarAction.icon(
