@@ -10,6 +10,7 @@ class LhText extends StatelessWidget {
   final TextAlign? textAlign;
   final TextOverflow? overflow;
   final double? textScaleFactor;
+  final int? maxLines;
   const LhText(
     this.data, {
     Key? key,
@@ -17,6 +18,7 @@ class LhText extends StatelessWidget {
     this.textAlign,
     this.overflow,
     this.textScaleFactor,
+    this.maxLines,
   }) : super(key: key);
 
   @override
@@ -27,6 +29,7 @@ class LhText extends StatelessWidget {
       textAlign: textAlign,
       overflow: overflow,
       textScaleFactor: textScaleFactor,
+      maxLines: maxLines,
     );
   }
 }

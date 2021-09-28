@@ -10,6 +10,7 @@ class LhBasePage extends StatelessWidget {
   final bool isPaddingBottom;
   final LhAppBar? appBarTop;
   final Widget? appBarBottom;
+  final LhSlidingPanel? bottomSlidingPanel;
 
   const LhBasePage(
       {Key? key,
@@ -20,7 +21,8 @@ class LhBasePage extends StatelessWidget {
       this.isPaddingTop = false,
       this.isPaddingBottom = false,
       this.appBarTop,
-      this.appBarBottom})
+      this.appBarBottom,
+      this.bottomSlidingPanel})
       : super(key: key);
 
   @override
@@ -34,11 +36,28 @@ class LhBasePage extends StatelessWidget {
               bottom:
                   isPaddingBottom ? MediaQuery.of(context).padding.bottom : 0),
           child: Scaffold(
-            body: Column(
+            body: Stack(
               children: [
-                if (appBarTop != null) appBarTop as Widget,
-                Expanded(child: child),
-                if (appBarBottom != null) appBarBottom as Widget,
+                Column(
+                  children: [
+                    if (appBarTop != null) appBarTop as Widget,
+                    Expanded(child: child),
+                    if (appBarBottom != null) appBarBottom as Widget,
+                  ],
+                ),
+                if (bottomSlidingPanel != null)
+                  Positioned(
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Wrap(
+                        children: [
+                          Container(
+                              color: Colors.red,
+                              child: bottomSlidingPanel as Widget),
+                        ],
+                      ),
+                    ),
+                  )
               ],
             ),
             floatingActionButton: floatingActionButton,
