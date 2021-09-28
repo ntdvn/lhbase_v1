@@ -54,7 +54,7 @@ class _LhBottomSheetState extends State<LhBottomSheet> {
     super.initState();
   }
 
-  late Timer _timer;
+  Timer? _timer;
 
   void expandHeightSize(double expandHeight) {
     var originHeight = _height;
@@ -120,7 +120,7 @@ class _LhBottomSheetState extends State<LhBottomSheet> {
 
   @override
   void dispose() {
-    _timer.cancel();
+    if (_timer != null) _timer!.cancel();
     super.dispose();
   }
 

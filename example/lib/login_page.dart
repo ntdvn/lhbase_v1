@@ -97,10 +97,10 @@ class _LoginPageState extends State<LoginPage> {
         //     children: [Text('123')],
         //   ),
         // ),
-        // bottomSlidingPanel: LhSlidingPanel(
-        //   controller: _slidingController,
-        //   child: Container(),
-        // ),
+        bottomSlidingPanel: LhSlidingPanel(
+          controller: _slidingController,
+          child: Container(),
+        ),
         child: Container(
           color: Colors.blue,
           child: Center(

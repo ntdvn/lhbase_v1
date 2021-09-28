@@ -166,7 +166,7 @@ class _LhSlidingPanelState extends State<LhSlidingPanel> {
                   // }
                 },
                 child: Container(
-                  // height: _height,
+                  height: widget.controller.currentHeight,
                   padding: EdgeInsets.only(
                     top: MediaQuery.of(context).padding.top,
                   ),
