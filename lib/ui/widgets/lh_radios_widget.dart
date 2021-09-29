@@ -43,16 +43,40 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
   @override
   Widget build(BuildContext context) {
     if (widget.containerWidget is Column) {
+      var parent = widget.containerWidget as Column;
       return Column(
+        mainAxisAlignment: parent.mainAxisAlignment,
+        crossAxisAlignment: parent.crossAxisAlignment,
+        mainAxisSize: parent.mainAxisSize,
+        verticalDirection: parent.verticalDirection,
+        textDirection: parent.textDirection,
+        textBaseline: parent.textBaseline,
         children: _renderChildren(),
       );
     } else if (widget.containerWidget is Row) {
+      var parent = widget.containerWidget as Row;
       return Row(
+        mainAxisAlignment: parent.mainAxisAlignment,
+        crossAxisAlignment: parent.crossAxisAlignment,
+        mainAxisSize: parent.mainAxisSize,
+        verticalDirection: parent.verticalDirection,
+        textDirection: parent.textDirection,
+        textBaseline: parent.textBaseline,
         children: _renderChildren(),
       );
     }
     if (widget.containerWidget is Wrap) {
+      var parent = widget.containerWidget as Wrap;
       return Wrap(
+        alignment: parent.alignment,
+        crossAxisAlignment: parent.crossAxisAlignment,
+        runAlignment: parent.runAlignment,
+        spacing: parent.spacing,
+        runSpacing: parent.runSpacing,
+        direction: parent.direction,
+        verticalDirection: parent.verticalDirection,
+        clipBehavior: parent.clipBehavior,
+        textDirection: parent.textDirection,
         children: _renderChildren(),
       );
     }
