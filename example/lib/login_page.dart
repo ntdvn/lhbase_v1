@@ -14,11 +14,15 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  var _slidingController =
-      LhSlidingPanelController(minimizeHeight: 300, maximizeHeight: Get.height);
+  late LhSlidingPanelController _slidingController;
   @override
   void initState() {
-    print('_LoginPageState');
+    _slidingController = LhSlidingPanelController(
+        minimizeHeight: 300,
+        maximizeHeight: Get.height,
+        onAnimatedEnded: () {
+          setState(() {});
+        });
     super.initState();
   }
 
@@ -53,10 +57,18 @@ class _LoginPageState extends State<LoginPage> {
               },
             ),
             LhAppBarAction.icon(
-              icon: Icon(Icons.offline_bolt),
+              icon: Icon(Icons.minimize),
               badge: 1,
               onTap: () {
-                _slidingController.toggle();
+                _slidingController.minimize();
+                // setState(() {});
+              },
+            ),
+            LhAppBarAction.icon(
+              icon: Icon(Icons.maximize),
+              badge: 1,
+              onTap: () {
+                _slidingController.toggleMaximize();
                 // setState(() {});
               },
             ),
@@ -64,7 +76,8 @@ class _LoginPageState extends State<LoginPage> {
               icon: Icon(Icons.no_accounts),
               badge: 1,
               onTap: () {
-                Get.toNamed('/home');
+                // Get.toNamed('/home');
+                Get.find<GlobalConfigController>().changeTheme('Light');
               },
             )
           ],
@@ -101,32 +114,26 @@ class _LoginPageState extends State<LoginPage> {
           controller: _slidingController,
           child: Container(),
         ),
-        child: Container(
-          color: Colors.blue,
-          child: Center(
-              child: Column(
-            children: [
-              ...List.generate(
-                  AppStyle().getSupportedThemes().length,
-                  (index) => TextButton(
-                      onPressed: () {
-                        Get.find<GlobalConfigController>().changeTheme(
-                            LhStyle.supportedThemes.keys.elementAt(index));
-                      },
-                      child:
-                          Text(LhStyle.supportedThemes.keys.elementAt(index)))),
-              GestureDetector(
-                  onTap: () {
-                    Get.find<GlobalConfigController>().changeLanguage();
-                  },
-                  child: LhText('connectivity.no_internet'.tr)),
-              TextField(
-                decoration: InputDecoration(
-                  hintText: 'connectivity.no_internet'.tr,
+        child: SingleChildScrollView(
+          child: Container(
+            // color: Colors.blue,
+            child: Center(
+                child: Column(
+              children: [
+                ...List.generate(123, (index) => Text('hehe $index')),
+                GestureDetector(
+                    onTap: () {
+                      Get.find<GlobalConfigController>().changeLanguage();
+                    },
+                    child: LhText('connectivity.no_internet'.tr)),
+                TextField(
+                  decoration: InputDecoration(
+                    hintText: 'connectivity.no_internet'.tr,
+                  ),
                 ),
-              )
-            ],
-          )),
+              ],
+            )),
+          ),
         ));
   }
 }

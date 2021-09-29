@@ -27,6 +27,7 @@ class LhBasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print('buildder');
     return KeyBoarDismisserWidget(
       child: WillPopScope(
         onWillPop: onWillPop,
@@ -43,6 +44,9 @@ class LhBasePage extends StatelessWidget {
                     if (appBarTop != null) appBarTop as Widget,
                     Expanded(child: child),
                     if (appBarBottom != null) appBarBottom as Widget,
+                    if (bottomSlidingPanel != null)
+                      Container(
+                          height: bottomSlidingPanel!.controller.currentHeight)
                   ],
                 ),
                 if (bottomSlidingPanel != null)

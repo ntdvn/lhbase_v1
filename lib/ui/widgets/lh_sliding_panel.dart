@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
-enum LhSlidingPanelState { DEFAULT, MINIMIZE, MAXIMIZE, CLOSED }
+enum LhSlidingPanelState { MINIMIZE, MAXIMIZE, CLOSED }
 
 class LhSlidingPanel extends StatefulWidget {
   final LhSlidingPanelController controller;
@@ -53,117 +53,55 @@ class _LhSlidingPanelState extends State<LhSlidingPanel> {
     super.initState();
   }
 
-  late Timer _timer;
-
-  void expandHeightSize(double expandHeight) {
-    var originHeight = widget.controller.minimizeHeight;
-    const double stepValue = 4;
-    const oneSec = const Duration(microseconds: 1000);
-    _timer = new Timer.periodic(
-      oneSec,
-      (Timer timer) {
-        if (widget.controller.minimizeHeight == expandHeight) {
-          setState(() {
-            timer.cancel();
-          });
-        } else {
-          if (originHeight < expandHeight) {
-            setState(() {
-              widget.controller.currentHeight += stepValue;
-            });
-            if (widget.controller.currentHeight > expandHeight) {
-              setState(() {
-                widget.controller.currentHeight = expandHeight;
-                timer.cancel();
-              });
-            }
-          } else if (originHeight > expandHeight) {
-            setState(() {
-              widget.controller.currentHeight -= stepValue;
-            });
-            if (widget.controller.currentHeight < expandHeight) {
-              setState(() {
-                widget.controller.currentHeight = expandHeight;
-                timer.cancel();
-              });
-            }
-          }
-
-          // if (expandHeight >= _height) {
-          //   if (_height > expandHeight) {
-          //     setState(() {
-          //       _height = expandHeight;
-          //       timer.cancel();
-          //     });
-          //   } else {
-          //     setState(() {
-          //       _height += 4;
-          //     });
-          //   }
-          // } else {
-          // if (_height < expandHeight) {
-          //   setState(() {
-          //     _height = expandHeight;
-          //     timer.cancel();
-          //   });
-          // } else {
-          //   setState(() {
-          //     _height -= 4;
-          //   });
-          // }
-          // }
-        }
-      },
-    );
-  }
-
   @override
   void dispose() {
-    _timer.cancel();
     super.dispose();
   }
-
-  // void _statusToHeight() {
-  //   if (widget.controller.status == LhSlidingPanelState.DEFAULT) {
-  //     _height = _defaultHeight;
-  //   }
-  //   if (widget.controller.status == LhSlidingPanelState.CLOSED) {
-  //     _height = 0;
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: widget.controller,
       builder: (context, child) {
+        print('AnimatedBuilder');
         return Container(
+          color: Colors.blue,
           child: Column(
             children: [
               GestureDetector(
                 onVerticalDragUpdate: (details) {
-                  // if (_height <= _maxHeight) {
-                  //   _height = _height - details.delta.dy;
-                  //   if (_height > _maxHeight) _height = _maxHeight;
-                  //   setState(() {});
+                  print('onVerticalDragUpdate');
+                  // if (widget.controller.currentHeight <=
+                  //     widget.controller.maximizeHeight) {
+                  print('<=maximizeHeight');
+                  widget.controller.animatedTo(
+                      widget.controller.currentHeight - details.delta.dy);
+                  // if (widget.controller.currentHeight >
+                  //     widget.controller.maximizeHeight)
+                  //   print('>maximizeHeight');
+                  // widget.controller
+                  //     .animatedTo(widget.controller.maximizeHeight);
+                  // setState(() {});
                   // }
                 },
                 onVerticalDragEnd: (details) {
-                  // if (_height < _defaultHeight - 30 &&
-                  //     widget.controller.status != LhSlidingPanelState.CLOSED) {
-                  //   widget.controller.status = LhSlidingPanelState.CLOSED;
-                  //   Get.back();
-                  // } else if (_height > _defaultHeight + 30 &&
-                  //     widget.controller.status !=
-                  //         LhSlidingPanelState.MAXIMIZE) {
-                  //   expandHeightSize(_maxHeight);
-                  //   widget.controller.status = LhSlidingPanelState.MAXIMIZE;
-                  // } else if (_height < _maxHeight - 30 &&
-                  //     widget.controller.status !=
-                  //         LhSlidingPanelState.MINIMIZE) {
-                  //   expandHeightSize(_defaultHeight);
-                  //   widget.controller.status = LhSlidingPanelState.MINIMIZE;
-                  // }
+                  if (widget.controller.currentHeight <
+                          widget.controller.minimizeHeight - 30 &&
+                      widget.controller.status != LhSlidingPanelState.CLOSED) {
+                    widget.controller.changeStatus(LhSlidingPanelState.CLOSED);
+                  } else if (widget.controller.currentHeight >
+                          widget.controller.minimizeHeight + 30 &&
+                      widget.controller.status !=
+                          LhSlidingPanelState.MAXIMIZE) {
+                    widget.controller
+                        .changeStatus(LhSlidingPanelState.MAXIMIZE);
+                  } else if (widget.controller.currentHeight <
+                          widget.controller.maximizeHeight - 30 &&
+                      widget.controller.status !=
+                          LhSlidingPanelState.MINIMIZE) {
+                    widget.controller
+                        .changeStatus(LhSlidingPanelState.MINIMIZE);
+                  }
                 },
                 child: Container(
                   height: widget.controller.currentHeight,
@@ -174,19 +112,19 @@ class _LhSlidingPanelState extends State<LhSlidingPanel> {
                   // padding: EdgeInsets.all(10.0),
                   child: Column(
                     children: [
-                      Container(
-                        color: Colors.transparent,
-                        height: 5,
-                        margin: EdgeInsets.symmetric(vertical: 10),
-                        child: FractionallySizedBox(
-                            widthFactor: 0.12,
-                            heightFactor: 1,
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFF0F2F5),
-                                  borderRadius: BorderRadius.circular(16.0)),
-                            )),
-                      ),
+                      // Container(
+                      //   color: Colors.transparent,
+                      //   height: 5,
+                      //   margin: EdgeInsets.symmetric(vertical: 10),
+                      //   child: FractionallySizedBox(
+                      //       widthFactor: 0.12,
+                      //       heightFactor: 1,
+                      //       child: Container(
+                      //         decoration: BoxDecoration(
+                      //             color: Color(0xFFF0F2F5),
+                      //             borderRadius: BorderRadius.circular(16.0)),
+                      //       )),
+                      // ),
                       Expanded(
                         child: Container(
                           width: double.infinity,
@@ -196,19 +134,19 @@ class _LhSlidingPanelState extends State<LhSlidingPanel> {
                                   top: Radius.circular(16.0))),
                           child: Column(
                             children: [
-                              Container(
-                                  color: null,
-                                  padding: EdgeInsets.symmetric(
-                                      vertical: 12, horizontal: 25),
-                                  child: Text(
-                                    'ahahaha',
-                                    style: LhStyle.DEFAULT_18
-                                        .copyWith(fontWeight: FontWeight.w600),
-                                  )),
-                              Container(
-                                height: 2,
-                                color: Color(0xFFF0F2F5),
-                              ),
+                              // Container(
+                              //     // color: null,
+                              //     padding: EdgeInsets.symmetric(
+                              //         vertical: 12, horizontal: 25),
+                              //     child: Text(
+                              //       'ahahaha',
+                              //       style: LhStyle.DEFAULT_18
+                              //           .copyWith(fontWeight: FontWeight.w600),
+                              //     )),
+                              // Container(
+                              //   height: 2,
+                              //   color: Color(0xFFF0F2F5),
+                              // ),
                               Expanded(
                                 child: Container(
                                   padding: EdgeInsets.only(
