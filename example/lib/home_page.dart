@@ -33,13 +33,17 @@ class _HomePageState extends State<HomePage> {
               },
               child: LhText('Login Page'),
             ),
-            Container(
-                color: Colors.greenAccent,
-                child: LhInputSearch(
-                  controller: controller,
-                  formTextStyle: LhStyle.DEFAULT_14,
-                ))
+            _renderSearchTextField()
           ],
         )));
+  }
+
+  Widget _renderSearchTextField() {
+    return Container(
+        color: Colors.blue,
+        child: LhInputSearch(
+          controller: controller,
+          // hint: 'chat_main.search'.tr,
+        ));
   }
 }

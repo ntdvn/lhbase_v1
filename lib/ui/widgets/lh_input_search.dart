@@ -36,17 +36,18 @@ class LhInputSearch extends StatefulWidget {
 class _LhInputSearchState extends State<LhInputSearch> {
   @override
   Widget build(BuildContext context) {
-    return LhBorderLessInput(
+    return LhMultiUseInput(
+        line: 1,
         controller: widget.controller,
         onChanged: (value) {
           if (widget.onChanged != null) widget.onChanged!(value);
           setState(() {});
         },
-        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+        // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
         hint: widget.hint,
         formTextStyle: widget.formTextStyle,
         formHintStyle: widget.formHintStyle,
-        prefixIcon: Container(
+        prefix: Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Icon(
             Icons.search,
@@ -65,20 +66,15 @@ class _LhInputSearchState extends State<LhInputSearch> {
                   setState(() {});
                 },
                 child: Container(
-                  alignment: Alignment.center,
-                  width: 25,
-                  height: 25,
-                  child: widget.controller.text.isNotEmpty
-                      ? Icon(
+                    width: 25,
+                    height: 25,
+                    child: LhAppBarAction.icon(
+                        iconFactor: 1,
+                        icon: Icon(
                           Icons.close,
                           size: widget.formTextStyle != null
                               ? widget.formTextStyle!.fontSize
                               : null,
-                        )
-                      : Text(
-                          '',
-                          style: LhStyle.DEFAULT_12,
-                        ),
-                ))));
+                        ))))));
   }
 }
