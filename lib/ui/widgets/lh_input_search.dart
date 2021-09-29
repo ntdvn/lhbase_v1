@@ -57,24 +57,26 @@ class _LhInputSearchState extends State<LhInputSearch> {
                 : null,
           ),
         ),
-        suffix: Material(
-            color: Colors.transparent,
-            child: InkWell(
-                borderRadius: BorderRadius.circular(500.0),
-                onTap: () {
-                  widget.controller.text = '';
-                  setState(() {});
-                },
-                child: Container(
-                    width: 25,
-                    height: 25,
-                    child: LhAppBarAction.icon(
-                        iconFactor: 1,
-                        icon: Icon(
-                          Icons.close,
-                          size: widget.formTextStyle != null
-                              ? widget.formTextStyle!.fontSize
-                              : null,
-                        ))))));
+        suffix: widget.controller.text.isNotEmpty
+            ? Material(
+                color: Colors.transparent,
+                child: InkWell(
+                    borderRadius: BorderRadius.circular(500.0),
+                    onTap: () {
+                      widget.controller.text = '';
+                      setState(() {});
+                    },
+                    child: Container(
+                        width: 25,
+                        height: 25,
+                        child: LhAppBarAction.icon(
+                            iconFactor: 1,
+                            icon: Icon(
+                              Icons.close,
+                              size: widget.formTextStyle != null
+                                  ? widget.formTextStyle!.fontSize
+                                  : null,
+                            )))))
+            : SizedBox.shrink());
   }
 }
