@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:lhbase_v1/lhbase.dart';
+
+class LhInputSearch extends StatefulWidget {
+  final int? line;
+  final FocusNode? focusNode;
+  final TextEditingController controller;
+  final List<TextInputFormatter>? inputFormatters;
+  final TextStyle? formTextStyle;
+  final String? hint;
+  final String? initialValue;
+  final TextStyle? formHintStyle;
+  final TextInputType? keyboardType;
+  final ValueChanged<String>? onChanged;
+  final EdgeInsets? padding;
+  const LhInputSearch(
+      {Key? key,
+      this.line,
+      this.focusNode,
+      required this.controller,
+      this.inputFormatters,
+      this.formTextStyle,
+      this.hint,
+      this.initialValue,
+      this.formHintStyle,
+      this.keyboardType,
+      this.onChanged,
+      this.padding})
+      : super(key: key);
+
+  @override
+  _LhInputSearchState createState() => _LhInputSearchState();
+}
+
+class _LhInputSearchState extends State<LhInputSearch> {
+  @override
+  Widget build(BuildContext context) {
+    return LhBorderLessInput(
+        controller: widget.controller,
+        onChanged: (value) {
+          if (widget.onChanged != null) widget.onChanged!(value);
+          setState(() {});
+        },
+        padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+        hint: widget.hint,
+        formTextStyle: widget.formTextStyle,
+        formHintStyle: widget.formHintStyle,
+        prefixIcon: Container(
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+          child: Icon(
+            Icons.search,
+            color: Colors.grey,
+            size: widget.formTextStyle != null
+                ? widget.formTextStyle!.fontSize
+                : null,
+          ),
+        ),
+        suffix: Material(
+            color: Colors.transparent,
+            child: InkWell(
+                borderRadius: BorderRadius.circular(500.0),
+                onTap: () {
+                  widget.controller.text = '';
+                  setState(() {});
+                },
+                child: Container(
+                  alignment: Alignment.center,
+                  width: 25,
+                  height: 25,
+                  child: widget.controller.text.isNotEmpty
+                      ? Icon(
+                          Icons.close,
+                          size: widget.formTextStyle != null
+                              ? widget.formTextStyle!.fontSize
+                              : null,
+                        )
+                      : Text(
+                          '',
+                          style: LhStyle.DEFAULT_12,
+                        ),
+                ))));
+  }
+}

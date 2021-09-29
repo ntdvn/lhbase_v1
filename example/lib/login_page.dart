@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
               icon: Icon(Icons.no_accounts),
               badge: 1,
               onTap: () {
-                // Get.toNamed('/home');
+                Get.toNamed('/home');
                 Get.find<GlobalConfigController>().changeTheme('Light');
               },
             )

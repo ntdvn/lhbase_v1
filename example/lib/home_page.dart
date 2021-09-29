@@ -15,6 +15,8 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
+  var controller = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
@@ -31,6 +33,12 @@ class _HomePageState extends State<HomePage> {
               },
               child: LhText('Login Page'),
             ),
+            Container(
+                color: Colors.greenAccent,
+                child: LhInputSearch(
+                  controller: controller,
+                  formTextStyle: LhStyle.DEFAULT_14,
+                ))
           ],
         )));
   }
