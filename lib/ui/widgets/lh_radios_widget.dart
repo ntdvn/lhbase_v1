@@ -42,9 +42,10 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
 
   @override
   Widget build(BuildContext context) {
+    late Widget _renderWidget;
     if (widget.containerWidget is Column) {
       var parent = widget.containerWidget as Column;
-      return Column(
+      _renderWidget = Column(
         mainAxisAlignment: parent.mainAxisAlignment,
         crossAxisAlignment: parent.crossAxisAlignment,
         mainAxisSize: parent.mainAxisSize,
@@ -55,7 +56,7 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
       );
     } else if (widget.containerWidget is Row) {
       var parent = widget.containerWidget as Row;
-      return Row(
+      _renderWidget = Row(
         mainAxisAlignment: parent.mainAxisAlignment,
         crossAxisAlignment: parent.crossAxisAlignment,
         mainAxisSize: parent.mainAxisSize,
@@ -67,7 +68,7 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
     }
     if (widget.containerWidget is Wrap) {
       var parent = widget.containerWidget as Wrap;
-      return Wrap(
+      _renderWidget = Wrap(
         alignment: parent.alignment,
         crossAxisAlignment: parent.crossAxisAlignment,
         runAlignment: parent.runAlignment,
@@ -80,9 +81,7 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
         children: _renderChildren(),
       );
     }
-    return Column(
-      children: _renderChildren(),
-    );
+    return Container(width: double.infinity, child: _renderWidget);
   }
 
   List<Widget> _renderChildren() {
