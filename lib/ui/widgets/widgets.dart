@@ -11,3 +11,4 @@ export 'lh_multi_use_input.dart';
 export 'lh_bottom_sheet.dart';
 export 'lh_sliding_panel.dart';
 export 'lh_radios_widget.dart';
+export 'lh_avatar.dart';

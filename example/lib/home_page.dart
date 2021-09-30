@@ -33,7 +33,24 @@ class _HomePageState extends State<HomePage> {
               },
               child: LhText('Login Page'),
             ),
-            _renderSearchTextField()
+            _renderSearchTextField(),
+            Container(
+              // height: 115,
+              // width: 115,
+              child: LhAvatar(
+                  borderWidth: 1,
+                  onDelete: () {
+                    print('onDelete');
+                  },
+                  onEdit: () {
+                    print('onEdit');
+                  },
+                  height: 120,
+                  width: 120,
+                  isOnline: true,
+                  imageUrl:
+                      'https://i.pinimg.com/736x/70/ed/da/70edda522b0e5673b231dad1b425b904.jpg'),
+            )
           ],
         )));
   }

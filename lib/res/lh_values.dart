@@ -103,4 +103,6 @@ class LhValue {
 
     return date[2] + '-' + date[1] + '-' + date[0];
   }
+
+  static final BorderRadius circleRadius = BorderRadius.circular(500.0);
 }
