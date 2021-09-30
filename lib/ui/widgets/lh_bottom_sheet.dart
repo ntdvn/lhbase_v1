@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
+import 'package:get/get.dart';
 
 enum LhBottomSheetState { DEFAULT, MINIMIZE, MAXIMIZE, CLOSED }
 
@@ -127,7 +128,7 @@ class _LhBottomSheetState extends State<LhBottomSheet> {
   @override
   Widget build(BuildContext context) {
     print(
-        'MediaQuery.of(context).padding.top ${MediaQuery.of(context).padding.top}');
+        'MediaQuery.of(context).padding.top ${MediaQuery.of(Get.context!).padding.top}');
     return Container(
       child: Column(
         children: [
