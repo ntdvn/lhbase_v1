@@ -49,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
                     LhBottomSheet(
                       title: 'title',
                       child: Container(),
-                      height: 300,
+                      height: 400,
                     ),
                     isScrollControlled: true,
                     ignoreSafeArea: false,
