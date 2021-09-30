@@ -45,7 +45,7 @@ class _LhBottomSheetState extends State<LhBottomSheet> {
   late double _defaultHeight;
   LhBottomSheetState _status = LhBottomSheetState.DEFAULT;
 
-  late double _maxHeight;
+  static final _maxHeight = Get.height;
 
   @override
   void initState() {
@@ -126,7 +126,6 @@ class _LhBottomSheetState extends State<LhBottomSheet> {
 
   @override
   Widget build(BuildContext context) {
-    _maxHeight = MediaQuery.of(context).size.height;
     return Container(
       child: Column(
         children: [
@@ -152,6 +151,7 @@ class _LhBottomSheetState extends State<LhBottomSheet> {
               // }
             },
             onVerticalDragEnd: (details) {
+              print('onVerticalDragEnd ${details.velocity}');
               if (_height < _defaultHeight - 30 &&
                   _status != LhBottomSheetState.CLOSED) {
                 // expandHeightSize(_maxHeight);
