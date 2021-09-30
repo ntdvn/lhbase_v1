@@ -27,7 +27,6 @@ class LhBasePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('buildder');
     return KeyBoarDismisserWidget(
       child: WillPopScope(
         onWillPop: onWillPop,

@@ -17,6 +17,7 @@ class LhBorderLessInput extends StatelessWidget {
   final Widget? prefixIcon;
   final Widget? suffixIcon;
   final Widget? suffix;
+  final int? maxLength;
   const LhBorderLessInput(
       {Key? key,
       this.line = 1,
@@ -32,7 +33,8 @@ class LhBorderLessInput extends StatelessWidget {
       this.padding,
       this.prefixIcon,
       this.suffixIcon,
-      this.suffix})
+      this.suffix,
+      this.maxLength})
       : super(key: key);
 
   static final titleStyle = LhStyle.DEFAULT_16_BOLD;
@@ -44,6 +46,7 @@ class LhBorderLessInput extends StatelessWidget {
         focusNode: focusNode,
         minLines: line,
         maxLines: line,
+        maxLength: maxLength,
         controller: controller,
         inputFormatters: inputFormatters,
         keyboardType: keyboardType,
