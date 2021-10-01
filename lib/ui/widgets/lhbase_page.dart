@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:focus_detector/focus_detector.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
-class LhBasePage extends StatelessWidget {
+class LhBasePage extends StatefulWidget {
   final Widget child;
   final Widget? floatingActionButton;
   final WillPopCallback? onWillPop;
@@ -11,6 +13,7 @@ class LhBasePage extends StatelessWidget {
   final LhAppBar? appBarTop;
   final Widget? appBarBottom;
   final LhSlidingPanel? bottomSlidingPanel;
+  final Brightness statusBarBrightness;
 
   const LhBasePage(
       {Key? key,
@@ -22,49 +25,65 @@ class LhBasePage extends StatelessWidget {
       this.isPaddingBottom = false,
       this.appBarTop,
       this.appBarBottom,
-      this.bottomSlidingPanel})
+      this.bottomSlidingPanel,
+      this.statusBarBrightness = Brightness.light})
       : super(key: key);
 
   @override
+  _LhBasePageState createState() => _LhBasePageState();
+}
+
+class _LhBasePageState extends State<LhBasePage> {
+  @override
   Widget build(BuildContext context) {
-    return KeyBoarDismisserWidget(
-      child: WillPopScope(
-        onWillPop: onWillPop,
-        child: Container(
-          padding: EdgeInsets.only(
-              top: isPaddingTop ? MediaQuery.of(context).padding.top : 0,
-              bottom:
-                  isPaddingBottom ? MediaQuery.of(context).padding.bottom : 0),
-          child: Scaffold(
-            body: Stack(
-              children: [
-                Column(
-                  children: [
-                    if (appBarTop != null) appBarTop as Widget,
-                    Expanded(child: child),
-                    if (appBarBottom != null) appBarBottom as Widget,
-                    if (bottomSlidingPanel != null)
-                      Container(
-                          height: bottomSlidingPanel!.controller.currentHeight)
-                  ],
-                ),
-                if (bottomSlidingPanel != null)
-                  Positioned(
-                    child: Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Wrap(
-                        children: [
-                          Container(
-                              color: Colors.red,
-                              child: bottomSlidingPanel as Widget),
-                        ],
+    return FocusDetector(
+      onVisibilityGained: () {
+        ComponentUtils.setStatusBarBrightness(widget.statusBarBrightness);
+      },
+      child: KeyBoarDismisserWidget(
+        child: WillPopScope(
+          onWillPop: widget.onWillPop,
+          child: Container(
+            padding: EdgeInsets.only(
+                top: widget.isPaddingTop
+                    ? MediaQuery.of(context).padding.top
+                    : 0,
+                bottom: widget.isPaddingBottom
+                    ? MediaQuery.of(context).padding.bottom
+                    : 0),
+            child: Scaffold(
+              body: Stack(
+                children: [
+                  Column(
+                    children: [
+                      if (widget.appBarTop != null) widget.appBarTop as Widget,
+                      Expanded(child: widget.child),
+                      if (widget.appBarBottom != null)
+                        widget.appBarBottom as Widget,
+                      if (widget.bottomSlidingPanel != null)
+                        Container(
+                            height: widget
+                                .bottomSlidingPanel!.controller.currentHeight)
+                    ],
+                  ),
+                  if (widget.bottomSlidingPanel != null)
+                    Positioned(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Wrap(
+                          children: [
+                            Container(
+                                color: Colors.red,
+                                child: widget.bottomSlidingPanel as Widget),
+                          ],
+                        ),
                       ),
-                    ),
-                  )
-              ],
+                    )
+                ],
+              ),
+              floatingActionButton: widget.floatingActionButton,
+              appBar: widget.appBar,
             ),
-            floatingActionButton: floatingActionButton,
-            appBar: appBar,
           ),
         ),
       ),

@@ -14,11 +14,12 @@ class GlobalConfigController extends LhBaseController {
     var theme = LhStyle.getTheme(themeName: themeName);
     Get.changeTheme(theme);
 
-    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
-        systemNavigationBarColor: Colors.blue, // navigation bar color
-        statusBarColor: Colors.pink, // status bar co
-        statusBarBrightness: theme.brightness // lor
-        ));
+    // SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+    //     systemNavigationBarColor: Colors.blue, // navigation bar color
+    //     statusBarColor: Colors.pink, // status bar co
+    //     statusBarBrightness: theme.brightness // lor
+    //
+    //     ));
     lhSessionRepository.saveAppTheme(themeName);
   }
 

@@ -23,7 +23,7 @@ packages:
     source: hosted
     version: "2.1.0"
   cached_network_image:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: cached_network_image
       url: "https://pub.dartlang.org"
@@ -182,6 +182,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  focus_detector:
+    dependency: transitive
+    description:
+      name: focus_detector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   get:
     dependency: "direct main"
     description:
@@ -488,6 +495,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
+  visibility_detector:
+    dependency: transitive
+    description:
+      name: visibility_detector
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.0"
   win32:
     dependency: transitive
     description:

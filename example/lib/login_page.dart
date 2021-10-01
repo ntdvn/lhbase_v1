@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
@@ -29,12 +30,13 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
+        statusBarBrightness: Brightness.light,
         appBarTop: LhAppBar.top(
           title: 'abc',
           titleStyle: TextStyle(color: Colors.white),
           backgroundImage: LhCachedImageWidget(
             imageUrl:
-                'https://img4.thuthuatphanmem.vn/uploads/2020/07/05/hinh-anh-backgroud-hoa-dao-no-cuc-ky-dep_034909613.png',
+                'https://baoquocte.vn/stores/news_dataimages/dieulinh/012020/29/15/nhung-buc-anh-dep-tuyet-voi-ve-tinh-ban.jpg',
           ),
           actions: [
             LhAppBarAction.custom(

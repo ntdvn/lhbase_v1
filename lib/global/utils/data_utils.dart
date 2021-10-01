@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 
@@ -26,6 +27,9 @@ class DataUtils {
 
       // Define the default font family.
       fontFamily: 'Georgia',
+      appBarTheme: AppBarTheme(
+        systemOverlayStyle: SystemUiOverlayStyle(),
+      ),
 
       // Define the default `TextTheme`. Use this to specify the default
       // text styling for headlines, titles, bodies of text, and more.

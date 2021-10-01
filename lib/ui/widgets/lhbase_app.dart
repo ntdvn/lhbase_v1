@@ -4,24 +4,38 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
-abstract class LhBaseApp extends StatelessWidget {
+// abstract class LhBaseApp extends StatelessWidget {
+//   const LhBaseApp({Key? key}) : super(key: key);
+//
+//
+//
+//
+//
+// }
+
+abstract class LhBaseApp extends StatefulWidget {
   const LhBaseApp({Key? key}) : super(key: key);
 
-  LhAppConfiguration onConfig();
+  @override
+  _LhBaseAppState createState() => _LhBaseAppState();
 
+  LhAppConfiguration onConfig();
+}
+
+class _LhBaseAppState extends State<LhBaseApp> {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       // theme: ThemeData(fontFamily: 'OpenSans'),
 
-      translations: onConfig().translations,
-      locale: onConfig().locale,
-      supportedLocales: onConfig().supportedLocales ?? [],
-      initialRoute: onConfig().initialRoute,
-      getPages: onConfig().getPages,
-      initialBinding: onConfig().initialBinding,
-      home: onConfig().home,
+      translations: widget.onConfig().translations,
+      locale: widget.onConfig().locale,
+      supportedLocales: widget.onConfig().supportedLocales ?? [],
+      initialRoute: widget.onConfig().initialRoute,
+      getPages: widget.onConfig().getPages,
+      initialBinding: widget.onConfig().initialBinding,
+      home: widget.onConfig().home,
       localizationsDelegates: const [
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,

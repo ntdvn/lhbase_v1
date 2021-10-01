@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:get/get.dart';
 
@@ -188,5 +189,38 @@ class ComponentUtils {
         ),
       ],
     );
+  }
+
+  static void setStatusBarStyle(
+      {required Brightness brightness,
+      Brightness? statusBarIconBrightness,
+      Brightness? systemNavigationBarIconBrightness,
+      Color? systemNavigationBarColor,
+      Color? statusBarColor,
+      Color? systemNavigationBarDividerColor}) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarBrightness: brightness,
+      statusBarIconBrightness: statusBarIconBrightness,
+      systemNavigationBarIconBrightness: systemNavigationBarIconBrightness,
+      systemNavigationBarColor:
+          systemNavigationBarColor, // navigation bar color
+      statusBarColor: statusBarColor, // status bar color
+
+      systemNavigationBarDividerColor: systemNavigationBarDividerColor,
+      systemStatusBarContrastEnforced: true,
+      systemNavigationBarContrastEnforced: true,
+    ));
+  }
+
+  static void setStatusBarBrightness(Brightness brightness) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+        statusBarBrightness: brightness,
+        statusBarIconBrightness: brightness,
+        systemNavigationBarIconBrightness: brightness,
+        systemNavigationBarColor: brightness == Brightness.light
+            ? Colors.black.withOpacity(0.4)
+            : Colors.white.withOpacity(0.1),
+        statusBarColor: Colors.transparent,
+        systemNavigationBarDividerColor: Colors.transparent));
   }
 }
