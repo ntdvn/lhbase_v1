@@ -145,19 +145,22 @@ class LhAppBar extends StatelessWidget {
       String? title,
       TextStyle? titleStyle,
       Widget? titles,
-      Widget? backgroundImage}) {
+      Widget? backgroundImage,
+      double? height}) {
     return LhAppBar(
-        type: LhAppBarType.TOP,
-        elevation: elevation,
-        backgroundColor: backgroundColor,
-        leading: leading,
-        leadingColor: leadingColor,
-        leadingOnTap: leadingOnTap,
-        actions: actions,
-        title: title,
-        titleStyle: titleStyle,
-        titles: titles,
-        backgroundImage: backgroundImage);
+      type: LhAppBarType.TOP,
+      elevation: elevation,
+      backgroundColor: backgroundColor,
+      leading: leading,
+      leadingColor: leadingColor,
+      leadingOnTap: leadingOnTap,
+      actions: actions,
+      title: title,
+      titleStyle: titleStyle,
+      titles: titles,
+      backgroundImage: backgroundImage,
+      height: height,
+    );
   }
 
   factory LhAppBar.bottom(
@@ -170,32 +173,41 @@ class LhAppBar extends StatelessWidget {
       String? title,
       TextStyle? titleStyle,
       Widget? titles,
-      Widget? backgroundImage}) {
+      Widget? backgroundImage,
+      double? height}) {
     return LhAppBar(
-        type: LhAppBarType.BOTTOM,
-        elevation: elevation,
-        backgroundColor: backgroundColor,
-        leading: leading,
-        leadingColor: leadingColor,
-        leadingOnTap: leadingOnTap,
-        actions: actions,
-        title: title,
-        titleStyle: titleStyle,
-        titles: titles,
-        backgroundImage: backgroundImage);
+      type: LhAppBarType.BOTTOM,
+      elevation: elevation,
+      backgroundColor: backgroundColor,
+      leading: leading,
+      leadingColor: leadingColor,
+      leadingOnTap: leadingOnTap,
+      actions: actions,
+      title: title,
+      titleStyle: titleStyle,
+      titles: titles,
+      backgroundImage: backgroundImage,
+      height: height,
+    );
   }
 
-  factory LhAppBar.topEmpty() {
+  factory LhAppBar.topEmpty({
+    Color? backgroundColor,
+  }) {
     return LhAppBar(
       type: LhAppBarType.TOP,
+      backgroundColor: backgroundColor,
       height: 0,
       leading: [],
     );
   }
 
-  factory LhAppBar.bottomEmpty() {
+  factory LhAppBar.bottomEmpty({
+    Color? backgroundColor,
+  }) {
     return LhAppBar(
       type: LhAppBarType.BOTTOM,
+      backgroundColor: backgroundColor,
       height: 0,
       leading: [],
     );

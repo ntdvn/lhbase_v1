@@ -26,9 +26,7 @@ class _HomePageState extends State<HomePage> {
         positiveTitle: 'form_validate.dialog_back_positive'.tr,
         negativeStyle: LhStyle.DEFAULT_14.copyWith(color: Colors.green),
         positiveStyle: LhStyle.DEFAULT_14.copyWith(color: Colors.red),
-        positiveTap: () {
-      Get.back();
-    });
+        positiveTap: () {});
   }
 
   var controller = TextEditingController();
