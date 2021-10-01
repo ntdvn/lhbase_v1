@@ -1,8 +1,12 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1/ui/widgets/lh_app_bar_action.dart';
 
 enum LhAppBarType { TOP, BOTTOM }
+
+// typedef LhLeadingCallback = bool Function();
 
 class LhAppBar extends StatelessWidget {
   // final double? height;
@@ -11,11 +15,13 @@ class LhAppBar extends StatelessWidget {
   final Color? backgroundColor;
   final List<LhAppBarAction>? leading;
   final Color? leadingColor;
+  final WillPopCallback? leadingOnTap;
   final List<LhAppBarAction>? actions;
   final String? title;
   final TextStyle? titleStyle;
   final Widget? titles;
   final Widget? backgroundImage;
+  final double? height;
 
   const LhAppBar(
       {Key? key,
@@ -25,11 +31,13 @@ class LhAppBar extends StatelessWidget {
       this.backgroundColor,
       this.leading,
       this.leadingColor,
+      this.leadingOnTap,
       this.actions,
       this.title,
       this.titleStyle,
       this.titles,
-      this.backgroundImage})
+      this.backgroundImage,
+      this.height})
       : super(key: key);
 
   @override
@@ -58,7 +66,7 @@ class LhAppBar extends StatelessWidget {
                       bottom: type == LhAppBarType.BOTTOM
                           ? MediaQuery.of(context).padding.bottom
                           : 0),
-                  height: kToolbarHeight,
+                  height: height ?? kToolbarHeight,
                   child: Row(
                     children: [
                       _renderLeading(context),
@@ -85,17 +93,26 @@ class LhAppBar extends StatelessWidget {
       if (ModalRoute.of(context) != null && type == LhAppBarType.TOP) {
         if (ModalRoute.of(context)!.canPop) {
           leadingWidget = LhAppBarAction.icon(
-            icon: Icon(
-              Icons.chevron_left,
-              color: leadingColor ?? Theme.of(context).primaryIconTheme.color,
-            ),
-            onTap: () => Navigator.of(context).pop(),
-          );
+              icon: Icon(
+                Icons.chevron_left,
+                color: leadingColor ?? Theme.of(context).primaryIconTheme.color,
+              ),
+              onTap: () {
+                handlerLeadingOnTap(context);
+              });
         }
       }
     }
     // if (.canPop!=null)
     return leadingWidget ?? SizedBox.shrink();
+  }
+
+  handlerLeadingOnTap(BuildContext context) async {
+    if (leadingOnTap != null) {
+      if (await leadingOnTap!()) Navigator.of(context).pop();
+    } else {
+      Navigator.of(context).pop();
+    }
   }
 
   _renderTitle() {
@@ -123,6 +140,7 @@ class LhAppBar extends StatelessWidget {
       Color? backgroundColor,
       List<LhAppBarAction>? leading,
       Color? leadingColor,
+      WillPopCallback? leadingOnTap,
       List<LhAppBarAction>? actions,
       String? title,
       TextStyle? titleStyle,
@@ -134,6 +152,7 @@ class LhAppBar extends StatelessWidget {
         backgroundColor: backgroundColor,
         leading: leading,
         leadingColor: leadingColor,
+        leadingOnTap: leadingOnTap,
         actions: actions,
         title: title,
         titleStyle: titleStyle,
@@ -146,6 +165,7 @@ class LhAppBar extends StatelessWidget {
       Color? backgroundColor,
       List<LhAppBarAction>? leading,
       Color? leadingColor,
+      WillPopCallback? leadingOnTap,
       List<LhAppBarAction>? actions,
       String? title,
       TextStyle? titleStyle,
@@ -157,10 +177,27 @@ class LhAppBar extends StatelessWidget {
         backgroundColor: backgroundColor,
         leading: leading,
         leadingColor: leadingColor,
+        leadingOnTap: leadingOnTap,
         actions: actions,
         title: title,
         titleStyle: titleStyle,
         titles: titles,
         backgroundImage: backgroundImage);
+  }
+
+  factory LhAppBar.topEmpty() {
+    return LhAppBar(
+      type: LhAppBarType.TOP,
+      height: 0,
+      leading: [],
+    );
+  }
+
+  factory LhAppBar.bottomEmpty() {
+    return LhAppBar(
+      type: LhAppBarType.BOTTOM,
+      height: 0,
+      leading: [],
+    );
   }
 }

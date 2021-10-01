@@ -17,13 +17,28 @@ class _HomePageState extends State<HomePage> {
     super.initState();
   }
 
-  var controller = TextEditingController();
+  Future<bool> _onBackButtonTap() async {
+    return await ComponentUtils.showConfirmDialog(
+        context,
+        'form_validate.dialog_back_title'.tr,
+        'form_validate.dialog_back_message'.tr,
+        negativeTitle: 'form_validate.dialog_back_negative'.tr,
+        positiveTitle: 'form_validate.dialog_back_positive'.tr,
+        negativeStyle: LhStyle.DEFAULT_14.copyWith(color: Colors.green),
+        positiveStyle: LhStyle.DEFAULT_14.copyWith(color: Colors.red),
+        positiveTap: () {
+      Get.back();
+    });
+  }
 
+  var controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
+      onWillPop: _onBackButtonTap,
       statusBarBrightness: Brightness.dark,
       appBarTop: LhAppBar.top(
+        leadingOnTap: _onBackButtonTap,
         title: 'abc',
         titleStyle: TextStyle(color: Colors.white),
         actions: [

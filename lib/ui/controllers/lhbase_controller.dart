@@ -6,7 +6,7 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
   LhSessionRepository lhSessionRepository = Get.find<LhSessionRepository>();
   WebServiceStateController webServiceStateController =
       Get.find<WebServiceStateController>();
-  var lhCommonRepository = Get.find(tag: 'commonRepository');
+  // var lhCommonRepository = Get.find(tag: 'commonRepository');
 
   RxInt loading = RxInt(0);
 
