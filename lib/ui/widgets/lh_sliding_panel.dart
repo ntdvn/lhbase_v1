@@ -8,7 +8,7 @@ import 'package:lhbase_v1/lhbase.dart';
 enum LhSlidingPanelState { MINIMIZE, MAXIMIZE, CLOSED }
 
 class LhSlidingPanel extends StatefulWidget {
-  final LhSlidingPanelController controller;
+  final LhSlidingSheetController controller;
   // final String title;
   // final TextStyle? titleStyle;
   //
@@ -39,9 +39,9 @@ class LhSlidingPanel extends StatefulWidget {
   //     : super(key: key);
 
   LhSlidingPanel(
-      {required LhSlidingPanelController controller, required this.child})
+      {required LhSlidingSheetController controller, required this.child})
       : this.controller = controller,
-        super(key: new ValueKey<LhSlidingPanelController>(controller));
+        super(key: new ValueKey<LhSlidingSheetController>(controller));
 
   @override
   _LhSlidingPanelState createState() => _LhSlidingPanelState();
@@ -85,23 +85,23 @@ class _LhSlidingPanelState extends State<LhSlidingPanel> {
                   // }
                 },
                 onVerticalDragEnd: (details) {
-                  if (widget.controller.currentHeight <
-                          widget.controller.minimizeHeight - 30 &&
-                      widget.controller.status != LhSlidingPanelState.CLOSED) {
-                    widget.controller.changeStatus(LhSlidingPanelState.CLOSED);
-                  } else if (widget.controller.currentHeight >
-                          widget.controller.minimizeHeight + 30 &&
-                      widget.controller.status !=
-                          LhSlidingPanelState.MAXIMIZE) {
-                    widget.controller
-                        .changeStatus(LhSlidingPanelState.MAXIMIZE);
-                  } else if (widget.controller.currentHeight <
-                          widget.controller.maximizeHeight - 30 &&
-                      widget.controller.status !=
-                          LhSlidingPanelState.MINIMIZE) {
-                    widget.controller
-                        .changeStatus(LhSlidingPanelState.MINIMIZE);
-                  }
+                  // if (widget.controller.currentHeight <
+                  //         widget.controller.minimizeHeight - 30 &&
+                  //     widget.controller.status != LhSlidingPanelState.CLOSED) {
+                  //   widget.controller.changeStatus(LhSlidingPanelState.CLOSED);
+                  // } else if (widget.controller.currentHeight >
+                  //         widget.controller.minimizeHeight + 30 &&
+                  //     widget.controller.status !=
+                  //         LhSlidingPanelState.MAXIMIZE) {
+                  //   widget.controller
+                  //       .changeStatus(LhSlidingPanelState.MAXIMIZE);
+                  // } else if (widget.controller.currentHeight <
+                  //         widget.controller.maximizeHeight - 30 &&
+                  //     widget.controller.status !=
+                  //         LhSlidingPanelState.MINIMIZE) {
+                  //   widget.controller
+                  //       .changeStatus(LhSlidingPanelState.MINIMIZE);
+                  // }
                 },
                 child: Container(
                   height: widget.controller.currentHeight,

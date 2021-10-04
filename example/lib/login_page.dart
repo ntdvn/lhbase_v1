@@ -15,15 +15,19 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  late LhSlidingPanelController _slidingController;
+  late LhSlidingSheetController _slidingController;
+
   @override
   void initState() {
-    _slidingController = LhSlidingPanelController(
+    _slidingController = LhSlidingSheetController(
         minimizeHeight: 300,
         maximizeHeight: Get.height,
         onAnimatedEnded: () {
           setState(() {});
-        });
+        })
+      ..onStatusChanged(() {
+        print('wtf');
+      });
     super.initState();
   }
 
@@ -49,9 +53,10 @@ class _LoginPageState extends State<LoginPage> {
                 // ));
                 Get.bottomSheet(
                     LhBottomSheet(
-                      title: 'title',
-                      child: Container(),
-                      height: 400,
+                      controller: _slidingController..minimize(),
+                      child: Container(
+                        child: Text('abcdef'),
+                      ),
                     ),
                     isScrollControlled: true,
                     ignoreSafeArea: false,
@@ -114,10 +119,10 @@ class _LoginPageState extends State<LoginPage> {
         ),
         // appBarTop: LhAppBar.topEmpty(),
         // appBarBottom: LhAppBar.bottom(),
-        bottomSlidingPanel: LhSlidingPanel(
-          controller: _slidingController,
-          child: Container(),
-        ),
+        // bottomSlidingPanel: LhSlidingPanel(
+        //   controller: _slidingController,
+        //   child: Container(),
+        // ),
         child: SingleChildScrollView(
           child: Container(
             // color: Colors.blue,
