@@ -14,6 +14,8 @@ class LhBasePage extends StatefulWidget {
   final Widget? appBarBottom;
   final LhSlidingPanel? bottomSlidingPanel;
   final Brightness statusBarBrightness;
+  final FloatingActionButtonLocation? floatingActionButtonLocation;
+  final FloatingActionButtonAnimator? floatingActionButtonAnimator;
 
   const LhBasePage(
       {Key? key,
@@ -26,7 +28,9 @@ class LhBasePage extends StatefulWidget {
       this.appBarTop,
       this.appBarBottom,
       this.bottomSlidingPanel,
-      this.statusBarBrightness = Brightness.light})
+      this.statusBarBrightness = Brightness.light,
+      this.floatingActionButtonLocation,
+      this.floatingActionButtonAnimator})
       : super(key: key);
 
   @override
@@ -82,6 +86,8 @@ class _LhBasePageState extends State<LhBasePage> {
                 ],
               ),
               floatingActionButton: widget.floatingActionButton,
+              floatingActionButtonLocation: widget.floatingActionButtonLocation,
+              floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
               appBar: widget.appBar,
             ),
           ),
