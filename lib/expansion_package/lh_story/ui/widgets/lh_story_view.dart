@@ -1,11 +1,16 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
 class LhStoryView extends StatefulWidget {
   final StoryController controller;
-  const LhStoryView({Key? key, required this.controller}) : super(key: key);
+  final VoidCallback? onTapLeft;
+  final VoidCallback? onTapRight;
+  const LhStoryView(
+      {Key? key, required this.controller, this.onTapLeft, this.onTapRight})
+      : super(key: key);
 
   @override
   _LhStoryViewState createState() => _LhStoryViewState();
@@ -15,9 +20,26 @@ class _LhStoryViewState extends State<LhStoryView> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print('alolo ${widget.controller.currentStory}');
+      onTapUp: (details) {
+        if (details.globalPosition.dx > MediaQuery.of(context).size.width / 2) {
+          widget.controller.next();
+          if (widget.onTapRight != null) {
+            widget.onTapRight!();
+          }
+        } else {
+          widget.controller.previous();
+          if (widget.onTapRight != null) {
+            widget.onTapLeft!();
+          }
+        }
       },
+      onLongPressDown: (details) {
+        widget.controller.pause();
+      },
+      onLongPressUp: () {
+        widget.controller.play();
+      },
+      onLongPressEnd: (details) {},
       child: Container(
         width: double.infinity,
         color: Colors.black,
@@ -74,8 +96,12 @@ class _LhStoryViewState extends State<LhStoryView> {
 
   Widget _renderProgressLayer() {
     return Positioned.fill(
-      child: Column(
+      child: Stack(
         children: [
+          Container(
+            height: 10,
+            color: Colors.black.withOpacity(0.3),
+          ),
           AnimatedBuilder(
             animation: widget.controller,
             builder: (context, child) {
@@ -87,19 +113,19 @@ class _LhStoryViewState extends State<LhStoryView> {
                       crossAxisCount: widget.controller.storys.length,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5,
-                      mainAxisExtent: 4),
+                      mainAxisExtent: 3),
                   itemCount: widget.controller.storys.length,
                   itemBuilder: (BuildContext ctx, index) {
                     return LhStoryProgressBar(
                       progress: (widget.controller.storys[index].currentDuration
                                   .inMilliseconds /
-                              widget.controller.storys[index].duration
+                              widget.controller.storys[index].duration!
                                   .inMilliseconds)
                           .toDouble(),
                     );
                   });
             },
-          )
+          ),
         ],
       ),
     );
@@ -107,12 +133,36 @@ class _LhStoryViewState extends State<LhStoryView> {
 
   Widget _renderStoryLayer() {
     return Positioned.fill(
-        child: Container(
-            child: AnimatedBuilder(
+        child: AnimatedBuilder(
       animation: widget.controller,
       builder: (context, child) {
-        return widget.controller.storys[widget.controller.currentStory].widget;
+        print('render');
+        return LhStoryContent(
+          story: widget.controller.storys[widget.controller.currentStory],
+          storyController: widget.controller,
+          onReady: () {
+            print('ready');
+
+            SchedulerBinding.instance!.addPostFrameCallback((_) {
+              // add your code here.
+
+              widget.controller.play();
+            });
+          },
+        );
       },
-    )));
+    ));
   }
+  // Widget _renderStoryLayer() {
+  //   return Container(
+  //     child: LhStoryContent(
+  //       story: widget.controller.storys[widget.controller.currentStory],
+  //       storyController: widget.controller,
+  //       onReady: () {
+  //         print('ready');
+  //         widget.controller.play();
+  //       },
+  //     ),
+  //   );
+  // }
 }

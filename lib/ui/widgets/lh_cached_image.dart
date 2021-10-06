@@ -12,6 +12,16 @@ class LhCachedImageWidget extends StatelessWidget {
       child: CachedNetworkImage(
         imageUrl: imageUrl,
         fit: BoxFit.cover,
+        progressIndicatorBuilder: (context, url, progress) {
+          final t = DateTime.now().toIso8601String();
+          print(
+              "$t Progress: ${progress.progress} Downloaded: ${progress.downloaded}");
+          return Center(
+            child: CircularProgressIndicator.adaptive(
+              value: progress.progress,
+            ),
+          );
+        },
       ),
     );
   }
