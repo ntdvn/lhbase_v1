@@ -60,6 +60,7 @@ class _LhBasePageState extends State<LhBasePage> {
                     ? MediaQuery.of(context).padding.bottom
                     : 0),
             child: Scaffold(
+              key: widget.key,
               body: Stack(
                 children: [
                   Column(
