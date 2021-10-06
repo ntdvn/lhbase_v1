@@ -16,6 +16,9 @@ class LhBasePage extends StatefulWidget {
   final Brightness statusBarBrightness;
   final FloatingActionButtonLocation? floatingActionButtonLocation;
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
+  final Widget? drawer;
+  final Widget? endDrawer;
+  final Key? keyScaffold;
 
   const LhBasePage(
       {Key? key,
@@ -30,6 +33,9 @@ class LhBasePage extends StatefulWidget {
       this.bottomSlidingPanel,
       this.statusBarBrightness = Brightness.light,
       this.floatingActionButtonLocation,
+      this.drawer,
+      this.endDrawer,
+      this.keyScaffold,
       this.floatingActionButtonAnimator})
       : super(key: key);
 
@@ -56,6 +62,7 @@ class _LhBasePageState extends State<LhBasePage> {
                     ? MediaQuery.of(context).padding.bottom
                     : 0),
             child: Scaffold(
+              key: widget.keyScaffold,
               body: Stack(
                 children: [
                   Column(
@@ -89,6 +96,8 @@ class _LhBasePageState extends State<LhBasePage> {
               floatingActionButtonLocation: widget.floatingActionButtonLocation,
               floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
               appBar: widget.appBar,
+              drawer: widget.drawer,
+              endDrawer: widget.endDrawer,
             ),
           ),
         ),
