@@ -18,6 +18,7 @@ class LhBasePage extends StatefulWidget {
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
   final Widget? drawer;
   final Widget? endDrawer;
+  final Key? keyScaffold;
 
   const LhBasePage(
       {Key? key,
@@ -34,6 +35,7 @@ class LhBasePage extends StatefulWidget {
       this.floatingActionButtonLocation,
       this.drawer,
       this.endDrawer,
+      this.keyScaffold,
       this.floatingActionButtonAnimator})
       : super(key: key);
 
@@ -60,7 +62,7 @@ class _LhBasePageState extends State<LhBasePage> {
                     ? MediaQuery.of(context).padding.bottom
                     : 0),
             child: Scaffold(
-              key: widget.key,
+              key: widget.keyScaffold,
               body: Stack(
                 children: [
                   Column(
