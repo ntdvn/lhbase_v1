@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1_example/app_binding.dart';
-import 'package:lhbase_v1_example/app_pages.dart';
+import 'package:lhbase_v1_example/common/routes/app_pages.dart';
 import 'package:lhbase_v1_example/test_string.dart';
 
 class MyApp extends LhBaseApp {
@@ -16,7 +16,7 @@ class MyApp extends LhBaseApp {
         supportedLocales: [Locale('vi', 'VN')],
         translations: TestString(),
         initialBinding: AppBinding(),
-        initialRoute: '/login',
+        initialRoute: Routes.initial,
         getPages: AppPages().routes);
   }
 }

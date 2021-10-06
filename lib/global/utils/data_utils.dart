@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -49,5 +51,42 @@ class DataUtils {
         overline: GoogleFonts.getFont(fontFamily),
       ),
     );
+  }
+
+  static void remainingMiliseconds(
+      {required Timer? timer,
+      required Duration time,
+      required int steps,
+      required ValueChanged<Duration> remainingTime,
+      VoidCallback? onEnd,
+      int replay = 1}) {
+    int replayCount = 1;
+    Future<void> handler() async {
+      int maxMilliseconds = time.inMilliseconds;
+      int onMilliseconds = maxMilliseconds ~/ steps;
+      int count = 0;
+      var oneSec = Duration(milliseconds: onMilliseconds);
+      timer = new Timer.periodic(
+        oneSec,
+        (Timer timer) {
+          count++;
+          remainingTime(Duration(milliseconds: onMilliseconds * count));
+          if (count == steps) {
+            timer.cancel();
+            if (replayCount < replay) {
+              replayCount++;
+
+              handler();
+              if (onEnd != null) {
+                onEnd();
+              }
+              return;
+            }
+          }
+        },
+      );
+    }
+
+    handler();
   }
 }

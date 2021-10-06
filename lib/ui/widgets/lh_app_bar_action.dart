@@ -58,13 +58,14 @@ class LhAppBarAction extends StatelessWidget {
               alignment: Alignment.center,
               height: double.infinity,
               child: child),
-          Positioned.fill(
-              child: Material(
-            color: Colors.transparent,
-            child: InkWell(
-              onTap: onTap,
-            ),
-          )),
+          if (onTap != null)
+            Positioned.fill(
+                child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+              ),
+            )),
         ],
       ),
       badge: badge,
@@ -85,17 +86,18 @@ class LhAppBarAction extends StatelessWidget {
                   widthFactor: iconFactor ?? 0.6,
                   heightFactor: iconFactor ?? 0.6,
                   child: icon)),
-          Positioned.fill(
-              child: Material(
-            color: Colors.transparent,
-            child: Padding(
-              padding: const EdgeInsets.all(3.0),
-              child: InkWell(
-                borderRadius: BorderRadius.circular(500.0),
-                onTap: onTap,
+          if (onTap != null)
+            Positioned.fill(
+                child: Material(
+              color: Colors.transparent,
+              child: Padding(
+                padding: const EdgeInsets.all(3.0),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(500.0),
+                  onTap: onTap,
+                ),
               ),
-            ),
-          )),
+            )),
         ],
       ),
       badge: badge,

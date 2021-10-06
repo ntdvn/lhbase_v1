@@ -1,0 +1,8 @@
+part of 'app_pages.dart';
+
+abstract class Routes {
+  static const initial = examples;
+  static const examples = '/examples';
+  static const video_play_back = '/video_play_back';
+  static const story_view = '/story_view';
+}
