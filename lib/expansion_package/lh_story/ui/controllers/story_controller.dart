@@ -25,15 +25,13 @@ class StoryController extends ChangeNotifier {
   }
 
   void play() {
-    // if (state != PlaybackState.play) {
-    //   state = PlaybackState.play;
-    //   notifyListeners();
-    //   startTimer();
-    // }
-    state = PlaybackState.play;
-    notifyListeners();
-    startTimer();
-    print('play');
+    if (state != PlaybackState.completed) {
+      state = PlaybackState.play;
+      startTimer();
+    }
+    // state = PlaybackState.play;
+    // startTimer();
+    // print('play');
   }
 
   void next() {
@@ -46,7 +44,6 @@ class StoryController extends ChangeNotifier {
     var expectedpage = currentStory - 1 < 0 ? 0 : currentStory - 1;
     print('expectedpage ${currentStory - 1}');
     goTo(expectedpage);
-    play();
     notifyListeners();
   }
 
@@ -88,9 +85,9 @@ class StoryController extends ChangeNotifier {
               milliseconds:
                   storys[currentStory].currentDuration.inMilliseconds +
                       onMilliseconds);
+          print(storys[currentStory].currentDuration.inMilliseconds);
           if (storys[currentStory].currentDuration.inMilliseconds >=
               storys[currentStory].duration!.inMilliseconds) {
-            _timer!.cancel();
             if (currentStory < storys.length - 1) {
               next();
               pause();
@@ -100,6 +97,7 @@ class StoryController extends ChangeNotifier {
                 this.state = PlaybackState.completed;
               }
             }
+            clearTimer();
           }
         } else {
           clearTimer();
@@ -110,6 +108,7 @@ class StoryController extends ChangeNotifier {
   }
 
   clearTimer() {
+    print('clearTimer');
     if (_timer != null) {
       _timer!.cancel();
       _timer = null;

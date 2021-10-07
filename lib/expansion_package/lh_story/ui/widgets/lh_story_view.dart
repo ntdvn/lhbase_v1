@@ -105,6 +105,7 @@ class _LhStoryViewState extends State<LhStoryView> {
           AnimatedBuilder(
             animation: widget.controller,
             builder: (context, child) {
+              print('_renderProgressLayer');
               return GridView.builder(
                   padding: EdgeInsets.zero,
                   physics: NeverScrollableScrollPhysics(),
@@ -136,10 +137,9 @@ class _LhStoryViewState extends State<LhStoryView> {
         child: AnimatedBuilder(
       animation: widget.controller,
       builder: (context, child) {
-        print('render');
+        print('_renderStoryLayer');
         return LhStoryContent(
           story: widget.controller.storys[widget.controller.currentStory],
-          storyController: widget.controller,
           onReady: () {
             print('ready');
 

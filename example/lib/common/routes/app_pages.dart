@@ -11,6 +11,7 @@ class AppPages extends LhPages {
   List<GetPage> onConfig() {
     return [
       GetPage(name: Routes.examples, page: () => const ExamplesPage()),
+      GetPage(name: Routes.alpha, page: () => const AlphaPage()),
       GetPage(name: Routes.story_view, page: () => const StoryViewPage()),
       GetPage(
           name: Routes.video_play_back, page: () => const VideoPlayBackPage()),

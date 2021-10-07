@@ -5,12 +5,10 @@ import 'package:lhbase_v1/lhbase.dart';
 
 class LhStoryContent extends StatefulWidget {
   final Story story;
-  final StoryController storyController;
   final VoidCallback? onReady;
   const LhStoryContent({
     Key? key,
     required this.story,
-    required this.storyController,
     this.onReady,
   }) : super(key: key);
 
@@ -21,6 +19,7 @@ class LhStoryContent extends StatefulWidget {
 class _LhStoryContentState extends State<LhStoryContent> {
   @override
   void initState() {
+    _isReady = false;
     super.initState();
   }
 
@@ -48,7 +47,10 @@ class _LhStoryContentState extends State<LhStoryContent> {
 
   bool _imageIsLoaded = false;
 
+  bool _isReady = false;
+
   Widget _renderByContent() {
+    print('_isReady $_isReady | widget.onReady ${widget.onReady}');
     if (widget.story.image != null) {
       return Image.network(
         widget.story.image!,
@@ -82,6 +84,15 @@ class _LhStoryContentState extends State<LhStoryContent> {
         },
       );
     } else if (widget.story.widget != null) {
+      print('!!! _isReady $_isReady | widget.onReady ${widget.onReady}');
+      if (widget.onReady != null && _isReady == false) {
+        _isReady = true;
+        widget.onReady!();
+
+        print('_isReady $_isReady | widget.onReady ${widget.onReady}');
+        return widget.story.widget!;
+      }
+
       return widget.story.widget!;
     }
     return Container();
