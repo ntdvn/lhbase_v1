@@ -48,14 +48,16 @@ class _AlphaPageState extends State<AlphaPage> {
     super.initState();
   }
 
+  var a = FocusNode();
+  var b = FocusNode();
+  var ab = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
+        statusBarBrightness: Brightness.dark,
         appBarTop: LhAppBar.top(),
-        child: Container(
-          child: LhStoryViewProvider(
-            controller: _storyController,
-          ),
+        child: Column(
+          children: [LhInputSearch(controller: ab)],
         ));
   }
 

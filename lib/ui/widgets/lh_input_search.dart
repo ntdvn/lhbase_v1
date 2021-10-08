@@ -36,18 +36,20 @@ class LhInputSearch extends StatefulWidget {
 class _LhInputSearchState extends State<LhInputSearch> {
   @override
   Widget build(BuildContext context) {
+    print('render');
     return LhMultiUseInput(
-        line: 1,
-        controller: widget.controller,
-        onChanged: (value) {
-          if (widget.onChanged != null) widget.onChanged!(value);
-          setState(() {});
-        },
-        // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
-        hint: widget.hint,
-        formTextStyle: widget.formTextStyle,
-        formHintStyle: widget.formHintStyle,
-        prefix: Container(
+      line: 1,
+      controller: widget.controller,
+      onChanged: (value) {
+        if (widget.onChanged != null) widget.onChanged!(value);
+        setState(() {});
+      },
+      // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
+      hint: widget.hint,
+      formTextStyle: widget.formTextStyle,
+      formHintStyle: widget.formHintStyle,
+      builderLeft: (lhInputBuilder) {
+        return Container(
           padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
           child: Icon(
             Icons.search,
@@ -56,14 +58,18 @@ class _LhInputSearchState extends State<LhInputSearch> {
                 ? widget.formTextStyle!.fontSize
                 : null,
           ),
-        ),
-        suffix: widget.controller.text.isNotEmpty
+        );
+      },
+      builderRight: (lhInputBuilder) {
+       
+        return lhInputBuilder.inputLength > 0
             ? Material(
                 color: Colors.transparent,
                 child: InkWell(
                     borderRadius: BorderRadius.circular(500.0),
                     onTap: () {
                       widget.controller.text = '';
+                      widget.controller.notifyListeners();
                       setState(() {});
                     },
                     child: Container(
@@ -77,6 +83,8 @@ class _LhInputSearchState extends State<LhInputSearch> {
                                   ? widget.formTextStyle!.fontSize
                                   : null,
                             )))))
-            : SizedBox.shrink());
+            : SizedBox.shrink();
+      },
+    );
   }
 }

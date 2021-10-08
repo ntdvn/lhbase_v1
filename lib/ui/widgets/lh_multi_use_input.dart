@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
+typedef Widget LhInputWidgetBuilder(LhInputBuilder lhInputBuilder);
+
 class LhMultiUseInput extends StatefulWidget {
   final int? line;
   final FocusNode? focusNode;
@@ -13,52 +15,113 @@ class LhMultiUseInput extends StatefulWidget {
   final TextStyle? formHintStyle;
   final TextInputType? keyboardType;
   final ValueChanged<String>? onChanged;
-  final EdgeInsets? padding;
-  final Widget? prefix;
-  final Widget? suffix;
-  const LhMultiUseInput(
-      {Key? key,
-      this.line,
-      this.focusNode,
-      required this.controller,
-      this.inputFormatters,
-      this.formTextStyle,
-      this.hint,
-      this.initialValue,
-      this.formHintStyle,
-      this.keyboardType,
-      this.onChanged,
-      this.padding,
-      this.prefix,
-      this.suffix})
-      : super(key: key);
+
+  final int? maxLength;
+  final LhInputWidgetBuilder? builderTop;
+  final LhInputWidgetBuilder? builderBottom;
+  final LhInputWidgetBuilder? builderLeft;
+  final LhInputWidgetBuilder? builderRight;
+
+  final Decoration? inputContainerDecoration;
+  final EdgeInsets? inputPadding;
+  final EdgeInsets? inputMargin;
+  const LhMultiUseInput({
+    Key? key,
+    this.line,
+    this.focusNode,
+    required this.controller,
+    this.inputFormatters,
+    this.formTextStyle,
+    this.hint,
+    this.initialValue,
+    this.formHintStyle,
+    this.keyboardType,
+    this.onChanged,
+    this.maxLength,
+    this.builderTop,
+    this.builderBottom,
+    this.builderLeft,
+    this.builderRight,
+    this.inputContainerDecoration,
+    this.inputPadding,
+    this.inputMargin,
+  }) : super(key: key);
 
   @override
   _LhMultiUseInputState createState() => _LhMultiUseInputState();
 }
 
 class _LhMultiUseInputState extends State<LhMultiUseInput> {
+  bool _inputIsFocused = false;
+
+  @override
+  void initState() {
+    if (widget.focusNode != null) {
+      widget.focusNode!.addListener(() {
+        setState(() {
+          _inputIsFocused = widget.focusNode!.hasFocus;
+        });
+      });
+    }
+
+    widget.controller.addListener(() {
+      print('widget.controller');
+      setState(() {});
+    });
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Row(
-      children: [
-        if (widget.prefix != null) widget.prefix!,
-        Expanded(
-          child: LhBorderLessInput(
-            line: widget.line,
-            controller: widget.controller,
-            onChanged: (value) {
-              if (widget.onChanged != null) widget.onChanged!(value);
-              setState(() {});
-            },
-            // padding: EdgeInsets.symmetric(horizontal: 5, vertical: 6),
-            hint: widget.hint,
-            formTextStyle: widget.formTextStyle,
-            formHintStyle: widget.formHintStyle,
+    return Container(
+      child: Column(
+        children: [
+          if (widget.builderTop != null)
+            widget.builderTop!(LhInputBuilder(
+                inputLength: widget.controller.text.length,
+                isFocused: _inputIsFocused)),
+          Container(
+            margin: widget.inputMargin,
+            decoration: widget.inputContainerDecoration,
+            child: Row(
+              children: [
+                if (widget.builderLeft != null)
+                  widget.builderLeft!(LhInputBuilder(
+                      inputLength: widget.controller.text.length,
+                      isFocused: _inputIsFocused)),
+                Expanded(
+                  child: LhBorderLessInput(
+                    line: widget.line ?? 1,
+                    focusNode: widget.focusNode,
+                    controller: widget.controller,
+                    onChanged: (value) {
+                      if (widget.onChanged != null) widget.onChanged!(value);
+                    },
+                    padding: widget.inputPadding,
+                    hint: widget.hint,
+                    formTextStyle: widget.formTextStyle,
+                    formHintStyle: widget.formHintStyle,
+                    inputFormatters: [
+                      if (widget.inputFormatters != null)
+                        ...widget.inputFormatters!,
+                      if (widget.maxLength != null)
+                        LengthLimitingTextInputFormatter(widget.maxLength),
+                    ],
+                  ),
+                ),
+                if (widget.builderRight != null)
+                  widget.builderRight!(LhInputBuilder(
+                      inputLength: widget.controller.text.length,
+                      isFocused: _inputIsFocused)),
+              ],
+            ),
           ),
-        ),
-        if (widget.suffix != null) widget.suffix!,
-      ],
+          if (widget.builderBottom != null)
+            widget.builderBottom!(LhInputBuilder(
+                inputLength: widget.controller.text.length,
+                isFocused: _inputIsFocused)),
+        ],
+      ),
     );
   }
 }
