@@ -31,7 +31,7 @@ class LhBasePage extends StatefulWidget {
       this.appBarTop,
       this.appBarBottom,
       this.bottomSlidingPanel,
-      this.statusBarBrightness = Brightness.dark,
+      this.statusBarBrightness = Brightness.light,
       this.floatingActionButtonLocation,
       this.drawer,
       this.endDrawer,
