@@ -10,7 +10,7 @@ class MyApp extends LhBaseApp {
   @override
   LhAppConfiguration onConfig() {
     return LhAppConfiguration(
-        title: 'nam loading',
+        title: 'nam loadinsg',
         // locale: Locale('vi', 'VN'),
         locale: Locale('en', 'US'),
         supportedLocales: [Locale('vi', 'VN')],
