@@ -110,7 +110,7 @@ class _AlphaPageState extends State<AlphaPage> {
           padding: EdgeInsets.all(10.0),
           child: Column(
             children: [
-              LhMultiUseInput(
+              LhAdvancedInput(
                 inputPadding:
                     EdgeInsets.symmetric(vertical: 12, horizontal: 18),
                 controller: ab,

@@ -5,7 +5,7 @@ import 'package:lhbase_v1/lhbase.dart';
 typedef Widget LhInputWidgetBuilder(LhInputBuilder lhInputBuilder);
 typedef Decoration LhContainerWidgetBuilder(LhInputBuilder lhInputBuilder);
 
-class LhMultiUseInput extends StatefulWidget {
+class LhAdvancedInput extends StatefulWidget {
   final int? line;
   final FocusNode? focusNode;
   final TextEditingController controller;
@@ -27,7 +27,7 @@ class LhMultiUseInput extends StatefulWidget {
 
   final EdgeInsets? inputPadding;
   final EdgeInsets? inputMargin;
-  const LhMultiUseInput({
+  const LhAdvancedInput({
     Key? key,
     this.line,
     this.focusNode,
@@ -51,10 +51,10 @@ class LhMultiUseInput extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _LhMultiUseInputState createState() => _LhMultiUseInputState();
+  _LhAdvancedInputState createState() => _LhAdvancedInputState();
 }
 
-class _LhMultiUseInputState extends State<LhMultiUseInput> {
+class _LhAdvancedInputState extends State<LhAdvancedInput> {
   bool _inputIsFocused = false;
 
   @override

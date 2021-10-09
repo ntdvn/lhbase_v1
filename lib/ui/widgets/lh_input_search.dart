@@ -37,7 +37,7 @@ class _LhInputSearchState extends State<LhInputSearch> {
   @override
   Widget build(BuildContext context) {
     print('render');
-    return LhMultiUseInput(
+    return LhAdvancedInput(
       line: 1,
       controller: widget.controller,
       onChanged: (value) {
