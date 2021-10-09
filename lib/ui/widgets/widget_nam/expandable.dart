@@ -4,10 +4,16 @@ import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
 class Expandable extends StatefulWidget {
-  final String name;
-  final String? title;
+  final double? angleBegin;
+  final double? angleEnd;
+  final Widget? header;
+  final Widget? expand;
+  final Widget? animeWidget;
+  final Duration? duration;
+  
 
-  const Expandable({Key? key, required this.name, this.title})
+  const Expandable(
+      {Key? key, this.expand, this.duration, this.angleBegin, this.angleEnd, this.header,this.animeWidget})
       : super(key: key);
 
   @override
@@ -16,18 +22,21 @@ class Expandable extends StatefulWidget {
 
 class _ButtonChooseState extends State<Expandable>
     with TickerProviderStateMixin {
-  Animation? _arrowAnimation;
-  AnimationController? _arrowAnimationController;
+  Animation? animation;
+  AnimationController? animationController;
   bool isExpand = false;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    _arrowAnimationController =
-        AnimationController(vsync: this, duration: Duration(milliseconds: 300));
-    _arrowAnimation =
-        Tween(begin: pi / 2, end: pi * 1.5).animate(_arrowAnimationController!);
+    animationController =
+        AnimationController(vsync: this,
+            duration:widget.duration ?? Duration(milliseconds: 300));
+    animation =
+        Tween(begin: widget.angleBegin ?? pi / 2,
+            end: widget.angleEnd ?? pi * 1.5).animate(
+            animationController!);
   }
 
   @override
@@ -38,37 +47,32 @@ class _ButtonChooseState extends State<Expandable>
           color: Colors.white,
           child: InkWell(
             onTap: () {
-              _arrowAnimationController!.isCompleted
-                  ? _arrowAnimationController!.reverse()
-                  : _arrowAnimationController!.forward();
+              animationController!.isCompleted
+                  ? animationController!.reverse()
+                  : animationController!.forward();
               setState(() {
                 isExpand = !isExpand;
               });
             },
             child: Container(
               padding: EdgeInsets.symmetric(
-                  horizontal: Get.width * 0.04, vertical: Get.height * 0.0195),
+                  horizontal: 16, vertical: 16),
               child: Row(
                 children: [
                   Expanded(
-                    child: LhText(
-                      widget.name,
-                      maxLines: 1,
-                      style: LhStyle.DEFAULT_16.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                      child: widget.header ?? Container()
                   ),
                   AnimatedBuilder(
-                    animation: _arrowAnimationController!,
-                    builder: (context, child) => Transform.rotate(
-                      angle: _arrowAnimation!.value,
-                      child: Icon(
-                        Icons.arrow_forward_ios,
-                        size: 20.0,
-                        color: Colors.black,
-                      ),
-                    ),
+                    animation: animationController!,
+                    builder: (context, child) =>
+                        Transform.rotate(
+                          angle: animation!.value,
+                          child:widget.animeWidget?? Icon(
+                            Icons.arrow_forward_ios,
+                            size:  20.0,
+                            color: Colors.black,
+                          ),
+                        ),
                   )
                 ],
               ),
@@ -76,23 +80,11 @@ class _ButtonChooseState extends State<Expandable>
           ),
         ),
         AnimatedCrossFade(
-          duration: Duration(milliseconds: 300),
+          duration:widget.duration ?? Duration(milliseconds: 300),
           firstChild: Container(),
-          secondChild: Container(
-            width: double.infinity,
-            padding: EdgeInsets.fromLTRB(
-                Get.width * 0.04, 0, Get.width * 0.04, Get.height * 0.03),
-            color: Colors.white,
-            child: SingleChildScrollView(
-              child: LhText(
-                widget.title ?? 'kdsndsjpo',
-                style: LhStyle.DEFAULT_14.copyWith(
-                    fontWeight: FontWeight.w400, color: Color(0xffC4C4C4)),
-              ),
-            ),
-          ),
+          secondChild: widget.expand ?? Container(),
           crossFadeState:
-              isExpand ? CrossFadeState.showFirst : CrossFadeState.showSecond,
+          isExpand ? CrossFadeState.showFirst : CrossFadeState.showSecond,
         )
       ],
     );
