@@ -50,6 +50,7 @@ class StoryControllerProvider with ChangeNotifier {
 
   @override
   void dispose() {
+    print('--------> dispose <----------');
     clearTimer();
     super.dispose();
   }

@@ -23,8 +23,13 @@ class _LhStoryViewProviderState extends State<LhStoryViewProvider> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-        create: (_) => widget.controller,
+    return ChangeNotifierProvider<StoryControllerProvider>(
+        create: (_) {
+          print('widget.controller ${widget.controller}');
+          var provider =
+              StoryControllerProvider(stories: widget.controller.stories);
+          return widget.controller;
+        },
         child: GestureDetector(
           onTapUp: (details) {
             if (details.globalPosition.dx >
@@ -121,4 +126,6 @@ class _LhStoryViewProviderState extends State<LhStoryViewProvider> {
       ),
     );
   }
+
+
 }

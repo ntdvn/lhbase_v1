@@ -215,8 +215,10 @@ class ComponentUtils {
   static void setStatusBarBrightness(Brightness brightness) {
     SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
         statusBarBrightness: brightness,
-        statusBarIconBrightness: brightness,
-        systemNavigationBarIconBrightness: brightness,
+        statusBarIconBrightness:
+            brightness == Brightness.light ? Brightness.dark : Brightness.light,
+        systemNavigationBarIconBrightness:
+            brightness == Brightness.light ? Brightness.dark : Brightness.light,
         systemNavigationBarColor: brightness == Brightness.light
             ? Colors.black.withOpacity(0.4)
             : Colors.white.withOpacity(0.1),

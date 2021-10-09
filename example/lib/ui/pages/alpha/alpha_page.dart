@@ -9,7 +9,15 @@ class AlphaPage extends StatefulWidget {
 }
 
 class _AlphaPageState extends State<AlphaPage> {
-  StoryControllerProvider _storyController = StoryControllerProvider(
+  final PageController controller = LhStoryPageController();
+  int currentIndex = 0;
+
+  StoryControllerProvider _storyController1 = StoryControllerProvider(
+      stories: [],
+      onCompleted: () {
+        print('onCompleted');
+      });
+  StoryControllerProvider _storyController2 = StoryControllerProvider(
       stories: [],
       onCompleted: () {
         print('onCompleted');
@@ -17,7 +25,7 @@ class _AlphaPageState extends State<AlphaPage> {
 
   @override
   void initState() {
-    _storyController.stories = [
+    _storyController1.stories = [
       Story(
           widget: Container(
         color: Colors.blue,
@@ -33,12 +41,25 @@ class _AlphaPageState extends State<AlphaPage> {
         color: Colors.red,
         child: Text('3'),
       )),
+      // Story(
+      //     image:
+      //         'https://i.pinimg.com/originals/58/bd/4f/58bd4fc9ebfccc1f2de419529bbf1a12.jpg'),
+      // Story(
+      //     image:
+      //         'https://www.wallpaperup.com/uploads/wallpapers/2015/03/06/633166/e8d825bde9f2127330224dbd1570e457.jpg'),
       Story(
-          image:
-              'https://i.pinimg.com/originals/58/bd/4f/58bd4fc9ebfccc1f2de419529bbf1a12.jpg'),
-      Story(
-          image:
-              'https://www.wallpaperup.com/uploads/wallpapers/2015/03/06/633166/e8d825bde9f2127330224dbd1570e457.jpg'),
+          widget: Container(
+        color: Colors.red,
+        child: Text('co gi do sai sai'),
+      )),
+    ];
+    _storyController2.stories = [
+      // Story(
+      //     image:
+      //         'https://i.pinimg.com/originals/58/bd/4f/58bd4fc9ebfccc1f2de419529bbf1a12.jpg'),
+      // Story(
+      //     image:
+      //         'https://www.wallpaperup.com/uploads/wallpapers/2015/03/06/633166/e8d825bde9f2127330224dbd1570e457.jpg'),
       Story(
           widget: Container(
         color: Colors.red,
@@ -48,13 +69,34 @@ class _AlphaPageState extends State<AlphaPage> {
     super.initState();
   }
 
+  var a = FocusNode();
+  var b = FocusNode();
+  var ab = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
+        statusBarBrightness: Brightness.dark,
         appBarTop: LhAppBar.top(),
         child: Container(
-          child: LhStoryViewProvider(
-            controller: _storyController,
+          child: CubePageView(
+            controller: controller,
+            onTapLeft: () {
+              // _storyController.previous();
+            },
+            onTapRight: () {
+              // _storyController.next();
+            },
+            children: [
+              LhStoryViewProvider(
+                controller: _storyController1,
+              ),
+              LhStoryViewProvider(
+                controller: _storyController2,
+              ),
+            ],
+            onPageChanged: (value) {
+              currentIndex = value;
+            },
           ),
         ));
   }
