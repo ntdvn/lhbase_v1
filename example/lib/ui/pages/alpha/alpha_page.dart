@@ -72,31 +72,73 @@ class _AlphaPageState extends State<AlphaPage> {
   var a = FocusNode();
   var b = FocusNode();
   var ab = TextEditingController();
+  // @override
+  // Widget build(BuildContext context) {
+  //   return LhBasePage(
+  //       statusBarBrightness: Brightness.dark,
+  //       appBarTop: LhAppBar.top(),
+  //       child: Container(
+  //         child: CubePageView(
+  //           controller: controller,
+  //           onTapLeft: () {
+  //             // _storyController.previous();
+  //           },
+  //           onTapRight: () {
+  //             // _storyController.next();
+  //           },
+  //           children: [
+  //             LhStoryViewProvider(
+  //               controller: _storyController1,
+  //             ),
+  //             LhStoryViewProvider(
+  //               controller: _storyController2,
+  //             ),
+  //           ],
+  //           onPageChanged: (value) {
+  //             currentIndex = value;
+  //           },
+  //         ),
+  //       ));
+  // }
+
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
         statusBarBrightness: Brightness.dark,
         appBarTop: LhAppBar.top(),
         child: Container(
-          child: CubePageView(
-            controller: controller,
-            onTapLeft: () {
-              // _storyController.previous();
-            },
-            onTapRight: () {
-              // _storyController.next();
-            },
+          padding: EdgeInsets.all(10.0),
+          child: Column(
             children: [
-              LhStoryViewProvider(
-                controller: _storyController1,
-              ),
-              LhStoryViewProvider(
-                controller: _storyController2,
-              ),
+              LhMultiUseInput(
+                inputPadding:
+                    EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+                controller: ab,
+                focusNode: a,
+                builderContainer: (lhInputBuilder) {
+                  return BoxDecoration(
+                      color: lhInputBuilder.isFocused
+                          ? Colors.yellow
+                          : Colors.blue,
+                      borderRadius: BorderRadius.circular(
+                          lhInputBuilder.isFocused ? 8.0 : 0),
+                      border: Border.all(
+                          width: 1,
+                          color: lhInputBuilder.isFocused
+                              ? Colors.green
+                              : Colors.black));
+                },
+                builderTop: (lhInputBuilder) {
+                  return Text(
+                    'avb',
+                    style: TextStyle(
+                        color: lhInputBuilder.isFocused
+                            ? Colors.green
+                            : Colors.black),
+                  );
+                },
+              )
             ],
-            onPageChanged: (value) {
-              currentIndex = value;
-            },
           ),
         ));
   }
