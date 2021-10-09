@@ -18,6 +18,7 @@ class LhBorderLessInput extends StatelessWidget {
   final Widget? suffixIcon;
   final Widget? suffix;
   final int? maxLength;
+  final bool obscureText;
   const LhBorderLessInput(
       {Key? key,
       this.line = 1,
@@ -34,7 +35,7 @@ class LhBorderLessInput extends StatelessWidget {
       this.prefixIcon,
       this.suffixIcon,
       this.suffix,
-      this.maxLength})
+      this.maxLength, this.obscureText = false})
       : super(key: key);
 
   static final titleStyle = LhStyle.DEFAULT_16_BOLD;
@@ -44,6 +45,7 @@ class LhBorderLessInput extends StatelessWidget {
     return TextFormField(
         initialValue: initialValue,
         focusNode: focusNode,
+        obscureText: obscureText,
         minLines: line,
         maxLines: line,
         maxLength: maxLength,

@@ -27,6 +27,7 @@ class LhAdvancedInput extends StatefulWidget {
 
   final EdgeInsets? inputPadding;
   final EdgeInsets? inputMargin;
+  final bool obscureText;
   const LhAdvancedInput({
     Key? key,
     this.line,
@@ -48,6 +49,7 @@ class LhAdvancedInput extends StatefulWidget {
     this.inputContainerDecoration,
     this.inputPadding,
     this.inputMargin,
+    this.obscureText = false,
   }) : super(key: key);
 
   @override
@@ -68,7 +70,6 @@ class _LhAdvancedInputState extends State<LhAdvancedInput> {
     }
 
     widget.controller.addListener(() {
-      print('widget.controller');
       setState(() {});
     });
     super.initState();
@@ -102,7 +103,7 @@ class _LhAdvancedInputState extends State<LhAdvancedInput> {
                 child: LhBorderLessInput(
                   initialValue: widget.initialValue,
                   keyboardType: widget.keyboardType,
-                  line: widget.line ?? 1,
+                  line: widget.line,
                   focusNode: widget.focusNode,
                   controller: widget.controller,
                   onChanged: (value) {
@@ -118,6 +119,7 @@ class _LhAdvancedInputState extends State<LhAdvancedInput> {
                     if (widget.maxLength != null)
                       LengthLimitingTextInputFormatter(widget.maxLength),
                   ],
+                  obscureText: widget.obscureText,
                 ),
               ),
               if (widget.builderRight != null)
