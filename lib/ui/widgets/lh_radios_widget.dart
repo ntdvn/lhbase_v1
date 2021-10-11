@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
+typedef MultiChildRenderObjectWidget LhRadiosContainerBuilder();
+typedef Widget LhRadiosWidgetBuilder<T>(int index, T item, T? selected);
+typedef void LhRadiosOnSelectedChanged<T>(int index, T selected);
+
 class LhRadiosWidget<T> extends StatefulWidget {
   final int? initialIndex;
   final List<T> items;
   // final List<T>? selectedItem;
-  final Widget Function(int, T, T?) radioBuilder;
-  final Function(int, T)? onSelectedChanged;
-  final MultiChildRenderObjectWidget? containerWidget;
+  final LhRadiosWidgetBuilder<T> radioBuilder;
+  final LhRadiosOnSelectedChanged<T>? onSelectedChanged;
+  final LhRadiosContainerBuilder? containerBuilder;
+  final Axis? scrollDirection;
   const LhRadiosWidget(
       {Key? key,
       required this.items,
@@ -14,7 +19,8 @@ class LhRadiosWidget<T> extends StatefulWidget {
       required this.radioBuilder,
       this.onSelectedChanged,
       this.initialIndex,
-      this.containerWidget})
+      this.containerBuilder,
+      this.scrollDirection})
       : assert(items.length != 0),
         super(key: key);
 
@@ -43,8 +49,9 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
   @override
   Widget build(BuildContext context) {
     late Widget _renderWidget;
-    if (widget.containerWidget is Column) {
-      var parent = widget.containerWidget as Column;
+    if (widget.containerBuilder != null &&
+        widget.containerBuilder!() is Column) {
+      var parent = widget.containerBuilder as Column;
       _renderWidget = Column(
         mainAxisAlignment: parent.mainAxisAlignment,
         crossAxisAlignment: parent.crossAxisAlignment,
@@ -54,8 +61,9 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
         textBaseline: parent.textBaseline,
         children: _renderChildren(),
       );
-    } else if (widget.containerWidget is Row) {
-      var parent = widget.containerWidget as Row;
+    } else if (widget.containerBuilder != null &&
+        widget.containerBuilder!() is Row) {
+      var parent = widget.containerBuilder!() as Row;
       _renderWidget = Row(
         mainAxisAlignment: parent.mainAxisAlignment,
         crossAxisAlignment: parent.crossAxisAlignment,
@@ -66,8 +74,8 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
         children: _renderChildren(),
       );
     }
-    if (widget.containerWidget is Wrap) {
-      var parent = widget.containerWidget as Wrap;
+    if (widget.containerBuilder != null && widget.containerBuilder!() is Wrap) {
+      var parent = widget.containerBuilder!() as Wrap;
       _renderWidget = Wrap(
         alignment: parent.alignment,
         crossAxisAlignment: parent.crossAxisAlignment,
@@ -81,7 +89,8 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
         children: _renderChildren(),
       );
     }
-    return Container(width: double.infinity, child: _renderWidget);
+
+    return _renderWidget;
   }
 
   List<Widget> _renderChildren() {

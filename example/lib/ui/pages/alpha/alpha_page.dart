@@ -101,6 +101,58 @@ class _AlphaPageState extends State<AlphaPage> {
   //       ));
   // }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return LhBasePage(
+  //       statusBarBrightness: Brightness.dark,
+  //       appBarTop: LhAppBar.top(),
+  //       child: Container(
+  //         padding: EdgeInsets.all(10.0),
+  //         child: Column(
+  //           children: [
+  //             LhAdvancedInput(
+  //               inputPadding:
+  //                   EdgeInsets.symmetric(vertical: 12, horizontal: 18),
+  //               controller: ab,
+  //               focusNode: a,
+  //               builderContainer: (lhInputBuilder) {
+  //                 return BoxDecoration(
+  //                     color: lhInputBuilder.isFocused
+  //                         ? Colors.yellow
+  //                         : Colors.blue,
+  //                     borderRadius: BorderRadius.circular(
+  //                         lhInputBuilder.isFocused ? 8.0 : 0),
+  //                     border: Border.all(
+  //                         width: 1,
+  //                         color: lhInputBuilder.isFocused
+  //                             ? Colors.green
+  //                             : Colors.black));
+  //               },
+  //               builderTop: (lhInputBuilder) {
+  //                 return Text(
+  //                   'avb',
+  //                   style: TextStyle(
+  //                       color: lhInputBuilder.isFocused
+  //                           ? Colors.green
+  //                           : Colors.black),
+  //                 );
+  //               },
+  //             )
+  //           ],
+  //         ),
+  //       ));
+  // }
+
+  int _currentCustomer = 0;
+  List<String> customerSupport = [
+    'Tất cả',
+    'Dành cho thành viên',
+    'Công khai',
+    'Tất cả',
+    'Dành cho thành viên',
+    'Công khai'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
@@ -110,32 +162,27 @@ class _AlphaPageState extends State<AlphaPage> {
           padding: EdgeInsets.all(10.0),
           child: Column(
             children: [
-              LhAdvancedInput(
-                inputPadding:
-                    EdgeInsets.symmetric(vertical: 12, horizontal: 18),
-                controller: ab,
-                focusNode: a,
-                builderContainer: (lhInputBuilder) {
-                  return BoxDecoration(
-                      color: lhInputBuilder.isFocused
-                          ? Colors.yellow
-                          : Colors.blue,
-                      borderRadius: BorderRadius.circular(
-                          lhInputBuilder.isFocused ? 8.0 : 0),
-                      border: Border.all(
-                          width: 1,
-                          color: lhInputBuilder.isFocused
-                              ? Colors.green
-                              : Colors.black));
+              LhRadiosWidget<String>(
+                initialIndex: 0,
+                items: customerSupport,
+                // scrollDirection: Axis.horizontal,
+                containerBuilder: () {
+                  return Row();
                 },
-                builderTop: (lhInputBuilder) {
-                  return Text(
-                    'avb',
-                    style: TextStyle(
-                        color: lhInputBuilder.isFocused
-                            ? Colors.green
-                            : Colors.black),
-                  );
+                radioBuilder: (p0, p1, p2) {
+                  return Container(
+                      margin: EdgeInsets.only(right: 25),
+                      child: Text(
+                        '${p1}',
+                        style: LhStyle.DEFAULT_16.copyWith(
+                            color: p0 == _currentCustomer
+                                ? Colors.green
+                                : Colors.black,
+                            fontWeight: FontWeight.w400),
+                      ));
+                },
+                onSelectedChanged: (p0, p1) {
+                  _currentCustomer = p0;
                 },
               )
             ],
