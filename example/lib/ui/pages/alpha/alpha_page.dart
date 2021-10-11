@@ -167,7 +167,7 @@ class _AlphaPageState extends State<AlphaPage> {
                 items: customerSupport,
                 // scrollDirection: Axis.horizontal,
                 containerBuilder: () {
-                  return Row();
+                  return Column();
                 },
                 radioBuilder: (p0, p1, p2) {
                   return Container(
