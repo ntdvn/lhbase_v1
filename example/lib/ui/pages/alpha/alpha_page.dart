@@ -152,41 +152,39 @@ class _AlphaPageState extends State<AlphaPage> {
     'Dành cho thành viên',
     'Công khai'
   ];
+  LhExpanableController _lhExpanableController =
+      LhExpanableController(minimizeHeight: 300, maximizeHeight: 700);
 
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
         statusBarBrightness: Brightness.dark,
-        appBarTop: LhAppBar.top(),
-        child: Container(
-          padding: EdgeInsets.all(10.0),
-          child: Column(
-            children: [
-              LhRadiosWidget<String>(
-                initialIndex: 0,
-                items: customerSupport,
-                // scrollDirection: Axis.horizontal,
-                containerBuilder: () {
-                  return Column();
-                },
-                radioBuilder: (p0, p1, p2) {
-                  return Container(
-                      margin: EdgeInsets.only(right: 25),
-                      child: Text(
-                        '${p1}',
-                        style: LhStyle.DEFAULT_16.copyWith(
-                            color: p0 == _currentCustomer
-                                ? Colors.green
-                                : Colors.black,
-                            fontWeight: FontWeight.w400),
-                      ));
-                },
-                onSelectedChanged: (p0, p1) {
-                  _currentCustomer = p0;
-                },
-              )
-            ],
-          ),
+        // appBarTop: LhAppBar.top(),
+        child: Stack(
+          children: [
+            TextField(),
+            Container(
+              margin: EdgeInsets.only(top: 200),
+              color: Colors.red,
+              child: Column(
+                children: [
+                  TextButton(
+                      onPressed: () {
+                        _lhExpanableController.minimize();
+                      },
+                      child: Text('minimize')),
+                       TextButton(
+                      onPressed: () {
+                        _lhExpanableController.maximize();
+                      },
+                      child: Text('maximize')),
+                ],
+              ),
+            ),
+            LhExpanableView(
+              controller: _lhExpanableController,
+            )
+          ],
         ));
   }
 

@@ -40,6 +40,7 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
   @override
   void initState() {
     if (widget.initialIndex != null) {
+      print('widget.initialIndex ${widget.initialIndex}');
       _selectedItem = widget.items[widget.initialIndex!];
     }
 
@@ -52,43 +53,41 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
     if (widget.containerBuilder != null) {
       var parent = widget.containerBuilder!();
 
-      if(parent is Column) {
-
-      _renderWidget = Column(
-        mainAxisAlignment: parent.mainAxisAlignment,
-        crossAxisAlignment: parent.crossAxisAlignment,
-        mainAxisSize: parent.mainAxisSize,
-        verticalDirection: parent.verticalDirection,
-        textDirection: parent.textDirection,
-        textBaseline: parent.textBaseline,
-        children: _renderChildren(),
-      );
-      } else if(parent is Row) {
-      _renderWidget = Row(
-        mainAxisAlignment: parent.mainAxisAlignment,
-        crossAxisAlignment: parent.crossAxisAlignment,
-        mainAxisSize: parent.mainAxisSize,
-        verticalDirection: parent.verticalDirection,
-        textDirection: parent.textDirection,
-        textBaseline: parent.textBaseline,
-        children: _renderChildren(),
-      );
-      } else if(parent is Wrap) {
+      if (parent is Column) {
+        _renderWidget = Column(
+          mainAxisAlignment: parent.mainAxisAlignment,
+          crossAxisAlignment: parent.crossAxisAlignment,
+          mainAxisSize: parent.mainAxisSize,
+          verticalDirection: parent.verticalDirection,
+          textDirection: parent.textDirection,
+          textBaseline: parent.textBaseline,
+          children: _renderChildren(),
+        );
+      } else if (parent is Row) {
+        _renderWidget = Row(
+          mainAxisAlignment: parent.mainAxisAlignment,
+          crossAxisAlignment: parent.crossAxisAlignment,
+          mainAxisSize: parent.mainAxisSize,
+          verticalDirection: parent.verticalDirection,
+          textDirection: parent.textDirection,
+          textBaseline: parent.textBaseline,
+          children: _renderChildren(),
+        );
+      } else if (parent is Wrap) {
         _renderWidget = Wrap(
-        alignment: parent.alignment,
-        crossAxisAlignment: parent.crossAxisAlignment,
-        runAlignment: parent.runAlignment,
-        spacing: parent.spacing,
-        runSpacing: parent.runSpacing,
-        direction: parent.direction,
-        verticalDirection: parent.verticalDirection,
-        clipBehavior: parent.clipBehavior,
-        textDirection: parent.textDirection,
-        children: _renderChildren(),
-      );
+          alignment: parent.alignment,
+          crossAxisAlignment: parent.crossAxisAlignment,
+          runAlignment: parent.runAlignment,
+          spacing: parent.spacing,
+          runSpacing: parent.runSpacing,
+          direction: parent.direction,
+          verticalDirection: parent.verticalDirection,
+          clipBehavior: parent.clipBehavior,
+          textDirection: parent.textDirection,
+          children: _renderChildren(),
+        );
       }
     }
-   
 
     return _renderWidget;
   }

@@ -148,7 +148,7 @@ class LhSlidingSheetController extends ChangeNotifier
     if (originHeight < expandHeight) {
       mode = 1;
     } else {
-      mode = 2;
+      mode = 2; 
     }
     const double stepValue = 4;
     const oneSec = const Duration(microseconds: 1000);
