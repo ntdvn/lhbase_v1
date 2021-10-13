@@ -36,13 +36,17 @@ class LhExpanableController extends ChangeNotifier {
 
   double get maximizeHeight => _maximizeHeight;
 
+  int step = 5;
+
   set maximizeHeight(double maximizeHeight) {
+    // _maximizeHeight = (maximizeHeight ~/ step * step).toDouble();
     _maximizeHeight = maximizeHeight;
+    print('maximizeHeight $_maximizeHeight');
+    // _maximizeHeight = maximizeHeight.round().toDouble();
     valueMaximize = LhExpanableValue(
       state: LhExpanableState.MAXIMIZE,
       height: _maximizeHeight,
     );
-    notifyListeners();
   }
 
   LhExpanableValue value = LhExpanableValue.CLOSED;
@@ -72,7 +76,6 @@ class LhExpanableController extends ChangeNotifier {
     );
 
     this.addListener(() {
-      // print('height $height targetHeight ${targetValue.height}')
       // switch (_action) {
       //   case LhExpanableAction.IDLE:
       //     print('height $height');
@@ -172,8 +175,9 @@ class LhExpanableController extends ChangeNotifier {
     } else if (targetValue.height < height) {
       mValue = -1;
     }
+    var stepDistance = maximizeHeight / 50;
 
-    double stepValue = (5 * mValue).toDouble();
+    double stepValue = (stepDistance * mValue).toDouble();
     const oneSec = const Duration(milliseconds: 1);
     // print('minimizeHeight ${minimizeHeight}');
     // print('expandHeight ${expandHeight}');
@@ -182,13 +186,15 @@ class LhExpanableController extends ChangeNotifier {
       oneSec,
       (Timer timer) {
         _tmpTimer = timer;
+        print('height ${height.round()} targetHeight ${targetValue.height}');
         // print('height $height');
         // print('targetValue $targetValue');
         // print('height $height');
         delta(stepValue);
-        if (targetValue.height == height) {
+        if (targetValue.height >= height-stepDistance && targetValue.height<= height+stepDistance) {
           // Future.delayed(Duration(seconds: 2), () {
           value = targetValue;
+          height = value.height;
           action = LhExpanableAction.IDLE;
           //  notifyListeners();
           // });

@@ -157,81 +157,72 @@ class _AlphaPageState extends State<AlphaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return LhBasePage(
-        statusBarBrightness: Brightness.dark,
-        appBarTop: LhAppBar.top(),
-        child: Container(
-          color: Colors.cyan,
-          child: Column(
-            children: [
-              Container(
-                height: 400,
-                color: Colors.yellow,
-                child: Stack(
-                  children: [
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                      child: Container(
-                        height: 300,
-                        width: double.infinity,
-                        color: Colors.green,
-                        child: TextButton(
-                          child: Text('minimize'),
-                          onPressed: () {
-                            _lhExpanableController.minimize();
-                          },
-                        ),
+    return Stack(
+      children: [
+        LhBasePage(
+            statusBarBrightness: Brightness.dark,
+            appBarTop: LhAppBar.top(),
+            child: Container(
+              width: double.infinity,
+              color: Colors.cyan,
+              child: TextButton(
+                child: Text('minimize'),
+                onPressed: () {
+                  _lhExpanableController.minimize();
+                },
+              ),
+            )),
+        LhExpanableView(
+          controller: _lhExpanableController,
+          child: LhBottomSheetUi(
+            child: Container(
+              padding: EdgeInsets.only(
+                  bottom: MediaQuery.of(context).padding.bottom),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(
+                        Icons.dangerous,
+                        size: 50,
                       ),
-                    ),
-                    LhExpanableView(
-                      controller: _lhExpanableController,
-                      child: LhBottomSheetUi(
-                        child: Container(
-                                padding: EdgeInsets.only(
-                                    bottom: MediaQuery.of(context).padding.bottom),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  mainAxisAlignment:MainAxisAlignment.center,
-                                  children: [
-                                    Row(
-                                      crossAxisAlignment: CrossAxisAlignment.center,
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Icon(Icons.dangerous, size: 50,),
-                                         Icon(Icons.dangerous, size: 50,)
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                        left: [
-                          LhAppBarAction.icon(
-                            icon: Icon(Icons.close),
-                            onTap: () {
-                              _lhExpanableController.closed();
-                            },
-                          ),
-                          LhAppBarAction.icon(
-                            icon: Icon(Icons.close),
-                            onTap: () {
-                              _lhExpanableController.minimize();
-                            },
-                          ),
-                          LhAppBarAction.icon(
-                            icon: Icon(Icons.close),
-                            onTap: () {
-                              _lhExpanableController.maximize();
-                            },
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
+                      Icon(
+                        Icons.dangerous,
+                        size: 50,
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            left: [
+              LhAppBarAction.icon(
+                icon: Icon(Icons.close),
+                onTap: () {
+                  _lhExpanableController.closed();
+                },
+              ),
+              LhAppBarAction.icon(
+                icon: Icon(Icons.close),
+                onTap: () {
+                  _lhExpanableController.minimize();
+                },
+              ),
+              LhAppBarAction.icon(
+                icon: Icon(Icons.close),
+                onTap: () {
+                  _lhExpanableController.maximize();
+                },
               ),
             ],
           ),
-        ));
+        )
+      ],
+    );
   }
 
   @override

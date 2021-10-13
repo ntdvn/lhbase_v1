@@ -27,8 +27,6 @@ class _LhExpanableViewState extends State<LhExpanableView> {
     return AnimatedBuilder(
       animation: widget.controller,
       builder: (context, child) {
-        print(
-            'widget.controller.maximizeHeight ${widget.controller.maximizeHeight}');
         return Stack(
           children: [
             if (_size == null)
@@ -37,9 +35,7 @@ class _LhExpanableViewState extends State<LhExpanableView> {
                   setState(() {
                     _size = size;
                   });
-                  print('onChange');
                   widget.controller.maximizeHeight = size.height;
-                  print("Size $size");
                 },
                 child: Container(
                   width: double.infinity,
@@ -85,7 +81,7 @@ class _LhExpanableViewState extends State<LhExpanableView> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      color: Colors.white,
+      color: Colors.transparent,
       child: Column(
         children: [
           GestureDetector(
@@ -101,9 +97,9 @@ class _LhExpanableViewState extends State<LhExpanableView> {
               child: Container(
             // duration: Duration(milliseconds: 1),
             color: backDropColor,
-            height: widget.controller.value.height == 0
-                ? MediaQuery.of(context).size.height
-                : widget.controller.value.height,
+            height: widget.controller.height < widget.controller.minimizeHeight
+                ? widget.controller.minimizeHeight
+                : widget.controller.height,
             // height: 0,
             child: widget.child,
           ))
