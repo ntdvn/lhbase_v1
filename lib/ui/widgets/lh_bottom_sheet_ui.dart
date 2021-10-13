@@ -55,12 +55,6 @@ class LhBottomSheetUi extends StatelessWidget {
                               Row(
                                 children: right!,
                               ),
-                            Container(
-                              child: LhAppBarAction.icon(
-                                icon: Icon(Icons.arrow_drop_down),
-                                onTap: () {},
-                              ),
-                            ),
                           ],
                         ),
                         Container(

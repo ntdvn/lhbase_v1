@@ -153,7 +153,7 @@ class _AlphaPageState extends State<AlphaPage> {
     'Công khai'
   ];
   LhExpanableController _lhExpanableController =
-      LhExpanableController(minimizeHeight: 300);
+      LhExpanableController(minimizeHeight: 500, maximizeHeight: 700);
 
   @override
   Widget build(BuildContext context) {
@@ -184,15 +184,20 @@ class _AlphaPageState extends State<AlphaPage> {
             LhExpanableView(
               controller: _lhExpanableController,
               child: LhBottomSheetUi(
-                child: Column(
-                  children: [
-                    Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-                    Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-
-Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-// Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-// Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-                  ],
+                child: Container(
+                  color: Colors.red,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.umbrella,
+                        size: 140,
+                      )
+                // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+                // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+                    ],
+                  ),
                 ),
                 left: [
                   LhAppBarAction.icon(
@@ -203,7 +208,9 @@ Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
                   ),
                   LhAppBarAction.icon(
                     icon: Icon(Icons.close),
-                    onTap: () {},
+                    onTap: () {
+                        _lhExpanableController.maximize();
+                    },
                   ),
                 ],
               ),
@@ -214,6 +221,7 @@ Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
 
   @override
   void dispose() {
+    _lhExpanableController.dispose();
     super.dispose();
   }
 }

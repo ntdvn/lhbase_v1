@@ -69,10 +69,7 @@ class _LhExpanableViewState extends State<LhExpanableView> {
       color: Colors.transparent,
       child: Column(
         children: [
-          AnimatedBuilder(
-            animation: widget.controller,
-            builder: (context, child) {
-              return GestureDetector(
+          GestureDetector(
                   // onVerticalDragUpdate: (details) {
                   //   widget.controller.delta(-details.delta.dy);
                   //   widget.controller.action = LhExpanableAction.SCROLLING;
@@ -84,11 +81,10 @@ class _LhExpanableViewState extends State<LhExpanableView> {
                   // },
                   child: Container(
                 color: backDropColor,
-                height: widget.controller.height,
+                height: widget.controller.value.height,
+                // height: 0,
                 child: widget.child,
-              ));
-            },
-          )
+              ))
         ],
       ),
     );
