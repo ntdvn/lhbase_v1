@@ -153,70 +153,84 @@ class _AlphaPageState extends State<AlphaPage> {
     'Công khai'
   ];
   LhExpanableController _lhExpanableController =
-      LhExpanableController(minimizeHeight: 300, maximizeHeight: 700);
+      LhExpanableController(minimizeHeight: 300);
 
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
         statusBarBrightness: Brightness.dark,
-        // appBarTop: LhAppBar.top(),
-        child: Stack(
-          children: [
-            Align(
-              alignment: Alignment.bottomCenter,
-              child: Container(
-                height: 300,
-                width: double.infinity,
-                color: Colors.green,
-                child: TextButton(
-                  child: Text('minimize'),
-                  onPressed: () {
-                    _lhExpanableController.minimize();
-                  },
+        appBarTop: LhAppBar.top(),
+        child: Container(
+          color: Colors.cyan,
+          child: Column(
+            children: [
+              Container(
+                height: 400,
+                color: Colors.yellow,
+                child: Stack(
+                  children: [
+                    Align(
+                      alignment: Alignment.bottomCenter,
+                      child: Container(
+                        height: 300,
+                        width: double.infinity,
+                        color: Colors.green,
+                        child: TextButton(
+                          child: Text('minimize'),
+                          onPressed: () {
+                            _lhExpanableController.minimize();
+                          },
+                        ),
+                      ),
+                    ),
+                    LhExpanableView(
+                      controller: _lhExpanableController,
+                      child: LhBottomSheetUi(
+                        child: Container(
+                                padding: EdgeInsets.only(
+                                    bottom: MediaQuery.of(context).padding.bottom),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment:MainAxisAlignment.center,
+                                  children: [
+                                    Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Icon(Icons.dangerous, size: 50,),
+                                         Icon(Icons.dangerous, size: 50,)
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                        left: [
+                          LhAppBarAction.icon(
+                            icon: Icon(Icons.close),
+                            onTap: () {
+                              _lhExpanableController.closed();
+                            },
+                          ),
+                          LhAppBarAction.icon(
+                            icon: Icon(Icons.close),
+                            onTap: () {
+                              _lhExpanableController.minimize();
+                            },
+                          ),
+                          LhAppBarAction.icon(
+                            icon: Icon(Icons.close),
+                            onTap: () {
+                              _lhExpanableController.maximize();
+                            },
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               ),
-            ),
-            LhExpanableView(
-              controller: _lhExpanableController,
-              child: LhBottomSheetUi(
-                child: Container(
-                  color: Colors.red,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.umbrella,
-                        size: 140,
-                      )
-                      // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-                      // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-                    ],
-                  ),
-                ),
-                left: [
-                  LhAppBarAction.icon(
-                    icon: Icon(Icons.close),
-                    onTap: () {
-                      _lhExpanableController.closed();
-                    },
-                  ),
-                  LhAppBarAction.icon(
-                    icon: Icon(Icons.close),
-                    onTap: () {
-                      _lhExpanableController.minimize();
-                    },
-                  ),
-                  LhAppBarAction.icon(
-                    icon: Icon(Icons.close),
-                    onTap: () {
-                      _lhExpanableController.maximize();
-                    },
-                  ),
-                ],
-              ),
-            )
-          ],
+            ],
+          ),
         ));
   }
 

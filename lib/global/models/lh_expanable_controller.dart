@@ -32,7 +32,18 @@ class LhExpanableValue {
 
 class LhExpanableController extends ChangeNotifier {
   final double minimizeHeight;
-  final double? maximizeHeight;
+  double _maximizeHeight = 0;
+
+  double get maximizeHeight => _maximizeHeight;
+
+  set maximizeHeight(double maximizeHeight) {
+    _maximizeHeight = maximizeHeight;
+    valueMaximize = LhExpanableValue(
+      state: LhExpanableState.MAXIMIZE,
+      height: _maximizeHeight,
+    );
+    notifyListeners();
+  }
 
   LhExpanableValue value = LhExpanableValue.CLOSED;
   LhExpanableValue targetValue = LhExpanableValue.CLOSED;
@@ -49,18 +60,16 @@ class LhExpanableController extends ChangeNotifier {
 
   static const double offsetHeight = 50;
 
-  LhExpanableController({required this.minimizeHeight, this.maximizeHeight}) {
+  LhExpanableController({required this.minimizeHeight}) {
     valueMinimize = LhExpanableValue(
       state: LhExpanableState.MINIMIZE,
       height: minimizeHeight,
     );
 
-    if (maximizeHeight != null) {
-      valueMaximize = LhExpanableValue(
-        state: LhExpanableState.MAXIMIZE,
-        height: maximizeHeight!,
-      );
-    }
+    valueMaximize = LhExpanableValue(
+      state: LhExpanableState.MAXIMIZE,
+      height: maximizeHeight,
+    );
 
     this.addListener(() {
       // print('height $height targetHeight ${targetValue.height}')
@@ -100,6 +109,7 @@ class LhExpanableController extends ChangeNotifier {
       //   case LhExpanableAction.SCROLLING:
       //     break;
       // }
+
       if (height <= 0)
         value = LhExpanableValue.CLOSED;
       else if (height == valueMinimize.height) {
@@ -108,14 +118,12 @@ class LhExpanableController extends ChangeNotifier {
           height: minimizeHeight,
         );
         // print('LhExpanableState.MINIMIZE');
-      } else if (maximizeHeight != null) {
-        if (height == valueMaximize.height) {
-          value = LhExpanableValue(
-            state: LhExpanableState.MAXIMIZE,
-            height: maximizeHeight!,
-          );
-          // print('LhExpanableState.MAXIMIZE ${maximizeHeight! - offsetHeight}');
-        }
+      } else if (height == valueMaximize.height) {
+        value = LhExpanableValue(
+          state: LhExpanableState.MAXIMIZE,
+          height: _maximizeHeight,
+        );
+        // print('LhExpanableState.MAXIMIZE ${maximizeHeight! - offsetHeight}');
       } else {
         // value = LhExpanableValue(
         //   state: LhExpanableState.SCROLLING,
@@ -186,7 +194,7 @@ class LhExpanableController extends ChangeNotifier {
           // });
           clearTimer();
           notifyListeners();
-        } else if (height < 0 || height > screenHeight) {
+        } else if (height < 0 || height > maximizeHeight) {
           clearTimer();
           notifyListeners();
         }
@@ -195,15 +203,23 @@ class LhExpanableController extends ChangeNotifier {
   }
 
   void minimize() {
+    // if (maximizeHeight == 0) {
+    //   Future.delayed(Duration(seconds: 1), () {
+    //     animatedToTarget(LhExpanableValue(
+    //         height: minimizeHeight, state: LhExpanableState.MINIMIZE));
+    //   });
+    // } else {
+    //   animatedToTarget(LhExpanableValue(
+    //     height: minimizeHeight, state: LhExpanableState.MINIMIZE));
+    // }
+    print('max $maximizeHeight');
     animatedToTarget(LhExpanableValue(
         height: minimizeHeight, state: LhExpanableState.MINIMIZE));
   }
 
   void maximize() {
-    if (maximizeHeight != null) {
-      animatedToTarget(LhExpanableValue(
-          height: maximizeHeight!, state: LhExpanableState.MAXIMIZE));
-    }
+    animatedToTarget(LhExpanableValue(
+        height: _maximizeHeight, state: LhExpanableState.MAXIMIZE));
   }
 
   void closed() {

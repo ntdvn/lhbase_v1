@@ -20,24 +20,44 @@ class _LhExpanableViewState extends State<LhExpanableView> {
     super.initState();
   }
 
+  Size? _size;
+
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: widget.controller,
       builder: (context, child) {
-        if (widget.controller.isShow) {
-          return Container(
-              width: double.infinity,
-              color: Colors.transparent,
-              child: SingleChildScrollView(
-                physics: NeverScrollableScrollPhysics(),
-                child: Column(
-                  children: [_buildBackdrop(), _buildExpanableView()],
+        print(
+            'widget.controller.maximizeHeight ${widget.controller.maximizeHeight}');
+        return Stack(
+          children: [
+            if (_size == null)
+              LhMeasureSize(
+                onChange: (Size size) {
+                  setState(() {
+                    _size = size;
+                  });
+                  print('onChange');
+                  widget.controller.maximizeHeight = size.height;
+                  print("Size $size");
+                },
+                child: Container(
+                  width: double.infinity,
+                  color: Colors.black,
                 ),
-              ));
-        } else {
-          return SizedBox.shrink();
-        }
+              ),
+            if (widget.controller.isShow)
+              Container(
+                  width: double.infinity,
+                  color: Colors.transparent,
+                  child: SingleChildScrollView(
+                    physics: NeverScrollableScrollPhysics(),
+                    child: Column(
+                      children: [_buildBackdrop(), _buildExpanableView()],
+                    ),
+                  ))
+          ],
+        );
       },
     );
   }
@@ -52,10 +72,9 @@ class _LhExpanableViewState extends State<LhExpanableView> {
       child: Container(
         // duration: Duration(microseconds: 1),
         width: LhExpanableController.screenWidth,
-        height:
-            LhExpanableController.screenHeight - widget.controller.height >= 0
-                ? LhExpanableController.screenHeight - widget.controller.height
-                : 0,
+        height: widget.controller.maximizeHeight - widget.controller.height >= 0
+            ? widget.controller.maximizeHeight - widget.controller.height
+            : 0,
         // height: widget.controller.currentHeight,
         color: backDropColor,
       ),
@@ -70,22 +89,24 @@ class _LhExpanableViewState extends State<LhExpanableView> {
       child: Column(
         children: [
           GestureDetector(
-                  // onVerticalDragUpdate: (details) {
-                  //   widget.controller.delta(-details.delta.dy);
-                  //   widget.controller.action = LhExpanableAction.SCROLLING;
-                  // },
-                  // onVerticalDragEnd: (details) {
-                  //   // widget.controller.onChangedEnd();
-                  //   print('${details.velocity}');
-                  //   widget.controller.action = LhExpanableAction.IDLE;
-                  // },
-                  child: Container(
-                    // duration: Duration(milliseconds: 1),
-                color: backDropColor,
-                height: widget.controller.value.height == 0 ?  MediaQuery.of(context).size.height : widget.controller.value.height,
-                // height: 0,
-                child: widget.child,
-              ))
+              // onVerticalDragUpdate: (details) {
+              //   widget.controller.delta(-details.delta.dy);
+              //   widget.controller.action = LhExpanableAction.SCROLLING;
+              // },
+              // onVerticalDragEnd: (details) {
+              //   // widget.controller.onChangedEnd();
+              //   print('${details.velocity}');
+              //   widget.controller.action = LhExpanableAction.IDLE;
+              // },
+              child: Container(
+            // duration: Duration(milliseconds: 1),
+            color: backDropColor,
+            height: widget.controller.value.height == 0
+                ? MediaQuery.of(context).size.height
+                : widget.controller.value.height,
+            // height: 0,
+            child: widget.child,
+          ))
         ],
       ),
     );
