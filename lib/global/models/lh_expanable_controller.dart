@@ -11,6 +11,11 @@ enum LhExpanableState {
   CLOSED,
 }
 
+enum LhExpanableAction {
+  SCROLLING,
+  IDLE,
+}
+
 class LhExpanableValue {
   final LhExpanableState state;
   final double height;
@@ -31,6 +36,10 @@ class LhExpanableController extends ChangeNotifier {
 
   LhExpanableValue value = LhExpanableValue.CLOSED;
   LhExpanableValue targetValue = LhExpanableValue.CLOSED;
+  LhExpanableAction _action = LhExpanableAction.IDLE;
+  set action(LhExpanableAction action) {
+    _action = action;
+  }
 
   double height = 0;
 
@@ -38,45 +47,62 @@ class LhExpanableController extends ChangeNotifier {
 
   late LhExpanableValue valueMinimize, valueMaximize;
 
+  static const double offsetHeight = 50;
+
   LhExpanableController({required this.minimizeHeight, this.maximizeHeight}) {
     valueMinimize = LhExpanableValue(
       state: LhExpanableState.MINIMIZE,
       height: minimizeHeight,
     );
 
-    if(maximizeHeight!=null) {
+    if (maximizeHeight != null) {
       valueMaximize = LhExpanableValue(
         state: LhExpanableState.MAXIMIZE,
         height: maximizeHeight!,
       );
     }
 
-
-    
     this.addListener(() {
-      // print('height $height targetHeight ${targetValue.height}');
-      if (height <= closedHeight)
-        value = LhExpanableValue.CLOSED;
-      else if (height >= minimizeHeight &&
-          maximizeHeight != null &&
-          height < maximizeHeight!) {
-        value = LhExpanableValue(
-          state: LhExpanableState.MINIMIZE,
-          height: minimizeHeight,
-        );
-        print('LhExpanableState.MINIMIZE');
-      } else if (maximizeHeight != null && height >= maximizeHeight!) {
-        value = LhExpanableValue(
-          state: LhExpanableState.MAXIMIZE,
-          height: maximizeHeight!,
-        );
-        print('LhExpanableState.MAXIMIZE');
-      } else {
-        value = LhExpanableValue(
-          state: LhExpanableState.SCROLLING,
-          height: height,
-        );
-        print('LhExpanableState.SCROLLING');
+      // print('height $height targetHeight ${targetValue.height}')
+      switch (_action) {
+        case LhExpanableAction.IDLE:
+          print('height $height');
+          
+
+
+
+
+          if (height <= valueMinimize.height - offsetHeight)
+            value = LhExpanableValue.CLOSED;
+          else if (height >= minimizeHeight - offsetHeight &&
+              height < minimizeHeight + offsetHeight) {
+            value = LhExpanableValue(
+              state: LhExpanableState.MINIMIZE,
+              height: minimizeHeight,
+            );
+            print('LhExpanableState.MINIMIZE');
+          } else if (maximizeHeight != null) {
+            if (height >= maximizeHeight! - offsetHeight) {
+              value = LhExpanableValue(
+                state: LhExpanableState.MAXIMIZE,
+                height: maximizeHeight!,
+              );
+              print('LhExpanableState.MAXIMIZE ${maximizeHeight! - offsetHeight}');
+            }
+          } else {
+            // value = LhExpanableValue(
+            //   state: LhExpanableState.SCROLLING,
+            //   height: height,
+            // );
+            print('LhExpanableState.SCROLLING');
+          }
+          // print('targetValue $targetValue');
+          // animatedToTarget(targetValue);
+
+          break;
+
+        case LhExpanableAction.SCROLLING:
+          break;
       }
     });
   }
@@ -101,6 +127,7 @@ class LhExpanableController extends ChangeNotifier {
       height += delta;
     else
       height = screenHeight;
+
     notifyListeners();
   }
 
@@ -116,15 +143,19 @@ class LhExpanableController extends ChangeNotifier {
       mValue = -1;
     }
 
-    double stepValue = (3 * mValue).toDouble();
+    double stepValue = (1 * mValue).toDouble();
     const oneSec = const Duration(milliseconds: 1);
     // print('minimizeHeight ${minimizeHeight}');
     // print('expandHeight ${expandHeight}');
     _timer = new Timer.periodic(
       oneSec,
       (Timer timer) {
+        // print('height $height');
+        // print('targetValue $targetValue');
+        print('height $height');
         delta(stepValue);
-        if (targetValue.state == value.state) {
+        if (targetValue.height == height) {
+          value = targetValue;
           timer.cancel();
           notifyListeners();
         }
@@ -139,8 +170,10 @@ class LhExpanableController extends ChangeNotifier {
   }
 
   void maximize() {
-    animatedToTarget(LhExpanableValue(
+    if(maximizeHeight!=null) {
+      animatedToTarget(LhExpanableValue(
         height: maximizeHeight!, state: LhExpanableState.MAXIMIZE));
+    } 
   }
 
   void closed() {

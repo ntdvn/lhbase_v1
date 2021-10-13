@@ -4,8 +4,11 @@ import 'package:lhbase_v1/lhbase.dart';
 
 class LhExpanableView extends StatefulWidget {
   // final Listenable controller;
+  final Widget child;
   final LhExpanableController controller;
-  const LhExpanableView({Key? key, required this.controller}) : super(key: key);
+  const LhExpanableView(
+      {Key? key, required this.controller, required this.child})
+      : super(key: key);
 
   @override
   _LhExpanableViewState createState() => _LhExpanableViewState();
@@ -39,6 +42,8 @@ class _LhExpanableViewState extends State<LhExpanableView> {
     );
   }
 
+  static final backDropColor = Colors.black.withOpacity(0.8);
+
   Widget _buildBackdrop() {
     return GestureDetector(
       onTap: () {
@@ -52,7 +57,7 @@ class _LhExpanableViewState extends State<LhExpanableView> {
                 ? LhExpanableController.screenHeight - widget.controller.height
                 : 0,
         // height: widget.controller.currentHeight,
-        color: Colors.black.withOpacity(0.8),
+        color: backDropColor,
       ),
     );
   }
@@ -61,32 +66,27 @@ class _LhExpanableViewState extends State<LhExpanableView> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      color: Colors.white,
+      color: Colors.transparent,
       child: Column(
         children: [
           AnimatedBuilder(
             animation: widget.controller,
             builder: (context, child) {
               return GestureDetector(
-                  onVerticalDragUpdate: (details) {
-                    widget.controller.delta(-details.delta.dy);
-                  },
-                  onVerticalDragEnd: (details) {
-                    // widget.controller.onChangedEnd();
-                  },
+                  // onVerticalDragUpdate: (details) {
+                  //   widget.controller.delta(-details.delta.dy);
+                  //   widget.controller.action = LhExpanableAction.SCROLLING;
+                  // },
+                  // onVerticalDragEnd: (details) {
+                  //   // widget.controller.onChangedEnd();
+                  //   print('${details.velocity}');
+                  //   widget.controller.action = LhExpanableAction.IDLE;
+                  // },
                   child: Container(
-                    color: Colors.white,
-                    height: widget.controller.height,
-                    child: GestureDetector(
-                      onTap: () {
-                        widget.controller.closed();
-                      },
-                      child: Text(
-                        'width: 100, height: 300, color: Colors.green',
-                        style: TextStyle(fontSize: 30),
-                      ),
-                    ),
-                  ));
+                color: backDropColor,
+                height: widget.controller.height,
+                child: widget.child,
+              ));
             },
           )
         ],

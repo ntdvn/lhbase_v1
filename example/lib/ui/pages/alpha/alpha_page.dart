@@ -153,7 +153,7 @@ class _AlphaPageState extends State<AlphaPage> {
     'Công khai'
   ];
   LhExpanableController _lhExpanableController =
-      LhExpanableController(minimizeHeight: 300, maximizeHeight: 700);
+      LhExpanableController(minimizeHeight: 300);
 
   @override
   Widget build(BuildContext context) {
@@ -173,7 +173,7 @@ class _AlphaPageState extends State<AlphaPage> {
                         _lhExpanableController.minimize();
                       },
                       child: Text('minimize')),
-                       TextButton(
+                  TextButton(
                       onPressed: () {
                         _lhExpanableController.maximize();
                       },
@@ -183,6 +183,30 @@ class _AlphaPageState extends State<AlphaPage> {
             ),
             LhExpanableView(
               controller: _lhExpanableController,
+              child: LhBottomSheetUi(
+                child: Column(
+                  children: [
+                    Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+                    Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+
+Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+// Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+// Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+                  ],
+                ),
+                left: [
+                  LhAppBarAction.icon(
+                    icon: Icon(Icons.close),
+                    onTap: () {
+                      _lhExpanableController.closed();
+                    },
+                  ),
+                  LhAppBarAction.icon(
+                    icon: Icon(Icons.close),
+                    onTap: () {},
+                  ),
+                ],
+              ),
             )
           ],
         ));
