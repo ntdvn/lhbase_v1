@@ -101,7 +101,7 @@ class _LhExpanableViewState extends State<LhExpanableView> {
                 ? widget.controller.minimizeHeight
                 : widget.controller.height,
             // height: 0,
-            child: widget.child,
+            child: Material(color: Colors.transparent, child: widget.child),
           ))
         ],
       ),
