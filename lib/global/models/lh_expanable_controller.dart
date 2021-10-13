@@ -102,26 +102,26 @@ class LhExpanableController extends ChangeNotifier {
       // }
       if (height <= 0)
         value = LhExpanableValue.CLOSED;
-      else if (height >= 0 && height < valueMinimize.height) {
+      else if (height == valueMinimize.height) {
         value = LhExpanableValue(
           state: LhExpanableState.MINIMIZE,
           height: minimizeHeight,
         );
-        print('LhExpanableState.MINIMIZE');
+        // print('LhExpanableState.MINIMIZE');
       } else if (maximizeHeight != null) {
-        if (height >= maximizeHeight! - offsetHeight) {
+        if (height == valueMaximize.height) {
           value = LhExpanableValue(
             state: LhExpanableState.MAXIMIZE,
             height: maximizeHeight!,
           );
-          print('LhExpanableState.MAXIMIZE ${maximizeHeight! - offsetHeight}');
+          // print('LhExpanableState.MAXIMIZE ${maximizeHeight! - offsetHeight}');
         }
       } else {
         // value = LhExpanableValue(
         //   state: LhExpanableState.SCROLLING,
         //   height: height,
         // );
-        print('LhExpanableState.SCROLLING');
+        // print('LhExpanableState.SCROLLING');
       }
     });
   }
@@ -153,6 +153,7 @@ class LhExpanableController extends ChangeNotifier {
   }
 
   Timer? _timer;
+  Timer? _tmpTimer;
 
   void animatedToTarget(LhExpanableValue tValue) {
     targetValue = tValue;
@@ -160,31 +161,37 @@ class LhExpanableController extends ChangeNotifier {
 
     if (targetValue.height > height) {
       mValue = 1;
-    } else if(targetValue.height < height) {
+    } else if (targetValue.height < height) {
       mValue = -1;
     }
 
-    double stepValue = (1 * mValue).toDouble();
-    const oneSec = const Duration(microseconds: 800);
+    double stepValue = (5 * mValue).toDouble();
+    const oneSec = const Duration(milliseconds: 1);
     // print('minimizeHeight ${minimizeHeight}');
     // print('expandHeight ${expandHeight}');
     clearTimer();
     _timer = new Timer.periodic(
       oneSec,
       (Timer timer) {
+        _tmpTimer = timer;
         // print('height $height');
         // print('targetValue $targetValue');
-        print('height $height');
+        // print('height $height');
         delta(stepValue);
         if (targetValue.height == height) {
+          // Future.delayed(Duration(seconds: 2), () {
           value = targetValue;
           action = LhExpanableAction.IDLE;
-          timer.cancel();
+          //  notifyListeners();
+          // });
+          clearTimer();
+          notifyListeners();
+        } else if (height < 0 || height > screenHeight) {
+          clearTimer();
           notifyListeners();
         }
       },
     );
-    _timer = null;
   }
 
   void minimize() {
@@ -206,6 +213,8 @@ class LhExpanableController extends ChangeNotifier {
   clearTimer() {
     if (_timer != null) _timer!.cancel();
     _timer = null;
+    if (_tmpTimer != null) _tmpTimer!.cancel();
+    _tmpTimer = null;
   }
 
   @override

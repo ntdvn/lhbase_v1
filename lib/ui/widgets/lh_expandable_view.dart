@@ -66,7 +66,7 @@ class _LhExpanableViewState extends State<LhExpanableView> {
     return Container(
       width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      color: Colors.transparent,
+      color: Colors.white,
       child: Column(
         children: [
           GestureDetector(
@@ -80,8 +80,9 @@ class _LhExpanableViewState extends State<LhExpanableView> {
                   //   widget.controller.action = LhExpanableAction.IDLE;
                   // },
                   child: Container(
+                    // duration: Duration(milliseconds: 1),
                 color: backDropColor,
-                height: widget.controller.value.height,
+                height: widget.controller.value.height == 0 ?  MediaQuery.of(context).size.height : widget.controller.value.height,
                 // height: 0,
                 child: widget.child,
               ))

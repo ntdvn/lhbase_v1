@@ -153,7 +153,7 @@ class _AlphaPageState extends State<AlphaPage> {
     'Công khai'
   ];
   LhExpanableController _lhExpanableController =
-      LhExpanableController(minimizeHeight: 500, maximizeHeight: 700);
+      LhExpanableController(minimizeHeight: 300, maximizeHeight: 700);
 
   @override
   Widget build(BuildContext context) {
@@ -162,23 +162,18 @@ class _AlphaPageState extends State<AlphaPage> {
         // appBarTop: LhAppBar.top(),
         child: Stack(
           children: [
-            TextField(),
-            Container(
-              margin: EdgeInsets.only(top: 200),
-              color: Colors.red,
-              child: Column(
-                children: [
-                  TextButton(
-                      onPressed: () {
-                        _lhExpanableController.minimize();
-                      },
-                      child: Text('minimize')),
-                  TextButton(
-                      onPressed: () {
-                        _lhExpanableController.maximize();
-                      },
-                      child: Text('maximize')),
-                ],
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                height: 300,
+                width: double.infinity,
+                color: Colors.green,
+                child: TextButton(
+                  child: Text('minimize'),
+                  onPressed: () {
+                    _lhExpanableController.minimize();
+                  },
+                ),
               ),
             ),
             LhExpanableView(
@@ -194,8 +189,8 @@ class _AlphaPageState extends State<AlphaPage> {
                         Icons.umbrella,
                         size: 140,
                       )
-                // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
-                // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+                      // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
+                      // Text('1234', style: LhStyle.DEFAULT_10.copyWith(fontSize: 40),),
                     ],
                   ),
                 ),
@@ -209,7 +204,13 @@ class _AlphaPageState extends State<AlphaPage> {
                   LhAppBarAction.icon(
                     icon: Icon(Icons.close),
                     onTap: () {
-                        _lhExpanableController.maximize();
+                      _lhExpanableController.minimize();
+                    },
+                  ),
+                  LhAppBarAction.icon(
+                    icon: Icon(Icons.close),
+                    onTap: () {
+                      _lhExpanableController.maximize();
                     },
                   ),
                 ],
