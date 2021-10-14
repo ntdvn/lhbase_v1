@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/ui/widgets/lh_cached_image.dart';
 
 class AlphaPage extends StatefulWidget {
   const AlphaPage({Key? key}) : super(key: key);
@@ -152,82 +153,113 @@ class _AlphaPageState extends State<AlphaPage> {
     'Dành cho thành viên',
     'Công khai'
   ];
-  LhExpanableController _lhExpanableController =
-      LhExpanableController(minimizeHeight: 300);
+
+  List<String> images = [
+    'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+    'https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg',
+    'https://farm3.staticflickr.com/2919/32726853103_ac1707e094_z.jpg',
+    'https://tackexinh.com/wp-content/uploads/2021/01/hinh-anh-dep-chat-luong-001.jpg',
+    'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
+    'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+    'https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg',
+    'https://farm3.staticflickr.com/2919/32726853103_ac1707e094_z.jpg',
+    'https://tackexinh.com/wp-content/uploads/2021/01/hinh-anh-dep-chat-luong-001.jpg',
+    'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
+    'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+    'https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg',
+    'https://farm3.staticflickr.com/2919/32726853103_ac1707e094_z.jpg',
+    'https://tackexinh.com/wp-content/uploads/2021/01/hinh-anh-dep-chat-luong-001.jpg',
+    'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
+    'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+    'https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg',
+    'https://farm3.staticflickr.com/2919/32726853103_ac1707e094_z.jpg',
+    'https://tackexinh.com/wp-content/uploads/2021/01/hinh-anh-dep-chat-luong-001.jpg',
+    'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
+    'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+    'https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg',
+    'https://farm3.staticflickr.com/2919/32726853103_ac1707e094_z.jpg',
+    'https://tackexinh.com/wp-content/uploads/2021/01/hinh-anh-dep-chat-luong-001.jpg',
+    'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
+    'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+    'https://www.elle.vn/wp-content/uploads/2017/07/25/hinh-anh-dep-1.jpg',
+    'https://farm3.staticflickr.com/2919/32726853103_ac1707e094_z.jpg',
+    'https://tackexinh.com/wp-content/uploads/2021/01/hinh-anh-dep-chat-luong-001.jpg',
+    'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
+  ];
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        LhBasePage(
-            statusBarBrightness: Brightness.dark,
-            appBarTop: LhAppBar.top(),
-            child: Container(
-              width: double.infinity,
-              color: Colors.cyan,
-              child: TextButton(
-                child: Text('minimize'),
-                onPressed: () {
-                  _lhExpanableController.minimize();
+    return LhBasePage(
+        statusBarBrightness: Brightness.dark,
+        appBarTop: LhAppBar.top(),
+        child: Column(
+          children: [
+            Container(
+              height: 300,
+              child: LhSelecteds<String>(
+                initialValue: images,
+                // containerBuilder: () {
+                //   return GridView(
+                //     scrollDirection: Axis.vertical,
+                //     gridDelegate:
+                //         const SliverGridDelegateWithFixedCrossAxisCount(
+                //             crossAxisCount: 3, mainAxisExtent: 150),
+                //   );
+                // },
+                addPosition: LhAddPosition.FIRST,
+                addBuilder: () {
+                  return GestureDetector(
+                    onTap: () {
+                      print('abc');
+                    },
+                    child: Container(
+                      width: 100,
+                      height: 100,
+                      color: Colors.green,
+                    ),
+                  );
                 },
-              ),
-            )),
-        LhExpanableView(
-          controller: _lhExpanableController,
-          child: LhBottomSheetUi(
-            child: Container(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).padding.bottom),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(
-                        Icons.dangerous,
-                        size: 50,
-                      ),
-                      Icon(
-                        Icons.dangerous,
-                        size: 50,
-                      )
-                    ],
-                  ),
-                ],
+                // containerBuilder: () {
+                //   return ListView(
+                //     scrollDirection: Axis.vertical,
+                //   );
+                // },
+                builder: (index, item) {
+                  return Container(
+                    padding: EdgeInsets.all(10),
+                    width: 100,
+                    height: 100,
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(8.0),
+                        child: LhCachedImageWidget(
+                          imageUrl: images[index],
+                        )),
+                  );
+                },
+                removeBuilder: (index, item) {
+                  return Align(
+                      alignment: Alignment.topRight,
+                      child: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            images.removeAt(index);
+                          });
+                        },
+                        child: Container(
+                            decoration: BoxDecoration(
+                                color: Colors.black.withOpacity(0.8),
+                                borderRadius: BorderRadius.circular(500.0)),
+                            child: Icon(Icons.close, color: Colors.white)),
+                      ));
+                },
               ),
             ),
-            left: [
-              LhAppBarAction.icon(
-                icon: Icon(Icons.close),
-                onTap: () {
-                  _lhExpanableController.closed();
-                },
-              ),
-              LhAppBarAction.icon(
-                icon: Icon(Icons.close),
-                onTap: () {
-                  _lhExpanableController.minimize();
-                },
-              ),
-              LhAppBarAction.icon(
-                icon: Icon(Icons.close),
-                onTap: () {
-                  _lhExpanableController.maximize();
-                },
-              ),
-            ],
-          ),
-        )
-      ],
-    );
+          ],
+        ));
   }
 
   @override
   void dispose() {
-    _lhExpanableController.dispose();
     super.dispose();
   }
 }
