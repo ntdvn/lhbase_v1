@@ -39,10 +39,13 @@ class LhExpanableController extends ChangeNotifier {
   int step = 5;
 
   set maximizeHeight(double maximizeHeight) {
-    // _maximizeHeight = (maximizeHeight ~/ step * step).toDouble();
-    _maximizeHeight = maximizeHeight;
-    print('maximizeHeight $_maximizeHeight');
-    // _maximizeHeight = maximizeHeight.round().toDouble();
+    if (maximizeHeight == screenHeight) {
+      _maximizeHeight = maximizeHeight;
+      print('_maximizeHeight $_maximizeHeight');
+    } else {
+      _maximizeHeight = maximizeHeight;
+    }
+
     valueMaximize = LhExpanableValue(
       state: LhExpanableState.MAXIMIZE,
       height: _maximizeHeight,
@@ -143,6 +146,8 @@ class LhExpanableController extends ChangeNotifier {
       MediaQueryData.fromWindow(WidgetsBinding.instance!.window).size.width;
   static final screenHeight =
       MediaQueryData.fromWindow(WidgetsBinding.instance!.window).size.height;
+       static final safeTopPadding =
+      MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
 
   void delta(double delta) {
     // if (maximizeHeight == null && delta > 0) {
@@ -191,7 +196,8 @@ class LhExpanableController extends ChangeNotifier {
         // print('targetValue $targetValue');
         // print('height $height');
         delta(stepValue);
-        if (targetValue.height >= height-stepDistance && targetValue.height<= height+stepDistance) {
+        if (targetValue.height >= height - stepDistance &&
+            targetValue.height <= height + stepDistance) {
           // Future.delayed(Duration(seconds: 2), () {
           value = targetValue;
           height = value.height;
@@ -225,7 +231,7 @@ class LhExpanableController extends ChangeNotifier {
 
   void maximize() {
     animatedToTarget(LhExpanableValue(
-        height: _maximizeHeight, state: LhExpanableState.MAXIMIZE));
+        height: _maximizeHeight == screenHeight ? _maximizeHeight- safeTopPadding : _maximizeHeight, state: LhExpanableState.MAXIMIZE));
   }
 
   void closed() {

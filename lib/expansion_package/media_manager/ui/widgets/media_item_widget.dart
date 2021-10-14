@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:lhbase_v1/expansion_package/expansion_package.dart';
+import 'package:lhbase_v1/ui/ui.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class MediaItemWidget extends StatefulWidget {
@@ -81,23 +82,27 @@ class _MediaItemWidgetState extends State<MediaItemWidget> {
           height: size.toDouble(),
           fit: BoxFit.cover,
         ),
-        widget.type == MediaSelectType.MULTIPLE
-            ? Align(
-                alignment: Alignment.topRight,
-                child: Checkbox(
-                  // value: checked.contains(entity),
-                  value: widget.value,
-                  onChanged: (value) {
-                    // if (checked.contains(entity)) {
-                    //   checked.remove(entity);
-                    // } else {
-                    //   checked.add(entity);
-                    // }
-                    // setState(() {});
-                  },
-                ),
-              )
-            : Container(),
+        if (widget.type == MediaSelectType.MULTIPLE)
+          Align(
+            alignment: Alignment.topRight,
+            child: LhCheckBox(
+              // value: checked.contains(entity),
+              value: widget.value,
+              onChanged: (value) {
+                // if (checked.contains(entity)) {
+                //   checked.remove(entity);
+                // } else {
+                //   checked.add(entity);
+                // }
+                // setState(() {});
+              },
+              builder: (bool isChecked) {
+                return Container(
+                  color: isChecked ? Colors.red.withOpacity(0.3) : Colors.green.withOpacity(0.3),
+                );
+              },
+            ),
+          ),
         Positioned.fill(
             child: Material(
           color: Colors.transparent,

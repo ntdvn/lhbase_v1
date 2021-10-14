@@ -168,4 +168,9 @@ class MediaManagerController extends GetxController {
     this.galleryAllPath.value = null;
     this.listAssetEntity.refresh();
   }
+
+  addSelected(AssetEntity entity) {
+    this.selectedList.value.add(entity);
+    this.selectedList.refresh();
+  }
 }

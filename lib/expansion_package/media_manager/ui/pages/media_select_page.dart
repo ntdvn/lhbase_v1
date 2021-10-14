@@ -30,10 +30,13 @@ class MediaSelectPage extends StatelessWidget {
           _mediaController.refreshGalleryList();
         }, child: GetX<MediaManagerController>(
           builder: (controller) {
+            print('build');
             return GridView.builder(
+              cacheExtent: controller.showItemCount.toDouble(),
+              padding: EdgeInsets.zero,
               itemCount: controller.showItemCount,
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 4, mainAxisSpacing: 1, crossAxisSpacing: 1),
               itemBuilder: (context, index) {
                 // print('itemBuilder $index');
                 return _buildItem(controller.listAssetEntity.value, index);
@@ -47,7 +50,11 @@ class MediaSelectPage extends StatelessWidget {
 
   //image thumb quality
   ThumbOption get thumbOption => ThumbOption(
-      width: 128, height: 128, format: ThumbFormat.png, quality: 80);
+        width: 128,
+        height: 128,
+        format: ThumbFormat.png,
+        quality: 50,
+      );
 
   Widget _buildItem(List<AssetEntity> listValue, int index) {
     final list = listValue;
@@ -63,10 +70,11 @@ class MediaSelectPage extends StatelessWidget {
       entity: _mediaController.listAssetEntity.value[index],
       option: thumbOption,
       onItemSelected: (value) {
+        print('onItemSelected');
         if (_mediaController.selectedList.value.contains(value)) {
           _mediaController.selectedList.value.remove(value);
         } else {
-          _mediaController.selectedList.value.add(value);
+          _mediaController.addSelected(value);
         }
 
         _mediaController.listAssetEntity.refresh();
