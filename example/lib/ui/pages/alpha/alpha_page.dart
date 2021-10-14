@@ -187,6 +187,77 @@ class _AlphaPageState extends State<AlphaPage> {
     'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
   ];
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return LhBasePage(
+  //       statusBarBrightness: Brightness.dark,
+  //       appBarTop: LhAppBar.top(),
+  //       child: Column(
+  //         children: [
+  //           Container(
+  //             height: 300,
+  //             child: LhSelecteds<String>(
+  //               initialValue: images,
+  //               // containerBuilder: () {
+  //               //   return GridView(
+  //               //     scrollDirection: Axis.vertical,
+  //               //     gridDelegate:
+  //               //         const SliverGridDelegateWithFixedCrossAxisCount(
+  //               //             crossAxisCount: 3, mainAxisExtent: 150),
+  //               //   );
+  //               // },
+  //               addPosition: LhAddPosition.FIRST,
+  //               addBuilder: () {
+  //                 return GestureDetector(
+  //                   onTap: () {
+  //                     print('abc');
+  //                   },
+  //                   child: Container(
+  //                     width: 100,
+  //                     height: 100,
+  //                     color: Colors.green,
+  //                   ),
+  //                 );
+  //               },
+  //               // containerBuilder: () {
+  //               //   return ListView(
+  //               //     scrollDirection: Axis.vertical,
+  //               //   );
+  //               // },
+  //               builder: (index, item) {
+  //                 return Container(
+  //                   padding: EdgeInsets.all(10),
+  //                   width: 100,
+  //                   height: 100,
+  //                   child: ClipRRect(
+  //                       borderRadius: BorderRadius.circular(8.0),
+  //                       child: LhCachedImageWidget(
+  //                         imageUrl: images[index],
+  //                       )),
+  //                 );
+  //               },
+  //               removeBuilder: (index, item) {
+  //                 return Align(
+  //                     alignment: Alignment.topRight,
+  //                     child: GestureDetector(
+  //                       onTap: () {
+  //                         setState(() {
+  //                           images.removeAt(index);
+  //                         });
+  //                       },
+  //                       child: Container(
+  //                           decoration: BoxDecoration(
+  //                               color: Colors.black.withOpacity(0.8),
+  //                               borderRadius: BorderRadius.circular(500.0)),
+  //                           child: Icon(Icons.close, color: Colors.white)),
+  //                     ));
+  //               },
+  //             ),
+  //           ),
+  //         ],
+  //       ));
+  // }
+
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
@@ -194,66 +265,7 @@ class _AlphaPageState extends State<AlphaPage> {
         appBarTop: LhAppBar.top(),
         child: Column(
           children: [
-            Container(
-              height: 300,
-              child: LhSelecteds<String>(
-                initialValue: images,
-                // containerBuilder: () {
-                //   return GridView(
-                //     scrollDirection: Axis.vertical,
-                //     gridDelegate:
-                //         const SliverGridDelegateWithFixedCrossAxisCount(
-                //             crossAxisCount: 3, mainAxisExtent: 150),
-                //   );
-                // },
-                addPosition: LhAddPosition.FIRST,
-                addBuilder: () {
-                  return GestureDetector(
-                    onTap: () {
-                      print('abc');
-                    },
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.green,
-                    ),
-                  );
-                },
-                // containerBuilder: () {
-                //   return ListView(
-                //     scrollDirection: Axis.vertical,
-                //   );
-                // },
-                builder: (index, item) {
-                  return Container(
-                    padding: EdgeInsets.all(10),
-                    width: 100,
-                    height: 100,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: LhCachedImageWidget(
-                          imageUrl: images[index],
-                        )),
-                  );
-                },
-                removeBuilder: (index, item) {
-                  return Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            images.removeAt(index);
-                          });
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.8),
-                                borderRadius: BorderRadius.circular(500.0)),
-                            child: Icon(Icons.close, color: Colors.white)),
-                      ));
-                },
-              ),
-            ),
+            LhInputSearch(controller: TextEditingController())
           ],
         ));
   }

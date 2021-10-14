@@ -89,9 +89,9 @@ class _LhAdvancedInputState extends State<LhAdvancedInput> {
               isFocused: _inputIsFocused)),
         AnimatedContainer(
           margin: widget.inputMargin,
-          decoration: widget.builderContainer!(LhInputBuilder(
+          decoration: widget.builderContainer!=null ? widget.builderContainer!(LhInputBuilder(
               inputLength: widget.controller.text.length,
-              isFocused: _inputIsFocused)),
+              isFocused: _inputIsFocused)) : null,
           duration: Duration(milliseconds: 300),
           child: Row(
             children: [
