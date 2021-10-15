@@ -7,26 +7,26 @@ abstract class LhStyle {
   LhStyle();
 
   static const DEFAULT_10 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_10, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_10, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
 
   static const DEFAULT_12 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_12, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_12, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
 
   static const DEFAULT_14 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_14, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_14, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
 
   static const DEFAULT_16 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_16, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_16, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
 
   static const DEFAULT_18 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_18, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_18, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
 
   static const DEFAULT_20 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_20, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_20, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
   static const DEFAULT_22 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_22, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_22, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
   static const DEFAULT_24 = TextStyle(
-      fontSize: LhValue.FONT_SIZE_24, color: LhColors.BLACK, height: 1.2);
+      fontSize: LhValue.FONT_SIZE_24, color: LhColors.BLACK, height: 1.4, fontWeight: FontWeight.normal);
 
   // ignore: non_constant_identifier_names
   static final DEFAULT_10_BOLD =
