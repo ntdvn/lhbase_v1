@@ -86,6 +86,11 @@ class LhValue {
   static const Widget vSpaceLarge = SizedBox(height: 64.0);
   static const Widget vSpaceMassive = SizedBox(height: 128.0);
 
+  static format_money(double money){
+    final currencyFormatter = NumberFormat('#,##0', 'ID');
+    return 'đ'+currencyFormatter.format(money);
+  }
+
   static String formatStringDateAndTime(String dateString) =>
       APP_DATE_FORMAT.format(DateTime.parse(dateString));
 
