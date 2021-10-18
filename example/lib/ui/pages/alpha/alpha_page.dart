@@ -258,29 +258,54 @@ class _AlphaPageState extends State<AlphaPage> {
   //         ),
   //       ));
   // }
-  LhExpanableController _lhExpanableController =
-      LhExpanableController(minimizeHeight: 300);
+  // LhExpanableController _lhExpanableController =
+  //     LhExpanableController(minimizeHeight: 300);
+
+  // @override
+  // Widget build(BuildContext context) {
+  //   return Stack(
+  //     children: [
+  //       LhBasePage(
+  //           statusBarBrightness: Brightness.dark,
+  //           appBarTop: LhAppBar.top(),
+  //           child: TextButton(
+  //             child: Text('abc'),
+  //             onPressed: () {
+  //               _lhExpanableController.minimize();
+  //             },
+  //           )),
+  //       LhExpanableView(
+  //           controller: _lhExpanableController,
+  //           child: LhBottomSheetUi(
+  //             child: Container(),
+  //           ),)
+  //     ],
+  //   );
+  // }
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: [
-        LhBasePage(
-            statusBarBrightness: Brightness.dark,
-            appBarTop: LhAppBar.top(),
-            child: TextButton(
-              child: Text('abc'),
-              onPressed: () {
-                _lhExpanableController.minimize();
-              },
-            )),
-        LhExpanableView(
-            controller: _lhExpanableController,
-            child: LhBottomSheetUi(
-              child: Container(),
-            ),)
-      ],
-    );
+    return LhBasePage(
+        appBarTop: LhAppBar.top(),
+        child: Column(
+          children: [
+            Container(
+              width: 200,
+              color: Colors.green,
+              child: LhInkwell(
+                padding: EdgeInsets.zero,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(6.0)),
+                onTap: () {},
+                child: Text(
+                  'title',
+                  style: LhStyle.DEFAULT_16,
+                ),
+              ),
+            ),
+          ],
+        ));
   }
 
   @override
