@@ -191,7 +191,7 @@ class LhExpanableController extends ChangeNotifier {
       oneSec,
       (Timer timer) {
         _tmpTimer = timer;
-        print('height ${height.round()} targetHeight ${targetValue.height}');
+        // print('height ${height.round()} targetHeight ${targetValue.height}');
         // print('height $height');
         // print('targetValue $targetValue');
         // print('height $height');
@@ -224,7 +224,7 @@ class LhExpanableController extends ChangeNotifier {
     //   animatedToTarget(LhExpanableValue(
     //     height: minimizeHeight, state: LhExpanableState.MINIMIZE));
     // }
-    print('max $maximizeHeight');
+    // print('max $maximizeHeight');
     animatedToTarget(LhExpanableValue(
         height: minimizeHeight, state: LhExpanableState.MINIMIZE));
   }

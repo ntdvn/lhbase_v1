@@ -71,6 +71,8 @@ class _LhSelectedsState<B> extends State<LhSelecteds<B>> {
       } else if (container is GridView) {
         _renderResult = GridView(
           scrollDirection: container.scrollDirection,
+          physics: container.physics,
+          shrinkWrap: container.shrinkWrap,
           gridDelegate: container.gridDelegate,
           children: [..._buildListWithAddButton()],
         );

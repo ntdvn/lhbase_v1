@@ -3,13 +3,13 @@ import 'package:flutter/material.dart';
 typedef Widget LhCheckBoxBuilder(bool isChecked);
 
 class LhCheckBox extends StatefulWidget {
-  final bool value;
+  bool value;
   final double? width;
   final double? height;
   final LhCheckBoxBuilder builder;
   final ValueChanged<bool>? onChanged;
 
-  const LhCheckBox(
+  LhCheckBox(
       {Key? key,
       this.width,
       this.height,
@@ -23,10 +23,8 @@ class LhCheckBox extends StatefulWidget {
 }
 
 class _LhCheckBoxState extends State<LhCheckBox> {
-  late bool _isCheck;
   @override
   void initState() {
-    _isCheck = widget.value;
     super.initState();
   }
 
@@ -34,13 +32,13 @@ class _LhCheckBoxState extends State<LhCheckBox> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        setState(() {
-          _isCheck = !_isCheck;
-        });
-        if (widget.onChanged != null) widget.onChanged!(_isCheck);
+        // setState(() {
+        //   widget.value = !widget.value;
+        // });
+        if (widget.onChanged != null) widget.onChanged!(!widget.value);
       },
       child: Container(
-        child: widget.builder(_isCheck),
+        child: widget.builder(widget.value),
       ),
     );
   }

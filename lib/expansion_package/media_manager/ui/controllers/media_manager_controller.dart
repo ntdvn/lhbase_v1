@@ -1,21 +1,26 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:get/get.dart';
+import 'package:lhbase_v1/expansion_package/media_manager/media_manager.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class MediaManagerController extends GetxController {
-  Rx<List<AssetEntity>> selectedList = Rx([]);
+  Rx<List<MediaEntity>> selecteds = Rx([]);
 
-  Rx<AssetPathEntity?> galleryAllPath = Rx(null);
+  Rx<AssetPathEntity?> gallery = Rx(null);
+  Rx<List<AssetPathEntity>> galleries = Rx([]);
   // AssetPathEntity? _galleryAllPath;
   // get galleryAllPath => _galleryAllPath;
 
-  Rx<List<AssetEntity>> listAssetEntity = Rx([]);
+  Rx<List<MediaEntity>> mediaEntities = Rx([]);
   // List<AssetEntity> get listAssetEntity => _listAssetEntity.value;
 
   RequestType type = RequestType.image;
 
   var hasAll = true;
 
-  var onlyAll = true; //ios: true -> only all gallery, false -> all gallery
+  // var onlyAll = true; //ios: true -> only all gallery, false -> all gallery
+  var onlyAll = false;
 
   bool _containsEmptyAlbum = false;
 
@@ -25,14 +30,14 @@ class MediaManagerController extends GetxController {
 
   bool refreshing = false;
   var page = 0;
-  static const loadCount = 10;
+  static const loadCount = 1000;
 
   int get showItemCount {
-    if (galleryAllPath.value == null) return 0;
-    if (listAssetEntity.value.length == galleryAllPath.value!.assetCount) {
-      return galleryAllPath.value!.assetCount;
+    if (gallery.value == null) return 0;
+    if (mediaEntities.value.length == gallery.value!.assetCount) {
+      return gallery.value!.assetCount;
     } else {
-      return galleryAllPath.value!.assetCount;
+      return gallery.value!.assetCount;
     }
   }
 
@@ -71,9 +76,8 @@ class MediaManagerController extends GetxController {
 
   DateTime get endDt => _endDt;
 
-  Future<void> refreshGalleryList() async {
+  Future<void> refreshGalleries() async {
     reset();
-    List<AssetPathEntity> list = [];
 
     final option = makeOption();
 
@@ -88,15 +92,12 @@ class MediaManagerController extends GetxController {
       return s2.assetCount.compareTo(s1.assetCount);
     });
 
-    list.clear();
-    list.addAll(galleryList);
-    if (list.length > 0) {
-      try {
-        this.galleryAllPath.value = list.first;
-        print(this.galleryAllPath.value);
-      } catch (e) {
-        print('dkm $e');
-      }
+    galleries.value.clear();
+    galleries.value.addAll(galleryList);
+    galleries.refresh();
+
+    if (galleries.value.length > 0 && this.gallery.value == null) {
+      this.gallery.value = galleries.value.first;
     }
     await onRefresh();
   }
@@ -141,36 +142,66 @@ class MediaManagerController extends GetxController {
   }
 
   Future onRefresh() async {
-    await galleryAllPath.value!.refreshPathProperties(
+    await gallery.value!.refreshPathProperties(
       maxDateTimeToNow: true,
     );
-    final list = await galleryAllPath.value!.getAssetListPaged(0, loadCount);
+    final list = await gallery.value!.getAssetListPaged(0, loadCount);
     page = 0;
-    this.listAssetEntity.value.clear();
-    this.listAssetEntity.value.addAll(list);
-    this.listAssetEntity.refresh();
+    this.mediaEntities.value.clear();
+    list.asMap().forEach((index, value) {
+      this.mediaEntities.value.add(MediaEntity(value));
+    });
+    // update(this.mediaEntities.value);
+    this.mediaEntities.refresh();
   }
 
-  Future<void> onLoadMore() async {
-    if (showItemCount > galleryAllPath.value!.assetCount) {
+  Future<void> onLoadMore(String a) async {
+    if (showItemCount > gallery.value!.assetCount) {
       print("already max");
       return;
     }
-    final list =
-        await galleryAllPath.value!.getAssetListPaged(page + 1, loadCount);
+    final list = await gallery.value!.getAssetListPaged(page + 1, loadCount);
+
     page = page + 1;
-    this.listAssetEntity.value.addAll(list);
-    this.listAssetEntity.refresh();
+    list.asMap().forEach((index, value) {
+      this.mediaEntities.value.add(MediaEntity(value));
+    });
+    // update(this.mediaEntities.value);
+    this.mediaEntities.refresh();
   }
 
   void reset() {
-    this.listAssetEntity.value.clear();
-    this.galleryAllPath.value = null;
-    this.listAssetEntity.refresh();
+    this.mediaEntities.value.clear();
+    this.gallery.value = null;
+    this.mediaEntities.refresh();
   }
 
-  addSelected(AssetEntity entity) {
-    this.selectedList.value.add(entity);
-    this.selectedList.refresh();
+  addSelected(int index) {
+    if (selecteds.value.contains(mediaEntities.value[index])) {
+      selecteds.value.remove(mediaEntities.value[index]);
+    } else {
+      selecteds.value.add(mediaEntities.value[index]);
+    }
+    mediaEntities.value[index].isSelected =
+        !mediaEntities.value[index].isSelected;
+
+    print('mediaEntities ${mediaEntities.value[index]}');
+
+    // this.selecteds.value.add(entity);
+    // this.selecteds.refresh();
+    this.mediaEntities.refresh();
+    // D95E2D21-5B16-42D9-A9CE-35174928AC5F/L0/001
+    
+  }
+
+  changeGallery(int index) {
+    gallery.value = galleries.value[index];
+    onRefresh();
+  }
+
+  @override
+  void onReady() {
+    refreshGalleries();
+    super.onReady();
   }
 }

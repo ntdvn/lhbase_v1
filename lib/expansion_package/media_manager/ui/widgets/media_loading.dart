@@ -8,13 +8,16 @@ class MediaLoading extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox.fromSize(
-        size: Size.square(30),
-        child: (Platform.isIOS || Platform.isMacOS)
-            ? CupertinoActivityIndicator()
-            : CircularProgressIndicator(),
-      ),
+    // return Center(
+    //   child: SizedBox.fromSize(
+    //     size: Size.square(30),
+    //     child: (Platform.isIOS || Platform.isMacOS)
+    //         ? CupertinoActivityIndicator()
+    //         : CircularProgressIndicator(),
+    //   ),
+    // );
+    return Container(
+      color: Colors.grey,
     );
   }
 }

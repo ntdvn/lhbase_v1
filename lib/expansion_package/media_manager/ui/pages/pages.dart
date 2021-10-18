@@ -1,1 +1,1 @@
-export 'media_select_page.dart';
+export 'media_resource_page.dart';

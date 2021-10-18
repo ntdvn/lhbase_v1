@@ -57,7 +57,7 @@ class LhBottomSheetUi extends StatelessWidget {
                               ),
                           ],
                         ),
-                        Container(
+                        if(title!=null) Container(
                           alignment: Alignment.center,
                           child: Text(
                             title ?? '',

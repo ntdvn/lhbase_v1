@@ -10,17 +10,13 @@ class MediaItemWidget extends StatefulWidget {
   final MediaSelectType type;
   final AssetEntity entity;
   final ThumbOption option;
-  final ValueChanged<AssetEntity>? onItemSelected;
-  final bool value;
 
-  const MediaItemWidget(
-      {Key? key,
-      required this.entity,
-      required this.option,
-      this.onItemSelected,
-      required this.type,
-      required this.value})
-      : super(key: key);
+  const MediaItemWidget({
+    Key? key,
+    required this.entity,
+    required this.option,
+    required this.type,
+  }) : super(key: key);
 
   @override
   _MediaItemWidgetState createState() => _MediaItemWidgetState();
@@ -55,11 +51,13 @@ class _MediaItemWidgetState extends State<MediaItemWidget> {
             w = Center(
               child: Text("load error, error: ${snapshot.error}"),
             );
-          }
+          }else 
           if (snapshot.hasData) {
+            
             ImageLruCache.setData(item, size, ThumbFormat.png, snapshot.data!);
             w = _buildImageWidget(item, snapshot.data!, size);
-          } else {
+          } 
+          else {
             w = Center(
               child: MediaLoading(),
             );
@@ -74,52 +72,12 @@ class _MediaItemWidgetState extends State<MediaItemWidget> {
   }
 
   Widget _buildImageWidget(AssetEntity entity, Uint8List uint8list, num size) {
-    return Stack(
-      children: [
-        Image.memory(
-          uint8list,
-          width: size.toDouble(),
-          height: size.toDouble(),
-          fit: BoxFit.cover,
-        ),
-        if (widget.type == MediaSelectType.MULTIPLE)
-          Align(
-            alignment: Alignment.topRight,
-            child: LhCheckBox(
-              // value: checked.contains(entity),
-              value: widget.value,
-              onChanged: (value) {
-                // if (checked.contains(entity)) {
-                //   checked.remove(entity);
-                // } else {
-                //   checked.add(entity);
-                // }
-                // setState(() {});
-              },
-              builder: (bool isChecked) {
-                return Container(
-                  color: isChecked ? Colors.red.withOpacity(0.3) : Colors.green.withOpacity(0.3),
-                );
-              },
-            ),
-          ),
-        Positioned.fill(
-            child: Material(
-          color: Colors.transparent,
-          child: InkWell(
-            onTap: () async {
-              // origin file path
-              // entity.originFile
-              var file = await entity.originFile;
-              print('entity ${(file!.path)}');
-              if (widget.onItemSelected != null) {
-                widget.onItemSelected!(entity);
-              }
-            },
-            child: Container(),
-          ),
-        )),
-      ],
-    );
+    // return FadeInImage.memory(
+    //   uint8list,
+    //   width: size.toDouble(),
+    //   height: size.toDouble(),
+    //   fit: BoxFit.cover,
+    // );
+    return FadeInImage(fadeInDuration: Duration(milliseconds: 200), fit: BoxFit.cover, placeholder: AssetImage('assets/gifs/loading.gif',  package: 'lhbase_v1', ), image: MemoryImage(uint8list));
   }
 }
