@@ -5,12 +5,13 @@ class LhAppBarAction extends StatelessWidget {
   final Widget? child;
   final int? badge;
   final VoidCallback? onTap;
+  final double? sizeFactor;
 
   const LhAppBarAction({
     Key? key,
     this.badge,
     this.child,
-    this.onTap,
+    this.onTap, this.sizeFactor,
   }) : super(key: key);
 
   @override
@@ -18,15 +19,6 @@ class LhAppBarAction extends StatelessWidget {
     return Stack(
       children: [
         Container(alignment: Alignment.center, child: child),
-        // Positioned.fill(
-        //     child: Material(
-        //   color: Colors.transparent,
-        //   child: InkWell(
-        //     onTap: () {
-        //       print('123');
-        //     },
-        //   ),
-        // )),
         if (badge != null && badge! > 0)
           Positioned(
             top: 5,
@@ -76,12 +68,12 @@ class LhAppBarAction extends StatelessWidget {
       {required Widget icon,
       int? badge,
       VoidCallback? onTap,
-      double? iconFactor}) {
+      double? iconFactor, double? sizeFactor}) {
     return LhAppBarAction(
       child: Stack(
         children: [
           AspectRatio(
-              aspectRatio: 1,
+              aspectRatio: sizeFactor ?? 0.75,
               child: FractionallySizedBox(
                   widthFactor: iconFactor ?? 0.6,
                   heightFactor: iconFactor ?? 0.6,
@@ -90,11 +82,15 @@ class LhAppBarAction extends StatelessWidget {
             Positioned.fill(
                 child: Material(
               color: Colors.transparent,
-              child: Padding(
-                padding: const EdgeInsets.all(3.0),
-                child: InkWell(
-                  borderRadius: BorderRadius.circular(500.0),
-                  onTap: onTap,
+              child: Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.zero,
+                child: AspectRatio(
+                  aspectRatio: 1,
+                  child: InkWell(
+                    borderRadius: BorderRadius.circular(500.0),
+                    onTap: onTap,
+                  ),
                 ),
               ),
             )),

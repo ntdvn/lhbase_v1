@@ -286,7 +286,21 @@ class _AlphaPageState extends State<AlphaPage> {
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
-        appBarTop: LhAppBar.top(),
+        appBarTop: LhAppBar.top(
+          actions: [
+                LhAppBarAction.icon(
+                    onTap: () {},
+                    iconFactor: .4,
+                    // sizeFactor: 0.75,
+                    icon: Image.asset('./assets/images/camera.png',  package: 'lhbase_v1' ,)),
+                LhAppBarAction.icon(
+                    onTap: () {
+                      // AppNavigator.navigateProductStatistical();
+                    },
+                    iconFactor: .4,
+                    icon: Icon(Icons.ac_unit)),
+              ],
+        ),
         child: Column(
           children: [
             Container(
