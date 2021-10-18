@@ -5,9 +5,10 @@ import 'package:lhbase_v1/lhbase.dart';
 class LhExpanableView extends StatefulWidget {
   // final Listenable controller;
   final Widget child;
+  final Widget? backdrop;
   final LhExpanableController controller;
   const LhExpanableView(
-      {Key? key, required this.controller, required this.child})
+      {Key? key, required this.controller, required this.child, this.backdrop})
       : super(key: key);
 
   @override
@@ -58,8 +59,6 @@ class _LhExpanableViewState extends State<LhExpanableView> {
     );
   }
 
-  static final backDropColor = Colors.black.withOpacity(0.8);
-
   Widget _buildBackdrop() {
     return GestureDetector(
       onTap: () {
@@ -72,7 +71,8 @@ class _LhExpanableViewState extends State<LhExpanableView> {
             ? widget.controller.maximizeHeight - widget.controller.height
             : 0,
         // height: widget.controller.currentHeight,
-        color: backDropColor,
+        color: LhColors.backdropColor,
+        child: widget.backdrop,
       ),
     );
   }
@@ -96,7 +96,7 @@ class _LhExpanableViewState extends State<LhExpanableView> {
               // },
               child: Container(
             // duration: Duration(milliseconds: 1),
-            color: backDropColor,
+
             height: widget.controller.height < widget.controller.minimizeHeight
                 ? widget.controller.minimizeHeight
                 : widget.controller.height,

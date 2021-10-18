@@ -187,89 +187,101 @@ class _AlphaPageState extends State<AlphaPage> {
     'https://dbk.vn/uploads/ckfinder/images/1-content/anh-dep-1.jpg',
   ];
 
-  @override
-  Widget build(BuildContext context) {
-    return LhBasePage(
-        statusBarBrightness: Brightness.dark,
-        appBarTop: LhAppBar.top(),
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              LhSelecteds<String>(
-                initialValue: images,
-                containerBuilder: () {
-                  return GridView(
-                    scrollDirection: Axis.vertical,
-                    physics: NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 3, mainAxisExtent: 150),
-                  );
-                },
-                addPosition: LhAddPosition.FIRST,
-                addBuilder: () {
-                  return GestureDetector(
-                    onTap: () {
-                      print('abc');
-                    },
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      color: Colors.green,
-                    ),
-                  );
-                },
-                // containerBuilder: () {
-                //   return ListView(
-                //     scrollDirection: Axis.vertical,
-                //   );
-                // },
-                builder: (index, item) {
-                  return Container(
-                    padding: EdgeInsets.all(10),
-                    width: 100,
-                    height: 100,
-                    child: ClipRRect(
-                        borderRadius: BorderRadius.circular(8.0),
-                        child: LhCachedImageWidget(
-                          imageUrl: images[index],
-                        )),
-                  );
-                },
-                removeBuilder: (index, item) {
-                  return Align(
-                      alignment: Alignment.topRight,
-                      child: GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            images.removeAt(index);
-                          });
-                        },
-                        child: Container(
-                            decoration: BoxDecoration(
-                                color: Colors.black.withOpacity(0.8),
-                                borderRadius: BorderRadius.circular(500.0)),
-                            child: Icon(Icons.close, color: Colors.white)),
-                      ));
-                },
-              ),
-            ],
-          ),
-        ));
-  }
-
   // @override
   // Widget build(BuildContext context) {
   //   return LhBasePage(
   //       statusBarBrightness: Brightness.dark,
   //       appBarTop: LhAppBar.top(),
-  //       child: Column(
-  //         children: [
-  //           LhInputSearch(controller: TextEditingController())
-  //         ],
+  //       child: SingleChildScrollView(
+  //         child: Column(
+  //           children: [
+  //             LhSelecteds<String>(
+  //               initialValue: images,
+  //               containerBuilder: () {
+  //                 return GridView(
+  //                   scrollDirection: Axis.vertical,
+  //                   physics: NeverScrollableScrollPhysics(),
+  //                   shrinkWrap: true,
+  //                   gridDelegate:
+  //                       const SliverGridDelegateWithFixedCrossAxisCount(
+  //                           crossAxisCount: 3, mainAxisExtent: 150),
+  //                 );
+  //               },
+  //               addPosition: LhAddPosition.FIRST,
+  //               addBuilder: () {
+  //                 return GestureDetector(
+  //                   onTap: () {
+  //                     print('abc');
+  //                   },
+  //                   child: Container(
+  //                     width: 100,
+  //                     height: 100,
+  //                     color: Colors.green,
+  //                   ),
+  //                 );
+  //               },
+  //               // containerBuilder: () {
+  //               //   return ListView(
+  //               //     scrollDirection: Axis.vertical,
+  //               //   );
+  //               // },
+  //               builder: (index, item) {
+  //                 return Container(
+  //                   padding: EdgeInsets.all(10),
+  //                   width: 100,
+  //                   height: 100,
+  //                   child: ClipRRect(
+  //                       borderRadius: BorderRadius.circular(8.0),
+  //                       child: LhCachedImageWidget(
+  //                         imageUrl: images[index],
+  //                       )),
+  //                 );
+  //               },
+  //               removeBuilder: (index, item) {
+  //                 return Align(
+  //                     alignment: Alignment.topRight,
+  //                     child: GestureDetector(
+  //                       onTap: () {
+  //                         setState(() {
+  //                           images.removeAt(index);
+  //                         });
+  //                       },
+  //                       child: Container(
+  //                           decoration: BoxDecoration(
+  //                               color: Colors.black.withOpacity(0.8),
+  //                               borderRadius: BorderRadius.circular(500.0)),
+  //                           child: Icon(Icons.close, color: Colors.white)),
+  //                     ));
+  //               },
+  //             ),
+  //           ],
+  //         ),
   //       ));
   // }
+  LhExpanableController _lhExpanableController =
+      LhExpanableController(minimizeHeight: 300);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: [
+        LhBasePage(
+            statusBarBrightness: Brightness.dark,
+            appBarTop: LhAppBar.top(),
+            child: TextButton(
+              child: Text('abc'),
+              onPressed: () {
+                _lhExpanableController.minimize();
+              },
+            )),
+        LhExpanableView(
+            controller: _lhExpanableController,
+            child: LhBottomSheetUi(
+              child: Container(),
+            ),)
+      ],
+    );
+  }
 
   @override
   void dispose() {

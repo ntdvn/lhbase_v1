@@ -7,13 +7,20 @@ class LhBottomSheetUi extends StatelessWidget {
   final List<Widget>? right;
   final String? title;
   final TextStyle? titleStyle;
-  const LhBottomSheetUi({Key? key, required this.child, this.left, this.right, this.title, this.titleStyle})
+  final Color? backgroundColor;
+  const LhBottomSheetUi(
+      {Key? key,
+      required this.child,
+      this.left,
+      this.right,
+      this.title,
+      this.titleStyle, this.backgroundColor})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.transparent,
+      color: backgroundColor ?? LhColors.backdropColor,
       child: Column(
         children: [
           Container(
@@ -57,16 +64,18 @@ class LhBottomSheetUi extends StatelessWidget {
                               ),
                           ],
                         ),
-                        if(title!=null) Container(
-                          alignment: Alignment.center,
-                          child: Text(
-                            title ?? '',
-                            textAlign: TextAlign.center,
-                            overflow: TextOverflow.fade,
-                            style: titleStyle ?? LhStyle.DEFAULT_18
-                                .copyWith(fontWeight: FontWeight.w500),
-                          ),
-                        )
+                        if (title != null)
+                          Container(
+                            alignment: Alignment.center,
+                            child: Text(
+                              title ?? '',
+                              textAlign: TextAlign.center,
+                              overflow: TextOverflow.fade,
+                              style: titleStyle ??
+                                  LhStyle.DEFAULT_18
+                                      .copyWith(fontWeight: FontWeight.w500),
+                            ),
+                          )
                       ],
                     ),
                   ),

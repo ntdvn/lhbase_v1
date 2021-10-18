@@ -27,4 +27,6 @@ class LhColors {
   static const RED = const Color(0xffEE273C);
 
   static const FORM_HINT_COLOR = const Color(0xff828282);
+
+  static final backdropColor = Colors.black.withOpacity(0.6);
 }

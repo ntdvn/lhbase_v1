@@ -180,10 +180,10 @@ class LhExpanableController extends ChangeNotifier {
     } else if (targetValue.height < height) {
       mValue = -1;
     }
-    var stepDistance = maximizeHeight / 50;
+    var stepDistance = maximizeHeight / 100;
 
     double stepValue = (stepDistance * mValue).toDouble();
-    const oneSec = const Duration(milliseconds: 1);
+    const oneSec = const Duration(milliseconds: 3);
     // print('minimizeHeight ${minimizeHeight}');
     // print('expandHeight ${expandHeight}');
     clearTimer();

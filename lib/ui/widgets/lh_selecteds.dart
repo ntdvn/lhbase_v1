@@ -49,10 +49,8 @@ class _LhSelectedsState<B> extends State<LhSelecteds<B>> {
   Widget _builderContainer() {
     var _renderResult;
     if (widget.containerBuilder != null) {
-      print('${widget.containerBuilder!()}');
       var container = widget.containerBuilder!();
       if (container is ListView) {
-        print('container is ListView ${container is ListView}');
         if (container.scrollDirection == Axis.horizontal) {
           _renderResult = SingleChildScrollView(
             scrollDirection: container.scrollDirection,
