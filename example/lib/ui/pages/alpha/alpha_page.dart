@@ -283,43 +283,74 @@ class _AlphaPageState extends State<AlphaPage> {
   //   );
   // }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return LhBasePage(
+  //       appBarTop: LhAppBar.top(
+  //         actions: [
+  //               LhAppBarAction.icon(
+  //                   onTap: () {},
+  //                   iconFactor: .4,
+  //                   // sizeFactor: 0.75,
+  //                   icon: Image.asset('./assets/images/camera.png',  package: 'lhbase_v1' ,)),
+  //               LhAppBarAction.icon(
+  //                   onTap: () {
+  //                     // AppNavigator.navigateProductStatistical();
+  //                   },
+  //                   iconFactor: .4,
+  //                   icon: Icon(Icons.ac_unit)),
+  //             ],
+  //       ),
+  //       child: Column(
+  //         children: [
+  //           Container(
+  //             width: 200,
+  //             color: Colors.green,
+  //             child: LhInkwell(
+  //               padding: EdgeInsets.zero,
+  //               decoration: BoxDecoration(
+  //                   color: Colors.red,
+  //                   borderRadius: BorderRadius.circular(6.0)),
+  //               onTap: () {},
+  //               child: Text(
+  //                 'title',
+  //                 style: LhStyle.DEFAULT_16,
+  //               ),
+  //             ),
+  //           ),
+  //         ],
+  //       ));
+  // }
+
+  List<String> radios = [
+    'Hiển thị tất cả sản phẩm với người mua',
+    'Chỉ hiển thị với thành viên',
+    'Khôi phục cài đặt gốc'
+  ];
+
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
-        appBarTop: LhAppBar.top(
-          actions: [
-                LhAppBarAction.icon(
-                    onTap: () {},
-                    iconFactor: .4,
-                    // sizeFactor: 0.75,
-                    icon: Image.asset('./assets/images/camera.png',  package: 'lhbase_v1' ,)),
-                LhAppBarAction.icon(
-                    onTap: () {
-                      // AppNavigator.navigateProductStatistical();
-                    },
-                    iconFactor: .4,
-                    icon: Icon(Icons.ac_unit)),
-              ],
-        ),
-        child: Column(
-          children: [
-            Container(
-              width: 200,
-              color: Colors.green,
-              child: LhInkwell(
-                padding: EdgeInsets.zero,
-                decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(6.0)),
-                onTap: () {},
-                child: Text(
-                  'title',
-                  style: LhStyle.DEFAULT_16,
-                ),
+      appBarTop: LhAppBar.top(),
+      child: Container(
+        child: LhRadiosWidget<String>(
+          items: radios,
+          containerBuilder: () {
+            return Column();
+          },
+          radioBuilder: (index, item, selected) {
+            return GestureDetector(
+              child: Row(
+                children: [
+                  LhRadioShape(isSelected: selected == item,),
+                  Text(item),
+                ],
               ),
-            ),
-          ],
-        ));
+            );
+          },
+        ),
+      ),
+    );
   }
 
   @override

@@ -21,5 +21,6 @@ export 'lh_selecteds.dart';
 export 'lh_checkbox.dart';
 export 'lh_dropdown_view.dart';
 export 'lh_dropdown_panel.dart';
+export 'lh_radio_shape.dart';
 
 export 'arrow_clipper.dart';

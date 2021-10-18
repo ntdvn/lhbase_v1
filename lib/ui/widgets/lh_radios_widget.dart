@@ -86,6 +86,16 @@ class _LhRadiosWidgetState<T> extends State<LhRadiosWidget<T>> {
           textDirection: parent.textDirection,
           children: _renderChildren(),
         );
+      } else {
+        // _renderWidget = Column(
+        //   mainAxisAlignment: parent.mainAxisAlignment,
+        //   crossAxisAlignment: parent.crossAxisAlignment,
+        //   mainAxisSize: parent.mainAxisSize,
+        //   verticalDirection: parent.verticalDirection,
+        //   textDirection: parent.textDirection,
+        //   textBaseline: parent.textBaseline,
+        //   children: _renderChildren(),
+        // );
       }
     }
 
