@@ -1,21 +1,79 @@
-import 'package:flutter/foundation.dart';
-
 import 'package:get/get.dart';
-import 'package:lhbase_v1/expansion_package/media_manager/media_manager.dart';
+import 'package:lhbase_v1/lhbase.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-class MediaManagerController extends GetxController {
-  Rx<List<MediaEntity>> selecteds = Rx([]);
+enum MediaPickerType {
+  IMAGE,
+  VIDEO,
+  AUDIO,
+  ALL,
+  COMMON,
+}
 
-  Rx<AssetPathEntity?> gallery = Rx(null);
-  Rx<List<AssetPathEntity>> galleries = Rx([]);
-  // AssetPathEntity? _galleryAllPath;
-  // get galleryAllPath => _galleryAllPath;
+class MediaPickerController extends GetxController {
+  final MediaPickerType mediaType;
 
-  Rx<List<MediaEntity>> mediaEntities = Rx([]);
-  // List<AssetEntity> get listAssetEntity => _listAssetEntity.value;
+  final int number;
 
-  RequestType type = RequestType.image;
+  MediaPickerController(
+      {this.mediaType = MediaPickerType.IMAGE, this.number = 1}) {
+    switch (this.mediaType) {
+      case MediaPickerType.IMAGE:
+        type = RequestType.image;
+        break;
+      case MediaPickerType.VIDEO:
+        type = RequestType.video;
+        break;
+      case MediaPickerType.AUDIO:
+        type = RequestType.audio;
+        break;
+      case MediaPickerType.ALL:
+        type = RequestType.all;
+        break;
+      case MediaPickerType.COMMON:
+        type = RequestType.common;
+        break;
+      default:
+        type = RequestType.image;
+        break;
+    }
+  }
+
+  late RequestType type;
+
+  Rx<List<MediaEntity>> _selecteds = Rx([]);
+
+  List<MediaEntity> get selecteds => _selecteds.value;
+
+  set selecteds(List<MediaEntity> value) {
+    _selecteds.value = value;
+  }
+
+  Rx<AssetPathEntity?> _gallery = Rx(null);
+
+  AssetPathEntity? get gallery => _gallery.value;
+
+  set gallery(AssetPathEntity? value) {
+    _gallery.value = value;
+  }
+
+  Rx<List<AssetPathEntity>> _galleries = Rx([]);
+
+  List<AssetPathEntity> get galleries => _galleries.value;
+
+  set galleries(List<AssetPathEntity> value) {
+    _galleries.value = value;
+  }
+
+  Rx<List<MediaEntity>> _mediaEntities = Rx([]);
+
+  List<MediaEntity> get mediaEntities => _mediaEntities.value;
+
+  set mediaEntities(List<MediaEntity> value) {
+    _mediaEntities.value = value;
+  }
+
+  //Config;
 
   var hasAll = true;
 
@@ -33,11 +91,11 @@ class MediaManagerController extends GetxController {
   static const loadCount = 1000;
 
   int get showItemCount {
-    if (gallery.value == null) return 0;
-    if (mediaEntities.value.length == gallery.value!.assetCount) {
-      return gallery.value!.assetCount;
+    if (gallery == null) return 0;
+    if (mediaEntities.length == gallery!.assetCount) {
+      return gallery!.assetCount;
     } else {
-      return gallery.value!.assetCount;
+      return gallery!.assetCount;
     }
   }
 
@@ -92,12 +150,13 @@ class MediaManagerController extends GetxController {
       return s2.assetCount.compareTo(s1.assetCount);
     });
 
-    galleries.value.clear();
-    galleries.value.addAll(galleryList);
-    galleries.refresh();
+    galleries.clear();
+    galleries.addAll(galleryList);
+    // update(galleries);
+    // refresh();
 
-    if (galleries.value.length > 0 && this.gallery.value == null) {
-      this.gallery.value = galleries.value.first;
+    if (galleries.length > 0 && this.gallery == null) {
+      this.gallery = galleries.first;
     }
     await onRefresh();
   }
@@ -142,61 +201,60 @@ class MediaManagerController extends GetxController {
   }
 
   Future onRefresh() async {
-    await gallery.value!.refreshPathProperties(
+    await gallery!.refreshPathProperties(
       maxDateTimeToNow: true,
     );
-    final list = await gallery.value!.getAssetListPaged(0, loadCount);
+    final list = await gallery!.getAssetListPaged(0, loadCount);
     page = 0;
-    this.mediaEntities.value.clear();
+    this.mediaEntities.clear();
     list.asMap().forEach((index, value) {
-      this.mediaEntities.value.add(MediaEntity(value));
+      this.mediaEntities.add(MediaEntity(value));
     });
-    // update(this.mediaEntities.value);
-    this.mediaEntities.refresh();
+    update();
   }
 
   Future<void> onLoadMore(String a) async {
-    if (showItemCount > gallery.value!.assetCount) {
+    if (showItemCount > gallery!.assetCount) {
       print("already max");
       return;
     }
-    final list = await gallery.value!.getAssetListPaged(page + 1, loadCount);
+    final list = await gallery!.getAssetListPaged(page + 1, loadCount);
 
     page = page + 1;
     list.asMap().forEach((index, value) {
-      this.mediaEntities.value.add(MediaEntity(value));
+      this.mediaEntities.add(MediaEntity(value));
     });
-    // update(this.mediaEntities.value);
-    this.mediaEntities.refresh();
+    update();
   }
 
   void reset() {
-    this.mediaEntities.value.clear();
-    this.gallery.value = null;
-    this.mediaEntities.refresh();
+    this.mediaEntities.clear();
+    this.gallery = null;
+    refresh();
   }
 
   addSelected(int index) {
-    if (selecteds.value.contains(mediaEntities.value[index])) {
-      selecteds.value.remove(mediaEntities.value[index]);
+    if (selecteds.contains(mediaEntities[index])) {
+      selecteds.remove(mediaEntities[index]);
     } else {
-      selecteds.value.add(mediaEntities.value[index]);
+      if (selecteds.length < number) selecteds.add(mediaEntities[index]);
     }
-    mediaEntities.value[index].isSelected =
-        !mediaEntities.value[index].isSelected;
-
-    print('mediaEntities ${mediaEntities.value[index]}');
-
-    // this.selecteds.value.add(entity);
-    // this.selecteds.refresh();
-    this.mediaEntities.refresh();
-    // D95E2D21-5B16-42D9-A9CE-35174928AC5F/L0/001
-    
+    mediaEntities[index].isSelected = !mediaEntities[index].isSelected;
+    update();
   }
 
   changeGallery(int index) {
-    gallery.value = galleries.value[index];
+    gallery = galleries[index];
     onRefresh();
+  }
+
+  refreshSelected() {
+    // _selecteds.value.clear();
+
+    // print('selected $selecteds');
+    // _selecteds.refresh();
+    selecteds.clear();
+    update();
   }
 
   @override

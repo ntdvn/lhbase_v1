@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:lhbase_v1/expansion_package/media_manager/ui/ui.dart';
+import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1/ui/ui.dart';
 
@@ -14,11 +14,17 @@ class MediaPage extends StatefulWidget {
 
 class _MediaPageState extends State<MediaPage> {
   late LhExpanableController _lhExpanableController;
+  late MediaPickerController _mediaController;
   List<MediaEntity> mediaEntities = [];
 
   @override
   void initState() {
     _lhExpanableController = LhExpanableController(minimizeHeight: 300);
+    Get.lazyPut(
+        () =>
+            MediaPickerController(mediaType: MediaPickerType.IMAGE, number: 5),
+        fenix: true);
+    _mediaController = Get.find<MediaPickerController>();
     super.initState();
   }
 
@@ -34,7 +40,7 @@ class _MediaPageState extends State<MediaPage> {
                   children: [
                     TextButton(
                       onPressed: () {
-                        _lhExpanableController.minimize();
+                        _lhExpanableController.maximize();
                       },
                       child: Text('open'),
                     ),
@@ -43,7 +49,11 @@ class _MediaPageState extends State<MediaPage> {
                         future: mediaEntities[index].assetEntity.originFile,
                         builder: (context, snapshot) {
                           if (snapshot.hasData) {
-                            return Container(height: 100, child: Image.file(snapshot.data!,));
+                            return Container(
+                                height: 100,
+                                child: Image.file(
+                                  snapshot.data!,
+                                ));
                           }
                           return Container();
                         },
@@ -54,11 +64,24 @@ class _MediaPageState extends State<MediaPage> {
               ),
             )),
         MediaPickerView(
-          controller: _lhExpanableController,
-          onSelectedChanged: (value) {
+          viewController: _lhExpanableController,
+          mediaManagerController: _mediaController,
+          // onSubmitted: (value) {
+          //   setState(() {
+          //     mediaEntities = value;
+          //     print('onSubmitted ${mediaEntities.length}');
+          //   });
+          // },
+          // onSelectedChanged: (value) {
+          //    setState(() {
+          //     mediaEntities = value;
+          //     print('onSubmitted ${mediaEntities.length}');
+          //   });
+          // },
+          onSubmitted: (value) {
             setState(() {
-              mediaEntities = value;
-              print('mediaEntities $mediaEntities');
+              mediaEntities.clear();
+              mediaEntities.addAll(value);
             });
           },
         )

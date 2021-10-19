@@ -21,25 +21,21 @@ class LhInkwell extends StatelessWidget {
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: borderRadius ?? BorderRadius.circular(5.0),
-      child: Wrap(
+      child: Stack(
         children: [
-          Stack(
-            children: [
-              Container(
-                  padding: padding ?? EdgeInsets.all(5.0),
-                  alignment: alignment,
-                  decoration: decoration,
-                  child: child),
-              Positioned.fill(
-                child: Material(
-                  color: Colors.transparent,
-                  child: InkWell(
-                    onTap: onTap,
-                    borderRadius: borderRadius ?? BorderRadius.circular(5.0),
-                  ),
-                ),
+          Container(
+              padding: padding ?? EdgeInsets.all(5.0),
+              alignment: alignment,
+              decoration: decoration,
+              child: child),
+          Positioned.fill(
+            child: Material(
+              color: Colors.transparent,
+              child: InkWell(
+                onTap: onTap,
+                borderRadius: borderRadius ?? BorderRadius.circular(5.0),
               ),
-            ],
+            ),
           ),
         ],
       ),
