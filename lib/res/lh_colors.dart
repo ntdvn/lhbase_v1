@@ -11,7 +11,7 @@ class LhColors {
   static const GREEN_2 = const Color(0xffA5C24A);
   static const GREEN_3 = const Color(0xffFAFC9B);
   static const GREEN_4 = const Color(0xff54A246);
-  static const BLACK = const Color(0xff000000);
+  static const BLACK = const Color(0xff2A2A2A);
   static const WHITE = const Color(0xffffffff);
   static const GREY = const Color(0xffC4C4C4);
   static const BG_INPUT = const Color(0xffF1F2F6);
