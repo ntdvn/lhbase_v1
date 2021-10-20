@@ -11,7 +11,8 @@ class LhAppBarAction extends StatelessWidget {
     Key? key,
     this.badge,
     this.child,
-    this.onTap, this.sizeFactor,
+    this.onTap,
+    this.sizeFactor,
   }) : super(key: key);
 
   @override
@@ -68,7 +69,8 @@ class LhAppBarAction extends StatelessWidget {
       {required Widget icon,
       int? badge,
       VoidCallback? onTap,
-      double? iconFactor, double? sizeFactor}) {
+      double? iconFactor,
+      double? sizeFactor}) {
     return LhAppBarAction(
       child: Stack(
         children: [
@@ -99,4 +101,28 @@ class LhAppBarAction extends StatelessWidget {
       badge: badge,
     );
   }
+
+  // factory LhAppBarAction.icon(
+  //     {required Widget icon,
+  //     int? badge,
+  //     VoidCallback? onTap,
+  //     double? iconFactor,
+  //     double? sizeFactor}) {
+  //   return LhAppBarAction(
+  //       child: Container(
+  //         color: Colors.red,
+  //         child: AspectRatio(
+  //     aspectRatio: 1,
+  //     child: LhInkwell(
+  //         borderRadius: BorderRadius.circular(500.0),
+  //         onTap: onTap,
+  //         alignment: Alignment.center,
+  //         child: FractionallySizedBox(
+  //             widthFactor: iconFactor ?? 0.6,
+  //             heightFactor: iconFactor ?? 0.6,
+  //             child: icon),
+  //     ),
+  //   ),
+  //       ));
+  // }
 }

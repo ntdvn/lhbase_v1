@@ -325,7 +325,13 @@ class _AlphaPageState extends State<AlphaPage> {
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
-      appBarTop: LhAppBar.top(),
+      appBarTop: LhAppBar.top(
+        actions: [
+          LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
+          LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
+          LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata))
+        ],
+      ),
       child: Container(
         child: Column(
           children: [
@@ -341,13 +347,13 @@ class _AlphaPageState extends State<AlphaPage> {
                     child: Text('haha'),
                   )),
             ),
-                LhInkwell(
+            LhInkwell(
                 // borderRadius: BorderRadius.zero,
                 onTap: () {},
                 decoration: BoxDecoration(
-                    color: Colors.green,
-                    // border: Border.all(color: Colors.green, width: 1)
-                    ),
+                  color: Colors.green,
+                  // border: Border.all(color: Colors.green, width: 1)
+                ),
                 child: Container(
                   child: Text('haha'),
                 )),

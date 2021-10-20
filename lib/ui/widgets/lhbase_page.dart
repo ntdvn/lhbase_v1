@@ -18,6 +18,7 @@ class LhBasePage extends StatefulWidget {
   final FloatingActionButtonAnimator? floatingActionButtonAnimator;
   final Widget? drawer;
   final Widget? endDrawer;
+  final bool keyboardDimissable;
   final Key? keyScaffold;
 
   const LhBasePage(
@@ -36,6 +37,7 @@ class LhBasePage extends StatefulWidget {
       this.drawer,
       this.endDrawer,
       this.keyScaffold,
+      this.keyboardDimissable = false,
       this.floatingActionButtonAnimator})
       : super(key: key);
 
@@ -51,6 +53,7 @@ class _LhBasePageState extends State<LhBasePage> {
         ComponentUtils.setStatusBarBrightness(widget.statusBarBrightness);
       },
       child: KeyBoarDismisserWidget(
+        keyboardDimissable: widget.keyboardDimissable,
         child: WillPopScope(
           onWillPop: widget.onWillPop,
           child: Container(
