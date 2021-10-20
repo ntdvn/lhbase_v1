@@ -8,8 +8,14 @@ enum LhAppBarType { TOP, BOTTOM }
 
 // typedef LhLeadingCallback = bool Function();
 
+enum LhAppBarBehavior {
+  SCROLLED,
+  STACKED,
+}
+
 class LhAppBar extends StatelessWidget {
   // final double? height;
+  final LhAppBarBehavior? behavior;
   final LhAppBarType type;
   final double? elevation;
   final Color? backgroundColor;
@@ -25,6 +31,7 @@ class LhAppBar extends StatelessWidget {
 
   const LhAppBar(
       {Key? key,
+      this.behavior = LhAppBarBehavior.SCROLLED,
       required this.type,
       // this.height,
       this.elevation = 0,
@@ -136,7 +143,9 @@ class LhAppBar extends StatelessWidget {
   }
 
   factory LhAppBar.top(
-      {double? elevation,
+      {
+        LhAppBarBehavior? behavior = LhAppBarBehavior.SCROLLED,
+        double? elevation,
       Color? backgroundColor,
       List<LhAppBarAction>? leading,
       Color? leadingColor,
@@ -148,6 +157,7 @@ class LhAppBar extends StatelessWidget {
       Widget? backgroundImage,
       double? height}) {
     return LhAppBar(
+      behavior: behavior,
       type: LhAppBarType.TOP,
       elevation: elevation,
       backgroundColor: backgroundColor,

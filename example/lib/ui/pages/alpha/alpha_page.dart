@@ -326,6 +326,9 @@ class _AlphaPageState extends State<AlphaPage> {
   Widget build(BuildContext context) {
     return LhBasePage(
       appBarTop: LhAppBar.top(
+        backgroundColor: Colors.transparent,
+        leadingColor: Colors.black,
+        behavior: LhAppBarBehavior.STACKED,
         actions: [
           LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
           LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
@@ -333,6 +336,7 @@ class _AlphaPageState extends State<AlphaPage> {
         ],
       ),
       child: Container(
+        margin: EdgeInsets.only(top: 30),
         child: Column(
           children: [
             Container(

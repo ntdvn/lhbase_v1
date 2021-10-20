@@ -68,9 +68,17 @@ class _LhBasePageState extends State<LhBasePage> {
               key: widget.keyScaffold,
               body: Stack(
                 children: [
+                  Align(alignment: Alignment.topCenter, child: Column(children: [
+                    if (widget.appBarTop != null &&
+                          widget.appBarTop!.behavior ==
+                              LhAppBarBehavior.STACKED)   widget.appBarTop as Widget,
+                  ],),),
                   Column(
                     children: [
-                      if (widget.appBarTop != null) widget.appBarTop as Widget,
+                      if (widget.appBarTop != null &&
+                          widget.appBarTop!.behavior ==
+                              LhAppBarBehavior.SCROLLED)
+                        widget.appBarTop as Widget,
                       Expanded(child: widget.child),
                       if (widget.appBarBottom != null)
                         widget.appBarBottom as Widget,
