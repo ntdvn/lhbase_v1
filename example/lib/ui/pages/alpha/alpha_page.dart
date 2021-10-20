@@ -329,15 +329,18 @@ class _AlphaPageState extends State<AlphaPage> {
       child: Container(
         child: Column(
           children: [
-            LhInkwell(
-                // borderRadius: BorderRadius.zero,
-                onTap: () {},
-                decoration: BoxDecoration(
-                    color: Colors.transparent,
-                    border: Border.all(color: Colors.green, width: 1)),
-                child: Container(
-                  child: Text('haha'),
-                )),
+            Container(
+              width: 300,
+              child: LhInkwell(
+                  // borderRadius: BorderRadius.zero,
+                  onTap: () {},
+                  decoration: BoxDecoration(
+                      color: Colors.transparent,
+                      border: Border.all(color: Colors.green, width: 1)),
+                  child: Container(
+                    child: Text('haha'),
+                  )),
+            ),
                 LhInkwell(
                 // borderRadius: BorderRadius.zero,
                 onTap: () {},

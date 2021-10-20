@@ -22,17 +22,16 @@ class LhInkwell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ClipRRect(
-      borderRadius: borderRadius,
-      child: Stack(
-        children: [
-          Container(
-              padding: padding ?? EdgeInsets.all(5.0),
+    return Container(
+     
               alignment: alignment,
               decoration: decoration != null
                   ? decoration!.copyWith(borderRadius: borderRadius)
                   : decoration,
-              child: child),
+              // child: child
+      child: Stack(
+        children: [
+         Container( padding: padding ?? EdgeInsets.all(5.0), child: child),
           Positioned.fill(
             child: Material(
               color: Colors.transparent,
