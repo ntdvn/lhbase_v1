@@ -4,6 +4,7 @@ class LhInkwell extends StatelessWidget {
   final Widget child;
   final VoidCallback? onTap;
   final EdgeInsets? padding;
+   final EdgeInsets? margin;
   BorderRadius? borderRadius;
   final Alignment? alignment;
   final BoxDecoration? decoration;
@@ -11,6 +12,7 @@ class LhInkwell extends StatelessWidget {
     Key? key,
     required this.child,
     this.onTap,
+    this.margin,
     this.padding,
     this.borderRadius,
     this.alignment,
@@ -23,12 +25,11 @@ class LhInkwell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-     
+      margin: margin,
               alignment: alignment,
               decoration: decoration != null
                   ? decoration!.copyWith(borderRadius: borderRadius)
                   : decoration,
-              // child: child
       child: Stack(
         children: [
          Container( padding: padding ?? EdgeInsets.all(5.0), child: child),
