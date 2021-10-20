@@ -322,13 +322,34 @@ class _AlphaPageState extends State<AlphaPage> {
   //       ));
   // }
 
-  
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
       appBarTop: LhAppBar.top(),
       child: Container(
-        color: Colors.red,
+        child: Column(
+          children: [
+            LhInkwell(
+                // borderRadius: BorderRadius.zero,
+                onTap: () {},
+                decoration: BoxDecoration(
+                    color: Colors.transparent,
+                    border: Border.all(color: Colors.green, width: 1)),
+                child: Container(
+                  child: Text('haha'),
+                )),
+                LhInkwell(
+                // borderRadius: BorderRadius.zero,
+                onTap: () {},
+                decoration: BoxDecoration(
+                    color: Colors.green,
+                    // border: Border.all(color: Colors.green, width: 1)
+                    ),
+                child: Container(
+                  child: Text('haha'),
+                )),
+          ],
+        ),
       ),
     );
   }
