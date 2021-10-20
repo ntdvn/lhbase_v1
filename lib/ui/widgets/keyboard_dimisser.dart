@@ -11,10 +11,10 @@ class KeyBoarDismisserWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KeyboardDismisser(
-      gestures: keyboardDimissable ? [
+      gestures: keyboardDimissable ? []  : [
         GestureType.onTap,
         GestureType.onPanUpdateDownDirection,
-      ] : [],
+      ],
       child: child,
     );
   }
