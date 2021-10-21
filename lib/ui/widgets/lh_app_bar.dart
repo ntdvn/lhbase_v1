@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1/ui/widgets/lh_app_bar_action.dart';
@@ -19,6 +17,8 @@ class LhAppBar extends StatelessWidget {
   final LhAppBarType type;
   final double? elevation;
   final Color? backgroundColor;
+  final Decoration? decoration;
+
   final List<LhAppBarAction>? leading;
   final Color? leadingColor;
   final WillPopCallback? leadingOnTap;
@@ -36,6 +36,7 @@ class LhAppBar extends StatelessWidget {
       // this.height,
       this.elevation = 0,
       this.backgroundColor,
+      this.decoration,
       this.leading,
       this.leadingColor,
       this.leadingOnTap,
@@ -49,43 +50,75 @@ class LhAppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: elevation ?? 0,
+    // return Card(
+    //   elevation: elevation ?? 0,
+    // margin: EdgeInsets.zero,
+    // shape: RoundedRectangleBorder(
+    //   borderRadius: BorderRadius.circular(0.0),
+    // ),
+    //   child: Container(
+    //     decoration: BoxDecoration(
+    //       // color: backgroundColor ?? Theme.of(context).primaryColor,
+    //       // color: Colors.transparent
+    //     ),
+    //     child: Stack(
+    //       children: [
+    //         if (backgroundImage != null)
+    //           Positioned.fill(child: backgroundImage!),
+    //         Column(
+    //           children: [
+    //             Container(
+    //               margin: EdgeInsets.only(
+    //                   top: type == LhAppBarType.TOP
+    //                       ? MediaQuery.of(context).padding.top
+    //                       : 0,
+    //                   bottom: type == LhAppBarType.BOTTOM
+    //                       ? MediaQuery.of(context).padding.bottom
+    //                       : 0),
+    //               height: height ?? kToolbarHeight,
+    //               child: Row(
+    //                 children: [
+    //                   _renderLeading(context),
+    //                   Expanded(child: _renderTitle()),
+    //                   if (actions != null) ...(actions as List<Widget>)
+    //                 ],
+    //               ),
+    //             ),
+    //           ],
+    //         ),
+    //       ],
+    //     ),
+    //   ),
+    // );
+    return Container(
+      color: backgroundColor,
       margin: EdgeInsets.zero,
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(0.0),
-      ),
-      child: Container(
-        decoration: BoxDecoration(
-          color: backgroundColor ?? Theme.of(context).primaryColor,
-        ),
-        child: Stack(
-          children: [
-            if (backgroundImage != null)
-              Positioned.fill(child: backgroundImage!),
-            Column(
-              children: [
-                Container(
-                  margin: EdgeInsets.only(
-                      top: type == LhAppBarType.TOP
-                          ? MediaQuery.of(context).padding.top
-                          : 0,
-                      bottom: type == LhAppBarType.BOTTOM
-                          ? MediaQuery.of(context).padding.bottom
-                          : 0),
-                  height: height ?? kToolbarHeight,
-                  child: Row(
-                    children: [
-                      _renderLeading(context),
-                      Expanded(child: _renderTitle()),
-                      if (actions != null) ...(actions as List<Widget>)
-                    ],
-                  ),
+      decoration: decoration,
+      child: Stack(
+        children: [
+          if (backgroundImage != null) Positioned.fill(child: backgroundImage!),
+          Column(
+            children: [
+              Container(
+                margin: EdgeInsets.only(
+                    top: type == LhAppBarType.TOP
+                        ? MediaQuery.of(context).padding.top
+                        : 0,
+                    bottom: type == LhAppBarType.BOTTOM
+                        ? MediaQuery.of(context).padding.bottom
+                        : 0),
+                height: height ?? kToolbarHeight,
+                child: Row(
+                  children: [
+                    _renderLeading(context),
+                    Expanded(child: _renderTitle()),
+                    if (actions != null) ...(actions as List<Widget>)
+                  ],
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
@@ -143,10 +176,10 @@ class LhAppBar extends StatelessWidget {
   }
 
   factory LhAppBar.top(
-      {
-        LhAppBarBehavior? behavior = LhAppBarBehavior.SCROLLED,
-        double? elevation,
-      Color? backgroundColor,
+      {LhAppBarBehavior? behavior = LhAppBarBehavior.SCROLLED,
+      double? elevation,
+      @Deprecated("Use decoration instead") Color? backgroundColor,
+      Decoration? decoration,
       List<LhAppBarAction>? leading,
       Color? leadingColor,
       WillPopCallback? leadingOnTap,
@@ -161,6 +194,7 @@ class LhAppBar extends StatelessWidget {
       type: LhAppBarType.TOP,
       elevation: elevation,
       backgroundColor: backgroundColor,
+      decoration: decoration,
       leading: leading,
       leadingColor: leadingColor,
       leadingOnTap: leadingOnTap,
@@ -175,7 +209,8 @@ class LhAppBar extends StatelessWidget {
 
   factory LhAppBar.bottom(
       {double? elevation,
-      Color? backgroundColor,
+      @Deprecated("Use decoration instead") Color? backgroundColor,
+      Decoration? decoration,
       List<LhAppBarAction>? leading,
       Color? leadingColor,
       WillPopCallback? leadingOnTap,
@@ -189,6 +224,7 @@ class LhAppBar extends StatelessWidget {
       type: LhAppBarType.BOTTOM,
       elevation: elevation,
       backgroundColor: backgroundColor,
+      decoration: decoration,
       leading: leading,
       leadingColor: leadingColor,
       leadingOnTap: leadingOnTap,

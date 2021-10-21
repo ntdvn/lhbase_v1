@@ -68,25 +68,32 @@ class _LhBasePageState extends State<LhBasePage> {
               key: widget.keyScaffold,
               body: Stack(
                 children: [
-                  Align(alignment: Alignment.topCenter, child: Column(children: [
-                    if (widget.appBarTop != null &&
-                          widget.appBarTop!.behavior ==
-                              LhAppBarBehavior.STACKED)   widget.appBarTop as Widget,
-                  ],),),
-                  Column(
-                    children: [
-                      if (widget.appBarTop != null &&
-                          widget.appBarTop!.behavior ==
-                              LhAppBarBehavior.SCROLLED)
+                  
+                  Positioned.fill(
+                    child: Column(
+                      children: [
+                        if (widget.appBarTop != null &&
+                            widget.appBarTop!.behavior ==
+                                LhAppBarBehavior.SCROLLED)
+                          widget.appBarTop as Widget,
+                        Expanded(child: widget.child),
+                        if (widget.appBarBottom != null)
+                          widget.appBarBottom as Widget,
+                        if (widget.bottomSlidingPanel != null)
+                          Container(
+                              height: widget
+                                  .bottomSlidingPanel!.controller.currentHeight)
+                      ],
+                    ),
+                  ),
+                   if (widget.appBarTop != null &&
+                            widget.appBarTop!.behavior ==
+                                LhAppBarBehavior.STACKED) Positioned.fill(
+                    child: Wrap(
+                      children: [
                         widget.appBarTop as Widget,
-                      Expanded(child: widget.child),
-                      if (widget.appBarBottom != null)
-                        widget.appBarBottom as Widget,
-                      if (widget.bottomSlidingPanel != null)
-                        Container(
-                            height: widget
-                                .bottomSlidingPanel!.controller.currentHeight)
-                    ],
+                      ],
+                    ),
                   ),
                   if (widget.bottomSlidingPanel != null)
                     Positioned(

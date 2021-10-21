@@ -326,8 +326,8 @@ class _AlphaPageState extends State<AlphaPage> {
   Widget build(BuildContext context) {
     return LhBasePage(
       appBarTop: LhAppBar.top(
-        backgroundColor: Colors.transparent,
         leadingColor: Colors.black,
+        // decoration: BoxDecoration(color: Colors.yellow),
         behavior: LhAppBarBehavior.STACKED,
         actions: [
           LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
@@ -335,33 +335,38 @@ class _AlphaPageState extends State<AlphaPage> {
           LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata))
         ],
       ),
-      child: Container(
-        margin: EdgeInsets.only(top: 30),
-        child: Column(
-          children: [
-            Container(
-              width: 300,
-              child: LhInkwell(
+      child: SingleChildScrollView(
+        child: Container(
+          height: 1000,
+          width: double.infinity,
+          color: Colors.red,
+          padding: EdgeInsets.only(top: 80),
+          child: Column(
+            children: [
+              Container(
+                width: 300,
+                child: LhInkwell(
+                    // borderRadius: BorderRadius.zero,
+                    onTap: () {},
+                    decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        border: Border.all(color: Colors.green, width: 1)),
+                    child: Container(
+                      child: Text('haha'),
+                    )),
+              ),
+              LhInkwell(
                   // borderRadius: BorderRadius.zero,
                   onTap: () {},
                   decoration: BoxDecoration(
-                      color: Colors.transparent,
-                      border: Border.all(color: Colors.green, width: 1)),
+                    color: Colors.green,
+                    // border: Border.all(color: Colors.green, width: 1)
+                  ),
                   child: Container(
                     child: Text('haha'),
                   )),
-            ),
-            LhInkwell(
-                // borderRadius: BorderRadius.zero,
-                onTap: () {},
-                decoration: BoxDecoration(
-                  color: Colors.green,
-                  // border: Border.all(color: Colors.green, width: 1)
-                ),
-                child: Container(
-                  child: Text('haha'),
-                )),
-          ],
+            ],
+          ),
         ),
       ),
     );
