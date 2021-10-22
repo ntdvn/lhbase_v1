@@ -339,7 +339,7 @@ class _AlphaPageState extends State<AlphaPage> {
         child: Container(
           height: 1000,
           width: double.infinity,
-          color: Colors.red,
+          // color: Colors.red,
           padding: EdgeInsets.only(top: 80),
           child: Column(
             children: [
@@ -365,6 +365,55 @@ class _AlphaPageState extends State<AlphaPage> {
                   child: Container(
                     child: Text('haha'),
                   )),
+              InkWell(
+                onTap: () {},
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Container(
+                      child: LhAvatar(
+                          width: 46,
+                          height: 46,
+                          imageUrl:
+                              'https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-avatar-de-thuong.jpg'),
+                    ),
+                    Expanded(
+                        child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Trần Hà',
+                          style: LhStyle.DEFAULT_16
+                              .copyWith(fontWeight: FontWeight.w500),
+                        ),
+                        Text(
+                          'Bạn có bức ảnh rất đẹp',
+                          style: LhStyle.DEFAULT_14.copyWith(
+                              color: Colors.grey, fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    )),
+                    Column(
+                      children: [
+                        LhInkwell(
+                          onTap: () {},
+                          margin: EdgeInsets.only(bottom: 10),
+                          child: Container(
+                            color: Colors.red,
+                              width: 20,
+                              child: Icon(Icons.ac_unit_outlined)),
+                        ),
+                        LhText(
+                          'story_view_comment.time_create',
+                          style: LhStyle.DEFAULT_10.copyWith(
+                              color: Colors.grey, fontWeight: FontWeight.w400),
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+              )
             ],
           ),
         ),
