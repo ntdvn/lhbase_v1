@@ -7,7 +7,6 @@ class LhInkwell extends StatelessWidget {
   final EdgeInsets? margin;
   BorderRadius? borderRadius;
   final Alignment? alignment;
-  final Color? color;
   final BoxDecoration? decoration;
   LhInkwell({
     Key? key,
@@ -17,7 +16,6 @@ class LhInkwell extends StatelessWidget {
     this.padding,
     this.borderRadius,
     this.alignment,
-    this.color,
     this.decoration,
   }) : super(key: key) {
     var defaultRadius = BorderRadius.circular(5.0);
@@ -27,25 +25,17 @@ class LhInkwell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: margin,
+      // margin: margin,
       alignment: alignment,
-      color: color,
-      decoration: decoration != null
-          ? decoration!.copyWith(borderRadius: borderRadius)
-          : decoration,
-      child: Stack(
-        children: [
-          Container(padding: padding ?? EdgeInsets.all(5.0), child: child),
-          Positioned.fill(
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: onTap,
-                borderRadius: borderRadius,
-              ),
-            ),
-          ),
-        ],
+      decoration: decoration != null ? decoration!.copyWith(borderRadius: borderRadius) : BoxDecoration(borderRadius: borderRadius),
+      child: Material(
+        color: Colors.transparent,
+        child: InkWell(
+          onTap: onTap,
+          borderRadius: borderRadius,
+          child: Container(
+              padding: padding ?? EdgeInsets.all(5.0), child: child),
+        ),
       ),
     );
   }
