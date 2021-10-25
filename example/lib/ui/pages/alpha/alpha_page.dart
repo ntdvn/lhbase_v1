@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1/ui/widgets/lh_cached_image.dart';
 
@@ -26,6 +27,8 @@ class _AlphaPageState extends State<AlphaPage> {
 
   @override
   void initState() {
+    Get.put(MediaPickerController());
+    _mediaPickerController = Get.find<MediaPickerController>();
     _storyController1.stories = [
       Story(
           widget: Container(
@@ -322,121 +325,142 @@ class _AlphaPageState extends State<AlphaPage> {
   //       ));
   // }
 
+  // @override
+  // Widget build(BuildContext context) {
+  //   return LhBasePage(
+  //     appBarTop: LhAppBar.top(
+  //       leadingColor: Colors.black,
+  //       // decoration: BoxDecoration(color: Colors.yellow),
+  //       behavior: LhAppBarBehavior.STACKED,
+  //       actions: [
+  //         LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
+  //         LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
+  //         LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata))
+  //       ],
+  //     ),
+  //     child: SingleChildScrollView(
+  //       child: Container(
+  //         height: 1000,
+  //         width: double.infinity,
+  //         // color: Colors.red,
+  //         padding: EdgeInsets.only(top: 80),
+  //         child: Column(
+  //           children: [
+  //             Container(
+  //               width: 300,
+  //               child: LhInkwell(
+  //                   // borderRadius: BorderRadius.zero,
+  //                   onTap: () {},
+  //                   decoration: BoxDecoration(
+  //                       color: Colors.transparent,
+  //                       border: Border.all(color: Colors.green, width: 1)),
+  //                   child: Container(
+  //                     child: Text('haha'),
+  //                   )),
+  //             ),
+  //             LhInkwell(
+  //                 // borderRadius: BorderRadius.zero,
+  //                 onTap: () {},
+  //                 decoration: BoxDecoration(
+  //                   color: Colors.green,
+  //                   // border: Border.all(color: Colors.green, width: 1)
+  //                 ),
+  //                 child: Container(
+  //                   child: Text('haha'),
+  //                 )),
+  //             ListView.builder(
+  //               physics: NeverScrollableScrollPhysics(),
+  //               shrinkWrap: true,
+  //               itemCount: 10,
+  //               itemBuilder: (context, index) {
+  //                 return LhInkwell(
+  //                   onTap: () {
+  //                     print('father');
+  //                   },
+  //                   child: Container(
+
+  //                     child: Row(
+  //                       mainAxisAlignment: MainAxisAlignment.center,
+  //                       crossAxisAlignment: CrossAxisAlignment.center,
+  //                       children: [
+  //                         Container(
+  //                           child: LhAvatar(
+  //                               width: 46,
+  //                               height: 46,
+  //                               imageUrl:
+  //                                   'https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-avatar-de-thuong.jpg'),
+  //                         ),
+  //                         Expanded(
+  //                             child: Column(
+  //                           crossAxisAlignment: CrossAxisAlignment.start,
+  //                           children: [
+  //                             Text(
+  //                               'Trần Hà',
+  //                               style: LhStyle.DEFAULT_16
+  //                                   .copyWith(fontWeight: FontWeight.w500),
+  //                             ),
+  //                             Text(
+  //                               'Bạn có bức ảnh rất đẹp',
+  //                               style: LhStyle.DEFAULT_14.copyWith(
+  //                                   color: Colors.grey,
+  //                                   fontWeight: FontWeight.w400),
+  //                             ),
+  //                           ],
+  //                         )),
+  //                         Column(
+  //                           children: [
+  //                             LhInkwell(
+  //                               borderRadius: BorderRadius.circular(10.0),
+  //                               // padding: EdgeInsets.all(5.0),
+  //                               onTap: () {
+  //                                 print('abc');
+  //                               },
+  //                               margin: EdgeInsets.only(bottom: 10),
+  //                               child: Container(
+  //                                   // color: Colors.red,
+  //                                   width: 20,
+  //                                   child: Icon(Icons.ac_unit_outlined)),
+  //                             ),
+  //                             LhText(
+  //                               'abc',
+  //                               style: LhStyle.DEFAULT_10.copyWith(
+  //                                   color: Colors.grey,
+  //                                   fontWeight: FontWeight.w400),
+  //                             ),
+  //                           ],
+  //                         )
+  //                       ],
+  //                     ),
+  //                   ),
+  //                 );
+  //               },
+  //             )
+  //           ],
+  //         ),
+  //       ),
+  //     ),
+  //   );
+  // }
+
+  late MediaPickerController _mediaPickerController;
+
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
-      appBarTop: LhAppBar.top(
-        leadingColor: Colors.black,
-        // decoration: BoxDecoration(color: Colors.yellow),
-        behavior: LhAppBarBehavior.STACKED,
-        actions: [
-          LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
-          LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata)),
-          LhAppBarAction.icon(onTap: () {}, icon: Icon(Icons.g_mobiledata))
+        child: SingleChildScrollView(
+      child: Column(
+        children: [
+          Text(
+              '_mediaPickerController_mediaPickerController_mediaPickerController_mediaPickerController',
+              style: LhStyle.DEFAULT_24_BOLD),
+          MediaResourceView(
+            mediaController: _mediaPickerController,
+            physics: const NeverScrollableScrollPhysics(),
+            shrinkWrap: true,
+          ),
         ],
       ),
-      child: SingleChildScrollView(
-        child: Container(
-          height: 1000,
-          width: double.infinity,
-          // color: Colors.red,
-          padding: EdgeInsets.only(top: 80),
-          child: Column(
-            children: [
-              Container(
-                width: 300,
-                child: LhInkwell(
-                    // borderRadius: BorderRadius.zero,
-                    onTap: () {},
-                    decoration: BoxDecoration(
-                        color: Colors.transparent,
-                        border: Border.all(color: Colors.green, width: 1)),
-                    child: Container(
-                      child: Text('haha'),
-                    )),
-              ),
-              LhInkwell(
-                  // borderRadius: BorderRadius.zero,
-                  onTap: () {},
-                  decoration: BoxDecoration(
-                    color: Colors.green,
-                    // border: Border.all(color: Colors.green, width: 1)
-                  ),
-                  child: Container(
-                    child: Text('haha'),
-                  )),
-              ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 10,
-                itemBuilder: (context, index) {
-                  return LhInkwell(
-                    onTap: () {
-                      print('father');
-                    },
-                    child: Container(
-                    
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [
-                          Container(
-                            child: LhAvatar(
-                                width: 46,
-                                height: 46,
-                                imageUrl:
-                                    'https://toigingiuvedep.vn/wp-content/uploads/2021/05/hinh-anh-avatar-de-thuong.jpg'),
-                          ),
-                          Expanded(
-                              child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Trần Hà',
-                                style: LhStyle.DEFAULT_16
-                                    .copyWith(fontWeight: FontWeight.w500),
-                              ),
-                              Text(
-                                'Bạn có bức ảnh rất đẹp',
-                                style: LhStyle.DEFAULT_14.copyWith(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          )),
-                          Column(
-                            children: [
-                              LhInkwell(
-                                borderRadius: BorderRadius.circular(10.0),
-                                // padding: EdgeInsets.all(5.0),
-                                onTap: () {
-                                  print('abc');
-                                },
-                                margin: EdgeInsets.only(bottom: 10),
-                                child: Container(
-                                    // color: Colors.red,
-                                    width: 20,
-                                    child: Icon(Icons.ac_unit_outlined)),
-                              ),
-                              LhText(
-                                'abc',
-                                style: LhStyle.DEFAULT_10.copyWith(
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w400),
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              )
-            ],
-          ),
-        ),
-      ),
-    );
+    ));
   }
 
   @override

@@ -40,7 +40,7 @@ class _MediaPickerViewState extends State<MediaPickerView> {
         child: LhBottomSheetUi(
           child: Stack(
             children: [
-              MediaResoucePage(
+              MediaResourceView(
                 mediaController: widget.mediaManagerController,
                 onSelectedChanged: widget.onSelectedChanged,
               ),
@@ -61,9 +61,10 @@ class _MediaPickerViewState extends State<MediaPickerView> {
                               onTap: () {
                                 if (widget.onSubmitted != null) {
                                   widget.onSubmitted!(controller.selecteds);
-                                 
+
                                   widget.viewController.closed();
-                                   widget.mediaManagerController.refreshSelected();
+                                  widget.mediaManagerController
+                                      .refreshSelected();
                                 }
                               },
                               // color: Colors.blue,
@@ -158,7 +159,6 @@ class _MediaPickerViewState extends State<MediaPickerView> {
             LhAppBarAction.icon(
                 sizeFactor: 1.0,
                 onTap: () {
-                 
                   widget.viewController.closed();
                 },
                 icon: Icon(Icons.close)),
