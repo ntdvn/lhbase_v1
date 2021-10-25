@@ -25,16 +25,18 @@ class LhInkwell extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      // margin: margin,
+      margin: margin,
       alignment: alignment,
-      decoration: decoration != null ? decoration!.copyWith(borderRadius: borderRadius) : BoxDecoration(borderRadius: borderRadius),
+      decoration: decoration != null
+          ? decoration!.copyWith(borderRadius: borderRadius)
+          : BoxDecoration(borderRadius: borderRadius),
       child: Material(
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
           borderRadius: borderRadius,
-          child: Container(
-              padding: padding ?? EdgeInsets.all(5.0), child: child),
+          child:
+              Container(padding: padding ?? EdgeInsets.all(5.0), child: child),
         ),
       ),
     );
