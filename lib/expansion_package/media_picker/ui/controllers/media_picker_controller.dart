@@ -14,9 +14,14 @@ class MediaPickerController extends GetxController {
   final MediaPickerType mediaType;
 
   final int number;
+  final int initLoadCount;
+  final int loadCount;
 
   MediaPickerController(
-      {this.mediaType = MediaPickerType.IMAGE, this.number = 1}) {
+      {this.mediaType = MediaPickerType.IMAGE,
+      this.number = 1,
+      this.initLoadCount = 47,
+      this.loadCount = 23}) {
     switch (this.mediaType) {
       case MediaPickerType.IMAGE:
         type = RequestType.image;
@@ -88,7 +93,6 @@ class MediaPickerController extends GetxController {
 
   bool refreshing = false;
   var page = 0;
-  static const loadCount = 1000;
 
   int get showItemCount {
     if (gallery == null) return 0;
@@ -204,7 +208,7 @@ class MediaPickerController extends GetxController {
     await gallery!.refreshPathProperties(
       maxDateTimeToNow: true,
     );
-    final list = await gallery!.getAssetListPaged(0, loadCount);
+    final list = await gallery!.getAssetListPaged(0, initLoadCount);
     page = 0;
     this.mediaEntities.clear();
     list.asMap().forEach((index, value) {

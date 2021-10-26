@@ -447,20 +447,10 @@ class _AlphaPageState extends State<AlphaPage> {
   @override
   Widget build(BuildContext context) {
     return LhBasePage(
-        child: SingleChildScrollView(
-      controller: controller,
-      child: Column(
-        children: [
-          Text(
-              '_mediaPickerController_mediaPickerController_mediaPickerController_mediaPickerController',
-              style: LhStyle.DEFAULT_24_BOLD),
-          MediaResourceView(
-            mediaController: _mediaPickerController,
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-          ),
-        ],
-      ),
+        child: MediaResourceView(
+      mediaController: _mediaPickerController,
+      // physics: const NeverScrollableScrollPhysics(),
+      // shrinkWrap: true,
     ));
   }
 

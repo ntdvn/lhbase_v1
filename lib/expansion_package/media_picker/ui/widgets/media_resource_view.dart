@@ -31,21 +31,44 @@ class _MediaResourceViewState extends State<MediaResourceView> {
   Widget build(BuildContext context) {
     return GetBuilder<MediaPickerController>(
       builder: (controller) {
-        return GridView.builder(
-          physics: widget.physics ?? ScrollPhysics(),
-          shrinkWrap: widget.shrinkWrap,
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
-          itemCount: controller.showItemCount,
-          gridDelegate: widget.gridDelegate ??
-              SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 4, mainAxisSpacing: 1, crossAxisSpacing: 1),
-          itemBuilder: (context, index) {
-            return _buildItem(controller.mediaEntities, index);
-          },
+        return NotificationListener<ScrollNotification>(
+          onNotification: _handleScrollNotification,
+          child: GridView.builder(
+            controller: _controller,
+            physics: widget.physics ?? ScrollPhysics(),
+            shrinkWrap: widget.shrinkWrap,
+            padding:
+                EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            // itemCount: controller.showItemCount,
+            itemCount: controller.mediaEntities.length,
+            gridDelegate: widget.gridDelegate ??
+                SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4, mainAxisSpacing: 1, crossAxisSpacing: 1),
+            itemBuilder: (context, index) {
+              return _buildItem(controller.mediaEntities, index);
+            },
+          ),
         );
       },
     );
+  }
+
+  late ScrollController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = new ScrollController();
+  }
+
+  bool _handleScrollNotification(ScrollNotification notification) {
+    if (notification is ScrollEndNotification) {
+      if (_controller.position.extentAfter == 0) {
+        print("hihi");
+        onLoadMore();
+      }
+    }
+    return false;
   }
 
   //image thumb quality
@@ -58,10 +81,10 @@ class _MediaResourceViewState extends State<MediaResourceView> {
 
   Widget _buildItem(List<MediaEntity> listValue, int index) {
     final list = listValue;
-    if (list.length == index) {
-      onLoadMore();
-      return MediaLoading();
-    }
+    // if (list.length == index) {
+    //   onLoadMore();
+    //   return MediaLoading();
+    // }
 
     if (index > list.length) {
       return Container();
