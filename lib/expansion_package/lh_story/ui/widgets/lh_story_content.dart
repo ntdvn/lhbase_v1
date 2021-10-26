@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
@@ -50,7 +48,7 @@ class _LhStoryContentState extends State<LhStoryContent> {
   bool _isReady = false;
 
   Widget _renderByContent() {
-    print('_isReady $_isReady | widget.onReady ${widget.onReady}');
+    // print('_isReady $_isReady | widget.onReady ${widget.onReady}');
     if (widget.story.image != null) {
       return Image.network(
         widget.story.image!,
@@ -84,12 +82,12 @@ class _LhStoryContentState extends State<LhStoryContent> {
         },
       );
     } else if (widget.story.widget != null) {
-      print('!!! _isReady $_isReady | widget.onReady ${widget.onReady}');
+      // print('!!! _isReady $_isReady | widget.onReady ${widget.onReady}');
       if (widget.onReady != null && _isReady == false) {
         _isReady = true;
         widget.onReady!();
 
-        print('_isReady $_isReady | widget.onReady ${widget.onReady}');
+        // print('_isReady $_isReady | widget.onReady ${widget.onReady}');
         return widget.story.widget!;
       }
 

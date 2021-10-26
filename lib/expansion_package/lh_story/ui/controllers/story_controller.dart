@@ -7,24 +7,28 @@ import 'package:rxdart/rxdart.dart';
 enum PlaybackState { pause, play, completed }
 
 class StoryController extends ChangeNotifier {
-  List<Story> storys;
-  int currentStory = 0;
+  List<Story> stories;
+  PlaybackState state = PlaybackState.play;
+  int currentIndex = 0;
   Timer? _timer;
   final VoidCallback? onCompleted;
+  final VoidCallback? onReturned;
+  int totalProgress = 0;
 
   StoryController({
-    required this.storys,
+    required this.stories,
     this.onCompleted,
+    this.onReturned,
   }) {}
-
-  PlaybackState state = PlaybackState.play;
 
   void pause() {
     state = PlaybackState.pause;
     notifyListeners();
+    print('pause');
   }
 
   void play() {
+    // print('play');
     if (state != PlaybackState.completed) {
       state = PlaybackState.play;
       startTimer();
@@ -35,60 +39,64 @@ class StoryController extends ChangeNotifier {
   }
 
   void next() {
-    var expectedpage = currentStory + 1;
-    goTo(expectedpage);
+    var expectedpage = currentIndex;
+    readyFor(++expectedpage);
     notifyListeners();
   }
 
   void previous() {
-    var expectedpage = currentStory - 1 < 0 ? 0 : currentStory - 1;
-    print('expectedpage ${currentStory - 1}');
-    goTo(expectedpage);
+    var expectedpage = currentIndex;
+    readyFor(--expectedpage);
     notifyListeners();
   }
 
   @override
   void dispose() {
-    print('dispose');
+    // print('--------> dispose <----------');
     clearTimer();
     super.dispose();
   }
 
-  void goTo(int index) {
-    if (index >= 0 && index < storys.length) {
-      if (currentStory >= index) {
-        storys[currentStory].currentDuration = Duration.zero;
+  void readyFor(int index) {
+    if (index < 0) {
+      if (this.onReturned != null) this.onReturned!();
+    } else if (index > stories.length - 1) {
+      if (this.onCompleted != null) this.onCompleted!();
+    } else {
+      if (index >= currentIndex) {
+        stories[currentIndex].toCompleted();
       } else {
-        storys[currentStory].currentDuration = storys[currentStory].duration!;
+        stories[currentIndex].toReset();
       }
-      currentStory = index;
-      storys[currentStory].currentDuration = Duration.zero;
+      currentIndex = index;
+      stories[currentIndex].currentDuration = Duration.zero;
     }
-    if (index == storys.length) {
-      storys[currentStory].currentDuration =
-          storys[currentStory].duration! - Duration(milliseconds: 1);
-    }
-    play();
+    notifyListeners();
+
+    // if (index >= 0 && index < stories.length) {}
+    // if (index == stories.length) {
+    //   stories[currentIndex].currentDuration =
+    //       stories[currentIndex].duration! - Duration(milliseconds: 1);
+    // }
   }
 
   void startTimer() {
     clearTimer();
-    int maxMilliseconds = storys[currentStory].duration!.inMilliseconds;
+    int maxMilliseconds = stories[currentIndex].duration!.inMilliseconds;
     int onMilliseconds = maxMilliseconds ~/ 100;
     var oneSec = Duration(milliseconds: onMilliseconds);
     _timer = new Timer.periodic(
       oneSec,
       (Timer timer) {
-        // print('state $state');
         if (state != PlaybackState.pause) {
-          storys[currentStory].currentDuration = Duration(
+          stories[currentIndex].currentDuration = Duration(
               milliseconds:
-                  storys[currentStory].currentDuration.inMilliseconds +
+                  stories[currentIndex].currentDuration.inMilliseconds +
                       onMilliseconds);
-          print(storys[currentStory].currentDuration.inMilliseconds);
-          if (storys[currentStory].currentDuration.inMilliseconds >=
-              storys[currentStory].duration!.inMilliseconds) {
-            if (currentStory < storys.length - 1) {
+          // print(stories[currentIndex].currentDuration.inMilliseconds);
+          if (stories[currentIndex].currentDuration.inMilliseconds >=
+              stories[currentIndex].duration!.inMilliseconds) {
+            if (currentIndex < stories.length - 1) {
               next();
               pause();
             } else {
@@ -102,13 +110,14 @@ class StoryController extends ChangeNotifier {
         } else {
           clearTimer();
         }
+        totalProgress += onMilliseconds;
         notifyListeners();
       },
     );
   }
 
   clearTimer() {
-    print('clearTimer');
+    // print('clearTimer');
     if (_timer != null) {
       _timer!.cancel();
       _timer = null;

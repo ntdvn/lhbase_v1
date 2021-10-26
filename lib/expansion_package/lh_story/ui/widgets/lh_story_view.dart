@@ -66,7 +66,7 @@ class _LhStoryViewState extends State<LhStoryView> {
   }
 
   // void startTimer() {
-  //   int MaxMilliseconds = _storys[_currentStory].duration.inMilliseconds;
+  //   int MaxMilliseconds = _stories[_currentStory].duration.inMilliseconds;
   //   int onMilliseconds = MaxMilliseconds ~/ 100;
   //   int count = 0;
   //   var oneSec = Duration(milliseconds: onMilliseconds);
@@ -75,14 +75,14 @@ class _LhStoryViewState extends State<LhStoryView> {
   //     (Timer timer) {
   //       count++;
   //       setState(() {
-  //         _storys[_currentStory].currentDuration =
+  //         _stories[_currentStory].currentDuration =
   //             Duration(milliseconds: onMilliseconds * count);
   //       });
   //       if (count == 100) {
   //         setState(() {
   //           _timer!.cancel();
   //         });
-  //         if (_currentStory < _storys.length - 1) {
+  //         if (_currentStory < _stories.length - 1) {
   //           setState(() {
   //             _currentStory++;
   //           });
@@ -105,22 +105,22 @@ class _LhStoryViewState extends State<LhStoryView> {
           AnimatedBuilder(
             animation: widget.controller,
             builder: (context, child) {
-              print('_renderProgressLayer');
+              // print('_renderProgressLayer');
               return GridView.builder(
                   padding: EdgeInsets.zero,
                   physics: NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: widget.controller.storys.length,
+                      crossAxisCount: widget.controller.stories.length,
                       crossAxisSpacing: 5,
                       mainAxisSpacing: 5,
                       mainAxisExtent: 3),
-                  itemCount: widget.controller.storys.length,
+                  itemCount: widget.controller.stories.length,
                   itemBuilder: (BuildContext ctx, index) {
                     return LhStoryProgressBar(
-                      progress: (widget.controller.storys[index].currentDuration
-                                  .inMilliseconds /
-                              widget.controller.storys[index].duration!
+                      progress: (widget.controller.stories[index]
+                                  .currentDuration.inMilliseconds /
+                              widget.controller.stories[index].duration!
                                   .inMilliseconds)
                           .toDouble(),
                     );
@@ -139,7 +139,7 @@ class _LhStoryViewState extends State<LhStoryView> {
       builder: (context, child) {
         print('_renderStoryLayer');
         return LhStoryContent(
-          story: widget.controller.storys[widget.controller.currentStory],
+          story: widget.controller.stories[widget.controller.currentIndex],
           onReady: () {
             print('ready');
 
@@ -156,7 +156,7 @@ class _LhStoryViewState extends State<LhStoryView> {
   // Widget _renderStoryLayer() {
   //   return Container(
   //     child: LhStoryContent(
-  //       story: widget.controller.storys[widget.controller.currentStory],
+  //       story: widget.controller.stories[widget.controller.currentStory],
   //       storyController: widget.controller,
   //       onReady: () {
   //         print('ready');

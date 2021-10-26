@@ -17,19 +17,19 @@ class _StoryViewPageState extends State<StoryViewPage> {
   int currentIndex = 0;
 
   StoryController _storyController1 = StoryController(
-      storys: [],
+      stories: [],
       onCompleted: () {
         print('onCompleted');
       });
   StoryController _storyController2 = StoryController(
-      storys: [],
+      stories: [],
       onCompleted: () {
         print('onCompleted');
       });
 
   @override
   void initState() {
-    _storyController1.storys = [
+    _storyController1.stories = [
       Story(
           widget: Container(
         color: Colors.blue,
@@ -57,7 +57,7 @@ class _StoryViewPageState extends State<StoryViewPage> {
         child: Text('co gi do sai sai'),
       )),
     ];
-    _storyController2.storys = [
+    _storyController2.stories = [
       // Story(
       //     image:
       //         'https://i.pinimg.com/originals/58/bd/4f/58bd4fc9ebfccc1f2de419529bbf1a12.jpg'),

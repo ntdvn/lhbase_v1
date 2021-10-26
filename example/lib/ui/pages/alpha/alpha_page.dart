@@ -448,6 +448,7 @@ class _AlphaPageState extends State<AlphaPage> {
   Widget build(BuildContext context) {
     return LhBasePage(
         child: SingleChildScrollView(
+      controller: controller,
       child: Column(
         children: [
           Text(
