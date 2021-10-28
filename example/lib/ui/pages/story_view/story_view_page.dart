@@ -19,7 +19,7 @@ class _StoryViewPageState extends State<StoryViewPage> {
         backgroundColor: Colors.black,
       ),
       appBarBottom: LhAppBar.bottomEmpty(),
-      child: Container(margin: ,),
+      child: Container(),
       // child: LhStory(
       //   customViewBuilder: (story) {
       //     return Container(
