@@ -31,7 +31,7 @@ class _LhStoryContentState extends State<LhStoryContent> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(color: Colors.red, child: _renderByContent());
+    return Container(child: _renderByContent());
   }
 
   @override

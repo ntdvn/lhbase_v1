@@ -107,7 +107,7 @@ class _LhStoryViewState extends State<LhStoryView> {
             if (widget.customViewBuilder != null)
               Expanded(
                   child: Container(
-                color: Colors.transparent,
+                // color: Colors.transparent,
                 child: GetBuilder<LhStoryController>(
                   builder: (controller) {
                     if (widget.customViewBuilder != null)

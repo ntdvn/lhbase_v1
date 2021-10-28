@@ -20,31 +20,12 @@ class _LhStoryState extends State<LhStory> {
 
   @override
   void initState() {
-    // Get.put(LhStoryController(storiesList: [
-    //   Stories(
-    //     [
-    //       Story(
-    //           image:
-    //               'https://file.vfo.vn/hinh/2018/03/hinh-nen-dien-thoai-dep-nhat-full-hd-cho-dien-thoai-iphone-android-2.jpg'),
-    //       Story(widget: Container(color: Colors.red))
-    //     ],
-    //   ),
-    //   Stories([Story(widget: Container(color: Colors.red))]),
-    //   Stories([
-    //     Story(
-    //         image:
-    //             'https://thuthuatnhanh.com/wp-content/uploads/2019/11/hinh-nen-dien-thoai-dep.jpg')
-    //   ])
-    // ]));
-    _lhStoryController = Get.find<LhStoryController>();
-    // _lhStoryController.play();
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.black,
       child: GetBuilder<LhStoryController>(
         builder: (controller) {
           // print('builder');
