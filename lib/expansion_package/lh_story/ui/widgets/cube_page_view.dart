@@ -123,7 +123,7 @@ class _CubePageViewState extends State<CubePageView> {
               physics: const ClampingScrollPhysics(),
               itemCount: widget.itemCount ?? widget.children!.length,
               itemBuilder: (_, index) {
-                print('value $value');
+                // print('value $value');
                 if (widget.itemBuilder != null)
                   return Container(
                       color: Colors.black.withOpacity(0.5),
