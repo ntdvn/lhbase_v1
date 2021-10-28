@@ -19,15 +19,16 @@ class _StoryViewPageState extends State<StoryViewPage> {
         backgroundColor: Colors.black,
       ),
       appBarBottom: LhAppBar.bottomEmpty(),
-      child: LhStory(
-        customViewBuilder: (story) {
-          return Container(
-            alignment: Alignment.center,
-            // color: Colors.yellow,
-            child: Text('${story.currentDuration.inMilliseconds}'),
-          );
-        },
-      ),
+      child: Container(margin: ,),
+      // child: LhStory(
+      //   customViewBuilder: (story) {
+      //     return Container(
+      //       alignment: Alignment.center,
+      //       // color: Colors.yellow,
+      //       child: Text('${story.currentDuration.inMilliseconds}'),
+      //     );
+      //   },
+      // ),
     );
   }
 }
