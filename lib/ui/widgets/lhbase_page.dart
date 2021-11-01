@@ -20,6 +20,7 @@ class LhBasePage extends StatefulWidget {
   final Widget? endDrawer;
   final bool keyboardDimissable;
   final Key? keyScaffold;
+  final bool? resizeToAvoidBottomInset;
 
   const LhBasePage(
       {Key? key,
@@ -38,7 +39,8 @@ class LhBasePage extends StatefulWidget {
       this.endDrawer,
       this.keyScaffold,
       this.keyboardDimissable = false,
-      this.floatingActionButtonAnimator})
+      this.floatingActionButtonAnimator,
+      this.resizeToAvoidBottomInset})
       : super(key: key);
 
   @override
@@ -68,7 +70,6 @@ class _LhBasePageState extends State<LhBasePage> {
               key: widget.keyScaffold,
               body: Stack(
                 children: [
-                  
                   Positioned.fill(
                     child: Column(
                       children: [
@@ -86,15 +87,15 @@ class _LhBasePageState extends State<LhBasePage> {
                       ],
                     ),
                   ),
-                   if (widget.appBarTop != null &&
-                            widget.appBarTop!.behavior ==
-                                LhAppBarBehavior.STACKED) Positioned.fill(
-                    child: Wrap(
-                      children: [
-                        widget.appBarTop as Widget,
-                      ],
+                  if (widget.appBarTop != null &&
+                      widget.appBarTop!.behavior == LhAppBarBehavior.STACKED)
+                    Positioned.fill(
+                      child: Wrap(
+                        children: [
+                          widget.appBarTop as Widget,
+                        ],
+                      ),
                     ),
-                  ),
                   if (widget.bottomSlidingPanel != null)
                     Positioned(
                       child: Align(
@@ -116,6 +117,7 @@ class _LhBasePageState extends State<LhBasePage> {
               appBar: widget.appBar,
               drawer: widget.drawer,
               endDrawer: widget.endDrawer,
+              resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
             ),
           ),
         ),
