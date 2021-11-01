@@ -5,7 +5,7 @@ import 'package:lhbase_v1/lhbase.dart';
 class MediaPickerView extends StatefulWidget {
   final LhExpanableController viewController;
   final MediaPickerController mediaManagerController;
-  final ValueChanged<List<MediaEntity>>? onSelectedChanged;
+  final OnMediaSelectedChanged? onSelectedChanged;
   final ValueChanged<List<MediaEntity>>? onSubmitted;
   const MediaPickerView(
       {Key? key,

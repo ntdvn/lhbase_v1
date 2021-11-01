@@ -6,9 +6,12 @@ import 'package:photo_manager/photo_manager.dart';
 
 enum MediaSelectType { SINGLE, MULTIPLE }
 
+typedef OnMediaSelectedChanged(
+    MediaEntity selected, List<MediaEntity> entities);
+
 class MediaResourceView extends StatefulWidget {
   final MediaPickerController mediaController;
-  final ValueChanged<List<MediaEntity>>? onSelectedChanged;
+  final OnMediaSelectedChanged? onSelectedChanged;
   final SliverGridDelegate? gridDelegate;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
@@ -94,7 +97,8 @@ class _MediaResourceViewState extends State<MediaResourceView> {
       onTap: () {
         widget.mediaController.addSelected(index);
         if (widget.onSelectedChanged != null)
-          widget.onSelectedChanged!(widget.mediaController.selecteds);
+          widget.onSelectedChanged!(widget.mediaController.mediaEntities[index],
+              widget.mediaController.selecteds);
       },
       child: MediaItemWidget(
         entity: widget.mediaController.mediaEntities[index].assetEntity,

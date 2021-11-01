@@ -22,7 +22,7 @@ class _MediaPageState extends State<MediaPage> {
     _lhExpanableController = LhExpanableController(minimizeHeight: 300);
     Get.lazyPut(
         () =>
-            MediaPickerController(mediaType: MediaPickerType.IMAGE, number: 5),
+            MediaPickerController(mediaType: MediaPickerType.IMAGE, number: 0),
         fenix: true);
     _mediaController = Get.find<MediaPickerController>();
     super.initState();
@@ -83,6 +83,10 @@ class _MediaPageState extends State<MediaPage> {
               mediaEntities.clear();
               mediaEntities.addAll(value);
             });
+          },
+          onSelectedChanged: (selected, entities) {
+            print('selected $selected');
+            print('entities $entities');
           },
         )
       ],
