@@ -70,11 +70,11 @@ class _LhStoryViewState extends State<LhStoryView> {
 
   Widget _renderProgressLayer() {
     return Positioned.fill(
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            Stack(
+      child: Column(
+        children: [
+          Container(
+            padding: const EdgeInsets.all(8.0),
+            child: Stack(
               children: [
                 Container(
                   color: Colors.black.withOpacity(0.3),
@@ -104,21 +104,21 @@ class _LhStoryViewState extends State<LhStoryView> {
                 )
               ],
             ),
-            if (widget.customViewBuilder != null)
-              Expanded(child: Container(
-                // color: Colors.transparent,
-                child: GetBuilder<LhStoryController>(
-                  builder: (controller) {
-                    if (widget.customViewBuilder != null)
-                      return widget.customViewBuilder!(
-                          controller.currentStories.getCurrentStory());
-                    else
-                      return Container();
-                  },
-                ),
-              ))
-          ],
-        ),
+          ),
+          if (widget.customViewBuilder != null)
+            Expanded(child: Container(
+              // color: Colors.transparent,
+              child: GetBuilder<LhStoryController>(
+                builder: (controller) {
+                  if (widget.customViewBuilder != null)
+                    return widget.customViewBuilder!(
+                        controller.currentStories.getCurrentStory());
+                  else
+                    return Container();
+                },
+              ),
+            ))
+        ],
       ),
     );
   }
