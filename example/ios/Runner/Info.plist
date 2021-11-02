@@ -43,5 +43,7 @@
 	<false/>
     <key>NSPhotoLibraryUsageDescription</key>
     <string>App need your agree, can visit your album</string>
+    <key>NSPhotoLibraryAddUsageDescription</key>
+    <string>App need your agree, can visit your album</string>
 </dict>
 </plist>

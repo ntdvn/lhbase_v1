@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:get/state_manager.dart';
 import 'package:lhbase_v1/expansion_package/lh_story/models/stories.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
@@ -11,34 +12,62 @@ enum PlaybackState { pause, play, completed }
 class LhStoryController extends GetxController {
   List<Stories> storiesList;
 
+  int get size => storiesList.length;
+
+  Stories get currentStories => storiesList[page];
+
   PageController pageController = LhStoryPageController();
 
-  int currentIndex = 0;
+  RxInt _page = RxInt(0);
 
-  Stories get currentStories => storiesList[currentIndex];
+  int get page => _page.value;
+
+  set page(int currentIndex) {
+    _page.value = currentIndex;
+  }
 
   PlaybackState state = PlaybackState.play;
 
-  Timer? _timer;
+  Timer? _parentTimer;
+  Timer? _childTimer;
+  final VoidCallback? onPageCompleted;
   final VoidCallback? onCompleted;
-  final VoidCallback? onReturned;
-  int totalProgress = 0;
+  final VoidCallback? onPageBack;
+  final VoidCallback? onBack;
+  // int totalProgress = 0;
 
   LhStoryController({
     required this.storiesList,
+    this.onPageCompleted,
     this.onCompleted,
-    this.onReturned,
-  }) {}
+    this.onPageBack,
+    this.onBack,
+  }) {
+    init();
+  }
+
+  init() {
+    pageController.addListener(() {
+      if (pageController.page! % 1 == 0 &&
+          page != pageController.page!.toInt()) {
+        print('pageController.page ${pageController.page}');
+        page = pageController.page!.toInt();
+        currentStories.reset();
+        play();
+      } else {
+        // pause();
+      }
+    });
+  }
 
   void pause() {
     state = PlaybackState.pause;
-    update();
   }
 
   void play() {
-    print('play');
     if (state != PlaybackState.completed) {
       state = PlaybackState.play;
+      // update();
       startTimer();
     }
     // state = PlaybackState.play;
@@ -47,86 +76,84 @@ class LhStoryController extends GetxController {
   }
 
   void next() {
-    var expectedpage = storiesList[currentIndex].currentStory + 1;
-    print('next + expectedpage $expectedpage');
+    var expectedpage = storiesList[page].currentStory + 1;
+    // print('next + expectedpage $expectedpage');
     readyFor(expectedpage);
     update();
   }
 
   void previous() {
-    var expectedpage = storiesList[currentIndex].currentStory -1;
+    var expectedpage = storiesList[page].currentStory - 1;
     readyFor(expectedpage);
     update();
   }
 
   @override
-  void dispose() {
-    print('--------> dispose <----------');
+  void onClose() {
     clearTimer();
+    pageController.dispose();
     super.dispose();
+    super.onClose();
   }
 
   void readyFor(int index) {
     if (index < 0) {
-      if (this.onReturned != null) this.onReturned!();
-    } else if (index > storiesList[currentIndex].stories.length - 1) {
-      if (this.onCompleted != null) this.onCompleted!();
-    } else {
-      if (index >= storiesList[currentIndex].currentStory) {
-        storiesList[currentIndex].getCurrentStory().toCompleted();
+      if (previousPage()) {
+        if (this.onPageBack != null) this.onPageBack!();
       } else {
-        storiesList[currentIndex].getCurrentStory().toReset();
+        if (this.onBack != null) this.onBack!();
       }
-      storiesList[currentIndex].currentStory = index;
-      storiesList[currentIndex].getCurrentStory().currentDuration =
-          Duration.zero;
+    } else if (index > storiesList[page].stories.length - 1) {
+      if (nextPage()) {
+        if (this.onPageCompleted != null) this.onPageCompleted!();
+      } else {
+        if (this.onCompleted != null) this.onCompleted!();
+      }
+    } else {
+      if (index >= storiesList[page].currentStory) {
+        storiesList[page].getCurrentStory().toCompleted();
+      } else {
+        storiesList[page].getCurrentStory().toReset();
+      }
+      storiesList[page].currentStory = index;
+      storiesList[page].getCurrentStory().currentDuration = Duration.zero;
     }
-    print('currentIndex $currentIndex');
-    update();
-
-    //   // if (index >= 0 && index < stories.length) {}
-    //   // if (index == stories.length) {
-    //   //   stories[currentIndex].currentDuration =
-    //   //       stories[currentIndex].duration! - Duration(milliseconds: 1);
-    //   // }
+    play();
   }
 
-  void startTimer() {
+  void startTimer() async {
     clearTimer();
+    await storiesList[page].getCurrentStory().loadContent();
+    // update();
     int maxMilliseconds =
-        storiesList[currentIndex].getCurrentStory().duration!.inMilliseconds;
+        storiesList[page].getCurrentStory().duration!.inMilliseconds;
     int onMilliseconds = maxMilliseconds ~/ 100;
     var oneSec = Duration(milliseconds: onMilliseconds);
-    _timer = new Timer.periodic(
+    _parentTimer = new Timer.periodic(
       oneSec,
       (Timer timer) {
+        _childTimer = timer;
         if (state != PlaybackState.pause) {
-          storiesList[currentIndex].getCurrentStory().currentDuration =
-              Duration(
-                  milliseconds: storiesList[currentIndex]
-                          .getCurrentStory()
-                          .currentDuration
-                          .inMilliseconds +
-                      onMilliseconds);
-          print(storiesList[currentIndex]
-              .getCurrentStory()
-              .currentDuration
-              .inMilliseconds);
-          if (storiesList[currentIndex]
+          storiesList[page].getCurrentStory().step();
+          if (storiesList[page]
                   .getCurrentStory()
                   .currentDuration
                   .inMilliseconds >=
-              storiesList[currentIndex]
-                  .getCurrentStory()
-                  .duration!
-                  .inMilliseconds) {
-            if (currentIndex < storiesList[currentIndex].stories.length - 1) {
+              storiesList[page].getCurrentStory().duration!.inMilliseconds) {
+            if (storiesList[page].canNext()) {
+              _parentTimer!.cancel();
               next();
-              pause();
             } else {
-              if (this.onCompleted != null) {
-                this.onCompleted!();
-                this.state = PlaybackState.completed;
+              clearTimer();
+              if (!nextPage()) {
+                if (this.onCompleted != null) {
+                  this.onCompleted!();
+                  this.state = PlaybackState.completed;
+                }
+              } else {
+                if (this.onPageCompleted != null) {
+                  this.onPageCompleted!();
+                }
               }
             }
             clearTimer();
@@ -134,17 +161,37 @@ class LhStoryController extends GetxController {
         } else {
           clearTimer();
         }
-        totalProgress += onMilliseconds;
         update();
       },
     );
   }
 
   clearTimer() {
-    print('clearTimer');
-    if (_timer != null) {
-      _timer!.cancel();
-      _timer = null;
+    if (_parentTimer != null) {
+      _parentTimer!.cancel();
+      _parentTimer = null;
     }
+    if (_childTimer != null) {
+      _childTimer!.cancel();
+      _childTimer = null;
+    }
+  }
+
+  bool nextPage() {
+    if (page + 1 < size) {
+      pageController.nextPage(
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
+      return true;
+    }
+    return false;
+  }
+
+  bool previousPage() {
+    if (page - 1 >= 0) {
+      pageController.previousPage(
+          duration: Duration(milliseconds: 500), curve: Curves.ease);
+      return true;
+    }
+    return false;
   }
 }

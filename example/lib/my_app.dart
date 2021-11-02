@@ -16,7 +16,7 @@ class MyApp extends LhBaseApp {
         supportedLocales: [Locale('vi', 'VN')],
         translations: TestString(),
         initialBinding: AppBinding(),
-        initialRoute: Routes.initial,
+        initialRoute: Routes.examples,
         getPages: AppPages().routes);
   }
 }

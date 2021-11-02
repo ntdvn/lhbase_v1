@@ -29,6 +29,7 @@ dependencies:
   focus_detector: ^2.0.0
   video_player: ^2.2.5
   camera: ^0.9.4+2
+  image_downloader: ^0.30.0
 
   # simple state management
   # provider: ^6.0.1

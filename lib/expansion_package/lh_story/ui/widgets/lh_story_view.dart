@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
-typedef Widget LhStoryCustomViewBuilder(Story story);
+typedef Widget LhStoryCustomViewBuilder(StoryData story);
 
 class LhStoryView extends StatefulWidget {
   final Stories stories;
@@ -105,8 +105,7 @@ class _LhStoryViewState extends State<LhStoryView> {
               ],
             ),
             if (widget.customViewBuilder != null)
-              Expanded(
-                  child: Container(
+              Expanded(child: Container(
                 // color: Colors.transparent,
                 child: GetBuilder<LhStoryController>(
                   builder: (controller) {
@@ -128,9 +127,10 @@ class _LhStoryViewState extends State<LhStoryView> {
     return Positioned.fill(
       child: GetBuilder<LhStoryController>(
         builder: (controller) {
+          // print('_renderStoryLayer');
           return LhStoryContent(
             key: ObjectKey(0),
-            story: widget.stories.getCurrentStory(),
+            data: widget.stories.getCurrentStory(),
             onReady: () {
               print('onReady');
               controller.play();

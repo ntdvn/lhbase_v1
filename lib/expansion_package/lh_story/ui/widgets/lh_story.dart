@@ -44,4 +44,10 @@ class _LhStoryState extends State<LhStory> {
       ),
     );
   }
+
+  @override
+  void dispose() {
+    Get.delete<LhStoryController>();
+    super.dispose();
+  }
 }
