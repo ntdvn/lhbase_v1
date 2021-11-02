@@ -91,9 +91,14 @@ class LhStoryController extends GetxController {
   @override
   void onClose() {
     clearTimer();
+
+    super.onClose();
+  }
+
+  @override
+  void dispose() {
     pageController.dispose();
     super.dispose();
-    super.onClose();
   }
 
   void readyFor(int index) {
@@ -179,6 +184,7 @@ class LhStoryController extends GetxController {
 
   bool nextPage() {
     if (page + 1 < size) {
+      currentStories.reset();
       pageController.nextPage(
           duration: Duration(milliseconds: 500), curve: Curves.ease);
       return true;

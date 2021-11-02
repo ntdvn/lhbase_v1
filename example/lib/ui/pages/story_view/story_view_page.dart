@@ -22,19 +22,21 @@ class _StoryViewPageState extends State<StoryViewPage> {
           Stories([
             StoryData(
                 image:
-                    'https://thuthuatnhanh.com/wp-content/uploads/2018/07/hinh-nen-khong-gian-vu-tru-cho-dien-thoai.jpg',
-                duration: Duration(seconds: 15)),
+                    'https://cdn.tgdd.vn/2020/05/content/bo-hinh-nen-valorant-dep-mat-cho-may-tinh-dien-thoai-game-thu-khong-nen-bo-qua-11-573x1020-1.jpg'),
             StoryData(
-                widget: Container(child: Text('Page 2'), color: Colors.blue)),
+                image:
+                    'https://i.vietgiaitri.com/2016/11/19/top-20-hinh-nen-chu-de-game-cuc-dep-danh-cho-dien-thoai-6abd00.jpg'),
             StoryData(
-                widget: Container(child: Text('Page 3'), color: Colors.amber)),
+                image:
+                    'https://dean2020.edu.vn/wp-content/uploads/2021/04/anh-nen-game-2.jpg'),
           ]),
           Stories([
             StoryData(
-                widget:
-                    Container(child: Text('Page 1'), color: Colors.cyanAccent)),
+                image:
+                    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTpIPymvX4j2f65KxaG-Dskg96FNNi1vefPjg&usqp=CAU'),
             StoryData(
-                widget: Container(child: Text('Page 2'), color: Colors.red)),
+                image:
+                    'https://1.bp.blogspot.com/-Fq8DR08GXMU/Xrpxg2ukuPI/AAAAAAAAk_0/qwbWHTcLrTkoiPg0QLoxXwhdjSuGvfeGACLcBGAsYHQ/s1600/Hinh-Nen-Game-Thu-Dep%2B%25283%2529.jpg'),
           ]),
         ],
         onPageBack: () {
