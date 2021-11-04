@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lhbase_v1/lhbase.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 class LhStory extends StatefulWidget {
   final LhStoryController controller;
@@ -21,6 +22,11 @@ class _LhStoryState extends State<LhStory> {
   @override
   void initState() {
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
   }
 
   @override

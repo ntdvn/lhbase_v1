@@ -1,0 +1,96 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:lhbase_v1/expansion_package/expansion_package.dart';
+import 'package:lhbase_v1/lhbase.dart';
+
+typedef Widget MessageBuilder();
+
+typedef Widget ActionBuilder(ChatMessage message);
+typedef OnMessagedClicked(ChatMessage message);
+
+class ChatView extends StatefulWidget {
+  final ChatKitController controller;
+  final ActionBuilder? actionBuilder;
+  final MessageBuilder? builder;
+  final OnMessagedClicked? onMessagedClicked;
+  const ChatView(
+      {Key? key,
+      required this.controller,
+      this.actionBuilder,
+      this.builder,
+      this.onMessagedClicked})
+      : super(key: key);
+
+  @override
+  _ChatViewState createState() => _ChatViewState();
+}
+
+class _ChatViewState extends State<ChatView> {
+  @override
+  Widget build(BuildContext context) {
+    return GetBuilder<ChatKitController>(
+      builder: (controller) {
+        return Container(
+          decoration: BoxDecoration(
+              image: controller.themeData.roomThemeData.backgroundImage != null
+                  ? DecorationImage(
+                      image: NetworkImage(
+                          controller.themeData.roomThemeData.backgroundImage!),
+                      fit: BoxFit.cover)
+                  : null,
+              color: controller.themeData.roomThemeData.backgroundColor),
+          child: ListView.builder(
+              reverse: true,
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              itemCount: controller.messages.length,
+              itemBuilder: (context, index) {
+                return Container(
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    mainAxisAlignment:
+                        controller.user == controller.messages[index].user
+                            ? MainAxisAlignment.end
+                            : MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    children: [
+                      Container(
+                          width: 40,
+                          height: 40,
+                          margin: EdgeInsets.only(right: 10),
+                          child: (controller.user !=
+                                          controller.messages[index].user &&
+                                      controller.messages[index].position ==
+                                          ChatBubblePosition.LAST ||
+                                  controller.messages[index].position ==
+                                      ChatBubblePosition.SINGLE)
+                              ? LhAvatar(
+                                  imageUrl:
+                                      controller.messages[index].user.imageUrl)
+                              : SizedBox.shrink()),
+                      Container(
+                          constraints: BoxConstraints(
+                              minWidth: 0, maxWidth: LhValue.messageFullWidth),
+                          child: ChatBubbleWidget(
+                            onTap: () {
+                              if (widget.onMessagedClicked != null) {
+                                widget.onMessagedClicked!(
+                                    controller.messages[index]);
+                              }
+                            },
+                            message: controller.messages[index],
+                            chatBubbleType: controller.messages[index].position,
+                            margin: EdgeInsets.symmetric(vertical: 2),
+                            child: MessageRender(
+                                message: controller.messages[index]),
+                            // child: Text(
+                            //     'asdasdasdasdasdasd\nasdasdasdasdasdasd\n')
+                          )),
+                    ],
+                  ),
+                );
+              }),
+        );
+      },
+    );
+  }
+}

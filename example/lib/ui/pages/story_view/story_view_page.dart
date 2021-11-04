@@ -68,7 +68,11 @@ class _StoryViewPageState extends State<StoryViewPage> {
           return Container(
             alignment: Alignment.center,
             // color: Colors.yellow,
-            child: Text('${story.currentDuration.inMilliseconds}'),
+            child: GestureDetector(
+                onTap: () {
+                  Get.bottomSheet(Container(height: 100, color: Colors.red));
+                },
+                child: Text('${story.currentDuration.inMilliseconds}')),
           );
         },
         controller: _lhStoryController,
