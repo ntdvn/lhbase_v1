@@ -1,5 +1,5 @@
-class Endpoint {
-  Endpoint._();
+class LhEndpoint {
+  LhEndpoint._();
 
   static const BASE_URL = 'http://goldfruit.app365.vn';
 
