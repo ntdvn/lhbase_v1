@@ -7,9 +7,9 @@ import 'package:lhbase_v1_example/my_app.dart';
 
 void main() {
   Initializer(initServices: () async {
-    print('hehe');
-    Get.put<dynamic>(LhCommonRepository(DioProvider.instance()),
-        tag: 'commonRepository');
+    // print('hehe');
+    // Get.put<dynamic>(LhCommonRepository(DioProvider.instance()),
+    //     tag: 'commonRepository');
   }).init(() {
     runApp(const MyApp());
   });

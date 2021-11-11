@@ -8,6 +8,5 @@ class ChatUser extends Equatable {
   ChatUser({required this.id, required this.username, required this.imageUrl});
 
   @override
-  // TODO: implement props
   List<Object?> get props => [id, username];
 }
