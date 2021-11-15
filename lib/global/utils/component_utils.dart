@@ -14,7 +14,7 @@ class ComponentUtils {
       DateTime? minimumDate,
       DateTime? initialDateTime,
       DateTime? maximumDate}) {
-    DateTime datetime = DateTime.now();
+    DateTime datetime = maximumDate!;
     FocusScope.of(context).unfocus();
     showCupertinoModalPopup(
         context: context,
