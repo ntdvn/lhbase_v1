@@ -5,6 +5,7 @@ import 'package:lhbase_v1/lhbase.dart';
 
 class LhBasePage extends StatefulWidget {
   final Widget child;
+  final Color? backgroundColor;
   final Widget? floatingActionButton;
   final WillPopCallback? onWillPop;
   final PreferredSizeWidget? appBar;
@@ -25,6 +26,7 @@ class LhBasePage extends StatefulWidget {
   const LhBasePage(
       {Key? key,
       required this.child,
+      this.backgroundColor = Colors.white,
       this.onWillPop,
       this.floatingActionButton,
       this.appBar,
@@ -68,48 +70,51 @@ class _LhBasePageState extends State<LhBasePage> {
                     : 0),
             child: Scaffold(
               key: widget.keyScaffold,
-              body: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Column(
-                      children: [
-                        if (widget.appBarTop != null &&
-                            widget.appBarTop!.behavior ==
-                                LhAppBarBehavior.SCROLLED)
-                          widget.appBarTop as Widget,
-                        Expanded(child: widget.child),
-                        if (widget.appBarBottom != null)
-                          widget.appBarBottom as Widget,
-                        if (widget.bottomSlidingPanel != null)
-                          Container(
-                              height: widget
-                                  .bottomSlidingPanel!.controller.currentHeight)
-                      ],
-                    ),
-                  ),
-                  if (widget.appBarTop != null &&
-                      widget.appBarTop!.behavior == LhAppBarBehavior.STACKED)
+              body: Container(
+                color: widget.backgroundColor,
+                child: Stack(
+                  children: [
                     Positioned.fill(
-                      child: Wrap(
+                      child: Column(
                         children: [
-                          widget.appBarTop as Widget,
+                          if (widget.appBarTop != null &&
+                              widget.appBarTop!.behavior ==
+                                  LhAppBarBehavior.SCROLLED)
+                            widget.appBarTop as Widget,
+                          Expanded(child: widget.child),
+                          if (widget.appBarBottom != null)
+                            widget.appBarBottom as Widget,
+                          if (widget.bottomSlidingPanel != null)
+                            Container(
+                                height: widget.bottomSlidingPanel!.controller
+                                    .currentHeight)
                         ],
                       ),
                     ),
-                  if (widget.bottomSlidingPanel != null)
-                    Positioned(
-                      child: Align(
-                        alignment: Alignment.bottomCenter,
+                    if (widget.appBarTop != null &&
+                        widget.appBarTop!.behavior == LhAppBarBehavior.STACKED)
+                      Positioned.fill(
                         child: Wrap(
                           children: [
-                            Container(
-                                color: Colors.red,
-                                child: widget.bottomSlidingPanel as Widget),
+                            widget.appBarTop as Widget,
                           ],
                         ),
                       ),
-                    )
-                ],
+                    if (widget.bottomSlidingPanel != null)
+                      Positioned(
+                        child: Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Wrap(
+                            children: [
+                              Container(
+                                  color: Colors.red,
+                                  child: widget.bottomSlidingPanel as Widget),
+                            ],
+                          ),
+                        ),
+                      )
+                  ],
+                ),
               ),
               floatingActionButton: widget.floatingActionButton,
               floatingActionButtonLocation: widget.floatingActionButtonLocation,

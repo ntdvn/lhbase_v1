@@ -54,6 +54,7 @@ class _ChatViewState extends State<ChatView> {
               NotificationListener<ScrollNotification>(
                 onNotification: _handleScrollNotification,
                 child: ListView.builder(
+                    addAutomaticKeepAlives: true,
                     controller: _controller,
                     reverse: true,
                     padding: EdgeInsets.symmetric(horizontal: 10),

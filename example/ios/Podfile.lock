@@ -1,4 +1,6 @@
 PODS:
+  - audio_session (0.0.1):
+    - Flutter
   - camera (0.0.1):
     - Flutter
   - connectivity (0.0.1):
@@ -9,6 +11,8 @@ PODS:
     - FMDB/standard (= 2.7.5)
   - FMDB/standard (2.7.5)
   - image_downloader (0.0.1):
+    - Flutter
+  - just_audio (0.0.1):
     - Flutter
   - lhbase_v1 (0.0.1):
     - Flutter
@@ -27,10 +31,12 @@ PODS:
     - Flutter
 
 DEPENDENCIES:
+  - audio_session (from `.symlinks/plugins/audio_session/ios`)
   - camera (from `.symlinks/plugins/camera/ios`)
   - connectivity (from `.symlinks/plugins/connectivity/ios`)
   - Flutter (from `Flutter`)
   - image_downloader (from `.symlinks/plugins/image_downloader/ios`)
+  - just_audio (from `.symlinks/plugins/just_audio/ios`)
   - lhbase_v1 (from `.symlinks/plugins/lhbase_v1/ios`)
   - path_provider (from `.symlinks/plugins/path_provider/ios`)
   - photo_manager (from `.symlinks/plugins/photo_manager/ios`)
@@ -44,6 +50,8 @@ SPEC REPOS:
     - Reachability
 
 EXTERNAL SOURCES:
+  audio_session:
+    :path: ".symlinks/plugins/audio_session/ios"
   camera:
     :path: ".symlinks/plugins/camera/ios"
   connectivity:
@@ -52,6 +60,8 @@ EXTERNAL SOURCES:
     :path: Flutter
   image_downloader:
     :path: ".symlinks/plugins/image_downloader/ios"
+  just_audio:
+    :path: ".symlinks/plugins/just_audio/ios"
   lhbase_v1:
     :path: ".symlinks/plugins/lhbase_v1/ios"
   path_provider:
@@ -66,11 +76,13 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/video_player/ios"
 
 SPEC CHECKSUMS:
+  audio_session: 4f3e461722055d21515cf3261b64c973c062f345
   camera: fe33292aff715a981eb34d7ce7b35b54337ff34c
   connectivity: c4130b2985d4ef6fd26f9702e886bd5260681467
   Flutter: 50d75fe2f02b26cc09d224853bb45737f8b3214a
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   image_downloader: 73e190d6c9f286f2649554051348d9cb319cd4b3
+  just_audio: baa7252489dbcf47a4c7cc9ca663e9661c99aafa
   lhbase_v1: afb6fee0f27693b48a590059867360004430d8f7
   path_provider: d1e9807085df1f9cc9318206cd649dc0b76be3de
   photo_manager: 84fa94fbeb82e607333ea9a13c43b58e0903a463
