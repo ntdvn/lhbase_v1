@@ -135,7 +135,6 @@ class _ChatViewState extends State<ChatView> {
     if (notification is ScrollEndNotification) {
       if (_controller.position.extentAfter == 0) {
         if (widget.onLoadMore != null) widget.onLoadMore!();
-        widget.onLoadMore!();
       }
     }
     return false;
