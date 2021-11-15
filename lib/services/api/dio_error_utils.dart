@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart' as Material;
 
 class DioErrorUtils {
   static String getErrorMessage(int code) {
@@ -74,7 +75,7 @@ class DioErrorUtils {
   }
 
   static handlerError(DioError error,
-      {VoidCallback? onUnauthorizedNavigate,
+      {Material.VoidCallback? onUnauthorizedNavigate,
       Function(String errorMessage)? onErrorHandler}) {
     String errorMessage = '';
 
