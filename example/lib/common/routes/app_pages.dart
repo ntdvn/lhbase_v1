@@ -1,6 +1,5 @@
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
-import 'package:lhbase_v1_example/ui/pages/chat/chat_page.dart';
 import 'package:lhbase_v1_example/ui/pages/pages.dart';
 
 part 'app_routes.dart';
@@ -18,6 +17,7 @@ class AppPages extends LhPages {
           name: Routes.video_play_back, page: () => const VideoPlayBackPage()),
       GetPage(name: Routes.media, page: () => const MediaPage()),
       GetPage(name: Routes.chat, page: () => const ChatPage()),
+      GetPage(name: Routes.toolbar, page: () => const ToolbarPage()),
     ];
   }
 }

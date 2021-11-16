@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/controllers/controllers.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
 typedef List<ChatKitAction> ActionsBuilder(
     ChatKitState state, ChatKitOutput output);
 
 class ChatToolbar extends StatefulWidget {
-  final TextEditingController controller;
+  final ChatToolbarController controller;
+  // final TextEditingController textEditController;
   final FocusNode focusNode;
-  final Widget? sendAction;
   final ActionsBuilder? leftActionsBuilder;
   final ActionsBuilder? rightActionsBuilder;
   final ValueChanged<String>? onInputChanged;
@@ -17,8 +18,8 @@ class ChatToolbar extends StatefulWidget {
   const ChatToolbar(
       {Key? key,
       required this.controller,
+
       required this.focusNode,
-      required this.sendAction,
       this.leftActionsBuilder,
       this.rightActionsBuilder,
       this.onInputChanged,
@@ -30,23 +31,22 @@ class ChatToolbar extends StatefulWidget {
 }
 
 class _ChatToolbarState extends State<ChatToolbar> {
-  late ChatKitController _controller;
+  
 
   Duration _animTime = Duration(milliseconds: 250);
 
   @override
   void initState() {
-    _controller = Get.find<ChatKitController>();
     widget.focusNode.addListener(() {
-      _controller.changeFocus(widget.focusNode.hasFocus);
-      _controller.changeToolbarRightFlag(!widget.focusNode.hasFocus);
+      widget.controller.changeFocus(widget.focusNode.hasFocus);
+      widget.controller.changeToolbarRightFlag(!widget.focusNode.hasFocus);
     });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<ChatKitController>(
+    return GetBuilder<ChatToolbarController>(
       builder: (controller) {
         return Container(
           width: double.infinity,
@@ -82,7 +82,7 @@ class _ChatToolbarState extends State<ChatToolbar> {
   }
 
   Widget _renderActions(
-      ChatKitController controller, List<ChatKitAction>? actions) {
+      ChatToolbarController controller, List<ChatKitAction>? actions) {
     List<ChatKitAction> mActions;
     if (actions == null)
       mActions = [];
@@ -107,7 +107,7 @@ class _ChatToolbarState extends State<ChatToolbar> {
     );
   }
 
-  Widget _renderInput(ChatKitController controller) {
+  Widget _renderInput(ChatToolbarController controller) {
     return Padding(
       padding: EdgeInsets.only(top: 2, bottom: 6, left: 10, right: 10),
       child: InkWell(
@@ -126,7 +126,7 @@ class _ChatToolbarState extends State<ChatToolbar> {
               Expanded(
                   child: TextField(
                 style: TextStyle(fontSize: 18),
-                controller: widget.controller,
+                // controller: widget.controller,
                 onChanged: (value) {
                   controller.changeText(value);
                 },

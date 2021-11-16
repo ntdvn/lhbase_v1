@@ -8,4 +8,5 @@ abstract class Routes {
   static const story_view = '/story_view';
   static const media = '/media';
    static const chat = '/chat';
+   static const toolbar = '/toolbar';
 }

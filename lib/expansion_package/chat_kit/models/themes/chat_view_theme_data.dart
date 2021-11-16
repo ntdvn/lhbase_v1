@@ -11,9 +11,5 @@ class ChatViewThemeData {
   TextMessageThemeData mTextMessageThemeData =
       TextMessageThemeData(textStyle: TextStyle(color: Colors.white));
 
-  // TOOLBAR
-  ToolbarThemeData toolbarThemeData = ToolbarThemeData();
-  ChatActionTheme actionTheme = ChatActionTheme.defaultTheme;
-
   ChatViewThemeData() {}
 }

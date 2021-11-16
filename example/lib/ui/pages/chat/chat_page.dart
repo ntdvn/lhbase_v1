@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/ui.dart';
 import 'package:lhbase_v1/expansion_package/expansion_package.dart';
 import 'package:lhbase_v1/ui/ui.dart';
 
@@ -12,6 +13,7 @@ class ChatPage extends StatefulWidget {
 
 class _ChatPageState extends State<ChatPage> {
   late ChatKitController _chatKitController;
+  late ChatToolbarController _chatToolbarController;
 
   var dat = ChatUser(
       username: "Tiot-1",
@@ -32,6 +34,7 @@ class _ChatPageState extends State<ChatPage> {
             'https://i.pinimg.com/736x/70/ed/da/70edda522b0e5673b231dad1b425b904.jpg',
         id: 1);
     Get.put(ChatKitController(dat));
+    _chatToolbarController = Get.put(ChatToolbarController());
     _chatKitController = Get.find<ChatKitController>();
 
     _chatKitController.messages = [
@@ -246,35 +249,36 @@ class _ChatPageState extends State<ChatPage> {
           },
           onMessagedClicked: (message) {},
           toolBar: ChatToolbar(
-              rightActionsBuilder: (state, output) {
-                return [
-                  if (output.text.isNotEmpty)
-                    ChatKitAction(widget: Icon(Icons.send), onTap: () {}),
-                ];
-              },
-              leftActionsBuilder: (state, output) {
-                return state.toolbarRightFlag
-                    ? [
-                        ChatKitAction(
-                            widget: Icon(Icons.add_circle), onTap: () {}),
-                        ChatKitAction(widget: Icon(Icons.mic), onTap: () {}),
-                        ChatKitAction(
-                            widget: Icon(Icons.camera_alt), onTap: () {}),
-                        ChatKitAction(widget: Icon(Icons.image), onTap: () {}),
-                      ]
-                    : [
-                        ChatKitAction(
-                            widget: Icon(Icons.chevron_right),
-                            onTap: () {
-                              _chatKitController.changeToolbarRightFlag(true);
-                              print(
-                                  "chatkit ${_chatKitController.state.toolbarRightFlag}");
-                            }),
-                      ];
-              },
-              controller: TextEditingController(),
-              focusNode: FocusNode(),
-              sendAction: Container()),
+            controller: _chatToolbarController,
+            rightActionsBuilder: (state, output) {
+              return [
+                if (output.text.isNotEmpty)
+                  ChatKitAction(widget: Icon(Icons.send), onTap: () {}),
+              ];
+            },
+            leftActionsBuilder: (state, output) {
+              return state.toolbarRightFlag
+                  ? [
+                      ChatKitAction(
+                          widget: Icon(Icons.add_circle), onTap: () {}),
+                      ChatKitAction(widget: Icon(Icons.mic), onTap: () {}),
+                      ChatKitAction(
+                          widget: Icon(Icons.camera_alt), onTap: () {}),
+                      ChatKitAction(widget: Icon(Icons.image), onTap: () {}),
+                    ]
+                  : [
+                      ChatKitAction(
+                          widget: Icon(Icons.chevron_right),
+                          onTap: () {
+                            // _chatKitController.changeToolbarRightFlag(true);
+                            // print(
+                            //     "chatkit ${_chatKitController.state.toolbarRightFlag}");
+                          }),
+                    ];
+            },
+            // controller: TextEditingController(),
+            focusNode: FocusNode(),
+          ),
         ));
   }
 

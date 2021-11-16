@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_kit_action.dart';
+import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/ui.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
 class ChatAction extends StatelessWidget {
@@ -9,7 +10,7 @@ class ChatAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetX<ChatKitController>(
+    return GetX<ChatToolbarController>(
       builder: (controller) {
         return Stack(
           children: [
