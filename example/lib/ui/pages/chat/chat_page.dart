@@ -270,7 +270,7 @@ class _ChatPageState extends State<ChatPage> {
                       ChatKitAction(
                           widget: Icon(Icons.chevron_right),
                           onTap: () {
-                            // _chatKitController.changeToolbarRightFlag(true);
+                            _chatToolbarController.changeToolbarRightFlag(true);
                             // print(
                             //     "chatkit ${_chatKitController.state.toolbarRightFlag}");
                           }),

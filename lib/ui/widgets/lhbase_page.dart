@@ -9,8 +9,6 @@ class LhBasePage extends StatefulWidget {
   final Widget? floatingActionButton;
   final WillPopCallback? onWillPop;
   final PreferredSizeWidget? appBar;
-  final bool isPaddingTop;
-  final bool isPaddingBottom;
   final LhAppBar? appBarTop;
   final Widget? appBarBottom;
   final LhSlidingPanel? bottomSlidingPanel;
@@ -30,8 +28,6 @@ class LhBasePage extends StatefulWidget {
       this.onWillPop,
       this.floatingActionButton,
       this.appBar,
-      this.isPaddingTop = false,
-      this.isPaddingBottom = false,
       this.appBarTop,
       this.appBarBottom,
       this.bottomSlidingPanel,
@@ -60,70 +56,61 @@ class _LhBasePageState extends State<LhBasePage> {
         keyboardDimissable: widget.keyboardDimissable,
         child: WillPopScope(
           onWillPop: widget.onWillPop,
-          child: Container(
-            padding: EdgeInsets.only(
-                top: widget.isPaddingTop
-                    ? MediaQuery.of(context).padding.top
-                    : 0,
-                bottom: widget.isPaddingBottom
-                    ? MediaQuery.of(context).padding.bottom
-                    : 0),
-            child: Scaffold(
-              key: widget.keyScaffold,
-              body: Container(
-                color: widget.backgroundColor,
-                child: Stack(
-                  children: [
+          child: Scaffold(
+            key: widget.keyScaffold,
+            body: Container(
+              color: widget.backgroundColor,
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: Column(
+                      children: [
+                        if (widget.appBarTop != null &&
+                            widget.appBarTop!.behavior ==
+                                LhAppBarBehavior.SCROLLED)
+                          widget.appBarTop as Widget,
+                        Expanded(child: widget.child),
+                        if (widget.appBarBottom != null)
+                          widget.appBarBottom as Widget,
+                        if (widget.bottomSlidingPanel != null)
+                          Container(
+                              height: widget
+                                  .bottomSlidingPanel!.controller.currentHeight)
+                      ],
+                    ),
+                  ),
+                  if (widget.appBarTop != null &&
+                      widget.appBarTop!.behavior == LhAppBarBehavior.STACKED)
                     Positioned.fill(
-                      child: Column(
+                      child: Wrap(
                         children: [
-                          if (widget.appBarTop != null &&
-                              widget.appBarTop!.behavior ==
-                                  LhAppBarBehavior.SCROLLED)
-                            widget.appBarTop as Widget,
-                          Expanded(child: widget.child),
-                          if (widget.appBarBottom != null)
-                            widget.appBarBottom as Widget,
-                          if (widget.bottomSlidingPanel != null)
-                            Container(
-                                height: widget.bottomSlidingPanel!.controller
-                                    .currentHeight)
+                          widget.appBarTop as Widget,
                         ],
                       ),
                     ),
-                    if (widget.appBarTop != null &&
-                        widget.appBarTop!.behavior == LhAppBarBehavior.STACKED)
-                      Positioned.fill(
+                  if (widget.bottomSlidingPanel != null)
+                    Positioned(
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
                         child: Wrap(
                           children: [
-                            widget.appBarTop as Widget,
+                            Container(
+                                color: Colors.red,
+                                child: widget.bottomSlidingPanel as Widget),
                           ],
                         ),
                       ),
-                    if (widget.bottomSlidingPanel != null)
-                      Positioned(
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: Wrap(
-                            children: [
-                              Container(
-                                  color: Colors.red,
-                                  child: widget.bottomSlidingPanel as Widget),
-                            ],
-                          ),
-                        ),
-                      )
-                  ],
-                ),
+                    )
+                ],
               ),
-              floatingActionButton: widget.floatingActionButton,
-              floatingActionButtonLocation: widget.floatingActionButtonLocation,
-              floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
-              appBar: widget.appBar,
-              drawer: widget.drawer,
-              endDrawer: widget.endDrawer,
-              resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
             ),
+            floatingActionButton: widget.floatingActionButton,
+            floatingActionButtonLocation: widget.floatingActionButtonLocation,
+            floatingActionButtonAnimator: widget.floatingActionButtonAnimator,
+            appBar: widget.appBar,
+            drawer: widget.drawer,
+            endDrawer: widget.endDrawer,
+            resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
           ),
         ),
       ),
