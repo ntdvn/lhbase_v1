@@ -35,7 +35,11 @@ class _ChatPageState extends State<ChatPage> {
     _chatKitController = Get.find<ChatKitController>();
 
     _chatKitController.messages = [
-      ChatMessage(user: nam, id: 1, recoderUrl: 'https://tainhac123.com/listen/em-cua-ngay-hom-qua-son-tung-m-tp.9Fd4zVvPMIbf.html'),
+      ChatMessage(
+          user: nam,
+          id: 1,
+          recoderUrl:
+              'https://tainhac123.com/listen/em-cua-ngay-hom-qua-son-tung-m-tp.9Fd4zVvPMIbf.html'),
       // ChatMessage(user: dat, id: 1, recoderUrl: 'dat day'),
       // ChatMessage(user: dat, id: 1, imageUrls: [
       //   'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg'
@@ -235,15 +239,42 @@ class _ChatPageState extends State<ChatPage> {
         child: ChatView(
           controller: _chatKitController,
           onLoadMore: () {
-            print('onLoadMore');
             _chatKitController.isLoading = true;
             Future.delayed(Duration(seconds: 2), () {
               _chatKitController.isLoading = false;
             });
           },
-          onMessagedClicked: (message) {
-            print('message $message');
-          },
+          onMessagedClicked: (message) {},
+          toolBar: ChatToolbar(
+              rightActionsBuilder: (state, output) {
+                return [
+                  if (output.text.isNotEmpty)
+                    ChatKitAction(widget: Icon(Icons.send), onTap: () {}),
+                ];
+              },
+              leftActionsBuilder: (state, output) {
+                return state.toolbarRightFlag
+                    ? [
+                        ChatKitAction(
+                            widget: Icon(Icons.add_circle), onTap: () {}),
+                        ChatKitAction(widget: Icon(Icons.mic), onTap: () {}),
+                        ChatKitAction(
+                            widget: Icon(Icons.camera_alt), onTap: () {}),
+                        ChatKitAction(widget: Icon(Icons.image), onTap: () {}),
+                      ]
+                    : [
+                        ChatKitAction(
+                            widget: Icon(Icons.chevron_right),
+                            onTap: () {
+                              _chatKitController.changeToolbarRightFlag(true);
+                              print(
+                                  "chatkit ${_chatKitController.state.toolbarRightFlag}");
+                            }),
+                      ];
+              },
+              controller: TextEditingController(),
+              focusNode: FocusNode(),
+              sendAction: Container()),
         ));
   }
 

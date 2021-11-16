@@ -5,3 +5,5 @@ export 'chat_message_render.dart';
 export 'chat_text.dart';
 export 'chat_images.dart';
 export 'chat_recoder.dart';
+
+export 'toolbar/toolbar.dart';

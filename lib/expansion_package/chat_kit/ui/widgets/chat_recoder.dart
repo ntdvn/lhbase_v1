@@ -32,7 +32,6 @@ class _ChatRecoderState extends State<ChatRecoder>
   }
 
   init() async {
-    print('init');
     var a = await player.setUrl(widget.message.recoderUrl!);
     await player.setSpeed(1.0);
     setState(() {
@@ -46,14 +45,13 @@ class _ChatRecoderState extends State<ChatRecoder>
     //   });
     // });
     player.positionStream.listen((duration) {
-      print('positionStream ${duration.inSeconds} ');
+      // print('positionStream ${duration.inSeconds} ');
       setState(() {
         // widthPerSecond = _widgetSize!.width / duration.inSeconds;
         _position = duration;
       });
 
       if (_position!.inSeconds == _duration!.inSeconds) {
-        print('bang nhau');
         player.seek(Duration.zero);
         player.pause();
       }
@@ -69,8 +67,8 @@ class _ChatRecoderState extends State<ChatRecoder>
   @override
   Widget build(BuildContext context) {
     if (_position != null && _duration != null) {
-      print('_position!.inSeconds: ${_position!.inSeconds}');
-      print('_duration!.inSeconds: ${_duration!.inSeconds}');
+      // print('_position!.inSeconds: ${_position!.inSeconds}');
+      // print('_duration!.inSeconds: ${_duration!.inSeconds}');
       print(
           'hee is ok ${_position != null && _duration != null ? _position!.inSeconds / _duration!.inSeconds : 0}');
     }
