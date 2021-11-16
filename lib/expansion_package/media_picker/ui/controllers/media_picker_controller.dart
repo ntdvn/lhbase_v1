@@ -16,12 +16,14 @@ class MediaPickerController extends GetxController {
   final int number;
   final int initLoadCount;
   final int loadCount;
+  final bool cameraPicker;
 
   MediaPickerController(
       {this.mediaType = MediaPickerType.IMAGE,
       this.number = 1,
       this.initLoadCount = 47,
-      this.loadCount = 23}) {
+      this.loadCount = 23,
+      this.cameraPicker = false}) {
     switch (this.mediaType) {
       case MediaPickerType.IMAGE:
         type = RequestType.image;

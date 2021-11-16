@@ -21,8 +21,8 @@ class _MediaPageState extends State<MediaPage> {
   void initState() {
     _lhExpanableController = LhExpanableController(minimizeHeight: 300);
     Get.lazyPut(
-        () =>
-            MediaPickerController(mediaType: MediaPickerType.IMAGE, number: 0),
+        () => MediaPickerController(
+            mediaType: MediaPickerType.IMAGE, number: 0, cameraPicker: true),
         fenix: true);
     _mediaController = Get.find<MediaPickerController>();
     super.initState();
@@ -64,31 +64,33 @@ class _MediaPageState extends State<MediaPage> {
               ),
             )),
         MediaPickerView(
-          viewController: _lhExpanableController,
-          mediaManagerController: _mediaController,
-          // onSubmitted: (value) {
-          //   setState(() {
-          //     mediaEntities = value;
-          //     print('onSubmitted ${mediaEntities.length}');
-          //   });
-          // },
-          // onSelectedChanged: (value) {
-          //    setState(() {
-          //     mediaEntities = value;
-          //     print('onSubmitted ${mediaEntities.length}');
-          //   });
-          // },
-          onSubmitted: (value) {
-            setState(() {
-              mediaEntities.clear();
-              mediaEntities.addAll(value);
-            });
-          },
-          onSelectedChanged: (selected, entities) {
-            print('selected $selected');
-            print('entities $entities');
-          },
-        )
+            viewController: _lhExpanableController,
+            mediaManagerController: _mediaController,
+            // onSubmitted: (value) {
+            //   setState(() {
+            //     mediaEntities = value;
+            //     print('onSubmitted ${mediaEntities.length}');
+            //   });
+            // },
+            // onSelectedChanged: (value) {
+            //    setState(() {
+            //     mediaEntities = value;
+            //     print('onSubmitted ${mediaEntities.length}');
+            //   });
+            // },
+            onSubmitted: (value) {
+              setState(() {
+                mediaEntities.clear();
+                mediaEntities.addAll(value);
+              });
+            },
+            onSelectedChanged: (selected, entities) {
+              print('selected $selected');
+              print('entities $entities');
+            },
+            onCameraTap: () {
+              print("object");
+            })
       ],
     );
   }

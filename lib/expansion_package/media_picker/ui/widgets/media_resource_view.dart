@@ -15,6 +15,7 @@ class MediaResourceView extends StatefulWidget {
   final SliverGridDelegate? gridDelegate;
   final ScrollPhysics? physics;
   final bool shrinkWrap;
+  final VoidCallback? onCameraTap;
 
   const MediaResourceView(
       {Key? key,
@@ -22,7 +23,8 @@ class MediaResourceView extends StatefulWidget {
       this.onSelectedChanged,
       this.gridDelegate,
       this.physics,
-      this.shrinkWrap = false})
+      this.shrinkWrap = false,
+      this.onCameraTap})
       : super(key: key);
 
   @override
@@ -36,20 +38,36 @@ class _MediaResourceViewState extends State<MediaResourceView> {
       builder: (controller) {
         return NotificationListener<ScrollNotification>(
           onNotification: _handleScrollNotification,
-          child: GridView.builder(
+          child: GridView(
             controller: _controller,
             physics: widget.physics ?? ScrollPhysics(),
             shrinkWrap: widget.shrinkWrap,
             padding:
                 EdgeInsets.only(bottom: MediaQuery.of(context).padding.bottom),
+            children: [
+              if (controller.cameraPicker)
+                LhInkwell(
+                  onTap: widget.onCameraTap,
+                  borderRadius: BorderRadius.zero,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                  ),
+                  child: Icon(
+                    Icons.camera_alt_rounded,
+                    color: Colors.white,
+                  ),
+                ),
+              ...List.generate(controller.mediaEntities.length,
+                  (index) => _buildItem(controller.mediaEntities, index))
+            ],
             // itemCount: controller.showItemCount,
-            itemCount: controller.mediaEntities.length,
+            // itemCount: controller.mediaEntities.length,
             gridDelegate: widget.gridDelegate ??
                 SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4, mainAxisSpacing: 1, crossAxisSpacing: 1),
-            itemBuilder: (context, index) {
-              return _buildItem(controller.mediaEntities, index);
-            },
+            // itemBuilder: (context, index) {
+            //   return _buildItem(controller.mediaEntities, index);
+            // },
           ),
         );
       },
@@ -84,11 +102,6 @@ class _MediaResourceViewState extends State<MediaResourceView> {
 
   Widget _buildItem(List<MediaEntity> listValue, int index) {
     final list = listValue;
-    // if (list.length == index) {
-    //   onLoadMore();
-    //   return MediaLoading();
-    // }
-
     if (index > list.length) {
       return Container();
     }

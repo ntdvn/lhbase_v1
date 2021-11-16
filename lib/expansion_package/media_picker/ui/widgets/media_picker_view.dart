@@ -7,12 +7,14 @@ class MediaPickerView extends StatefulWidget {
   final MediaPickerController mediaManagerController;
   final OnMediaSelectedChanged? onSelectedChanged;
   final ValueChanged<List<MediaEntity>>? onSubmitted;
+  final VoidCallback? onCameraTap;
   const MediaPickerView(
       {Key? key,
       required this.viewController,
       required this.mediaManagerController,
       this.onSelectedChanged,
-      this.onSubmitted})
+      this.onSubmitted,
+      this.onCameraTap})
       : super(key: key);
 
   @override
@@ -43,6 +45,7 @@ class _MediaPickerViewState extends State<MediaPickerView> {
               MediaResourceView(
                 mediaController: widget.mediaManagerController,
                 onSelectedChanged: widget.onSelectedChanged,
+                onCameraTap: widget.onCameraTap,
               ),
               Positioned.fill(
                   child: Align(
