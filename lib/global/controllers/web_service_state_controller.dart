@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class WebServiceStateController extends GetxController {
@@ -10,10 +11,23 @@ class WebServiceStateController extends GetxController {
 
   pushLoading() {
     loading.value++;
+    if (isLoading() && Get.isDialogOpen != true) {
+      Get.dialog(Container(
+        color: Colors.transparent,
+        child: GestureDetector(
+          onTap: () {},
+          child: Center(child: CircularProgressIndicator()),
+        ),
+      ));
+    }
   }
 
   popLoading() {
     loading.value > 0 ? loading.value-- : loading.value = 0;
+    if (!this.isLoading() && Get.isDialogOpen == true) {
+      Get.back();
+    }
+    print('popLoading ${loading.value}');
   }
 
   bool isLoading() {
