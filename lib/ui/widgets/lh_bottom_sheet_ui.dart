@@ -9,6 +9,7 @@ class LhBottomSheetUi extends StatelessWidget {
   final TextStyle? titleStyle;
   final Color? backgroundColor;
   final Color? color;
+  final double? heightTitle;
   const LhBottomSheetUi(
       {Key? key,
       required this.child,
@@ -16,7 +17,8 @@ class LhBottomSheetUi extends StatelessWidget {
       this.right,
       this.title,
       this.titleStyle,
-      this.backgroundColor, this.color = Colors.white})
+      this.backgroundColor,
+      this.color = Colors.white, this.heightTitle})
       : super(key: key);
 
   @override
@@ -48,7 +50,7 @@ class LhBottomSheetUi extends StatelessWidget {
               child: Column(
                 children: [
                   Container(
-                    height: 40,
+                    height:heightTitle?? 40,
                     child: Stack(
                       children: [
                         Row(
@@ -88,7 +90,6 @@ class LhBottomSheetUi extends StatelessWidget {
                   Flexible(
                     flex: 9,
                     child: Container(
-
                       // padding: EdgeInsets.only(
                       //     bottom: MediaQuery.of(context)
                       //         .padding
