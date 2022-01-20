@@ -69,9 +69,10 @@ class _LhAdvancedInputState extends State<LhAdvancedInput> {
       });
     }
 
-    widget.controller.addListener(() {
-      setState(() {});
-    });
+    // widget.controller.addListener(() {
+    //   if (!mounted) return;
+    //   setState(() {});
+    // });
     super.initState();
   }
 
@@ -89,9 +90,11 @@ class _LhAdvancedInputState extends State<LhAdvancedInput> {
               isFocused: _inputIsFocused)),
         AnimatedContainer(
           margin: widget.inputMargin,
-          decoration: widget.builderContainer!=null ? widget.builderContainer!(LhInputBuilder(
-              inputLength: widget.controller.text.length,
-              isFocused: _inputIsFocused)) : null,
+          decoration: widget.builderContainer != null
+              ? widget.builderContainer!(LhInputBuilder(
+                  inputLength: widget.controller.text.length,
+                  isFocused: _inputIsFocused))
+              : null,
           duration: Duration(milliseconds: 300),
           child: Row(
             children: [
