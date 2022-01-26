@@ -186,7 +186,7 @@ class LhStoryController extends GetxController {
     if (page + 1 < size) {
       currentStories.reset();
       pageController.nextPage(
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
+          duration: Duration(seconds: 1), curve: Curves.ease);
       return true;
     }
     return false;
@@ -195,7 +195,7 @@ class LhStoryController extends GetxController {
   bool previousPage() {
     if (page - 1 >= 0) {
       pageController.previousPage(
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
+          duration: Duration(seconds: 1), curve: Curves.ease);
       return true;
     }
     return false;
