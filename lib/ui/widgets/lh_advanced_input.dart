@@ -12,6 +12,7 @@ class LhAdvancedInput extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextStyle? formTextStyle;
   final String? hint;
+  final bool? enable;
   final String? initialValue;
   final TextStyle? formHintStyle;
   final TextInputType? keyboardType;
@@ -36,6 +37,7 @@ class LhAdvancedInput extends StatefulWidget {
     this.inputFormatters,
     this.formTextStyle,
     this.hint,
+    this.enable,
     this.initialValue,
     this.formHintStyle,
     this.keyboardType,
@@ -109,6 +111,7 @@ class _LhAdvancedInputState extends State<LhAdvancedInput> {
                   line: widget.line,
                   focusNode: widget.focusNode,
                   controller: widget.controller,
+                  enable: widget.enable,
                   onChanged: (value) {
                     if (widget.onChanged != null) widget.onChanged!(value);
                   },

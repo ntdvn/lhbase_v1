@@ -9,6 +9,7 @@ class LhBorderLessInput extends StatelessWidget {
   final List<TextInputFormatter>? inputFormatters;
   final TextStyle? formTextStyle;
   final String? hint;
+  final bool? enable;
   final String? initialValue;
   final TextStyle? formHintStyle;
   final TextInputType? keyboardType;
@@ -27,6 +28,7 @@ class LhBorderLessInput extends StatelessWidget {
       this.inputFormatters,
       this.formTextStyle,
       this.hint,
+      this.enable,
       this.formHintStyle,
       this.onChanged,
       this.initialValue,
@@ -49,6 +51,7 @@ class LhBorderLessInput extends StatelessWidget {
         minLines: line,
         maxLines: line,
         maxLength: maxLength,
+        enabled: enable,
         controller: controller,
         inputFormatters: inputFormatters,
         keyboardType: keyboardType,
