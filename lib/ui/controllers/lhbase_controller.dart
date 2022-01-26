@@ -40,6 +40,21 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
     return;
   }
 
+  Future<void> callApiNotLoading<T>(
+      {required Future<T> api,
+      required Function(T) onSuccess,
+      Function(Object)? onError}) async {
+    try {
+      var result = await api;
+      onSuccess(result);
+      onAPISuccess(result);
+    } catch (e) {
+      if (onError != null) onError(e);
+      onAPIError(e as DioError, e.requestOptions.path, e.requestOptions.method);
+    }
+    return;
+  }
+
   callApiLocalLoading<T>(
       {required Future<T> api,
       required Function(T) onSuccess,
