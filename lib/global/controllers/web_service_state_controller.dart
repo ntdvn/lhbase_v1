@@ -21,13 +21,16 @@ class WebServiceStateController extends GetxController {
       //     child: Center(child: CircularProgressIndicator()),
       //   ),
       // ));
-      Get.dialog(Container(
-        height: 60,
-        width: 60,
-        child: Lottie.asset(
-          'assets/lottie/8311-loading.json',
-        ),
-      ));
+      Get.dialog(
+          Container(
+              height: 20,
+              width: 20,
+              child: Center(
+                child: Lottie.asset(
+                  'assets/lottie/8311-loading.json',
+                ),
+              )
+          ));
     }
   }
 
