@@ -22,10 +22,10 @@ class WebServiceStateController extends GetxController {
       //   ),
       // ));
       Get.dialog(Container(
-        height: 60,
-        width: 60,
+        height: 20,
+        width: 20,
         child: Lottie.asset(
-          'assets/lottie/8311-loading.json',
+          'assets/lotties/8311-loading.json',
         ),
       ));
     }
