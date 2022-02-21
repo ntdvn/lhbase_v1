@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 
 class WebServiceStateController extends GetxController {
   RxDouble networkProgress = RxDouble(0.0);
@@ -13,11 +14,18 @@ class WebServiceStateController extends GetxController {
     loading.value++;
     print('pushLoading ${loading.value}');
     if (isLoading() && Get.isDialogOpen != true) {
+      // Get.dialog(Container(
+      //   color: Colors.transparent,
+      //   child: GestureDetector(
+      //     onTap: () {},
+      //     child: Center(child: CircularProgressIndicator()),
+      //   ),
+      // ));
       Get.dialog(Container(
-        color: Colors.transparent,
-        child: GestureDetector(
-          onTap: () {},
-          child: Center(child: CircularProgressIndicator()),
+        height: 60,
+        width: 60,
+        child: Lottie.asset(
+          'assets/lottie/8311-loading.json',
         ),
       ));
     }
