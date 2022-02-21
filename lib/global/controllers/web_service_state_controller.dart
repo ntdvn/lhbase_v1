@@ -25,7 +25,7 @@ class WebServiceStateController extends GetxController {
         height: 20,
         width: 20,
         child: Lottie.asset(
-          'assets/lotties/8311-loading.json',
+          'assets/lottie/8311-loading.json',
         ),
       ));
     }
