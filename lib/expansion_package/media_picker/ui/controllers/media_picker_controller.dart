@@ -207,15 +207,18 @@ class MediaPickerController extends GetxController {
   }
 
   Future onRefresh() async {
-    await gallery!.refreshPathProperties(
-      maxDateTimeToNow: true,
-    );
-    final list = await gallery!.getAssetListPaged(0, initLoadCount);
-    page = 0;
-    this.mediaEntities.clear();
-    list.asMap().forEach((index, value) {
-      this.mediaEntities.add(MediaEntity(value));
-    });
+    if (gallery != null) {
+      await gallery!.refreshPathProperties(
+        maxDateTimeToNow: true,
+      );
+      final list = await gallery!.getAssetListPaged(0, initLoadCount);
+      page = 0;
+      this.mediaEntities.clear();
+      list.asMap().forEach((index, value) {
+        this.mediaEntities.add(MediaEntity(value));
+      });
+    }
+
     update();
   }
 
