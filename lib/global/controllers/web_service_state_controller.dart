@@ -14,23 +14,13 @@ class WebServiceStateController extends GetxController {
     loading.value++;
     print('pushLoading ${loading.value}');
     if (isLoading() && Get.isDialogOpen != true) {
-      // Get.dialog(Container(
-      //   color: Colors.transparent,
-      //   child: GestureDetector(
-      //     onTap: () {},
-      //     child: Center(child: CircularProgressIndicator()),
-      //   ),
-      // ));
-      Get.dialog(
-          Container(
-              height: 20,
-              width: 20,
-              child: Center(
-                child: Lottie.asset(
-                  'assets/lottie/8311-loading.json',
-                ),
-              )
-          ));
+      Get.dialog(Container(
+        color: Colors.transparent,
+        child: GestureDetector(
+          onTap: () {},
+          child: Center(child: CircularProgressIndicator()),
+        ),
+      ));
     }
   }
 
