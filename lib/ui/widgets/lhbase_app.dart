@@ -4,7 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
-
+import 'dart:ui' as ui;
 // abstract class LhBaseApp extends StatelessWidget {
 //   const LhBaseApp({Key? key}) : super(key: key);
 //
@@ -31,26 +31,30 @@ class _LhBaseAppState extends State<LhBaseApp> {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: () {
-          ScreenUtil.setContext(context);
-          return MediaQuery(
-              data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-              child: GetMaterialApp(
-                debugShowCheckedModeBanner: false,
-                // theme: ThemeData(fontFamily: 'OpenSans'),
+          return MaterialApp(
+            builder: (context, child) {
+              ScreenUtil.setContext(context);
+              return MediaQuery(
+                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                  child: GetMaterialApp(
+                    debugShowCheckedModeBanner: false,
+                    // theme: ThemeData(fontFamily: 'OpenSans'),
 
-                translations: widget.onConfig().translations,
-                locale: widget.onConfig().locale,
-                supportedLocales: widget.onConfig().supportedLocales ?? [],
-                initialRoute: widget.onConfig().initialRoute,
-                getPages: widget.onConfig().getPages,
-                initialBinding: widget.onConfig().initialBinding,
-                home: widget.onConfig().home,
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-              ));
+                    translations: widget.onConfig().translations,
+                    locale: widget.onConfig().locale,
+                    supportedLocales: widget.onConfig().supportedLocales ?? [],
+                    initialRoute: widget.onConfig().initialRoute,
+                    getPages: widget.onConfig().getPages,
+                    initialBinding: widget.onConfig().initialBinding,
+                    home: widget.onConfig().home,
+                    localizationsDelegates: const [
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                  ));
+            },
+          );
         });
   }
 }
