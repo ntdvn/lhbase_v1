@@ -28,6 +28,7 @@ class LhAppBar extends StatelessWidget {
   final Widget? titles;
   final Widget? backgroundImage;
   final double? height;
+  final double? sizeIcon;
 
   const LhAppBar(
       {Key? key,
@@ -45,7 +46,7 @@ class LhAppBar extends StatelessWidget {
       this.titleStyle,
       this.titles,
       this.backgroundImage,
-      this.height})
+      this.height, this.sizeIcon})
       : super(key: key);
 
   @override
@@ -136,6 +137,7 @@ class LhAppBar extends StatelessWidget {
               icon: Icon(
                 Icons.chevron_left,
                 color: leadingColor ?? Theme.of(context).primaryIconTheme.color,
+                size: sizeIcon ?? 14,
               ),
               onTap: () {
                 handlerLeadingOnTap(context);
