@@ -190,7 +190,8 @@ class LhAppBar extends StatelessWidget {
       TextStyle? titleStyle,
       Widget? titles,
       Widget? backgroundImage,
-      double? height}) {
+      double? height,
+      double? sizeIcon}) {
     return LhAppBar(
       behavior: behavior,
       type: LhAppBarType.TOP,
@@ -206,6 +207,7 @@ class LhAppBar extends StatelessWidget {
       titles: titles,
       backgroundImage: backgroundImage,
       height: height,
+      sizeIcon: sizeIcon,
     );
   }
 
