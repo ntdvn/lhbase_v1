@@ -32,6 +32,7 @@ class _LhBaseAppState extends State<LhBaseApp> {
         splitScreenMode: true,
         builder: () {
           return MaterialApp(
+            debugShowCheckedModeBanner: false,
             builder: (context, child) {
               ScreenUtil.setContext(context);
               return MediaQuery(
