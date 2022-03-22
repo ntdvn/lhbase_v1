@@ -137,7 +137,7 @@ class LhAppBar extends StatelessWidget {
               icon: Icon(
                 Icons.chevron_left,
                 color: leadingColor ?? Theme.of(context).primaryIconTheme.color,
-                size: sizeIcon ?? 14,
+                size: sizeIcon ?? 24,
               ),
               onTap: () {
                 handlerLeadingOnTap(context);
