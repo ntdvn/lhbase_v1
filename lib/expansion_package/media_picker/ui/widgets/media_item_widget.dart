@@ -7,7 +7,7 @@ import 'package:photo_manager/photo_manager.dart';
 
 class MediaItemWidget extends StatefulWidget {
   final AssetEntity entity;
-  final ThumbOption option;
+  final ThumbnailOption option;
 
   const MediaItemWidget({
     Key? key,
@@ -31,15 +31,15 @@ class _MediaItemWidgetState extends State<MediaItemWidget> {
     //   );
     // }
     final item = widget.entity;
-    final size = widget.option.width;
-    final u8List = ImageLruCache.getData(item, size, ThumbFormat.png);
+    final size = widget.option.size.width;
+    final u8List = ImageLruCache.getData(item, size, ThumbnailFormat.png);
     Widget image;
 
     if (u8List != null) {
       return _buildImageWidget(item, u8List, size);
     } else {
       image = FutureBuilder<Uint8List?>(
-        future: item.thumbDataWithOption(widget.option),
+        future: item.thumbnailDataWithOption(widget.option),
         builder: (context, snapshot) {
           Widget w;
           if (snapshot.hasError) {
@@ -47,7 +47,7 @@ class _MediaItemWidgetState extends State<MediaItemWidget> {
               child: Text("load error, error: ${snapshot.error}"),
             );
           } else if (snapshot.hasData) {
-            ImageLruCache.setData(item, size, ThumbFormat.png, snapshot.data!);
+            ImageLruCache.setData(item, size, ThumbnailFormat.png, snapshot.data!);
             w = _buildImageWidget(item, snapshot.data!, size);
           } else {
             w = Center(

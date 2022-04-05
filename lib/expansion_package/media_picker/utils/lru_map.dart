@@ -41,12 +41,12 @@ class ImageLruCache {
   static LRUMap<_ImageCacheEntity, Uint8List> _map = LRUMap(500);
 
   static Uint8List? getData(AssetEntity entity,
-      [int size = 64, ThumbFormat format = ThumbFormat.jpeg]) {
+      [int size = 64, ThumbnailFormat format = ThumbnailFormat.jpeg]) {
     return _map.get(_ImageCacheEntity(entity, size, format));
   }
 
   static void setData(
-      AssetEntity entity, int size, ThumbFormat format, Uint8List list) {
+      AssetEntity entity, int size, ThumbnailFormat format, Uint8List list) {
     _map.put(_ImageCacheEntity(entity, size, format), list);
   }
 }
@@ -54,7 +54,7 @@ class ImageLruCache {
 class _ImageCacheEntity {
   AssetEntity entity;
   int size;
-  ThumbFormat format;
+  ThumbnailFormat format;
 
   _ImageCacheEntity(this.entity, this.size, this.format);
 

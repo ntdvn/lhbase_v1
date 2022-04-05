@@ -93,10 +93,9 @@ class _MediaResourceViewState extends State<MediaResourceView> {
   }
 
   //image thumb quality
-  ThumbOption get thumbOption => ThumbOption(
-        width: 128,
-        height: 128,
-        format: ThumbFormat.png,
+  ThumbnailOption get thumbOption => ThumbnailOption(
+       size:ThumbnailSize(128, 128) ,
+        format: ThumbnailFormat.png,
         quality: 70,
       );
 

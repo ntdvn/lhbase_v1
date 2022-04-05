@@ -208,10 +208,13 @@ class MediaPickerController extends GetxController {
 
   Future onRefresh() async {
     if (gallery != null) {
-      await gallery!.refreshPathProperties(
-        maxDateTimeToNow: true,
-      );
-      final list = await gallery!.getAssetListPaged(0, initLoadCount);
+      await gallery!.obtainForNewProperties(maxDateTimeToNow: true);
+      // refreshPathProperties(
+      //   maxDateTimeToNow: true,
+      // );
+      final list =
+          await gallery!.getAssetListPaged(page: 0, size: initLoadCount);
+      // .getAssetListPaged(0, initLoadCount);
       page = 0;
       this.mediaEntities.clear();
       list.asMap().forEach((index, value) {
@@ -227,7 +230,8 @@ class MediaPickerController extends GetxController {
       print("already max");
       return;
     }
-    final list = await gallery!.getAssetListPaged(page + 1, loadCount);
+    final list =
+        await gallery!.getAssetListPaged(page: page + 1, size: loadCount);
 
     page = page + 1;
     list.asMap().forEach((index, value) {
