@@ -27,35 +27,36 @@ class _LhBaseAppState extends State<LhBaseApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(414, 890),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: () {
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
-            builder: (context, child) {
-              ScreenUtil.setContext(context);
-              return MediaQuery(
-                  data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                  child: GetMaterialApp(
-                    debugShowCheckedModeBanner: false,
-                    // theme: ThemeData(fontFamily: 'OpenSans'),
+      designSize: Size(414, 890),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (BuildContext context) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          builder: (context, child) {
+            ScreenUtil.setContext(context);
+            return MediaQuery(
+                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+                child: GetMaterialApp(
+                  debugShowCheckedModeBanner: false,
+                  // theme: ThemeData(fontFamily: 'OpenSans'),
 
-                    translations: widget.onConfig().translations,
-                    locale: widget.onConfig().locale,
-                    supportedLocales: widget.onConfig().supportedLocales ?? [],
-                    initialRoute: widget.onConfig().initialRoute,
-                    getPages: widget.onConfig().getPages,
-                    initialBinding: widget.onConfig().initialBinding,
-                    home: widget.onConfig().home,
-                    localizationsDelegates: const [
-                      GlobalMaterialLocalizations.delegate,
-                      GlobalWidgetsLocalizations.delegate,
-                      GlobalCupertinoLocalizations.delegate,
-                    ],
-                  ));
-            },
-          );
-        });
+                  translations: widget.onConfig().translations,
+                  locale: widget.onConfig().locale,
+                  supportedLocales: widget.onConfig().supportedLocales ?? [],
+                  initialRoute: widget.onConfig().initialRoute,
+                  getPages: widget.onConfig().getPages,
+                  initialBinding: widget.onConfig().initialBinding,
+                  home: widget.onConfig().home,
+                  localizationsDelegates: const [
+                    GlobalMaterialLocalizations.delegate,
+                    GlobalWidgetsLocalizations.delegate,
+                    GlobalCupertinoLocalizations.delegate,
+                  ],
+                ));
+          },
+        );
+      },
+    );
   }
 }
