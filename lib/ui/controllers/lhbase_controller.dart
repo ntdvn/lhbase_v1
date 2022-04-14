@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
@@ -25,8 +26,9 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
   Future<void> callApi<T>(
       {required Future<T> api,
       required Function(T) onSuccess,
+      Widget? childLoading,
       Function(Object)? onError}) async {
-    webServiceStateController.pushLoading();
+      webServiceStateController.pushLoading(childLoading: childLoading);
     try {
       var result = await api;
       webServiceStateController.popLoading();
