@@ -10,7 +10,7 @@ class WebServiceStateController extends GetxController {
     networkProgress.value = progress.toDouble();
   }
 
-  pushLoading() {
+  pushLoading({Widget? childLoading}) {
     loading.value++;
     print('pushLoading ${loading.value}');
     if (isLoading() && Get.isDialogOpen != true) {
@@ -18,7 +18,7 @@ class WebServiceStateController extends GetxController {
         color: Colors.transparent,
         child: GestureDetector(
           onTap: () {},
-          child: Center(child: CircularProgressIndicator()),
+          child: Center(child: childLoading ?? CircularProgressIndicator()),
         ),
       ));
     }
