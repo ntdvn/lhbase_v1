@@ -27,6 +27,7 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
       {required Future<T> api,
       required Function(T) onSuccess,
       Widget? childLoading,
+      Widget? widgetTimeOut,
       Function(Object)? onError}) async {
       webServiceStateController.pushLoading(childLoading: childLoading);
     try {
@@ -37,7 +38,7 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
     } catch (e) {
       webServiceStateController.popLoading();
       if (onError != null) onError(e);
-      onAPIError(e as DioError, e.requestOptions.path, e.requestOptions.method);
+      onAPIError(e as DioError, e.requestOptions.path, e.requestOptions.method, timeout :widgetTimeOut);
     }
     return;
   }
@@ -45,6 +46,7 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
   Future<void> callApiNotLoading<T>(
       {required Future<T> api,
       required Function(T) onSuccess,
+      Widget? widgetTimeOut,
       Function(Object)? onError}) async {
     try {
       var result = await api;
@@ -52,7 +54,7 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
       onAPISuccess(result);
     } catch (e) {
       if (onError != null) onError(e);
-      onAPIError(e as DioError, e.requestOptions.path, e.requestOptions.method);
+      onAPIError(e as DioError, e.requestOptions.path, e.requestOptions.method, timeout :widgetTimeOut);
     }
     return;
   }
@@ -76,7 +78,11 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
   void onAPISuccess(Object? object) {}
 
   @override
-  void onAPIError(DioError e, String path, String method) {}
+  void onAPIError(DioError e, String path, String method, {Widget? timeout}) {
+    if(e.type == DioErrorType.connectTimeout){
+      webServiceStateController.pushTimeout(timeout: timeout);
+    }
+  }
 }
 
 abstract class WebServiceAPICallback {
