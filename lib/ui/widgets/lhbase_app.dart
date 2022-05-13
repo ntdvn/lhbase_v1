@@ -30,11 +30,10 @@ class _LhBaseAppState extends State<LhBaseApp> {
       designSize: Size(414, 890),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: (BuildContext context) {
+      builder: (child) {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           builder: (context, child) {
-            ScreenUtil.setContext(context);
             return MediaQuery(
                 data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
                 child: GetMaterialApp(
