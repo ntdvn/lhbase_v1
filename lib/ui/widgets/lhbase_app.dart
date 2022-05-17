@@ -39,7 +39,7 @@ class _LhBaseAppState extends State<LhBaseApp> {
                 child: GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   // theme: ThemeData(fontFamily: 'OpenSans'),
-
+                  title: widget.onConfig().title ?? '',
                   translations: widget.onConfig().translations,
                   locale: widget.onConfig().locale,
                   supportedLocales: widget.onConfig().supportedLocales ?? [],
