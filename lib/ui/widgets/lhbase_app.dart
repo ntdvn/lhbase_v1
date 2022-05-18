@@ -24,31 +24,26 @@ class _LhBaseAppState extends State<LhBaseApp> {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (child) {
-        return MaterialApp(
-          debugShowCheckedModeBanner: false,
-          builder: (context, child) {
-            return MediaQuery(
-                data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
-                child: GetMaterialApp(
-                  debugShowCheckedModeBanner: false,
-                  // theme: ThemeData(fontFamily: 'OpenSans'),
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              // theme: ThemeData(fontFamily: 'OpenSans'),
 
-                  title: widget.onConfig().title ?? '',
-                  translations: widget.onConfig().translations,
-                  locale: widget.onConfig().locale,
-                  supportedLocales: widget.onConfig().supportedLocales ?? [],
-                  initialRoute: widget.onConfig().initialRoute,
-                  getPages: widget.onConfig().getPages,
-                  initialBinding: widget.onConfig().initialBinding,
-                  home: widget.onConfig().home,
-                  localizationsDelegates: const [
-                    GlobalMaterialLocalizations.delegate,
-                    GlobalWidgetsLocalizations.delegate,
-                    GlobalCupertinoLocalizations.delegate,
-                  ],
-                ));
-          },
-        );
+              title: widget.onConfig().title ?? '',
+              translations: widget.onConfig().translations,
+              locale: widget.onConfig().locale,
+              supportedLocales: widget.onConfig().supportedLocales ?? [],
+              initialRoute: widget.onConfig().initialRoute,
+              getPages: widget.onConfig().getPages,
+              initialBinding: widget.onConfig().initialBinding,
+              home: widget.onConfig().home,
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+            ));
       },
     );
   }
