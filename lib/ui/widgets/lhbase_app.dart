@@ -5,14 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
 import 'dart:ui' as ui;
-// abstract class LhBaseApp extends StatelessWidget {
-//   const LhBaseApp({Key? key}) : super(key: key);
-//
-//
-//
-//
-//
-// }
+
 
 abstract class LhBaseApp extends StatefulWidget {
   const LhBaseApp({Key? key}) : super(key: key);
@@ -39,6 +32,8 @@ class _LhBaseAppState extends State<LhBaseApp> {
                 child: GetMaterialApp(
                   debugShowCheckedModeBanner: false,
                   // theme: ThemeData(fontFamily: 'OpenSans'),
+
+                  title: widget.onConfig().title ?? '',
                   translations: widget.onConfig().translations,
                   locale: widget.onConfig().locale,
                   supportedLocales: widget.onConfig().supportedLocales ?? [],

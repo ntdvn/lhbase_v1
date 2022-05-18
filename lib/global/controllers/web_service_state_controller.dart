@@ -24,6 +24,20 @@ class WebServiceStateController extends GetxController {
     }
   }
 
+  pushTimeout({Widget? timeout}) {
+    loading.value++;
+    print('pushLoading ${loading.value}');
+    if (isLoading() && Get.isDialogOpen != true) {
+      Get.dialog(Container(
+        color: Colors.transparent,
+        child: GestureDetector(
+          onTap: () {},
+          child: Center(child: timeout ?? Text('Tải lại')),
+        ),
+      ));
+    }
+  }
+
   popLoading() {
     loading.value > 0 ? loading.value-- : loading.value = 0;
     if (!this.isLoading() && Get.isDialogOpen == true) {
