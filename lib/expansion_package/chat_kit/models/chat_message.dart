@@ -7,7 +7,7 @@ enum MessageType {
 }
 
 class ChatMessage {
-  final ChatUser user;
+  final LhChatUser user;
   final int id;
   final int status;
   String? text;

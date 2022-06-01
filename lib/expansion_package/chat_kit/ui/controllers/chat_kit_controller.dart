@@ -13,7 +13,7 @@ enum ChatBubblePosition {
 }
 
 class ChatKitController extends GetxController {
-  final ChatUser user;
+  final LhChatUser user;
   Rx<ChatViewThemeData> _themeData = Rx(ChatViewThemeData());
 
   ChatViewThemeData get themeData => _themeData.value;
