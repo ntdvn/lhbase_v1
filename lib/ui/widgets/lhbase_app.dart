@@ -19,26 +19,31 @@ class _LhBaseAppState extends State<LhBaseApp> {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-        designSize: Size(414, 890),
-        minTextAdapt: true,
-        splitScreenMode: true,
-        builder: (context, child) {
-          return GetMaterialApp(
-            debugShowCheckedModeBanner: false,
-            title: widget.onConfig().title ?? '',
-            translations: widget.onConfig().translations,
-            locale: widget.onConfig().locale,
-            supportedLocales: widget.onConfig().supportedLocales ?? [],
-            initialRoute: widget.onConfig().initialRoute,
-            getPages: widget.onConfig().getPages,
-            initialBinding: widget.onConfig().initialBinding,
-            home: widget.onConfig().home,
-            localizationsDelegates: const [
-              GlobalMaterialLocalizations.delegate,
-              GlobalWidgetsLocalizations.delegate,
-              GlobalCupertinoLocalizations.delegate,
-            ],
-          );
-        });
+      designSize: Size(414, 890),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (child) {
+        return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaleFactor: 1.0),
+            child: GetMaterialApp(
+              debugShowCheckedModeBanner: false,
+              // theme: ThemeData(fontFamily: 'OpenSans'),
+
+              title: widget.onConfig().title ?? '',
+              translations: widget.onConfig().translations,
+              locale: widget.onConfig().locale,
+              supportedLocales: widget.onConfig().supportedLocales ?? [],
+              initialRoute: widget.onConfig().initialRoute,
+              getPages: widget.onConfig().getPages,
+              initialBinding: widget.onConfig().initialBinding,
+              home: widget.onConfig().home,
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+            ));
+      },
+    );
   }
 }
