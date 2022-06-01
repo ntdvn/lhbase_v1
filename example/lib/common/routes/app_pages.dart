@@ -16,8 +16,6 @@ class AppPages extends LhPages {
       GetPage(
           name: Routes.video_play_back, page: () => const VideoPlayBackPage()),
       GetPage(name: Routes.media, page: () => const MediaPage()),
-      GetPage(name: Routes.chat, page: () => const ChatPage()),
-      GetPage(name: Routes.toolbar, page: () => const ToolbarPage()),
     ];
   }
 }
