@@ -3,6 +3,7 @@ import 'package:lhbase_v1/lhbase.dart';
 enum MessageType {
   TEXT,
   IMAGE,
+  VIDEO,
   AUDIO,
 }
 
@@ -12,6 +13,7 @@ class ChatMessage {
   final int status;
   String? text;
   final List<String>? imageUrls;
+  final String? video;
   final String? recoderUrl;
   ChatBubblePosition position = ChatBubblePosition.MIDDLE;
 
@@ -21,6 +23,7 @@ class ChatMessage {
     this.status = 1,
     this.text,
     this.imageUrls,
+    this.video,
     this.recoderUrl,
   });
 
@@ -29,6 +32,8 @@ class ChatMessage {
       return MessageType.TEXT;
     else if (imageUrls != null)
       return MessageType.IMAGE;
+    else if (video != null)
+      return MessageType.VIDEO;
     else if (recoderUrl != null) return MessageType.AUDIO;
     return MessageType.TEXT;
   }

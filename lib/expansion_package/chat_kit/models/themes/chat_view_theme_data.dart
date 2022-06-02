@@ -9,7 +9,7 @@ class ChatViewThemeData {
   TextMessageThemeData textMessageThemeData =
       TextMessageThemeData(textStyle: TextStyle(color: Colors.white));
   TextMessageThemeData mTextMessageThemeData =
-      TextMessageThemeData(textStyle: TextStyle(color: Colors.white));
+      TextMessageThemeData(textStyle: TextStyle(color: Colors.black));
 
   ChatViewThemeData() {}
 }

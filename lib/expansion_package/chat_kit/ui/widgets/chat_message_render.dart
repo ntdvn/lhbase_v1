@@ -21,6 +21,9 @@ class MessageRender extends StatelessWidget {
       case MessageType.IMAGE:
         renderMessage = ChatImages(imageUrls: message.imageUrls!);
         break;
+      case MessageType.VIDEO:
+        renderMessage = ChatVideo(message: message);
+        break;
       case MessageType.AUDIO:
         renderMessage = ChatRecoder(
           message: message,
