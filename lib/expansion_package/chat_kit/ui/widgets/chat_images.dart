@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/view_list_image_screen.dart';
 
 class ChatImages extends StatelessWidget {
   final List<String> imageUrls;
@@ -27,6 +28,13 @@ class ChatImages extends StatelessWidget {
                 return GestureDetector(
                     onTap: () {
                       print('index $index');
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ViewListNetworkImageScreen(listImage: imageUrls, initIndex: index,)
+                        ),
+                      );
                     },
                     child: Image.network(
                       imageUrls[index],
@@ -40,9 +48,20 @@ class ChatImages extends StatelessWidget {
             )
           : FractionallySizedBox(
               widthFactor: .7,
-              child: Image.network(
-                imageUrls[0],
-                fit: BoxFit.cover,
+              child: GestureDetector(
+                onTap: (){
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ViewListNetworkImageScreen(listImage: imageUrls, initIndex: 0,)
+                    ),
+                  );
+                },
+                child: Image.network(
+                  imageUrls[0],
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
     );
