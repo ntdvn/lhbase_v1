@@ -54,6 +54,7 @@ class ControlsOverlayState extends State<ControlsOverlay> {
           right: 4,
           child: GestureDetector(
             onTap: () {
+              widget.controller.pause();
               Navigator.push(
                 context,
                 MaterialPageRoute(

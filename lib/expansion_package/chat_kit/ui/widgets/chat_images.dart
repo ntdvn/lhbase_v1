@@ -36,10 +36,13 @@ class ChatImages extends StatelessWidget {
                         ),
                       );
                     },
-                    child: Image.network(
-                      imageUrls[index],
+                    child: WidgetNetworkImage(
+                      image: imageUrls[index],
+                      borderRadius: 4,
                       fit: BoxFit.cover,
-                    ));
+                    )
+                )
+                ;
               },
               staggeredTileBuilder: (index) {
                 return new StaggeredTile.count(
