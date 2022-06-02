@@ -8,7 +8,6 @@ typedef List<ChatKitAction> ActionsBuilder(
 
 class ChatToolbar extends StatefulWidget {
   final ChatToolbarController controller;
-  final TextEditingController textEditingController;
   // final TextEditingController textEditController;
   final FocusNode focusNode;
   final ActionsBuilder? leftActionsBuilder;
@@ -19,7 +18,6 @@ class ChatToolbar extends StatefulWidget {
   const ChatToolbar(
       {Key? key,
       required this.controller,
-      required this.textEditingController,
       required this.focusNode,
       this.leftActionsBuilder,
       this.rightActionsBuilder,
@@ -66,7 +64,7 @@ class _ChatToolbarState extends State<ChatToolbar> {
                           controller,
                           widget.leftActionsBuilder!(
                               controller.state, controller.output)),
-                    Expanded(child: _renderInput(controller, widget.textEditingController)),
+                    Expanded(child: _renderInput(controller)),
                     if (widget.rightActionsBuilder != null)
                       _renderActions(
                           controller,
@@ -109,7 +107,7 @@ class _ChatToolbarState extends State<ChatToolbar> {
   }
 
 
-  Widget _renderInput(ChatToolbarController controller, TextEditingController textEditingController) {
+  Widget _renderInput(ChatToolbarController controller) {
     return Padding(
       padding: EdgeInsets.only(top: 2, bottom: 6, left: 10, right: 10),
       child: InkWell(
@@ -128,7 +126,6 @@ class _ChatToolbarState extends State<ChatToolbar> {
               Expanded(
                   child: TextField(
                 style: TextStyle(fontSize: 18),
-                controller: textEditingController,
                 onChanged: (value) {
                   controller.changeText(value);
                 },

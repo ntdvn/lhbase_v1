@@ -222,7 +222,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
               onMessagedClicked: (message) {},
               toolBar: ChatToolbar(
                 controller: _chatToolbarController,
-                textEditingController: textEditingController,
+
                 rightActionsBuilder: (state, output) {
                   return [
                     if (output.text.isNotEmpty)
@@ -232,7 +232,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                               iconFactor: 0.7,
                               icon: Icon(Icons.send)),
                           onTap: () {
-                            textEditingController.text = '';
+
                           }),
                   ];
                 },
