@@ -73,13 +73,13 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
           user: nam,
           id: 1,
           recoderUrl:
-              'https://tainhac123.com/listen/em-cua-ngay-hom-qua-son-tung-m-tp.9Fd4zVvPMIbf.html'),
+              'https://vichatcrm.vn/storage/uploads/22/pOitUUljiX1xwI384NnZ7zP5pFjLCBekrD9J6Zvd.mp4'),
       ChatMessage(user: dat, id: 1, imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg'
       ]),
       ChatMessage(user: dat, id: 1, video: 'https://vichatcrm.vn/storage/uploads/22/JzAYB6vp4VFQbEAEwSrd3eSisJQ14FO4GfajDqqv.mp4'),
-      ChatMessage(user: nam, id: 2, video: 'https://vichatcrm.vn/storage/uploads/22/JzAYB6vp4VFQbEAEwSrd3eSisJQ14FO4GfajDqqv.mp4'),
-      ChatMessage(user: dat, id: 1, imageUrls: [
+      ChatMessage(user: nam, id: 2, video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
+      ChatMessage(user: dat, id: 2, imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg'
       ]),
       ChatMessage(user: dat, id: 1, imageUrls: [

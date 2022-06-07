@@ -86,11 +86,14 @@ class _PlayVideoOnlineBackScreenState extends State<PlayVideoOnlineBackScreen> {
                 ),
                 Align(
                   alignment: Alignment.bottomCenter,
-                  child: VideoProgressIndicator(
-                    _controller,
-                    allowScrubbing: true,
-                    colors: VideoProgressColors(
-                      playedColor: Colors.white
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: VideoProgressIndicator(
+                      _controller,
+                      allowScrubbing: true,
+                      colors: VideoProgressColors(
+                        playedColor: Colors.white
+                      ),
                     ),
                   ),
                 ),

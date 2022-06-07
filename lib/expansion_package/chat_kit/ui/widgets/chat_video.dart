@@ -31,10 +31,18 @@ class _ChatVideoState extends State<ChatVideo> {
   }
 
   @override
+  void dispose() {
+    _controller!.dispose();
+    super.dispose();
+  }
+
+
+  @override
   Widget build(BuildContext context) {
     return GetBuilder<ChatKitController>(
       builder: (controller) {
         return Container(
+          key: UniqueKey(),
           child: AspectRatio(
             aspectRatio: _controller!.value.aspectRatio,
             child: Stack(
@@ -42,6 +50,16 @@ class _ChatVideoState extends State<ChatVideo> {
               children: <Widget>[
                 VideoPlayer(_controller!),
                 ControlsOverlay(controller: _controller!, fullScreen: true, videoUrl: widget.message.video!,),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: VideoProgressIndicator(
+                    _controller!,
+                    allowScrubbing: true,
+                    colors: VideoProgressColors(
+                        playedColor: Colors.white
+                    ),
+                  ),
+                )
               ],
             ),
           )

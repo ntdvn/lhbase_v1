@@ -11,9 +11,10 @@ class ChatText extends StatelessWidget {
     return GetBuilder<ChatKitController>(
       builder: (controller) {
         return Container(
+          key: UniqueKey(),
           padding: EdgeInsets.all(10.0),
           child: Text(
-            message.text!,
+            message.text ?? '',
             style: controller.user == message.user
                 ? controller.themeData.textMessageThemeData.textStyle
                 : controller.themeData.mTextMessageThemeData.textStyle,

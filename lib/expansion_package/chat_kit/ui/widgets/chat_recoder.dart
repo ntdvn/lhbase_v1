@@ -31,6 +31,12 @@ class _ChatRecoderState extends State<ChatRecoder>
     super.initState();
   }
 
+  @override
+  void dispose() {
+    player.dispose();
+    super.dispose();
+  }
+
   init() async {
     var a = await player.setUrl(widget.message.recoderUrl!);
     await player.setSpeed(1.0);
@@ -66,13 +72,6 @@ class _ChatRecoderState extends State<ChatRecoder>
 
   @override
   Widget build(BuildContext context) {
-    if (_position != null && _duration != null) {
-      // print('_position!.inSeconds: ${_position!.inSeconds}');
-      // print('_duration!.inSeconds: ${_duration!.inSeconds}');
-      print(
-          'hee is ok ${_position != null && _duration != null ? _position!.inSeconds / _duration!.inSeconds : 0}');
-    }
-
     return LhInkwell(
       padding: EdgeInsets.zero,
       onTap: () {
@@ -124,5 +123,5 @@ class _ChatRecoderState extends State<ChatRecoder>
   }
 
   @override
-  bool get wantKeepAlive => true;
+  bool get wantKeepAlive => false;
 }

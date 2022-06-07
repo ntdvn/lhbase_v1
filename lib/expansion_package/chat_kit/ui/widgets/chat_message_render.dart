@@ -29,6 +29,12 @@ class MessageRender extends StatelessWidget {
           message: message,
         );
         break;
+      case MessageType.PRODUCT:
+        renderMessage = message.product;
+        break;
+      case MessageType.ORDER:
+        renderMessage = message.order;
+        break;
       default:
         renderMessage = Container();
         break;
