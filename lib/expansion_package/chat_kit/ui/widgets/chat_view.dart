@@ -69,7 +69,6 @@ class _LhChatViewState extends State<LhChatView> {
                           itemCount: controller.messages.length,
                           itemBuilder: (context, index) {
                             return Container(
-                              key: UniqueKey(),
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: controller.user ==
