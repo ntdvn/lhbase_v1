@@ -93,11 +93,12 @@ class _ChatRecoderState extends State<ChatRecoder>
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Container(
-                    child: Icon(_playing ? Icons.pause : Icons.play_circle),
+                    child: Icon(_playing ? Icons.pause_circle_filled : Icons.play_circle, color: Colors.white,),
                     margin: EdgeInsets.only(right: 10),
                   ),
                   Text(
-                      '${_duration != null ? DataUtils.durationToTime(_duration!) : ''}')
+                      '${_duration != null ? DataUtils.durationToTime(_duration!) : ''}',
+                  style: TextStyle(color: Colors.white,),)
                 ],
               ),
             ),
@@ -123,5 +124,5 @@ class _ChatRecoderState extends State<ChatRecoder>
   }
 
   @override
-  bool get wantKeepAlive => false;
+  bool get wantKeepAlive => true;
 }
