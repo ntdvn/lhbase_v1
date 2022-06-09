@@ -73,7 +73,7 @@ class _LhChatViewState extends State<LhChatView> {
                           itemBuilder: (context, index) {
                             return index == controller.messages.length-1 || (index != controller.messages.length-1 && LhValue.dateTimeToDate(controller.messages[index].time) != LhValue.dateTimeToDate(controller.messages[index+1].time))  ?
                             Column(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                              crossAxisAlignment: controller.messages[index].user == controller.user ? CrossAxisAlignment.end : CrossAxisAlignment.start,
                               children: [
                                 Align(
                                   alignment: Alignment.center,
