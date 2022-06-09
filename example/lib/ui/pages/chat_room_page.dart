@@ -77,14 +77,14 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       ChatMessage(
           user: nam,
           id: 1,
-          time: DateTime.parse('2022-06-10T03:44:08.000000Z'),
+          time: DateTime.parse('2022-06-10T03:21:08.000000Z'),
           recoderUrl:
               'https://vichatcrm.vn/storage/uploads/22/pOitUUljiX1xwI384NnZ7zP5pFjLCBekrD9J6Zvd.mp4'),
-      ChatMessage(user: dat, id: 1,time: DateTime.parse('2022-06-10T03:44:08.000000Z'), imageUrls: [
+      ChatMessage(user: dat, id: 1,time: DateTime.parse('2022-06-10T03:22:08.000000Z'), imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg'
       ]),
-      ChatMessage(user: dat, id: 1,time: DateTime.parse('2022-06-10T03:44:08.000000Z'), video: 'https://vichatcrm.vn/storage/uploads/22/JzAYB6vp4VFQbEAEwSrd3eSisJQ14FO4GfajDqqv.mp4'),
-      ChatMessage(user: nam, id: 2, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
+      ChatMessage(user: dat, id: 1,time: DateTime.parse('2022-06-10T03:23:08.000000Z'), video: 'https://vichatcrm.vn/storage/uploads/22/JzAYB6vp4VFQbEAEwSrd3eSisJQ14FO4GfajDqqv.mp4'),
+      ChatMessage(user: nam, id: 2, time: DateTime.parse('2022-06-10T03:25:08.000000Z'),video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
       ChatMessage(user: dat, id: 2, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg'
       ]),

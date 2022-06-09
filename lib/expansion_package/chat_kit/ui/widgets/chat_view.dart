@@ -71,7 +71,7 @@ class _LhChatViewState extends State<LhChatView> {
                               horizontal: 10, vertical: 10),
                           itemCount: controller.messages.length,
                           itemBuilder: (context, index) {
-                            return index == controller.messages.length-1 || (index != controller.messages.length-1 && controller.messages[index].time != controller.messages[index+1].time)  ?
+                            return index == controller.messages.length-1 || (index != controller.messages.length-1 && LhValue.dateTimeToDate(controller.messages[index].time) != LhValue.dateTimeToDate(controller.messages[index+1].time))  ?
                             Column(
                               children: [
                                 Container(

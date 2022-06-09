@@ -104,10 +104,10 @@ class LhValue {
       YEAR_MONTH_DAY.format(DateTime.parse(dateString));
 
   static String dateTimeToTime(DateTime dateString) =>
-      TIME_FORMAT.format(dateString);
+      TIME_FORMAT.format(dateString.add(Duration(hours: 7)));
 
   static String dateTimeToDate(DateTime dateString) =>
-      DATE_FORMAT.format(dateString);
+      DATE_FORMAT.format(dateString.add(Duration(hours: 7)));
 
   static String formatStringDateYMD(String dateString) {
     List date = dateString.split('/');
