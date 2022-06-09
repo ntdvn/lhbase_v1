@@ -73,10 +73,14 @@ class _LhChatViewState extends State<LhChatView> {
                           itemBuilder: (context, index) {
                             return index == controller.messages.length-1 || (index != controller.messages.length-1 && LhValue.dateTimeToDate(controller.messages[index].time) != LhValue.dateTimeToDate(controller.messages[index+1].time))  ?
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.end,
                               children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
-                                  child: LhText(LhValue.dateTimeToDate(controller.messages[index].time), style: LhStyle.DEFAULT_14.copyWith(color: Colors.black),),
+                                Align(
+                                  alignment: Alignment.center,
+                                  child: Container(
+                                    padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                                    child: LhText(LhValue.dateTimeToDate(controller.messages[index].time), style: LhStyle.DEFAULT_16.copyWith(color: Colors.black),),
+                                  ),
                                 ),
                                 Container(
                                   child: Row(
