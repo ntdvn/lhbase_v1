@@ -6,7 +6,8 @@ import 'package:lhbase_v1/ui/ui.dart';
 
 class ChatRecoder extends StatefulWidget {
   final ChatMessage message;
-  const ChatRecoder({Key? key, required this.message}) : super(key: key);
+  final DateTime time;
+  const ChatRecoder({Key? key, required this.message, required this.time}) : super(key: key);
 
   @override
   _ChatRecoderState createState() => _ChatRecoderState();
@@ -73,6 +74,7 @@ class _ChatRecoderState extends State<ChatRecoder>
   @override
   Widget build(BuildContext context) {
     return LhInkwell(
+      key: UniqueKey(),
       padding: EdgeInsets.zero,
       onTap: () {
         if (player.playing) {

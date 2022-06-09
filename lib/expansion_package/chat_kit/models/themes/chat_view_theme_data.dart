@@ -7,9 +7,9 @@ class ChatViewThemeData {
   BubbleThemeData bubbleThemeData = BubbleThemeData();
   BubbleThemeData mBubbleThemeData = BubbleThemeData();
   TextMessageThemeData textMessageThemeData =
-      TextMessageThemeData(textStyle: TextStyle(color: Colors.white));
+      TextMessageThemeData(textStyle: TextStyle(color: Colors.white, fontSize: 16));
   TextMessageThemeData mTextMessageThemeData =
-      TextMessageThemeData(textStyle: TextStyle(color: Colors.white));
+      TextMessageThemeData(textStyle: TextStyle(color: Colors.white, fontSize: 16));
 
   ChatViewThemeData() {}
 }

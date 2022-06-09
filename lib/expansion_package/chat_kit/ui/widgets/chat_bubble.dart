@@ -12,6 +12,7 @@ class ChatBubbleWidget extends StatelessWidget {
   final EdgeInsets? margin;
   final ActionBuilder? actionBuilder;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
 
   const ChatBubbleWidget(
       {Key? key,
@@ -22,7 +23,9 @@ class ChatBubbleWidget extends StatelessWidget {
       this.padding,
       this.margin,
       this.actionBuilder,
-      this.onTap})
+      this.onTap,
+      this.onLongPress,
+      })
       : super(key: key);
 
   static const double activeDefault = 15;
@@ -118,7 +121,7 @@ class ChatBubbleWidget extends StatelessWidget {
                   semanticContainer: true,
                   child: LhInkwell(
                     onTap: onTap,
-
+                    onLongPress: onLongPress,
                     // padding: padding,
                     padding: EdgeInsets.zero,
                     borderRadius: borderRadius,

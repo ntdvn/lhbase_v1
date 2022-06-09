@@ -44,8 +44,13 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
   var nam = LhChatUser(
       username: "Tiot-2",
       imageUrl:
-          'https://i.pinimg.com/736x/70/ed/da/70edda522b0e5673b231dad1b425b904.jpg',
+          'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
       id: 2);
+  var viet = LhChatUser(
+      username: "Tiot-3",
+      imageUrl:
+          'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg',
+      id: 3);
 
   // </RECODER>
 
@@ -72,74 +77,76 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
       ChatMessage(
           user: nam,
           id: 1,
+          time: DateTime.parse('2022-06-10T03:44:08.000000Z'),
           recoderUrl:
               'https://vichatcrm.vn/storage/uploads/22/pOitUUljiX1xwI384NnZ7zP5pFjLCBekrD9J6Zvd.mp4'),
-      ChatMessage(user: dat, id: 1, imageUrls: [
+      ChatMessage(user: dat, id: 1,time: DateTime.parse('2022-06-10T03:44:08.000000Z'), imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg'
       ]),
-      ChatMessage(user: dat, id: 1, video: 'https://vichatcrm.vn/storage/uploads/22/JzAYB6vp4VFQbEAEwSrd3eSisJQ14FO4GfajDqqv.mp4'),
-      ChatMessage(user: nam, id: 2, video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
-      ChatMessage(user: dat, id: 2, imageUrls: [
+      ChatMessage(user: dat, id: 1,time: DateTime.parse('2022-06-10T03:44:08.000000Z'), video: 'https://vichatcrm.vn/storage/uploads/22/JzAYB6vp4VFQbEAEwSrd3eSisJQ14FO4GfajDqqv.mp4'),
+      ChatMessage(user: nam, id: 2, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),video: 'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4'),
+      ChatMessage(user: dat, id: 2, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg'
       ]),
-      ChatMessage(user: dat, id: 1, imageUrls: [
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
       ]),
-      ChatMessage(user: dat, id: 1, imageUrls: [
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
       ]),
-      ChatMessage(user: dat, id: 1, imageUrls: [
-        'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg',
-        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
-        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
-        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
-      ]),
-      ChatMessage(user: dat, id: 1, imageUrls: [
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
-        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
       ]),
-      ChatMessage(user: dat, id: 1, imageUrls: [
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-10T03:44:08.000000Z'),imageUrls: [
         'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+      ]),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),imageUrls: [
+        'https://topshare.vn/wp-content/uploads/2021/01/Hinh-nen-dien-thoai-dep-va-doc-dao-1.jpg',
+        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
+        'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
       ]),
-      ChatMessage(user: dat, id: 1, text: 'alkjhfalksfjklasfjlka', status: 0),
-      ChatMessage(user: dat, id: 1, text: 'abc'),
-      ChatMessage(user: dat, id: 1, text: 'alo alo'),
-      ChatMessage(user: dat, id: 1, text: 'Xin chào'),
-      ChatMessage(user: dat, id: 1, text: 'Ừm'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: dat, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: dat, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: dat, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: 'alo alo'),
-      ChatMessage(user: nam, id: 1, text: '123'),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alkjhfalksfjklasfjlka', status: 0),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'abc'),
+      ChatMessage(user: viet, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'Xin chào'),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'Ừm'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: dat, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: viet, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: viet, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: viet, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: 'alo alo'),
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),text: '123'),
       ChatMessage(
           user: nam,
           id: 1,
+          time: DateTime.parse('2022-06-09T03:44:08.000000Z'),
           text:
               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum'),
-      ChatMessage(user: nam, id: 1, imageUrls: [
+      ChatMessage(user: nam, id: 1, time: DateTime.parse('2022-06-09T03:44:08.000000Z'),imageUrls: [
         'https://baoninhbinh.org.vn//DATA/ARTICLES/2021/5/17/cuoc-dua-lot-vao-top-100-anh-dep-di-san-van-hoa-va-thien-7edf3.jpg',
         'https://nhattientuu.com/wp-content/uploads/2020/08/hinh-anh-dep-1.jpg',
         'https://sites.google.com/site/hinhanhdep24h/_/rsrc/1436687439788/home/hinh%20anh%20thien%20nhien%20dep%202015%20%281%29.jpeg',
@@ -220,6 +227,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 });
               },
               onMessagedClicked: (message) {},
+              onMessagedLongClicked: (mess){
+                print('delete message ${mess.id}');
+              },
               toolBar: ChatToolbar(
                 controller: _chatToolbarController,
 

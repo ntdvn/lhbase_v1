@@ -7,12 +7,14 @@ typedef Widget MessageBuilder();
 
 typedef Widget ActionBuilder(ChatMessage message);
 typedef OnMessagedClicked(ChatMessage message);
+typedef OnMessagedLongClicked(ChatMessage message);
 
 class LhChatView extends StatefulWidget {
   final ChatKitController controller;
   final ActionBuilder? actionBuilder;
   final MessageBuilder? builder;
   final OnMessagedClicked? onMessagedClicked;
+  final OnMessagedLongClicked? onMessagedLongClicked;
   final VoidCallback? onLoadMore;
 
   final Widget? toolBar;
@@ -22,6 +24,7 @@ class LhChatView extends StatefulWidget {
       this.actionBuilder,
       this.builder,
       this.onMessagedClicked,
+      this.onMessagedLongClicked,
       this.onLoadMore,
       this.toolBar})
       : super(key: key);
@@ -68,11 +71,75 @@ class _LhChatViewState extends State<LhChatView> {
                               horizontal: 10, vertical: 10),
                           itemCount: controller.messages.length,
                           itemBuilder: (context, index) {
-                            return Container(
+                            return index == controller.messages.length-1 || (index != controller.messages.length-1 && controller.messages[index].time != controller.messages[index+1].time)  ?
+                            Column(
+                              children: [
+                                Container(
+                                  padding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+                                  child: LhText(LhValue.dateTimeToDate(controller.messages[index].time), style: LhStyle.DEFAULT_14.copyWith(color: Colors.black),),
+                                ),
+                                Container(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: controller.user ==
+                                            controller.messages[index].user
+                                        ? MainAxisAlignment.end
+                                        : MainAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
+                                    children: [
+                                      Container(
+                                          width: 40,
+                                          height: 40,
+                                          margin: EdgeInsets.only(right: 10),
+                                          child: (controller.user !=
+                                                          controller.messages[index]
+                                                              .user &&
+                                                      controller.messages[index]
+                                                              .position ==
+                                                          ChatBubblePosition.LAST ||
+                                                  controller.messages[index]
+                                                          .position ==
+                                                      ChatBubblePosition.SINGLE)
+                                              ? LhAvatar(
+                                                  imageUrl: controller
+                                                      .messages[index]
+                                                      .user
+                                                      .imageUrl)
+                                              : SizedBox.shrink()),
+                                      Container(
+                                          constraints: BoxConstraints(
+                                              minWidth: 0,
+                                              maxWidth: LhValue.messageFullWidth),
+                                          child: ChatBubbleWidget(
+                                            onTap: () {
+                                              print("click vaof ddaau");
+                                              // if (widget.onMessagedClicked !=
+                                              //     null) {
+                                              //   widget.onMessagedClicked!(
+                                              //       controller.messages[index]);
+                                              // }
+                                            },
+                                            message: controller.messages[index],
+                                            chatBubbleType:
+                                                controller.messages[index].position,
+                                            margin:
+                                                EdgeInsets.symmetric(vertical: 2),
+                                            child: MessageRender(
+                                                message:
+                                                controller.messages[index]),
+                                            // child: Text(
+                                            //     'asdasdasdasdasdasd\nasdasdasdasdasdasd\n')
+                                          )),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ) :
+                            Container(
                               child: Row(
                                 mainAxisSize: MainAxisSize.min,
                                 mainAxisAlignment: controller.user ==
-                                        controller.messages[index].user
+                                    controller.messages[index].user
                                     ? MainAxisAlignment.end
                                     : MainAxisAlignment.start,
                                 crossAxisAlignment: CrossAxisAlignment.end,
@@ -82,19 +149,19 @@ class _LhChatViewState extends State<LhChatView> {
                                       height: 40,
                                       margin: EdgeInsets.only(right: 10),
                                       child: (controller.user !=
-                                                      controller.messages[index]
-                                                          .user &&
-                                                  controller.messages[index]
-                                                          .position ==
-                                                      ChatBubblePosition.LAST ||
-                                              controller.messages[index]
-                                                      .position ==
-                                                  ChatBubblePosition.SINGLE)
+                                          controller.messages[index]
+                                              .user &&
+                                          controller.messages[index]
+                                              .position ==
+                                              ChatBubblePosition.LAST ||
+                                          controller.messages[index]
+                                              .position ==
+                                              ChatBubblePosition.SINGLE)
                                           ? LhAvatar(
-                                              imageUrl: controller
-                                                  .messages[index]
-                                                  .user
-                                                  .imageUrl)
+                                          imageUrl: controller
+                                              .messages[index]
+                                              .user
+                                              .imageUrl)
                                           : SizedBox.shrink()),
                                   Container(
                                       constraints: BoxConstraints(
@@ -108,14 +175,22 @@ class _LhChatViewState extends State<LhChatView> {
                                                 controller.messages[index]);
                                           }
                                         },
+                                        onLongPress: (){
+                                          if (widget.onMessagedLongClicked !=
+                                              null) {
+                                            widget.onMessagedLongClicked!(
+                                                controller.messages[index]);
+                                          }
+                                        },
                                         message: controller.messages[index],
                                         chatBubbleType:
-                                            controller.messages[index].position,
+                                        controller.messages[index].position,
                                         margin:
-                                            EdgeInsets.symmetric(vertical: 2),
-                                        child: MessageRender(
+                                        EdgeInsets.symmetric(vertical: 2),
+                                        child:
+                                        MessageRender(
                                             message:
-                                                controller.messages[index]),
+                                            controller.messages[index]),
                                         // child: Text(
                                         //     'asdasdasdasdasdasd\nasdasdasdasdasdasd\n')
                                       )),

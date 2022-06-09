@@ -103,9 +103,14 @@ class LhValue {
   static String formatStringYMD(String dateString) =>
       YEAR_MONTH_DAY.format(DateTime.parse(dateString));
 
+  static String dateTimeToTime(DateTime dateString) =>
+      TIME_FORMAT.format(dateString);
+
+  static String dateTimeToDate(DateTime dateString) =>
+      DATE_FORMAT.format(dateString);
+
   static String formatStringDateYMD(String dateString) {
     List date = dateString.split('/');
-
     return date[2] + '-' + date[1] + '-' + date[0];
   }
 

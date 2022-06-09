@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class LhInkwell extends StatelessWidget {
   final Widget child;
   final VoidCallback? onTap;
+  final VoidCallback? onLongPress;
   final EdgeInsets? padding;
   final EdgeInsets? margin;
   BorderRadius? borderRadius;
@@ -12,6 +13,7 @@ class LhInkwell extends StatelessWidget {
     Key? key,
     required this.child,
     this.onTap,
+    this.onLongPress,
     this.margin,
     this.padding,
     this.borderRadius,
@@ -34,6 +36,7 @@ class LhInkwell extends StatelessWidget {
         color: Colors.transparent,
         child: InkWell(
           onTap: onTap,
+          onLongPress: onLongPress,
           borderRadius: borderRadius,
           child:
               Container(padding: padding ?? EdgeInsets.all(5.0), child: child),

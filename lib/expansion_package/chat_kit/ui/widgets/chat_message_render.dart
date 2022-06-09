@@ -15,18 +15,18 @@ class MessageRender extends StatelessWidget {
     switch (message.type) {
       case MessageType.TEXT:
         renderMessage = ChatText(
-          message: message,
+          message: message, time: message.time
         );
         break;
       case MessageType.IMAGE:
-        renderMessage = ChatImages(imageUrls: message.imageUrls!);
+        renderMessage = ChatImages(imageUrls: message.imageUrls!, time: message.time);
         break;
       case MessageType.VIDEO:
-        renderMessage = ChatVideo(message: message);
+        renderMessage = ChatVideo(message: message, time: message.time);
         break;
       case MessageType.AUDIO:
         renderMessage = ChatRecoder(
-          message: message,
+          message: message, time: message.time
         );
         break;
       case MessageType.PRODUCT:
