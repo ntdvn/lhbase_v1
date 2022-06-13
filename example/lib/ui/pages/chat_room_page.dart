@@ -232,7 +232,7 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
               onMessagedLongClicked: (mess){
                 print('delete message ${mess.id}');
               },
-              onAvatarClicked: (){
+              onAvatarClicked: (message){
                 print('avatar');
               },
               toolBar: ChatToolbar(

@@ -9,6 +9,7 @@ typedef Widget MessageBuilder();
 typedef Widget ActionBuilder(ChatMessage message);
 typedef OnMessagedClicked(ChatMessage message);
 typedef OnMessagedLongClicked(ChatMessage message);
+typedef OnAvatarClicked(ChatMessage message);
 
 class LhChatView extends StatefulWidget {
   final ChatKitController controller;
@@ -16,7 +17,7 @@ class LhChatView extends StatefulWidget {
   final MessageBuilder? builder;
   final OnMessagedClicked? onMessagedClicked;
   final OnMessagedLongClicked? onMessagedLongClicked;
-  final VoidCallback? onAvatarClicked;
+  final OnAvatarClicked? onAvatarClicked;
   final VoidCallback? onLoadMore;
 
   final Widget? toolBar;
@@ -170,36 +171,39 @@ class _LhChatViewState extends State<LhChatView> {
                                         width: 40,
                                         borderRadius: 100,
                                         fit: BoxFit.cover,
-                                        onTap: widget.onAvatarClicked,
-                                      )
+                                        onTap: (){
+                                          if (widget.onAvatarClicked != null) {
+                                            widget.onAvatarClicked!(controller.messages[index]);}
+                                          })
 
-                                      // LhAvatar(
-                                      //         imageUrl: controller.messages[index].user.imageUrl)
-                                          : SizedBox.shrink()),
-                                  Container(
-                                      constraints: BoxConstraints(
+                                          // LhAvatar(
+                                          //         imageUrl: controller.messages[index].user.imageUrl)
+                                              : SizedBox.shrink()),
+                                          Container(
+                                          constraints: BoxConstraints(
                                           minWidth: 0,
                                           maxWidth: LhValue.messageFullWidth),
-                                      child: ChatBubbleWidget(
-                                        onTap: () {
+                                          child: ChatBubbleWidget(
+                                          onTap: () {
                                           if (widget.onMessagedClicked !=
-                                              null) {
-                                            widget.onMessagedClicked!(
-                                                controller.messages[index]);
+                                          null) {
+                                          widget.onMessagedClicked!(
+                                          controller.messages[index]);
                                           }
-                                        },
-                                        onLongPress: (){
+                                          },
+                                          onLongPress: (){
                                           if (widget.onMessagedLongClicked !=
-                                              null) {
-                                            widget.onMessagedLongClicked!(
-                                                controller.messages[index]);
+                                          null) {
+                                          widget.onMessagedLongClicked!(
+                                          controller.messages[index]);
                                           }
-                                        },
-                                        message: controller.messages[index],
-                                        chatBubbleType:
-                                        controller.messages[index].position,
-                                        margin:
-                                        EdgeInsets.symmetric(vertical: 2),
+                                          },
+                                          message: controller.messages[index],
+                                          chatBubbleType:
+                                          controller.messages[index].position,
+                                          margin:
+                                          EdgeInsets.symmetric(vertical: 2
+                                        ),
                                         child:
                                         MessageRender(
                                             message:
