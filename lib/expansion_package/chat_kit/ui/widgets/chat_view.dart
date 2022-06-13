@@ -121,9 +121,9 @@ class _LhChatViewState extends State<LhChatView> {
                                           child: ChatBubbleWidget(
                                             onTap: () {
                                               print("click vaof ddaau");
-                                              if (widget.onMessagedClicked !=
+                                              if (widget.onMessagedLongClicked !=
                                                   null) {
-                                                widget.onMessagedClicked!(
+                                                widget.onMessagedLongClicked!(
                                                     controller.messages[index]);
                                               }
                                             },
