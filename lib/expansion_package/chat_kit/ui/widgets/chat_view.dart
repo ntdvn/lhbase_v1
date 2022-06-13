@@ -121,11 +121,11 @@ class _LhChatViewState extends State<LhChatView> {
                                           child: ChatBubbleWidget(
                                             onTap: () {
                                               print("click vaof ddaau");
-                                              // if (widget.onMessagedClicked !=
-                                              //     null) {
-                                              //   widget.onMessagedClicked!(
-                                              //       controller.messages[index]);
-                                              // }
+                                              if (widget.onMessagedClicked !=
+                                                  null) {
+                                                widget.onMessagedClicked!(
+                                                    controller.messages[index]);
+                                              }
                                             },
                                             message: controller.messages[index],
                                             chatBubbleType:
