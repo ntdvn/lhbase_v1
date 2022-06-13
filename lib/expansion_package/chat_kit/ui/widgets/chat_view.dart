@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/view_list_image_screen.dart';
 import 'package:lhbase_v1/expansion_package/expansion_package.dart';
 import 'package:lhbase_v1/lhbase.dart';
 
@@ -13,6 +14,7 @@ class LhChatView extends StatefulWidget {
   final ActionBuilder? actionBuilder;
   final MessageBuilder? builder;
   final OnMessagedClicked? onMessagedClicked;
+  final VoidCallback? onAvatarClicked;
   final VoidCallback? onLoadMore;
 
   final Widget? toolBar;
@@ -23,6 +25,7 @@ class LhChatView extends StatefulWidget {
       this.builder,
       this.onMessagedClicked,
       this.onLoadMore,
+      this.onAvatarClicked,
       this.toolBar})
       : super(key: key);
 
@@ -90,11 +93,17 @@ class _LhChatViewState extends State<LhChatView> {
                                               controller.messages[index]
                                                       .position ==
                                                   ChatBubblePosition.SINGLE)
-                                          ? LhAvatar(
-                                              imageUrl: controller
-                                                  .messages[index]
-                                                  .user
-                                                  .imageUrl)
+                                          ? WidgetNetworkImage(
+                                        image: controller.messages[index].user.imageUrl,
+                                        height: 40,
+                                        width: 40,
+                                        borderRadius: 100,
+                                        fit: BoxFit.cover,
+                                        onTap: widget.onAvatarClicked,
+                                      )
+
+                                      // LhAvatar(
+                                      //         imageUrl: controller.messages[index].user.imageUrl)
                                           : SizedBox.shrink()),
                                   Container(
                                       constraints: BoxConstraints(

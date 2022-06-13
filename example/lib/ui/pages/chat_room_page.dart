@@ -220,6 +220,9 @@ class _ChatRoomPageState extends State<ChatRoomPage> {
                 });
               },
               onMessagedClicked: (message) {},
+              onAvatarClicked: (){
+                print('avatar');
+              },
               toolBar: ChatToolbar(
                 controller: _chatToolbarController,
 
