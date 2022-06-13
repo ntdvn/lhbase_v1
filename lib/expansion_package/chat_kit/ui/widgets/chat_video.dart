@@ -6,7 +6,8 @@ import 'package:video_player/video_player.dart';
 
 class ChatVideo extends StatefulWidget {
   final ChatMessage message;
-  const ChatVideo({Key? key, required this.message}) : super(key: key);
+  final DateTime time;
+  const ChatVideo({Key? key, required this.message, required this.time}) : super(key: key);
 
   @override
   State<ChatVideo> createState() => _ChatVideoState();
@@ -49,7 +50,7 @@ class _ChatVideoState extends State<ChatVideo> {
               alignment: Alignment.center,
               children: <Widget>[
                 VideoPlayer(_controller!),
-                ControlsOverlay(controller: _controller!, fullScreen: true, videoUrl: widget.message.video!,),
+                ControlsOverlay(controller: _controller!, fullScreen: true, videoUrl: widget.message.video!, time: widget.time,),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: VideoProgressIndicator(
@@ -59,7 +60,8 @@ class _ChatVideoState extends State<ChatVideo> {
                         playedColor: Colors.white
                     ),
                   ),
-                )
+                ),
+
               ],
             ),
           )

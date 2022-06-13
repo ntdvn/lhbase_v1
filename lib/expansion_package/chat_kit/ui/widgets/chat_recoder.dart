@@ -6,7 +6,8 @@ import 'package:lhbase_v1/ui/ui.dart';
 
 class ChatRecoder extends StatefulWidget {
   final ChatMessage message;
-  const ChatRecoder({Key? key, required this.message}) : super(key: key);
+  final DateTime time;
+  const ChatRecoder({Key? key, required this.message, required this.time}) : super(key: key);
 
   @override
   _ChatRecoderState createState() => _ChatRecoderState();
@@ -73,6 +74,7 @@ class _ChatRecoderState extends State<ChatRecoder>
   @override
   Widget build(BuildContext context) {
     return LhInkwell(
+      key: UniqueKey(),
       padding: EdgeInsets.zero,
       onTap: () {
         if (player.playing) {
@@ -93,11 +95,12 @@ class _ChatRecoderState extends State<ChatRecoder>
                 crossAxisAlignment: WrapCrossAlignment.center,
                 children: [
                   Container(
-                    child: Icon(_playing ? Icons.pause : Icons.play_circle),
+                    child: Icon(_playing ? Icons.pause_circle_filled : Icons.play_circle, color: Colors.white,),
                     margin: EdgeInsets.only(right: 10),
                   ),
                   Text(
-                      '${_duration != null ? DataUtils.durationToTime(_duration!) : ''}')
+                      '${_duration != null ? DataUtils.durationToTime(_duration!) : ''}',
+                  style: TextStyle(color: Colors.white,),)
                 ],
               ),
             ),
@@ -123,5 +126,5 @@ class _ChatRecoderState extends State<ChatRecoder>
   }
 
   @override
-  bool get wantKeepAlive => false;
+  bool get wantKeepAlive => true;
 }

@@ -3,14 +3,18 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/res/lh_styles.dart';
+import 'package:lhbase_v1/ui/widgets/lh_text.dart';
 import 'package:video_player/video_player.dart';
 
 import 'widget_play_video_back.dart';
 
 class ControlsOverlay extends StatefulWidget {
   final String videoUrl;
+  final DateTime? time;
   final bool fullScreen;
-  const ControlsOverlay({Key? key, required this.controller, required this.fullScreen, required this.videoUrl})
+  const ControlsOverlay({Key? key, required this.controller, required this.fullScreen, required this.videoUrl, this.time})
       : super(key: key);
 
   final VideoPlayerController controller;
@@ -49,6 +53,24 @@ class ControlsOverlayState extends State<ControlsOverlay> {
             });
           },
         ),
+        widget.time != null ? Positioned(
+          bottom: 8,
+          left: 8,
+          child: Container(
+            padding: EdgeInsets.only(top: 8),
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.withOpacity(0.5),
+                  spreadRadius: 1,
+                  blurRadius: 1,
+                  offset: Offset(0, 2), // changes position of shadow
+                ),
+              ],
+            ),
+            child: LhText(LhValue.dateTimeToTime(widget.time!), style: LhStyle.DEFAULT_12.copyWith(color: Colors.black),),
+          ),
+        ) : Container(),
         widget.fullScreen == true ? Positioned(
           bottom: 4,
           right: 4,

@@ -19,6 +19,7 @@ class ChatMessage {
   final String? video;
   final String? recoderUrl;
   final Widget? product, order;
+  final DateTime time;
   ChatBubblePosition position = ChatBubblePosition.MIDDLE;
 
   ChatMessage({
@@ -31,6 +32,7 @@ class ChatMessage {
     this.recoderUrl,
     this.product,
     this.order,
+    required this.time,
   });
 
   MessageType get type {
