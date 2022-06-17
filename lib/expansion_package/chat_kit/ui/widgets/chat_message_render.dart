@@ -19,7 +19,7 @@ class MessageRender extends StatelessWidget {
         );
         break;
       case MessageType.IMAGE:
-        renderMessage = ChatImages(imageUrls: message.imageUrls!, time: message.time);
+        renderMessage = ChatImages(message: message, time: message.time);
         break;
       case MessageType.VIDEO:
         renderMessage = ChatVideo(message: message, time: message.time);

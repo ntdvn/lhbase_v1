@@ -14,6 +14,7 @@ class ChatMessage {
   final LhChatUser user;
   final int id;
   final int status;
+  final bool is_hidden;
   String? text;
   final List<String>? imageUrls;
   final String? video;
@@ -25,6 +26,7 @@ class ChatMessage {
   ChatMessage({
     required this.user,
     required this.id,
+    required this.is_hidden,
     this.status = 1,
     this.text,
     this.imageUrls,

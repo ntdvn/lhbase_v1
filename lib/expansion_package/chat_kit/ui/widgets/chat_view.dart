@@ -119,8 +119,9 @@ class _LhChatViewState extends State<LhChatView> {
                                               minWidth: 0,
                                               maxWidth: LhValue.messageFullWidth),
                                           child: ChatBubbleWidget(
-                                            onTap: () {
-                                              print("click vaof ddaau");
+
+                                            onLongPress: (){
+                                              print("long click");
                                               if (widget.onMessagedLongClicked !=
                                                   null) {
                                                 widget.onMessagedLongClicked!(
