@@ -27,7 +27,7 @@ class _ChatTextState extends State<ChatText> {
             crossAxisAlignment: controller.user == widget.message.user ? CrossAxisAlignment.end : CrossAxisAlignment.start,
             children: [
               Text(
-                widget.message.text ?? '',
+                widget.message.is_hidden == false ? widget.message.text ?? '' : 'Tin nhắn đã được thu hồi',
                 style: controller.user == widget.message.user
                     ? controller.themeData.textMessageThemeData.textStyle
                     : controller.themeData.mTextMessageThemeData.textStyle,

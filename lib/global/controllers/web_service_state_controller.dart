@@ -28,13 +28,28 @@ class WebServiceStateController extends GetxController {
     loading.value++;
     print('pushLoading ${loading.value}');
     if (isLoading() && Get.isDialogOpen != true) {
-      Get.dialog(Container(
-        color: Colors.transparent,
-        child: GestureDetector(
-          onTap: () {},
-          child: Center(child: timeout ?? Text('Tải lại')),
-        ),
-      ));
+      Get.dialog(
+        Scaffold(
+          body: StatefulBuilder(
+            builder: (context, setState1) {
+              return SafeArea(
+                child: Container(
+                  color: Colors.transparent,
+                  child: Center(
+                    child: timeout ??
+                      GestureDetector(
+                        onTap: () {
+                          Get.back();
+                        },
+                        child: Text('Thử lại'),
+                      ),
+                  ),
+                ),
+              );
+            },
+          ),
+        )
+      );
     }
   }
 

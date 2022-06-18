@@ -42,7 +42,7 @@ class _ChatVideoState extends State<ChatVideo> {
   Widget build(BuildContext context) {
     return GetBuilder<ChatKitController>(
       builder: (controller) {
-        return Container(
+        return widget.message.is_hidden == false ? Container(
           key: UniqueKey(),
           child: AspectRatio(
             aspectRatio: _controller!.value.aspectRatio,
@@ -65,6 +65,29 @@ class _ChatVideoState extends State<ChatVideo> {
               ],
             ),
           )
+        ) : Container(
+          color: Colors.transparent,
+          key: UniqueKey(),
+          padding: EdgeInsets.all(10.0),
+          child: Column(
+            crossAxisAlignment: controller.user == widget.message.user ? CrossAxisAlignment.end : CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Tin nhắn đã được thu hồi',
+                style: controller.user == widget.message.user
+                    ? controller.themeData.textMessageThemeData.textStyle
+                    : controller.themeData.mTextMessageThemeData.textStyle,
+                textAlign: TextAlign.start,
+                softWrap: true,
+                maxLines: null,
+                textWidthBasis: TextWidthBasis.longestLine,
+              ),
+              Container(
+                padding: EdgeInsets.only(top: 8),
+                child: LhText(LhValue.dateTimeToTime(widget.time), style: LhStyle.DEFAULT_12.copyWith(color: Colors.grey[100]),),
+              )
+            ],
+          ),
         );
       },
     );
