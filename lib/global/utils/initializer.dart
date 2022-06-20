@@ -22,9 +22,9 @@ class Initializer {
       // );
       return Text(errorDetails.exceptionAsString());
     };
-
+    WidgetsFlutterBinding.ensureInitialized();
     runZonedGuarded(() async {
-      WidgetsFlutterBinding.ensureInitialized();
+
 
       FlutterError.onError = (details) {
         FlutterError.dumpErrorToConsole(details);

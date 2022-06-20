@@ -143,11 +143,11 @@ class LhExpanableController extends ChangeNotifier {
   bool get isShow => height > 0;
 
   static final screenWidth =
-      MediaQueryData.fromWindow(WidgetsBinding.instance!.window).size.width;
+      MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.width;
   static final screenHeight =
-      MediaQueryData.fromWindow(WidgetsBinding.instance!.window).size.height;
+      MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height;
        static final safeTopPadding =
-      MediaQueryData.fromWindow(WidgetsBinding.instance!.window).padding.top;
+      MediaQueryData.fromWindow(WidgetsBinding.instance.window).padding.top;
 
   void delta(double delta) {
     // if (maximizeHeight == null && delta > 0) {

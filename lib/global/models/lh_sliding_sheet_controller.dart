@@ -21,7 +21,7 @@ class LhSlidingSheetController extends ChangeNotifier
   Timer? _timer;
 
   static final _maxHeight =
-      MediaQueryData.fromWindow(WidgetsBinding.instance!.window).size.height;
+      MediaQueryData.fromWindow(WidgetsBinding.instance.window).size.height;
 
   static final offsetHeight = 70;
 

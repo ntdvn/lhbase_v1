@@ -86,7 +86,7 @@ class _LhDropdownViewState extends State<LhDropdownView> {
           AnimatedBuilder(
             animation: widget.controller,
             builder: (context, child) {
-              SchedulerBinding.instance!.addPostFrameCallback((_) {
+              SchedulerBinding.instance.addPostFrameCallback((_) {
                 // add your code here.
 
                 if (widget.controller.isPanelShow == true) {

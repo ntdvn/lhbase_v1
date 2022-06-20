@@ -84,7 +84,7 @@ class _CubePageViewState extends State<CubePageView> {
   @override
   void initState() {
     _pageController = widget.controller ?? PageController();
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       _pageController.addListener(_listener);
     });
     super.initState();
