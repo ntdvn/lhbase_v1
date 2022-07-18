@@ -79,7 +79,7 @@ class _ViewListNetworkImageScreenState extends State<ViewListNetworkImageScreen>
 }
 
 
-class WidgetNetworkImage extends StatelessWidget {
+class LhWidgetNetworkImage extends StatelessWidget {
   final double? width, height, borderRadius;
   final BorderRadius? borderRadiusCustom;
   final String image;
@@ -87,7 +87,7 @@ class WidgetNetworkImage extends StatelessWidget {
   final BoxFit? fit;
   final GestureTapCallback? onTap;
 
-  const WidgetNetworkImage(
+  const LhWidgetNetworkImage(
       {this.width, this.height, this.borderRadius, this.borderRadiusCustom, required this.image,
         this.boxDecoration,
         this.onTap,

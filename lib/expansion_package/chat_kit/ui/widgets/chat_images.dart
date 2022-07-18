@@ -45,7 +45,7 @@ class ChatImages extends StatelessWidget {
                             ),
                           );
                         },
-                        child: WidgetNetworkImage(
+                        child: LhWidgetNetworkImage(
                           image: message.imageUrls![index],
                           borderRadius: 4,
                           fit: BoxFit.cover,

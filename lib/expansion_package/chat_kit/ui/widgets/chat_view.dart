@@ -112,7 +112,7 @@ class _LhChatViewState extends State<LhChatView> {
                                                   controller.messages[index]
                                                           .position ==
                                                       ChatBubblePosition.SINGLE)
-                                              ? WidgetNetworkImage(
+                                              ? LhWidgetNetworkImage(
                                                   image: controller.messages[index].user.imageUrl,
                                                   height: 54,
                                                   width: 54,
@@ -170,7 +170,7 @@ class _LhChatViewState extends State<LhChatView> {
                                           controller.messages[index]
                                               .position ==
                                               ChatBubblePosition.SINGLE)
-                                          ? WidgetNetworkImage(
+                                          ? LhWidgetNetworkImage(
                                         image: controller.messages[index].user.imageUrl,
                                         height: 40,
                                         width: 40,

@@ -80,7 +80,7 @@ class _PlayVideoOnlineBackScreenState extends State<PlayVideoOnlineBackScreen> {
                   alignment: Alignment.center,
                   children: <Widget>[
                     VideoPlayer(_controller),
-                    ControlsOverlay(controller: _controller),
+                    LhControlsOverlay(controller: _controller),
                   ],
                 ),
               ),

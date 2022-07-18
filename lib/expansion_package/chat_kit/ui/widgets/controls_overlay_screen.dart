@@ -5,17 +5,17 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:video_player/video_player.dart';
 
-class ControlsOverlay extends StatefulWidget {
-  const ControlsOverlay({Key? key, required this.controller})
+class LhControlsOverlay extends StatefulWidget {
+  const LhControlsOverlay({Key? key, required this.controller})
       : super(key: key);
 
   final VideoPlayerController controller;
 
   @override
-  State<ControlsOverlay> createState() => ControlsOverlayState();
+  State<LhControlsOverlay> createState() => LhControlsOverlayState();
 }
 
-class ControlsOverlayState extends State<ControlsOverlay> {
+class LhControlsOverlayState extends State<LhControlsOverlay> {
   @override
   Widget build(BuildContext context) {
     return Stack(
