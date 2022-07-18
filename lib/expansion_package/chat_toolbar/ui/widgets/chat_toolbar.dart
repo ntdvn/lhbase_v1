@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/controllers/controllers.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_kit_action.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_kit_output.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_kit_state.dart';
+import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/controllers/chat_toolbar_controller.dart';
+import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/widgets/chat_action.dart';
 
 typedef List<ChatKitAction> ActionsBuilder(
     ChatKitState state, ChatKitOutput output);

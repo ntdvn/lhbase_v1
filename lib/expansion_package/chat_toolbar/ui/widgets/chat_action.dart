@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_kit_action.dart';
-import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/ui.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/expansion_package/chat_toolbar/ui/controllers/chat_toolbar_controller.dart';
 
 class ChatAction extends StatelessWidget {
   final ChatKitAction action;

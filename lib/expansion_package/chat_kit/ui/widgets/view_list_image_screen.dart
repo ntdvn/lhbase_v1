@@ -8,10 +8,12 @@ import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:lhbase_v1/lhbase.dart';
 import 'package:lhbase_v1/res/lh_styles.dart';
-import 'package:lhbase_v1/res/res.dart';
-import 'package:lhbase_v1/ui/widgets/widgets.dart';
+import 'package:lhbase_v1/ui/widgets/lh_app_bar.dart';
+import 'package:lhbase_v1/ui/widgets/lh_text.dart';
+import 'package:lhbase_v1/ui/widgets/lhbase_page.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 class ViewListNetworkImageScreen extends StatefulWidget {
   final List<String>? listImage;
@@ -44,26 +46,28 @@ class _ViewListNetworkImageScreenState extends State<ViewListNetworkImageScreen>
         ),
         child: Container(
           height: Get.width,
-          child: widget.listImage != null && widget.listImage!.isNotEmpty ? Swiper(
-            controller: swiperController,
-            itemBuilder: (BuildContext context, int index) {
-              return WidgetNetworkImage(
-                image: widget.listImage![index],
-                height: Get.width,
-                width: Get.width,
-                borderRadius: 0,
-                fit: BoxFit.fitWidth,
-                boxDecoration: BoxDecoration(
-                    color: Colors.black
+          child: widget.listImage != null && widget.listImage!.isNotEmpty ? Container(
+              child: PhotoViewGallery.builder(
+                scrollPhysics: const BouncingScrollPhysics(),
+                builder: (BuildContext context, int index) {
+                  return PhotoViewGalleryPageOptions(
+                    imageProvider: NetworkImage(widget.listImage![index]),
+                    initialScale: PhotoViewComputedScale.contained,
+                  );
+                },
+                itemCount: widget.listImage!.length,
+                loadingBuilder: (context, event) => Center(
+                  child: Container(
+                    width: 20.0,
+                    height: 20.0,
+                    child: CircularProgressIndicator(
+                      value: event == null
+                          ? 0
+                          : event.cumulativeBytesLoaded / event.expectedTotalBytes!,
+                    ),
+                  ),
                 ),
-              );
-            },
-            indicatorLayout: PageIndicatorLayout.COLOR,
-            control: const SwiperControl(),
-            autoplay: false,
-            loop: false,
-            itemCount: widget.listImage!.length,
-            index: widget.initIndex,
+              )
           )
               : Container(
           color: Colors.black,

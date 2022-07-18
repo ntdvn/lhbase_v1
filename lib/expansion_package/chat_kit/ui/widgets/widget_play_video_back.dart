@@ -6,14 +6,13 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/controls_overlay_screen.dart';
-import 'package:lhbase_v1/lhbase.dart';
-import 'package:lhbase_v1/ui/widgets/widgets.dart';
+import 'package:lhbase_v1/ui/widgets/lh_app_bar.dart';
+import 'package:lhbase_v1/ui/widgets/lhbase_page.dart';
 import 'package:video_player/video_player.dart';
 import 'package:wakelock/wakelock.dart';
 
 class PlayVideoOnlineBackScreen extends StatefulWidget {
-  final String videoUrl;
-  PlayVideoOnlineBackScreen({Key? key, required this.videoUrl}) : super(key: key);
+  PlayVideoOnlineBackScreen({Key? key}) : super(key: key);
 
   @override
   _PlayVideoOnlineBackScreenState createState() => _PlayVideoOnlineBackScreenState();
@@ -24,13 +23,15 @@ class _PlayVideoOnlineBackScreenState extends State<PlayVideoOnlineBackScreen> {
   late VideoPlayerController _controller;
 
   int index = 0;
+  
+  String videoUrl = Get.arguments;
 
   @override
   void initState() {
-    print('dkm: ${widget.videoUrl}');
+    print('dkm: ${videoUrl}');
 
-    if(widget.videoUrl != null){
-      _controller = VideoPlayerController.network(widget.videoUrl)
+    if(videoUrl != null){
+      _controller = VideoPlayerController.network(videoUrl)
         ..initialize().then((_) {
           // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
           setState(() {
@@ -71,34 +72,34 @@ class _PlayVideoOnlineBackScreenState extends State<PlayVideoOnlineBackScreen> {
         width: Get.width,
         child: _controller.value.isInitialized
             ? Stack(
-              children: [
-                Center(
-                  child: AspectRatio(
-                    aspectRatio: _controller.value.aspectRatio,
-                    child: Stack(
-                      alignment: Alignment.center,
-                      children: <Widget>[
-                        VideoPlayer(_controller),
-                        ControlsOverlay(controller: _controller, fullScreen: false, videoUrl: widget.videoUrl),
-                      ],
-                    ),
+          children: [
+            Center(
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: Stack(
+                  alignment: Alignment.center,
+                  children: <Widget>[
+                    VideoPlayer(_controller),
+                    ControlsOverlay(controller: _controller),
+                  ],
+                ),
+              ),
+            ),
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8),
+                child: VideoProgressIndicator(
+                  _controller,
+                  allowScrubbing: true,
+                  colors: VideoProgressColors(
+                      playedColor: Colors.white
                   ),
                 ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: VideoProgressIndicator(
-                      _controller,
-                      allowScrubbing: true,
-                      colors: VideoProgressColors(
-                        playedColor: Colors.white
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            )
+              ),
+            ),
+          ],
+        )
             : Container(),
       ),
     );

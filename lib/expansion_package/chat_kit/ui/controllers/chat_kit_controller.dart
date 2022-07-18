@@ -1,5 +1,8 @@
 import 'package:get/get.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_user.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/themes/chat_view_theme_data.dart';
+import 'audio_model.dart';
 
 enum ChatBubblePosition {
   FIRST,
@@ -32,6 +35,9 @@ class ChatKitController extends GetxController {
   }
 
   Rx<List<ChatMessage>> _messages = Rx([]);
+
+  Rx<List<AudioModel>> audioController = Rx([]);
+
 
   List<ChatMessage> get messages => _messages.value;
 
@@ -93,5 +99,31 @@ class ChatKitController extends GetxController {
 
   bool checkValidIndex(int index) {
     return index >= 0 && index <= messages.length - 1;
+  }
+
+  playAudio(int idMess){
+    audioController.value.forEach((element) {
+      if(element.id == idMess){
+        if(element.controller != null){
+          if (element.controller!.playing) {
+            element.controller!.stop();
+          } else {
+            element.controller!.play();
+          }
+        } else {
+          if (element.controllerVideo!.value.isPlaying) {
+            element.controllerVideo!.pause();
+          } else {
+            element.controllerVideo!.play();
+          }
+        }
+
+      } else {
+        if(element.controller != null)
+          element.controller!.stop();
+        else
+          element.controllerVideo!.pause();
+      }
+    });
   }
 }

@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
+import 'package:lhbase_v1/res/lh_styles.dart';
+import 'package:lhbase_v1/res/lh_values.dart';
+import 'package:lhbase_v1/ui/widgets/lh_text.dart';
 
 class ChatText extends StatefulWidget {
   final ChatMessage message;

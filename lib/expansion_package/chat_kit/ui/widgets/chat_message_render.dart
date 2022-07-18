@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/widgets.dart';
 
 class MessageRender extends StatelessWidget {
   final ChatMessage message;

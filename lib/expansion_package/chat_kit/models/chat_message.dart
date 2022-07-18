@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_user.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
 
 enum MessageType {
   TEXT,

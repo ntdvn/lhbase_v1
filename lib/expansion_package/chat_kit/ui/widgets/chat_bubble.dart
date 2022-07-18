@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lhbase_v1/lhbase.dart';
-import 'package:lhbase_v1/ui/ui.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/chat_view.dart';
+import 'package:lhbase_v1/ui/widgets/lh_inkwell.dart';
 
 class ChatBubbleWidget extends StatelessWidget {
   final ChatMessage message;

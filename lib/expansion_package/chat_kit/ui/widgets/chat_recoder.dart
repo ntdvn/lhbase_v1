@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:just_audio/just_audio.dart';
-import 'package:lhbase_v1/expansion_package/chat_kit/chat_kit.dart';
-import 'package:lhbase_v1/lhbase.dart';
-import 'package:lhbase_v1/ui/ui.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/audio_model.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
+import 'package:lhbase_v1/global/utils/data_utils.dart';
+import 'package:lhbase_v1/res/lh_styles.dart';
+import 'package:lhbase_v1/res/lh_values.dart';
+import 'package:lhbase_v1/ui/widgets/lh_text.dart';
 
 class ChatRecoder extends StatefulWidget {
   final ChatMessage message;
@@ -19,6 +23,8 @@ class _ChatRecoderState extends State<ChatRecoder>
   final player = AudioPlayer(
     userAgent: 'myradioapp/1.0 (Linux;Android 11) https://myradioapp.com',
   );
+
+  ChatKitController chatKitController = Get.find<ChatKitController>();
 
   Duration? _duration;
   Duration? _position;
@@ -41,11 +47,17 @@ class _ChatRecoderState extends State<ChatRecoder>
 
   init() async {
     var a = await player.setUrl(widget.message.recoderUrl!);
+
     await player.setSpeed(1.0);
     setState(() {
       _duration = a;
     });
 
+    AudioModel data = AudioModel(widget.message.id, player, null, ()=>setState(() {
+
+    }));
+    if(chatKitController.audioController.value.contains(data) == false)
+      chatKitController.audioController.value.add(data);
     // player.durationStream.listen((duration) {
     //   // print('duration: ${duration!.inMilliseconds}');
     //   setState(() {
@@ -87,12 +99,7 @@ class _ChatRecoderState extends State<ChatRecoder>
                 children: [
                   GestureDetector(
                     onTap: (){
-                      print("dlkkjl");
-                      if (player.playing) {
-                        player.stop();
-                      } else {
-                        player.play();
-                      }
+                      chatKitController.playAudio(widget.message.id);
                     },
                     child: Container(
                       child: Icon(_playing ? Icons.pause_circle_filled : Icons.play_circle, color: Colors.white,),

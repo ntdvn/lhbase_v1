@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
 import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/view_list_image_screen.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/res/lh_styles.dart';
+import 'package:lhbase_v1/res/lh_values.dart';
+import 'package:lhbase_v1/ui/widgets/lh_text.dart';
 
 class ChatImages extends StatelessWidget {
   final ChatMessage message;

@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/controls_overlay_screen.dart';
-import 'package:lhbase_v1/lhbase.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/audio_model.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
+import 'package:lhbase_v1/global/routes/lh_pages.dart';
+import 'package:lhbase_v1/res/lh_styles.dart';
+import 'package:lhbase_v1/res/lh_values.dart';
+import 'package:lhbase_v1/ui/widgets/lh_text.dart';
 import 'package:video_player/video_player.dart';
 
 class ChatVideo extends StatefulWidget {
@@ -16,6 +22,7 @@ class ChatVideo extends StatefulWidget {
 class _ChatVideoState extends State<ChatVideo> {
 
   VideoPlayerController? _controller;
+  ChatKitController chatKitController = Get.find<ChatKitController>();
 
   @override
   void initState() {
@@ -28,6 +35,11 @@ class _ChatVideoState extends State<ChatVideo> {
       });
 
     _controller!.pause();
+    AudioModel data = AudioModel(widget.message.id, null, _controller, ()=>setState(() {
+
+    }));
+    if(chatKitController.audioController.value.contains(data) == false)
+      chatKitController.audioController.value.add(data);
     super.initState();
   }
 
@@ -42,15 +54,29 @@ class _ChatVideoState extends State<ChatVideo> {
   Widget build(BuildContext context) {
     return GetBuilder<ChatKitController>(
       builder: (controller) {
-        return widget.message.is_hidden == false ? Container(
-          key: UniqueKey(),
-          child: AspectRatio(
-            aspectRatio: _controller!.value.aspectRatio,
+        return widget.message.is_hidden == false ? GestureDetector(
+          onTap: ()=> Get.toNamed(LhPages.play_video_online_screen, arguments: widget.message.video),
+          child: Container(
+            height: Get.width/2,
+            key: UniqueKey(),
             child: Stack(
               alignment: Alignment.center,
               children: <Widget>[
-                VideoPlayer(_controller!),
-                ControlsOverlay(controller: _controller!, fullScreen: true, videoUrl: widget.message.video!, time: widget.time,),
+                Center(
+                  child: VideoPlayer(_controller!),
+                ),
+
+                Container(
+                  color: Colors.black26,
+                  child: Center(
+                    child: Icon(
+                      Icons.play_arrow,
+                      color: Colors.white,
+                      size: 50.0,
+                      semanticLabel: 'Play',
+                    ),
+                  )
+                ),
                 Align(
                   alignment: Alignment.bottomCenter,
                   child: VideoProgressIndicator(
@@ -63,8 +89,8 @@ class _ChatVideoState extends State<ChatVideo> {
                 ),
 
               ],
-            ),
-          )
+            )
+          ),
         ) : Container(
           color: Colors.transparent,
           key: UniqueKey(),

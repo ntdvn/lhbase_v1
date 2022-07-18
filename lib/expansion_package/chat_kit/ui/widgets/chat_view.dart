@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/models/chat_message.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/controllers/chat_kit_controller.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/chat_bubble.dart';
+import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/chat_message_render.dart';
 import 'package:lhbase_v1/expansion_package/chat_kit/ui/widgets/view_list_image_screen.dart';
-import 'package:lhbase_v1/expansion_package/expansion_package.dart';
-import 'package:lhbase_v1/lhbase.dart';
-
+import 'package:lhbase_v1/res/lh_styles.dart';
+import 'package:lhbase_v1/res/lh_values.dart';
+import 'package:lhbase_v1/ui/widgets/lh_text.dart';
 typedef Widget MessageBuilder();
 
 typedef Widget ActionBuilder(ChatMessage message);
@@ -108,11 +112,11 @@ class _LhChatViewState extends State<LhChatView> {
                                                   controller.messages[index]
                                                           .position ==
                                                       ChatBubblePosition.SINGLE)
-                                              ? LhAvatar(
-                                                  imageUrl: controller
-                                                      .messages[index]
-                                                      .user
-                                                      .imageUrl)
+                                              ? WidgetNetworkImage(
+                                                  image: controller.messages[index].user.imageUrl,
+                                                  height: 54,
+                                                  width: 54,
+                                                )
                                               : SizedBox.shrink()),
                                       Container(
                                           constraints: BoxConstraints(
