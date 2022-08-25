@@ -196,7 +196,6 @@ class MediaPickerController extends GetxController {
       ..setOption(AssetType.image, option)
       ..setOption(AssetType.audio, option)
       ..createTimeCond = createDtCond
-      ..containsEmptyAlbum = _containsEmptyAlbum
       ..containsPathModified = _containsPathModified
       ..addOrderOption(
         OrderOption(
