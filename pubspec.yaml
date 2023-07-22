@@ -13,8 +13,8 @@ dependencies:
   flutter_localizations: # Add this line
     sdk: flutter
   dio: ^4.0.0
-  get: 4.6.5
-  intl: ^0.17.0
+  get: ^4.6.5
+  intl: ^0.18.0
 
   connectivity: ^3.0.6
   photo_manager: ^2.2.1
