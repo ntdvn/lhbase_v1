@@ -26,7 +26,7 @@ dependencies:
   flutter_screenutil: ^5.5.3+1
   keyboard_dismisser: ^2.0.0
   lottie: ^1.1.0
-  google_fonts: ^2.1.0
+  google_fonts: ^4.0.4
   focus_detector: ^2.0.0
   video_player: ^2.4.7
   # image_downloader: ^0.30.0
