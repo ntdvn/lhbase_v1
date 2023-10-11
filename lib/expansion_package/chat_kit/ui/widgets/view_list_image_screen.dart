@@ -100,7 +100,7 @@ class LhWidgetNetworkImage extends StatelessWidget {
       child: GestureDetector(
         onTap: onTap,
         child: ClipRRect(
-          borderRadius: borderRadiusCustom == null ? BorderRadius.circular(borderRadius ?? 100) : borderRadiusCustom,
+          borderRadius: borderRadiusCustom ?? BorderRadius.circular(borderRadius ?? 100),
           child: CachedNetworkImage(
             imageUrl: image,
             fit: fit,

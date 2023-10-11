@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:lhbase_v1/lhbase.dart';
+import 'dart:async';
 
 class LhBaseController extends GetxController implements WebServiceAPICallback {
   LhSessionRepository lhSessionRepository = Get.find<LhSessionRepository>();
@@ -79,7 +80,7 @@ class LhBaseController extends GetxController implements WebServiceAPICallback {
 
   @override
   void onAPIError(DioError e, String path, String method, {Widget? timeout}) {
-    if(e.type == DioErrorType.connectTimeout){
+    if(e.type == DioErrorType.connectionTimeout){
       webServiceStateController.pushTimeout(timeout: timeout);
     }
   }

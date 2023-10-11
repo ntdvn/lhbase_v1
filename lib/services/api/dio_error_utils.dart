@@ -79,7 +79,7 @@ class DioErrorUtils {
       Function(String errorMessage)? onErrorHandler}) {
     String errorMessage = '';
 
-    if (error.type == DioErrorType.response) {
+    if (error.type ==( DioErrorType.connectionError??'')) {
       var httpStatusCode = error.response!.statusCode!;
       errorMessage = getErrorMessage(httpStatusCode);
 
@@ -87,7 +87,7 @@ class DioErrorUtils {
         if (onUnauthorizedNavigate != null) onUnauthorizedNavigate();
       }
     }
-    errorMessage = error.message;
+    errorMessage = error.message??'';
     if (onErrorHandler != null) onErrorHandler(errorMessage);
   }
 }
